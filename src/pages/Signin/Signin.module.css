@@ -1,0 +1,34 @@
+.signContainer {
+   
+    height: 100vh;
+   
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   
+  }
+  .signupImage {
+    width: 495px;
+     height: 460px
+
+
+  }
+
+.formContainer {
+    width: 510px;
+  }
+  .label {
+    color: "#2E2C2C";
+    margin-bottom: 10px !important;
+    font-size: 16px !important;
+  }
+  .input {
+    height: 45px;
+    margin-top: 6px;
+  }
+  .rememberAndPass {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
