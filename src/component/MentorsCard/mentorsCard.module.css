@@ -1,0 +1,30 @@
+.mentorsCardEditBtn {
+  border-radius: 3px;
+  background-color: #2492eb !important;
+  color: white;
+  padding: 8px 40px;
+}
+.mentorsCardEditBtn:hover {
+  border-radius: 3px;
+  background-color: #0e8df5 !important;
+  color: white;
+  padding: 8px 40px;
+}
+.mentorDeleteBtn {
+  border-radius: 3px;
+  padding: 8px 40px;
+  background-color: white !important;
+  color: #2492eb;
+  border: 1px solid #2492eb;
+  background-color: #e1ecf4 !important;
+  margin-left: 24px;
+}
+.mentorDeleteBtn:hover {
+  border-radius: 3px;
+  padding: 8px 40px;
+  background-color: white !important;
+  color: #2492eb;
+  border: 1px solid #2492eb;
+  background-color: #cce4f5 !important;
+  margin-left: 24px;
+}

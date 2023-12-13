@@ -1,0 +1,14 @@
+.input {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: "1px solid #ddd";
+  border-radius: 0 !important;
+}
+.input:hover {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: "1px solid #ddd";
+  border-radius: 0 !important;
+}

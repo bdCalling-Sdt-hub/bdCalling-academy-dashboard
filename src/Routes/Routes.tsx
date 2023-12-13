@@ -7,10 +7,11 @@ import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePasswor
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
-import EditStudents from "../pages/Dashboard/Students/EditStudents";
+import EditStudents from "../pages/Dashboard/Students/EditStudent/EditStudents";
 import Courses from "../pages/Dashboard/Courses/Courses";
 import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
+import Mentors from "../pages/Dashboard/Mentors/Mentors";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/courses/edit/:id",
         element: <EditCourse></EditCourse>,
+      },
+      {
+        path: "/mentors",
+        element: <Mentors />,
       },
     ],
   },

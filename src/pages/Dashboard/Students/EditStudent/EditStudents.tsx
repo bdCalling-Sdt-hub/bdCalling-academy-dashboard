@@ -1,22 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Col, Row, Form, Input } from "antd";
-
-import { useSearchParams } from "react-router-dom";
-import style from "./student.module.css";
-
+import { Button, Col, Row, Form, Input, DatePicker } from "antd";
+import style from "../student.module.css";
+import editStyle from "./EditStudent.module.css";
+import { useState } from "react";
 export default function EditStudents() {
   //   const { id } = useSearchParams();
+  const [action, setAction] = useState("");
   const onFinish = (data: any) => {
-    console.log(data);
+    if (action === "save") {
+      //save logic here
+    } else if (action === "edit") {
+      //edit logic
+    }
   };
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto h-screen ">
       <div className="text-right">
         <Button
+          onClick={() => setAction("edit")}
           style={{
             backgroundColor: "#D7263D",
             color: "white",
@@ -27,6 +32,7 @@ export default function EditStudents() {
           EDIT
         </Button>
         <Button
+          onClick={() => setAction("save")}
           className="bg-customPrimary ms-4"
           style={{
             color: "white",
@@ -64,34 +70,36 @@ export default function EditStudents() {
                 >
                   <Row gutter={16}>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input student name",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="text"
                           placeholder="name"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input student mobile number",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="number"
                           placeholder="mobile number"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
@@ -101,13 +109,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="email"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
@@ -117,77 +119,59 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="batchNo"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
                       <Form.Item>
-                        <Input
-                          size="large"
-                          type="date"
-                          placeholder="date"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                        <DatePicker
+                          style={{ width: "100%", padding: "8px" }}
+                          placeholder="start date"
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
-                        <Input
-                          size="large"
-                          type="date"
+                      <Form.Item
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input date of birth",
+                          },
+                        ]}
+                      >
+                        <DatePicker
+                          style={{ width: "100%", padding: "8px" }}
                           placeholder="date of birth"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input course name",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="text"
                           placeholder="course title"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item rules={[]}>
                         <Input
                           size="large"
                           type="text"
                           placeholder="blood group"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
@@ -197,13 +181,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="address"
-                          style={{
-                            borderBottom: "1px solid #ddd",
-                            borderRadius: "none",
-                            borderTop: "none",
-                            borderLeft: "none",
-                            borderRight: "none",
-                          }}
+                          className={editStyle.input}
                         />
                       </Form.Item>
                     </Col>
