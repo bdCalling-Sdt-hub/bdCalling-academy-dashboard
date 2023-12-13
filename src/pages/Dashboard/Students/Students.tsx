@@ -8,6 +8,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import Table from "../../../component/UI/Table/Table";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 export default function Students() {
   const handleDownload = () => {
@@ -40,10 +41,13 @@ export default function Students() {
       render: function (data: any) {
         return (
           <div className="flex gap-x-2">
-            <FiEdit
-              className="cursor-pointer text-customPrimary"
-              onClick={() => console.log(data)}
-            />
+            <Link to={`/students/edit/${data.key}`}>
+              {" "}
+              <FiEdit
+                className="cursor-pointer text-customPrimary"
+                onClick={() => console.log(data)}
+              />
+            </Link>
             <RxCross1
               className="cursor-pointer "
               onClick={() => console.log(data)}

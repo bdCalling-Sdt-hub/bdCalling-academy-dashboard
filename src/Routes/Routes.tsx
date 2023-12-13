@@ -7,6 +7,7 @@ import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePasswor
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
+import EditStudents from "../pages/Dashboard/Students/EditStudents";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/students",
         element: <Students></Students>,
+      },
+      {
+        path: "/students/edit/:id",
+        element: <EditStudents></EditStudents>,
       },
     ],
   },
