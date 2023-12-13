@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "img": "https://t.ly/ImQRE",
+    "title": "Certified UI/UX Designer Course",
+    "price": "15,000 BDT",
+    "availableSeat": "15 Seats Left",
+    "daysLeft": "12 Days Left",
+    "type": "offline",
+    "batch": "batch 3"
+  },
+  {
+    "id": "2",
+    "img": "https://t.ly/ImQRE",
+    "title": "Web Development Bootcamp",
+    "price": "20,000 BDT",
+    "availableSeat": "10 Seats Left",
+    "daysLeft": "8 Days Left",
+    "type": "online",
+    "batch": "batch 1"
+  },
+  {
+    "id": "3",
+    "img": "https://t.ly/ImQRE",
+    "title": "Digital Marketing Masterclass",
+    "price": "18,000 BDT",
+    "availableSeat": "20 Seats Left",
+    "daysLeft": "15 Days Left",
+    "type": "offline",
+    "batch": "batch 2"
+  },
+  {
+    "id": "4",
+    "img": "https://t.ly/ImQRE",
+    "title": "Python Programming Fundamentals",
+    "price": "12,000 BDT",
+    "availableSeat": "5 Seats Left",
+    "daysLeft": "10 Days Left",
+    "type": "online",
+    "batch": "batch 4"
+  },
+  {
+    "id": "5",
+    "img": "https://t.ly/ImQRE",
+    "title": "Mobile App Development Workshop",
+    "price": "25,000 BDT",
+    "availableSeat": "8 Seats Left",
+    "daysLeft": "7 Days Left",
+    "type": "offline",
+    "batch": "batch 5"
+  }
+]

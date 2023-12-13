@@ -1,0 +1,19 @@
+.cardEditButton {
+  background-color: #2492eb;
+  width: 372px;
+  color: white;
+  font-weight: 500;
+}
+.cardDeleteButton {
+  background-color: white;
+  width: 372px;
+  color: #2492eb;
+  font-weight: 500;
+  border: 1px solid #2492eb;
+}
+.cardEditButton:hover {
+  background-color: #2492eb;
+  width: 372px;
+  color: white !important;
+  font-weight: 500;
+}

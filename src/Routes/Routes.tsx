@@ -8,6 +8,9 @@ import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
 import EditStudents from "../pages/Dashboard/Students/EditStudents";
+import Courses from "../pages/Dashboard/Courses/Courses";
+import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
+import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,18 @@ export const router = createBrowserRouter([
       {
         path: "/students/edit/:id",
         element: <EditStudents></EditStudents>,
+      },
+      {
+        path: "/courses",
+        element: <Courses></Courses>,
+      },
+      {
+        path: "/courses/add",
+        element: <Addcourse></Addcourse>,
+      },
+      {
+        path: "/courses/edit/:id",
+        element: <EditCourse></EditCourse>,
       },
     ],
   },
