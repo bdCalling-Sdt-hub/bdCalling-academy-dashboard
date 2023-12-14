@@ -42,6 +42,7 @@ export default function EditEvent(props: any) {
   };
   const onReset = () => {
     form.resetFields();
+    setImageUrl("");
   };
   const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>

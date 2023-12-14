@@ -16,6 +16,7 @@ import Department from "../pages/Dashboard/Department/Department";
 import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDepartment";
 import Attendence from "../pages/Dashboard/Attendence/Attendence";
 import Events from "../pages/Dashboard/Events/Events";
+import ClassSchedule from "../pages/Dashboard/Class-Schedule/Class-Schedule";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "/events",
         element: <Events />,
+      },
+      {
+        path: "/class-schedule",
+        element: <ClassSchedule />,
       },
     ],
   },
