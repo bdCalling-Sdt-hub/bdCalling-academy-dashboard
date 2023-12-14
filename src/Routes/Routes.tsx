@@ -12,6 +12,8 @@ import Courses from "../pages/Dashboard/Courses/Courses";
 import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 import Mentors from "../pages/Dashboard/Mentors/Mentors";
+import Department from "../pages/Dashboard/Department/Department";
+import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDepartment";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +51,18 @@ export const router = createBrowserRouter([
       {
         path: "/mentors",
         element: <Mentors />,
+      },
+      {
+        path: "/departments",
+        element: <Department />,
+      },
+      {
+        path: "/departments",
+        element: <Department />,
+      },
+      {
+        path: "/department/edit/:id",
+        element: <EditDepartment />,
       },
     ],
   },

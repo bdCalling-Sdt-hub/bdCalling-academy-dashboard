@@ -40,7 +40,7 @@ export default function EditCourse() {
         <div className="flex justify-between items-center">
           <h1 className="text-2xl  font-semibold mb-8 ">Edit Course</h1>
         </div>
-        <div className="add-course">
+        <div className="edit-course">
           <Form
             layout="vertical"
             form={form}

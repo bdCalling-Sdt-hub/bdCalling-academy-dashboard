@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { ReactElement, ReactNode } from "react";
 interface IModal {
   isOpen: boolean;
