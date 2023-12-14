@@ -152,16 +152,13 @@ export default function EditMentor({ img, id }: any) {
                 <Input placeholder="courseName" className="py-2" />
               </Form.Item>
             </Col>
-            <Col lg={12}>
-              <button type="submit" className={style.mentorsCardEditBtn}>
-                EDIT
-              </button>
-            </Col>
-
-            <Col lg={12}>
-              <button className={style.mentorDeleteBtn}>Cancel</button>
-            </Col>
           </Row>
+          <div className={style.buttonContainer}>
+            <button type="submit" className={style.mentorsCardEditBtn}>
+              EDIT
+            </button>
+            <button className={style.mentorDeleteBtn}>Cancel</button>
+          </div>
         </Form>
       </div>
     </div>

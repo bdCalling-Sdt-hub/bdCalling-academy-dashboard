@@ -1,15 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Card, Form, Upload, message } from "antd";
+import { Card } from "antd";
 import style from "./mentorsCard.module.css";
 import { useState } from "react";
 import CustomModal from "../UI/Modal/Modal";
-import {
-  RcFile,
-  UploadChangeParam,
-  UploadFile,
-  UploadProps,
-} from "antd/es/upload";
-import { EditOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+
 import EditMentor from "../../pages/Dashboard/Mentors/EditMentor/EditMentor";
 
 export default function MentorsCard(props: any) {
@@ -22,8 +16,14 @@ export default function MentorsCard(props: any) {
 
   return (
     <div>
-      <CustomModal isOpen={show} closeModal={() => setshow(false)}>
-        <EditMentor img={img} />
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <EditMentor data={props.mentor} />
       </CustomModal>
       <Card
         hoverable

@@ -24,14 +24,15 @@ export default function CustomModal({
   return (
     <div>
       <Modal
+        confirmLoading={confirmLoading}
         title={title}
         open={isOpen}
         onOk={handleOk}
         onCancel={closeModal}
-        // cancelButtonProps={{
-        //   style: { display: showCancelButton ? "inline" : "none" },
-        // }}
-        // okButtonProps={{ style: { display: showOkButton ? "inline" : "none" } }}
+        cancelButtonProps={{
+          style: { display: showCancelButton ? "inline" : "none" },
+        }}
+        okButtonProps={{ style: { display: showOkButton ? "inline" : "none" } }}
       >
         {children}
       </Modal>

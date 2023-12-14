@@ -6,7 +6,7 @@
 }
 .mentorsCardEditBtn:hover {
   border-radius: 3px;
-  background-color: #0e8df5 !important;
+  background-color: #057ada !important;
   color: white;
   padding: 8px 40px;
 }
@@ -24,6 +24,10 @@
   background-color: d7263d !important;
   color: white !important;
   border: 1px solid #d7263d;
-  background-color: #d7263d !important;
-  margin-left: 24px;
+  background-color: #99091c !important;
+}
+
+.buttonContainer {
+  display: flex !important;
+  justify-content: space-around !important;
 }
