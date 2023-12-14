@@ -46,11 +46,12 @@ export default function EditMentor({ img, id }: any) {
       });
     }
   };
-
+  const onFinish = (data) => {};
+  const onFinishFailed = (error) => {};
   return (
     <div>
       <div>
-        <Form>
+        <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item>
             <div className="flex justify-center items-center py-6">
               <div className="relative">

@@ -1,0 +1,32 @@
+.editEvents {
+  border-radius: 6px;
+  background: var(--Primary-Color-Blue-100, #2492eb);
+  padding: 12px 30px;
+  color: white;
+  font-weight: 500;
+}
+.editEvents:hover {
+  border-radius: 6px;
+  background: var(--Primary-Color-Blue-100, #187fd3);
+  padding: 12px 30px;
+  color: white;
+  font-weight: 500;
+}
+.deleteEvents {
+  border-radius: 6px;
+  border: 1px solid var(--Primary-Color-Blue-100, #2492eb);
+  background: var(--White-Full-White, #fff);
+  padding: 12px 30px;
+
+  color: #2492eb;
+  font-weight: 500;
+}
+.deleteEvents:hover {
+  border-radius: 6px;
+  border: 1px solid var(--Primary-Color-Blue-100, #1481da);
+  background: var(--White-Full-White, #fff);
+  padding: 12px 30px;
+
+  color: #1481da;
+  font-weight: 500;
+}

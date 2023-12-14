@@ -15,6 +15,7 @@ import Mentors from "../pages/Dashboard/Mentors/Mentors";
 import Department from "../pages/Dashboard/Department/Department";
 import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDepartment";
 import Attendence from "../pages/Dashboard/Attendence/Attendence";
+import Events from "../pages/Dashboard/Events/Events";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "/attendence",
         element: <Attendence />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
       },
     ],
   },

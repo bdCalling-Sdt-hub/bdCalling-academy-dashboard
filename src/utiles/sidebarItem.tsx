@@ -4,6 +4,7 @@ import { BsBook } from "react-icons/bs";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { LuFolders } from "react-icons/lu";
 import { PiIdentificationCard } from "react-icons/pi";
+import { BsCalendar2Event } from "react-icons/bs";
 
 export const sidebarItems = [
   {
@@ -35,6 +36,11 @@ export const sidebarItems = [
     key: "/attendence",
     label: "Attendence",
     icon: <PiIdentificationCard />,
+  },
+  {
+    key: "/events",
+    label: "Events",
+    icon: <BsCalendar2Event />,
   },
   {
     key: "/class-schedule",
