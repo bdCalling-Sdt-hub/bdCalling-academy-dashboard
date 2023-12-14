@@ -16,7 +16,7 @@ export default function Department() {
   const columns = [
     {
       title: "Head of Department",
-      dataIndex: "name",
+      dataIndex: "head",
     },
     {
       title: "Department name",
@@ -61,15 +61,41 @@ export default function Department() {
     },
   ];
 
+  const data = departments?.map((department) => {
+    return {
+      key: department.id,
+      id: department.id,
+      head: (
+        <div className="flex items-center gap-x-2">
+          <img
+            style={{
+              width: "30px",
+              height: "30px",
+              borderRadius: "50%",
+            }}
+            src={department.img}
+            alt=""
+          />
+          <p>{department.head}</p>
+        </div>
+      ),
+      department: department.department,
+      phone: department.phone,
+      email: department.email,
+      startingDate: department.startingDate,
+      totalStudents: department.totalStudents,
+    };
+  });
+  console.log(data);
   return (
     <div>
       <h1 className="text-xl font-bold">Department List</h1>
-      <div>
+      <div className="mt-6">
         <Table
           title={false}
           loading={false}
           columns={columns}
-          data={departments}
+          data={data}
           page={5}
           total={departments.length}
           needPagination={true}
