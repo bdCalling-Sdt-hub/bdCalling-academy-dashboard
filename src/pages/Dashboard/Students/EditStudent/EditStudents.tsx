@@ -111,7 +111,7 @@ export default function EditStudents() {
                 <div className="absolute right-5 top-[225px]">
                   <Upload
                     name="avatar"
-                    disabled={action !== "edit"}
+                    disabled={action === ""}
                     className={`avatar-uploader`}
                     showUploadList={false}
                     action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
@@ -144,7 +144,7 @@ export default function EditStudents() {
             <div className={style.editStudentContainer}>
               <div>
                 <Form
-                  disabled={action !== "edit"}
+                  disabled={action === ""}
                   initialValues={{}}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
