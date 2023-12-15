@@ -19,6 +19,7 @@ import Events from "../pages/Dashboard/Events/Events";
 import ClassSchedule from "../pages/Dashboard/Class-Schedule/Class-Schedule";
 import StudentProfile from "../pages/Dashboard/Students/EditStudent/StudentProfile";
 import Profile from "../pages/Dashboard/Profile/Profile";
+import MentorsDashboard from "../pages/Dashboard/Mentors/MentorsDashboard/MentorsDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "/mentors",
         element: <Mentors />,
+      },
+      {
+        path: "/MentorsDashboard",
+        element: <MentorsDashboard />,
       },
       {
         path: "/departments",

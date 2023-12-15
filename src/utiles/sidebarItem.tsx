@@ -33,6 +33,11 @@ export const sidebarItems = [
     icon: <IoPersonCircleOutline />,
   },
   {
+    key: "/MentorsDashboard",
+    label: "MentorsDashboard",
+    icon: <IoPersonCircleOutline />,
+  },
+  {
     key: "/departments",
     label: "Departments",
     icon: <LuFolders />,

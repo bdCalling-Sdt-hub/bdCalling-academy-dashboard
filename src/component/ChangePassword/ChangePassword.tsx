@@ -18,13 +18,19 @@ export default function ChangePassword() {
 
   return (
     <div>
-      <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+      >
         <h1 className="text-2xl font-semibold mb-6">Change your Password </h1>
         <Row gutter={16} justify={"center"} align={"middle"}>
           <Col lg={24}>
             <Form.Item
               key="old password"
               name="oldPassword"
+              label="Enter your old password"
               rules={[
                 {
                   required: true,
@@ -50,6 +56,7 @@ export default function ChangePassword() {
           </Col>
           <Col lg={24}>
             <Form.Item
+              label="Enter your new password"
               key="new password"
               name="newPassword"
               rules={[
@@ -77,6 +84,7 @@ export default function ChangePassword() {
           </Col>
           <Col lg={24}>
             <Form.Item
+              label="Re-enter the new password"
               key="confirm password"
               name="confirmPassword"
               rules={[
