@@ -7,7 +7,7 @@ import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePasswor
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
-import EditStudents from "../pages/Dashboard/Students/EditStudent/EditStudents";
+
 import Courses from "../pages/Dashboard/Courses/Courses";
 import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
@@ -17,6 +17,8 @@ import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDep
 import Attendence from "../pages/Dashboard/Attendence/Attendence";
 import Events from "../pages/Dashboard/Events/Events";
 import ClassSchedule from "../pages/Dashboard/Class-Schedule/Class-Schedule";
+import StudentProfile from "../pages/Dashboard/Students/EditStudent/StudentProfile";
+import Profile from "../pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -36,8 +38,12 @@ export const router = createBrowserRouter([
         element: <Students></Students>,
       },
       {
-        path: "/students/edit/:id",
-        element: <EditStudents></EditStudents>,
+        path: "/profile/:id",
+        element: <Profile />,
+      },
+      {
+        path: "/students/profile/:id",
+        element: <StudentProfile></StudentProfile>,
       },
       {
         path: "/courses",

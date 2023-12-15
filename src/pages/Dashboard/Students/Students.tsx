@@ -41,7 +41,7 @@ export default function Students() {
       render: function (data: any) {
         return (
           <div className="flex gap-x-2">
-            <Link to={`/students/edit/${data.key}`}>
+            <Link to={`/students/profile/${data.key}`}>
               {" "}
               <FiEdit
                 className="cursor-pointer text-customPrimary"

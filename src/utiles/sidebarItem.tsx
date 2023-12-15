@@ -5,7 +5,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { LuFolders } from "react-icons/lu";
 import { PiIdentificationCard } from "react-icons/pi";
 import { BsCalendar2Event } from "react-icons/bs";
-
+const id = 1;
 export const sidebarItems = [
   {
     key: "/dashboard",
@@ -15,6 +15,11 @@ export const sidebarItems = [
   {
     key: "/students",
     label: "Students",
+    icon: <GoPeople />,
+  },
+  {
+    key: `/profile/${id}`,
+    label: "Profile",
     icon: <GoPeople />,
   },
   {

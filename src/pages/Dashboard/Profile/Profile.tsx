@@ -1,19 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Col, Row, Form, Input, DatePicker } from "antd";
-import style from "../student.module.css";
-import editStyle from "./EditStudent.module.css";
+import style from "./Profile.module.css";
+
 import { message, Upload } from "antd";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
-export default function EditStudents() {
+import CustomModal from "../../../component/UI/Modal/Modal";
+import EditEvent from "../Events/EditEvent/EditEvent";
+import ChangePassword from "../../../component/ChangePassword/ChangePassword";
+
+export default function Profile() {
   //   const { id } = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-
+  const [show, setshow] = useState(false);
   const [action, setAction] = useState("");
   console.log(action);
   const onFinish = (data: any) => {
@@ -59,10 +64,32 @@ export default function EditStudents() {
       });
     }
   };
-  const customUploadClass = "custom-upload";
+  let role = "student";
+
   return (
     <div className="container mx-auto h-screen ">
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <ChangePassword />
+      </CustomModal>
       <div className="text-right">
+        {role !== "admin" && (
+          <Button
+            onClick={() => setshow(true)}
+            className="bg-customPrimary me-4"
+            style={{
+              color: "white",
+              fontWeight: "600",
+            }}
+          >
+            CHANGE PASSWORD
+          </Button>
+        )}
         <Button
           onClick={() => setAction("edit")}
           style={{
@@ -163,7 +190,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="name"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -180,7 +207,7 @@ export default function EditStudents() {
                           size="large"
                           type="number"
                           placeholder="mobile number"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -190,7 +217,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="email"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -200,7 +227,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="batchNo"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -209,7 +236,7 @@ export default function EditStudents() {
                         <DatePicker
                           style={{ width: "100%", padding: "8px" }}
                           placeholder="start date"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -225,7 +252,7 @@ export default function EditStudents() {
                         <DatePicker
                           style={{ width: "100%", padding: "8px" }}
                           placeholder="date of birth"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -242,7 +269,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="course title"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -252,7 +279,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="blood group"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
@@ -262,7 +289,7 @@ export default function EditStudents() {
                           size="large"
                           type="text"
                           placeholder="address"
-                          className={editStyle.input}
+                          className={style.input}
                         />
                       </Form.Item>
                     </Col>
