@@ -1,0 +1,20 @@
+.dateRange {
+  padding: 12px 30px;
+  border-radius: 3px;
+  border: 1px solid #a7a7a7;
+  background: #f4f4f4;
+}
+.date {
+  border-radius: 23.802px;
+  padding: 4px 14.876px;
+  border: 2px solid #8b8b8b;
+
+  background: #f4f4f4;
+}
+.setBtn {
+  padding: 9px 40px;
+  border-radius: 23.802px;
+  background: #2492eb;
+  color: white;
+  font-weight: 500;
+}

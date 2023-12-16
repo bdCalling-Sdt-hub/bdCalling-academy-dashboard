@@ -1,9 +1,7 @@
 import { ArrowUpOutlined, DollarOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
-import { MdOutlineShowChart } from "react-icons/md";
 
 export default function WalletSurvey() {
-  const percantage = 10;
   return (
     <div>
       <Row gutter={16}>
@@ -408,7 +406,6 @@ export default function WalletSurvey() {
           </div>
         </Col>
       </Row>
-      ;
     </div>
   );
 }
