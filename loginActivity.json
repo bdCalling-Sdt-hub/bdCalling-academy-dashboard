@@ -1,0 +1,50 @@
+[
+  {
+    "browser": "google chrome",
+    "device": "Mobile",
+    "time": "08:30 AM",
+    "country": "USA",
+    "date": "2023-01-15",
+    "status": true
+  },
+  {
+    "browser": "google chrome",
+    "device": "Desktop",
+    "time": "12:45 PM",
+    "country": "Canada",
+    "date": "2023-02-22",
+    "status": false
+  },
+  {
+    "browser": "google chrome",
+    "device": "Tablet",
+    "time": "04:15 PM",
+    "country": "Germany",
+    "date": "2023-03-10",
+    "status": true
+  },
+  {
+    "browser": "google chrome",
+    "device": "Mobile",
+    "time": "10:00 AM",
+    "country": "UK",
+    "date": "2023-04-05",
+    "status": false
+  },
+  {
+    "browser": "google chrome",
+    "device": "Desktop",
+    "time": "02:30 PM",
+    "country": "Australia",
+    "date": "2023-05-18",
+    "status": true
+  },
+  {
+    "browser": "google chrome",
+    "device": "Tablet",
+    "time": "06:20 AM",
+    "country": "Japan",
+    "date": "2023-06-27",
+    "status": false
+  }
+]

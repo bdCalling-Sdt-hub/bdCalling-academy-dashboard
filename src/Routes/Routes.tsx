@@ -21,6 +21,9 @@ import StudentProfile from "../pages/Dashboard/Students/EditStudent/StudentProfi
 import Profile from "../pages/Dashboard/Profile/Profile";
 import MentorsDashboard from "../pages/Dashboard/Mentors/MentorsDashboard/MentorsDashboard";
 import Wallet from "../pages/Dashboard/Wallet/Wallet";
+import Setting from "../pages/Dashboard/Setting/Setting";
+import LoginActivity from "../component/LoginActivity/LoginActivity";
+import Notification from "../component/Notification/Notification";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +97,18 @@ export const router = createBrowserRouter([
       {
         path: "/wallet",
         element: <Wallet />,
+      },
+      {
+        path: "/setting",
+        element: <Setting />,
+      },
+      {
+        path: "/setting/login-activity",
+        element: <LoginActivity />,
+      },
+      {
+        path: "/notification",
+        element: <Notification />,
       },
     ],
   },

@@ -61,7 +61,7 @@ export const sidebarItems = [
     label: "Wallet",
   },
   {
-    key: "/Setting",
+    key: "/setting",
     label: "setting",
   },
   {
