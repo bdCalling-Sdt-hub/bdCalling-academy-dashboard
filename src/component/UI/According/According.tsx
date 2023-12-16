@@ -1,22 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import "./According.module.css";
-const AccordionPanel = ({ header, content, isActive, onClick }: any) => {
+import { DownOutlined, RightOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+
+const According = ({ title, children }: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div
-      className={`accordion-panel ${isActive ? "active" : ""}`}
-      onClick={onClick}
-    >
-      <div className="accordion-header">
-        {header}
-        {isActive ? (
-          <UpOutlined className="icon" />
-        ) : (
-          <DownOutlined className="icon" />
-        )}
+    <div className="border p-4 mb-2">
+      <div
+        className="flex justify-between items-center cursor-pointer"
+        onClick={toggleAccordion}
+      >
+        <button className="text-lg font-semibold ">
+          {isOpen ? <DownOutlined /> : <RightOutlined />} {title}
+        </button>
       </div>
-      {isActive && <div className="accordion-content">{content}</div>}
+      {isOpen && <div className="mt-2">{children}</div>}
     </div>
   );
 };
-export default AccordionPanel;
+
+export default According;
