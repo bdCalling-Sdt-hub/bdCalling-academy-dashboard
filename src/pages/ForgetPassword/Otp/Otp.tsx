@@ -11,6 +11,7 @@ const { Text } = Typography;
 import otpImage from "../../../assets/forget-password/forget3.svg";
 
 import { useRef, useState } from "react";
+import AccordionPanel from "../../../component/UI/According/According";
 
 export default function Otp() {
   const [otp, setOtp] = useState(new Array(6).fill(""));

@@ -1,0 +1,5 @@
+.dropdown {
+  padding: 10px 30px;
+  border-radius: 50px;
+  border: 1px solid var(--Black-Black-40, #a7a7a7);
+}

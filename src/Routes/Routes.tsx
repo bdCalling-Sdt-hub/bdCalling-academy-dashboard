@@ -20,6 +20,7 @@ import ClassSchedule from "../pages/Dashboard/Class-Schedule/Class-Schedule";
 import StudentProfile from "../pages/Dashboard/Students/EditStudent/StudentProfile";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import MentorsDashboard from "../pages/Dashboard/Mentors/MentorsDashboard/MentorsDashboard";
+import Wallet from "../pages/Dashboard/Wallet/Wallet";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "/class-schedule",
         element: <ClassSchedule />,
+      },
+      {
+        path: "/wallet",
+        element: <Wallet />,
       },
     ],
   },

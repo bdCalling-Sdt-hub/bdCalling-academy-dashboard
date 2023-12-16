@@ -1,0 +1,22 @@
+.custom-accordion {
+  width: 100%;
+}
+
+.accordion-panel {
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.accordion-panel.active {
+  background-color: #f9f9f9;
+}
+
+.accordion-header {
+  padding: 12px;
+  font-weight: bold;
+}
+
+.accordion-content {
+  padding: 12px;
+}
