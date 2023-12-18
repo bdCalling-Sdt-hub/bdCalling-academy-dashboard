@@ -2,7 +2,6 @@ import StudentDashboardSurvey from "../../../component/StudentDashboardSurvey/St
 import { useState } from "react";
 import style from "./studentDashboard.module.css";
 import StudentCourses from "../../../component/StudentCourses/StudentCourses";
-import NoEnrollMent from "../../../component/StudentCourses/NoEnrollment/Noenrollment";
 import StudentCertificate from "../../../component/StudentCertificate/StudentCertificate";
 export default function StudentDashbord() {
   const [selectedTab, setSelectedTab] = useState<"courses" | "certificates">(

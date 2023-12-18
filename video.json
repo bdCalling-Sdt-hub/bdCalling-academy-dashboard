@@ -1,0 +1,34 @@
+[
+  {
+    "id": "complete-html-course-01",
+    "completation": 30,
+    "rating": 3,
+    "image": "https://i.postimg.cc/rmrmFB0d/Rectangle-77.png",
+    "title": "complete-html-course",
+    "duration": "4 hours",
+    "modules": ["Basic HTML Concepts", "HTML Forms"],
+
+    "videos": [
+      {
+        "videoId": "kwx8SGjg-rw?si=JQTK7lyUfIWp3QzQ",
+        "title": "HTML Basics",
+        "module": "Basic HTML Concepts"
+      },
+      {
+        "videoId": "Zj7UV59LbFA?si=Yp__TSm7l-2uTF-5",
+        "title": "HTML Tags",
+        "module": "Basic HTML Concepts"
+      },
+      {
+        "videoId": "kwx8SGjg-rw?si=EeCD1z_cAKwKHm_G",
+        "title": "HTML Forms",
+        "module": "HTML Forms"
+      },
+      {
+        "videoId": "rZm35iLo654?si=ftpezXIneRLQyV1n",
+        "title": "HTML Semantics",
+        "module": "HTML Forms"
+      }
+    ]
+  }
+]

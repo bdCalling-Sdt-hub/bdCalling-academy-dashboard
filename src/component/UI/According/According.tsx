@@ -10,7 +10,7 @@ const According = ({ title, children }: any) => {
   };
 
   return (
-    <div className="border p-4 mb-2">
+    <div className="border p-4">
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={toggleAccordion}

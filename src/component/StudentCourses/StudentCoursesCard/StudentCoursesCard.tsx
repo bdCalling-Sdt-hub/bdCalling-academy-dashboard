@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Card } from "antd";
 import { Progress } from "antd";
 import { FaStar } from "react-icons/fa";
 import style from "./studentCourseCard.module.css";
-export default function StudentCoursesCard() {
-  const cardInfo = {
-    image: "https://t.ly/G_wcW",
-    title: "Certified UI/UX Designer Course",
-    completation: 30,
-    rating: 3,
-  };
+import { Link } from "react-router-dom";
+export default function StudentCoursesCard(props: any) {
+  const { id, image, title, duration, modules, completation, rating } =
+    props.course;
+
   const handleContinueCourse = () => {};
   return (
     <div>
@@ -19,22 +19,22 @@ export default function StudentCoursesCard() {
           <img
             style={{ height: "260px", padding: "20px" }}
             alt="course-image"
-            src={cardInfo.image}
+            src={image}
           />
         }
       >
         <h1 className="text-lg px-5	font-semibold pt-3 pb-5	text-customPrimary">
-          {cardInfo.title}
+          {title}
         </h1>
         <div>
           <Progress
-            percent={cardInfo.completation}
+            percent={completation}
             strokeColor="#2492EB"
             showInfo={false}
           />
         </div>
         <div className="flex justify-between items-center px-5 pb-4">
-          <p>{cardInfo.completation}% complete</p>
+          <p>{completation}% complete</p>
 
           <div className="flex items-center gap-x-2 text-[#FFC60B]">
             <FaStar />
@@ -43,9 +43,14 @@ export default function StudentCoursesCard() {
         </div>
 
         <div className="px-5 pb-4 pt-3">
-          <button onClick={handleContinueCourse} className={style.continueBtn}>
-            Continue Course
-          </button>
+          <Link to={`/studentEnrolledCourse/${id}`}>
+            <button
+              onClick={handleContinueCourse}
+              className={style.continueBtn}
+            >
+              Continue Course
+            </button>
+          </Link>
         </div>
       </Card>
     </div>

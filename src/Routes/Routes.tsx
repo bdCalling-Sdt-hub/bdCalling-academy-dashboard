@@ -25,6 +25,7 @@ import Setting from "../pages/Dashboard/Setting/Setting";
 import LoginActivity from "../component/LoginActivity/LoginActivity";
 import Notification from "../component/Notification/Notification";
 import StudentDashbord from "../pages/Dashboard/StudentDashboard/StudentDashbord";
+import StudentEnrolledCourse from "../pages/Dashboard/StudentDashboard/StudentEnrolledCourse/StudentEnrolledCourse";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
       {
         path: "/notification",
         element: <Notification />,
+      },
+      {
+        path: "/studentEnrolledCourse/:id",
+        element: <StudentEnrolledCourse />,
       },
     ],
   },
