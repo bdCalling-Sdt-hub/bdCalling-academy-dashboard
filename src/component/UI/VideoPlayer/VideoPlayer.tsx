@@ -5,12 +5,14 @@ interface videoPlayerParams {
   videoId: string;
   autoplay?: boolean;
   loading?: boolean;
+  moduleId?: string | number;
 }
 export default function VideoPlayer({
   title,
   videoId,
   autoplay = true,
   loading,
+  moduleId,
 }: videoPlayerParams) {
   return (
     <div>
@@ -24,7 +26,9 @@ export default function VideoPlayer({
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>
-      <h1 className="text-[22px] my-5 text-[#333]">{title}</h1>
+      <h1 className="text-[22px] my-5 text-[#333]">
+        {moduleId}. {title}
+      </h1>
     </div>
   );
 }

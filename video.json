@@ -6,28 +6,40 @@
     "image": "https://i.postimg.cc/rmrmFB0d/Rectangle-77.png",
     "title": "complete-html-course",
     "duration": "4 hours",
-    "modules": ["Basic HTML Concepts", "HTML Forms"],
-
-    "videos": [
+    "modules": [
       {
-        "videoId": "kwx8SGjg-rw?si=JQTK7lyUfIWp3QzQ",
-        "title": "HTML Basics",
-        "module": "Basic HTML Concepts"
+        "moduleId": 0,
+        "moduleName": "Basic HTML Concepts",
+        "videos": [
+          {
+            "id": "0.1",
+            "video": "kwx8SGjg-rw?si=JQTK7lyUfIWp3QzQ",
+            "title": "HTML Basics",
+            "module": "Basic HTML Concepts"
+          },
+          {
+            "id": "0.2",
+            "video": "Zj7UV59LbFA?si=Yp__TSm7l-2uTF-5",
+            "title": "HTML Tags",
+            "module": "Basic HTML Concepts"
+          }
+        ]
       },
       {
-        "videoId": "Zj7UV59LbFA?si=Yp__TSm7l-2uTF-5",
-        "title": "HTML Tags",
-        "module": "Basic HTML Concepts"
-      },
-      {
-        "videoId": "kwx8SGjg-rw?si=EeCD1z_cAKwKHm_G",
-        "title": "HTML Forms",
-        "module": "HTML Forms"
-      },
-      {
-        "videoId": "rZm35iLo654?si=ftpezXIneRLQyV1n",
-        "title": "HTML Semantics",
-        "module": "HTML Forms"
+        "moduleId": 1,
+        "moduleName": "HTML Forms",
+        "videos": [
+          {
+            "id": "1.1",
+            "video": "kwx8SGjg-rw?si=EeCD1z_cAKwKHm_G",
+            "title": "HTML Forms"
+          },
+          {
+            "id": "1.2",
+            "videoId": "1.1",
+            "title": "HTML Semantics"
+          }
+        ]
       }
     ]
   }

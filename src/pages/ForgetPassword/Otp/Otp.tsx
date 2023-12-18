@@ -11,7 +11,6 @@ const { Text } = Typography;
 import otpImage from "../../../assets/forget-password/forget3.svg";
 
 import { useRef, useState } from "react";
-import AccordionPanel from "../../../component/UI/According/According";
 
 export default function Otp() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -40,9 +39,10 @@ export default function Otp() {
       otpBoxReference.current[index + 1].focus();
     }
   };
-  const onSubmit = () => {
+  const handleSubmit = () => {
     try {
-      console.log("submit");
+      const finalOtp = otp.join("");
+      console.log(finalOtp);
     } catch (error) {
       console.log(error);
     }
@@ -117,6 +117,7 @@ export default function Otp() {
                   </a>
                 </div>
                 <Button
+                  onClick={handleSubmit}
                   type="primary"
                   htmlType="submit"
                   className={style.otpButton}

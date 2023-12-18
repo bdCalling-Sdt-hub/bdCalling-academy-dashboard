@@ -43,7 +43,11 @@ export default function StudentCoursesCard(props: any) {
         </div>
 
         <div className="px-5 pb-4 pt-3">
-          <Link to={`/studentEnrolledCourse/${id}`}>
+          <Link
+            to={`/studentEnrolledCourse/${id}/${encodeURIComponent(
+              modules[0].moduleName
+            )}/${encodeURIComponent(modules[0].videos[0].title)}`}
+          >
             <button
               onClick={handleContinueCourse}
               className={style.continueBtn}

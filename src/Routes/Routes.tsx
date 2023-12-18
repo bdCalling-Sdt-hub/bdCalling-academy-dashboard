@@ -117,7 +117,7 @@ export const router = createBrowserRouter([
         element: <Notification />,
       },
       {
-        path: "/studentEnrolledCourse/:id",
+        path: "/studentEnrolledCourse/:id/:moduleName/:videoId",
         element: <StudentEnrolledCourse />,
       },
     ],

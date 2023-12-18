@@ -52,7 +52,7 @@ const DashboardLayout = () => {
             marginTop: "10px",
           }}
           mode="inline"
-          defaultSelectedKeys={[sidebarItems[0].key]}
+          // defaultSelectedKeys={[sidebarItems[0].key]}
           items={sidebarItems}
           onClick={handleMenuSelect}
         />
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
         </Header>
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "0 16px",
             padding: 24,
             backgroundColor: "#F6F8FA",
             borderRadius: borderRadiusLG,

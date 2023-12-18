@@ -2,7 +2,7 @@
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
-const According = ({ title, children }: any) => {
+const According = ({ title, index, children }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -16,7 +16,8 @@ const According = ({ title, children }: any) => {
         onClick={toggleAccordion}
       >
         <button className="text-lg font-semibold ">
-          {isOpen ? <DownOutlined /> : <RightOutlined />} {title}
+          {isOpen ? <DownOutlined /> : <RightOutlined />}
+          {index}. {title}
         </button>
       </div>
       {isOpen && <div className="mt-2">{children}</div>}
