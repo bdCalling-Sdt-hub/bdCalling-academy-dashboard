@@ -18,6 +18,11 @@ export const sidebarItems = [
     icon: <GoPeople />,
   },
   {
+    key: "/student/dashboard",
+    label: "StudentDashboard",
+    icon: <GoPeople />,
+  },
+  {
     key: `/profile/${id}`,
     label: "Profile",
     icon: <GoPeople />,

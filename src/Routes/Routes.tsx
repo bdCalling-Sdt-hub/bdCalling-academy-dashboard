@@ -24,6 +24,7 @@ import Wallet from "../pages/Dashboard/Wallet/Wallet";
 import Setting from "../pages/Dashboard/Setting/Setting";
 import LoginActivity from "../component/LoginActivity/LoginActivity";
 import Notification from "../component/Notification/Notification";
+import StudentDashbord from "../pages/Dashboard/StudentDashboard/StudentDashbord";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/students/profile/:id",
         element: <StudentProfile></StudentProfile>,
+      },
+      {
+        path: "/student/dashboard",
+        element: <StudentDashbord />,
       },
       {
         path: "/courses",

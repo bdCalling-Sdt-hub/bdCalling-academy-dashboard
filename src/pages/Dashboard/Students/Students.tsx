@@ -3,7 +3,7 @@
 import { Button } from "antd";
 import StudentSurvey from "../../../component/StudentSurvey/StudentSurvey";
 import person from "../../../assets/table/person.svg";
-import React from "react";
+
 import { PlusOutlined } from "@ant-design/icons";
 import Table from "../../../component/UI/Table/Table";
 import { FiEdit } from "react-icons/fi";
@@ -42,7 +42,6 @@ export default function Students() {
         return (
           <div className="flex gap-x-2">
             <Link to={`/students/profile/${data.key}`}>
-              {" "}
               <FiEdit
                 className="cursor-pointer text-customPrimary"
                 onClick={() => console.log(data)}
