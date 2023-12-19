@@ -4,15 +4,30 @@ import Table from "../../../component/UI/Table/Table";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
-
+interface departmentData {
+  id: string;
+  img: string;
+  head: string;
+  department: string;
+  phone: string;
+  email: string;
+  startingDate: string;
+  totalStudents: string;
+}
 export default function Department() {
-  const [departments, setdepartments] = useState([]);
+  const [departments, setdepartments] = useState<departmentData[] | []>([]);
 
   useEffect(() => {
     fetch("./departments.json")
       .then((res) => res.json())
       .then((data) => setdepartments(data));
   }, []);
+  const tablethemes = {
+    Table: {
+      headerBg: "#2492EB",
+      headerColor: "white",
+    },
+  };
   const columns = [
     {
       title: "Head of Department",
@@ -92,6 +107,7 @@ export default function Department() {
       <h1 className="text-xl font-bold">Department List</h1>
       <div className="mt-6">
         <Table
+          theme={tablethemes}
           title={false}
           loading={false}
           columns={columns}
