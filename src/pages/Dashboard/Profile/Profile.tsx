@@ -3,21 +3,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Col, Row, Form, Input, DatePicker } from "antd";
 import style from "./Profile.module.css";
-
-import { message, Upload } from "antd";
-import type { UploadChangeParam } from "antd/es/upload";
-import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
-import EditEvent from "../Events/EditEvent/EditEvent";
+
 import ChangePassword from "../../../component/ChangePassword/ChangePassword";
+import CustomUpload from "../../../component/UI/Upload/Upload";
 
 export default function Profile() {
-  //   const { id } = useSearchParams();
+  // const { id } = useSearchParams();
+  const img = "https://t.ly/aBlAZ ";
+  let role = "student";
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [show, setshow] = useState(false);
   const [action, setAction] = useState("");
   console.log(action);
@@ -28,43 +27,11 @@ export default function Profile() {
       //edit logic
     }
   };
-  const img = "https://t.ly/aBlAZ ";
+
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
-  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result as string));
-    reader.readAsDataURL(img);
-  };
-
-  const beforeUpload = (file: RcFile) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
-  };
-  const handleChange: UploadProps["onChange"] = (
-    info: UploadChangeParam<UploadFile>
-  ) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-  let role = "student";
+  console.log(loading, imageFile, imageUrl);
 
   return (
     <div className="container mx-auto h-screen ">
@@ -136,14 +103,14 @@ export default function Profile() {
                   )}
                 </div>
                 <div className="absolute right-5 top-[225px]">
-                  <Upload
+                  <CustomUpload
                     name="avatar"
                     disabled={action === ""}
                     className={`avatar-uploader`}
                     showUploadList={false}
-                    action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-                    beforeUpload={beforeUpload}
-                    onChange={handleChange}
+                    setLoading={setLoading}
+                    setImageUrl={setImageUrl}
+                    setImageFile={setImageFile}
                   >
                     <div
                       className=" bg-customPrimary"
@@ -158,11 +125,14 @@ export default function Profile() {
                         transform: "translate(-50%, -50%)",
                       }}
                     >
-                      <span className="font-bold text-lg" style={{}}>
+                      <span
+                        className="font-bold text-lg cursor-pointer"
+                        style={{}}
+                      >
                         <EditOutlined />
                       </span>
                     </div>
-                  </Upload>
+                  </CustomUpload>
                 </div>
               </div>
             </div>
