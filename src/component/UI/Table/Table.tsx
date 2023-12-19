@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table as AntTable, ConfigProvider } from "antd";
+import { paginationThemes2 } from "../../../themes/Index";
 
 export default function Table({
   page,
@@ -15,6 +16,12 @@ export default function Table({
 }: any) {
   const handleSeeAll = (data: any) => {
     console.log(data);
+  };
+  const combinedTheme = {
+    components: {
+      ...theme,
+      ...paginationThemes2,
+    },
   };
 
   return (
@@ -33,7 +40,7 @@ export default function Table({
           {seeAll ? seeAll : ""}
         </button>
       </div>
-      <ConfigProvider theme={theme}>
+      <ConfigProvider theme={combinedTheme}>
         <AntTable
           loading={loading}
           columns={columns}

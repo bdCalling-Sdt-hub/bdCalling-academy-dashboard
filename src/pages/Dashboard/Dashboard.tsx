@@ -8,15 +8,12 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import person from "../../assets/table/person.svg";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
-import { paginationThemes } from "../../themes/Index";
 
 export default function Dashboard() {
   const tablethemes = {
-    components: {
-      Table: {
-        lineHeight: 1,
-        borderRadius: 8,
-      },
+    Table: {
+      lineHeight: 1,
+      borderRadius: 8,
     },
   };
 
@@ -251,7 +248,6 @@ export default function Dashboard() {
         <Row>
           <Col lg={24}>
             <Table
-              theme={paginationThemes}
               title="Student List"
               seeAll="seeAll"
               loading={false}

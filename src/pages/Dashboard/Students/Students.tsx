@@ -128,6 +128,13 @@ export default function Students() {
       admissionDate: "1October 30, 2023",
     },
   ];
+  const tablethemes = {
+    Table: {
+      headerBg: "#2492EB",
+      headerColor: "white",
+    },
+  };
+
   return (
     <div>
       <StudentSurvey></StudentSurvey>
@@ -150,6 +157,7 @@ export default function Students() {
       </div>
       <div className="mt-6">
         <Table
+          theme={tablethemes}
           loading={false}
           title={false}
           data={data}
