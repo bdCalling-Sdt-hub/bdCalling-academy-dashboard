@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import style from "./Events.module.css";
+
 import { Link } from "react-router-dom";
 import { Button, Col, Row } from "antd";
 import { FiPlus } from "react-icons/fi";

@@ -9,8 +9,22 @@ import Table from "../../../component/UI/Table/Table";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
+interface AttendenceData {
+  id: string;
+  img: string;
+  name: string;
+  courseName: string;
+  date: string;
+  attendence: string;
+}
 export default function Attendence() {
-  const [attendence, setattendence] = useState([]);
+  const [attendence, setattendence] = useState<AttendenceData[]>([]);
+  const tablethemes = {
+    Table: {
+      headerBg: "#2492EB",
+      headerColor: "white",
+    },
+  };
   const [searchTerm, setSearchTerm] = useState("");
   const [type, settype] = useState("Students");
   const query: Record<string, unknown> = {};
@@ -138,6 +152,7 @@ export default function Attendence() {
 
       <div className="mt-6">
         <Table
+          theme={tablethemes}
           columns={columns}
           data={data}
           loading={false}
