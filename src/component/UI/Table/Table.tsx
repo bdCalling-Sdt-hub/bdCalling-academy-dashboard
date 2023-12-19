@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Table as AntTable } from "antd";
+import { Table as AntTable, ConfigProvider } from "antd";
 
 export default function Table({
   page,
@@ -11,7 +11,11 @@ export default function Table({
   data,
   needPagination,
   seeAll,
+  theme,
 }: any) {
+  const handleSeeAll = (data: any) => {
+    console.log(data);
+  };
   return (
     <div
       style={{
@@ -19,24 +23,29 @@ export default function Table({
         boxShadow: "#000000",
       }}
     >
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-4 pt-4 px-4">
         <h1 className="text-lg font-semibold   ">{title ? title : ""}</h1>
-        <h1 className="text-lg text-customPrimary font-semibold cursor-pointer  ">
+        <button
+          onClick={handleSeeAll}
+          className="text-lg text-customPrimary font-semibold cursor-pointer  "
+        >
           {seeAll ? seeAll : ""}
-        </h1>
+        </button>
       </div>
-      <AntTable
-        loading={loading}
-        columns={columns}
-        dataSource={data}
-        pagination={
-          needPagination && {
-            pageSize: page,
-            total: total,
+      <ConfigProvider theme={theme}>
+        <AntTable
+          loading={loading}
+          columns={columns}
+          dataSource={data}
+          pagination={
+            needPagination && {
+              pageSize: page,
+              total: total,
+            }
           }
-        }
-        onChange={onTableChange}
-      ></AntTable>
+          onChange={onTableChange}
+        ></AntTable>
+      </ConfigProvider>
     </div>
   );
 }

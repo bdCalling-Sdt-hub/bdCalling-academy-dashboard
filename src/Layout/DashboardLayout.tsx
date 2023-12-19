@@ -57,7 +57,7 @@ const DashboardLayout = () => {
           onClick={handleMenuSelect}
         />
       </Sider>
-      <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
+      <Layout style={{ marginLeft: collapsed ? 80 : 180 }}>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button
             type="text"

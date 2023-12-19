@@ -1,6 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-const */
-import { Button, Col, Form, Input, InputRef, Row, Typography } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  InputRef,
+  Row,
+  Typography,
+  message,
+} from "antd";
 
 import logo from "../../../assets/logo.svg";
 import style from "./otp.module.css";
@@ -14,7 +23,7 @@ import { useRef, useState } from "react";
 
 export default function Otp() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [otpError, setOtpError] = useState(null);
+  const [otpError, setOtpError] = useState("");
   const otpBoxReference: React.MutableRefObject<
     (InputRef | HTMLInputElement)[]
   > = useRef<(InputRef | HTMLInputElement)[]>([]);
@@ -40,11 +49,13 @@ export default function Otp() {
     }
   };
   const handleSubmit = () => {
-    try {
-      const finalOtp = otp.join("");
-      console.log(finalOtp);
-    } catch (error) {
-      console.log(error);
+    if (otp.join("") === "123456") {
+      console.log("Valid OTP");
+      message.success("valid otp");
+      navigate("/forgetpassword/update");
+    } else {
+      setOtpError("Invalid OTP");
+      message.error("Invalid otp");
     }
   };
   const resendOtp = () => {};
@@ -106,7 +117,7 @@ export default function Otp() {
                     </Col>
                   ))}
                 </Row>
-                <div className="flex justify-between">
+                <div className="flex justify-between my-2">
                   <Text>Don't received code?</Text>
                   <a
                     className="reset-password-resend text-black font-semibold"
@@ -119,6 +130,7 @@ export default function Otp() {
                 <Button
                   onClick={handleSubmit}
                   type="primary"
+                  disabled={otp.join("").length !== 6}
                   htmlType="submit"
                   className={style.otpButton}
                   block
