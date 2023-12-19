@@ -10,6 +10,7 @@
       {
         "moduleId": 0,
         "moduleName": "Basic HTML Concepts",
+        "moduleDuration": "1st Day 02:30 Hours",
         "videos": [
           {
             "id": "0.1",
@@ -28,6 +29,7 @@
       {
         "moduleId": 1,
         "moduleName": "HTML Forms",
+        "moduleDuration": "1st Day 02:30 Hours",
         "videos": [
           {
             "id": "1.1",

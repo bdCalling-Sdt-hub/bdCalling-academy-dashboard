@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import According from "../../../../component/UI/According/According";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -5,12 +7,41 @@ import { PiVideo } from "react-icons/pi";
 import style from "../studentDashboard.module.css";
 import VideoPlayer from "../../../../component/UI/VideoPlayer/VideoPlayer";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { Input, message } from "antd";
+import { CiSearch } from "react-icons/ci";
 
+interface Video {
+  id: string;
+  video: string;
+  title: string;
+  module?: string;
+}
+
+interface Module {
+  moduleId: number;
+  moduleDuration: string;
+  moduleName: string;
+  videos: Video[];
+}
+
+interface Course {
+  id: string;
+  completation: number;
+  rating: number;
+  image: string;
+  title: string;
+  duration: string;
+  modules: Module[];
+}
 export default function StudentEnrolledCourse() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [course, setCourse] = useState([]);
-  const [videoInfo, setVideoInfo] = useState({ videoId: "", title: "" });
+  const [course, setCourse] = useState<Course | null>();
+  const [videoInfo, setVideoInfo] = useState({
+    videoId: "",
+    title: "",
+    moduleId: 0,
+  });
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [showNextButton, setShowNextButton] = useState(true);
@@ -21,13 +52,13 @@ export default function StudentEnrolledCourse() {
     fetch("/video.json")
       .then((res) => res.json())
       .then((data) => {
-        const course = data.find((c) => c.id === id);
+        const course = data.find((c: any) => c.id === id);
         setCourse(course);
         // if (course.modules && course.modules.length > 0) {
         //   setSelectedModule(course.modules[0]);
         // }
       });
-  }, []);
+  }, [id]);
   useEffect(() => {
     if (course?.modules && course.modules.length > 0) {
       const selectedVideo =
@@ -35,7 +66,7 @@ export default function StudentEnrolledCourse() {
       setVideoInfo({
         videoId: selectedVideo.video,
         title: selectedVideo.title,
-        moduleId: course?.modules[currentModuleIndex].moduleId,
+        moduleId: currentModuleIndex,
       });
 
       setShowNextButton(
@@ -45,6 +76,9 @@ export default function StudentEnrolledCourse() {
     }
   }, [course, currentModuleIndex, currentVideoIndex]);
 
+  if (!course) {
+    return message.error("course not found");
+  }
   const handleNext = () => {
     if (
       currentVideoIndex <
@@ -102,7 +136,7 @@ export default function StudentEnrolledCourse() {
   const handleback = () => {
     navigate("/");
   };
-  const handleVideoClick = (moduleId, videoIndex) => {
+  const handleVideoClick = (moduleId: number, videoIndex: number) => {
     console.log(moduleId, videoIndex);
     ("clicked ");
     setCurrentModuleIndex(moduleId);
@@ -143,13 +177,23 @@ export default function StudentEnrolledCourse() {
             </button>
           </div>
         </div>
-        <div className="w-4/5	ms-4 mt-8">
+        <div className="w-4/5	ms-4 mt-16">
           <div>
+            <Input
+              className="py-[16px] border border-[#D3D3D3] mb-[20px] "
+              prefix={<CiSearch />}
+              placeholder="Search"
+              onChange={(e) => console.log(e.target.value)}
+              style={{
+                boxShadow: " 0px 0px 20px 0px rgba(0, 0, 0, 0.08)",
+              }}
+            />
             <div>
               {course?.modules?.map((module, moduleIndex) => (
                 <According
                   key={module.moduleId}
                   title={module.moduleName}
+                  moduleDuration={module.moduleDuration}
                   index={module.moduleId}
                 >
                   {module.videos.map((video, videoIndex) => (
@@ -162,7 +206,7 @@ export default function StudentEnrolledCourse() {
                     >
                       <div
                         key={video.id}
-                        className="flex items-center gap-x-2 text-lg cursor-pointer"
+                        className="flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary"
                         onClick={() =>
                           handleVideoClick(module.moduleId, videoIndex)
                         }

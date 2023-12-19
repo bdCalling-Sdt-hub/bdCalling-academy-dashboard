@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 interface videoPlayerParams {
   title: string;
+  moduleId: string | number;
   videoId: string;
+
   autoplay?: boolean;
   loading?: boolean;
-  moduleId?: string | number;
 }
 export default function VideoPlayer({
   title,

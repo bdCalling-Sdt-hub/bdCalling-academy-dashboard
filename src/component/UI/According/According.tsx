@@ -2,7 +2,7 @@
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
-const According = ({ title, index, children }: any) => {
+const According = ({ title, index, children, moduleDuration }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -10,15 +10,20 @@ const According = ({ title, index, children }: any) => {
   };
 
   return (
-    <div className="border p-4">
-      <div
-        className="flex justify-between items-center cursor-pointer"
-        onClick={toggleAccordion}
-      >
-        <button className="text-lg font-semibold ">
-          {isOpen ? <DownOutlined /> : <RightOutlined />}
-          {index}. {title}
-        </button>
+    <div>
+      <div className="border p-4 border-[#333333]">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={toggleAccordion}
+        >
+          <button className="text-lg font-semibold text-[#333333] ">
+            {isOpen ? <DownOutlined /> : <RightOutlined />}
+            {index}. {title}
+          </button>
+          <button className="text-lg font-semibold text-[#333333] ">
+            {moduleDuration}
+          </button>
+        </div>
       </div>
       {isOpen && <div className="mt-2">{children}</div>}
     </div>
