@@ -16,6 +16,7 @@ export default function Table({
   const handleSeeAll = (data: any) => {
     console.log(data);
   };
+
   return (
     <div
       style={{
