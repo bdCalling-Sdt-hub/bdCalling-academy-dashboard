@@ -4,7 +4,8 @@ interface videoPlayerParams {
   title: string;
   moduleId: string | number;
   videoId: string;
-
+  setCurrentModuleIndex?: string | number;
+  setCurrentVideoIndex?: string | number;
   autoplay?: boolean;
   loading?: boolean;
 }

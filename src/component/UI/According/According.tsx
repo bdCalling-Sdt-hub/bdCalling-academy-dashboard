@@ -25,7 +25,7 @@ const According = ({ title, index, children, moduleDuration }: any) => {
           </button>
         </div>
       </div>
-      {isOpen && <div className="mt-2">{children}</div>}
+      {isOpen && <div className={``}>{children}</div>}
     </div>
   );
 };

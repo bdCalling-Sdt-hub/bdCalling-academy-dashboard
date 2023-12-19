@@ -27,7 +27,7 @@ export default function Table({
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
+        // backgroundColor: "#FFFFFF",
         boxShadow: "#000000",
       }}
     >

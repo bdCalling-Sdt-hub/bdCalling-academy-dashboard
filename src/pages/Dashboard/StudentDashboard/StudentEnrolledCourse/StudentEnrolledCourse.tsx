@@ -9,6 +9,7 @@ import VideoPlayer from "../../../../component/UI/VideoPlayer/VideoPlayer";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Input, message } from "antd";
 import { CiSearch } from "react-icons/ci";
+import { Spin } from "antd";
 
 interface Video {
   id: string;
@@ -77,7 +78,7 @@ export default function StudentEnrolledCourse() {
   }, [course, currentModuleIndex, currentVideoIndex]);
 
   if (!course) {
-    return message.error("course not found");
+    return <Spin />;
   }
   const handleNext = () => {
     if (
@@ -165,12 +166,9 @@ export default function StudentEnrolledCourse() {
             moduleId={videoInfo.moduleId}
           />
           <div className="flex justify-between">
-            <Link to={encodedUrl}>
-              {" "}
-              <button onClick={handlePrev} className={`${style.prevBtn}`}>
-                <ArrowLeftOutlined /> Previous
-              </button>
-            </Link>
+            <button onClick={handlePrev} className={`${style.prevBtn}`}>
+              <ArrowLeftOutlined /> Previous
+            </button>
 
             <button onClick={handleNext} className={`${style.nextBtn}`}>
               <ArrowRightOutlined /> Next
