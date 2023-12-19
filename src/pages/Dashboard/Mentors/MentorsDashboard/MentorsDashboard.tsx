@@ -2,24 +2,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { useEffect, useState } from "react";
-import { Button, Col, DatePicker, Input, Row, message } from "antd";
+import { Col, DatePicker, Input, Row, message } from "antd";
 import style from "./MentorsDashboard.module.css";
-import { DownOutlined, SearchOutlined, SmileOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import Table from "../../../../component/UI/Table/Table";
-import type { MenuProps, SelectProps } from "antd";
-import { Dropdown, Space } from "antd";
-
+import type { MenuProps } from "antd";
+import { Dropdown } from "antd";
+interface AttendenceData {
+  id: string;
+  img: string;
+  name: string;
+  courseName: string;
+  date: string;
+  attendence: string;
+}
 export default function MentorsDashboard() {
-  const [attendence, setattendence] = useState([]);
+  const [attendence, setattendence] = useState<AttendenceData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [d, setData] = useState("");
+
   const [date, setDate] = useState<string | undefined>();
   const [subject, setSubject] = useState("");
-  console.log(d, date, subject);
+  console.log(date, subject);
   const query: Record<string, unknown> = {};
   query["searchTerm"] = searchTerm;
 

@@ -9,11 +9,26 @@ import SelectField from "../../../../component/UI/Form/SelectField";
 export default function Addcourse() {
   const [form] = Form.useForm();
   const [courseType, setCourseType] = useState("Offline");
+  const [file, setFile] = useState<File | null>(null);
+  console.log("files", file);
+  const [selectedValue, setSelectedValue] = useState({});
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
 
   const onFinish = (values: any) => {
+    const finalData = {
+      ...values,
+      mentors: selectedValue,
+      startDate: values.startDate.format("DD-MM-YYYY"),
+    };
+    console.log(finalData);
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+    formData.append("data", finalData);
+
     console.log("Success:", values);
   };
 
@@ -166,8 +181,12 @@ export default function Addcourse() {
               </Form.Item>
             </Col>
             <Col lg={12}>
-              <Form.Item key="mentor" name="mentor" rules={[]}>
-                <SelectField options={options} placeholder="select mentor" />
+              <Form.Item key="mentors" name="mentors" rules={[]}>
+                <SelectField
+                  setSelectedValue={setSelectedValue}
+                  options={options}
+                  placeholder="select mentor"
+                />
               </Form.Item>
             </Col>
             <Col lg={12}>
@@ -211,9 +230,9 @@ export default function Addcourse() {
                 <Col lg={12}>
                   <Form.Item
                     label="Course Time"
-                    key="image"
-                    name="image"
-                    rules={[{ required: true, message: "Please input iamge" }]}
+                    key="courseTime"
+                    name="courseTime"
+                    rules={[]}
                   >
                     <Input placeholder="Video hours" className="py-2" />
                   </Form.Item>
@@ -227,19 +246,14 @@ export default function Addcourse() {
                       { required: true, message: "Please input address" },
                     ]}
                   >
-                    <UploadImage />
+                    <UploadImage setFile={setFile} />
                   </Form.Item>
                 </Col>
               </>
             ) : (
               <Col lg={24}>
-                <Form.Item
-                  label="Upload"
-                  key="Upload"
-                  name="Upload"
-                  rules={[{ required: true, message: "Please input address" }]}
-                >
-                  <UploadImage />
+                <Form.Item label="Upload" key="image" name="image" rules={[]}>
+                  <UploadImage setFile={setFile} />
                 </Form.Item>
               </Col>
             )}

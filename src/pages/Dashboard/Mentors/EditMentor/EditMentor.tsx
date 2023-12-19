@@ -10,52 +10,36 @@ import Upload, {
   UploadProps,
 } from "antd/es/upload";
 import React, { useState } from "react";
+import CustomUpload from "../../../../component/UI/Upload/Upload";
 
-export default function EditMentor({ img, id }: any) {
+export default function EditMentor(props: any) {
+  const { id, img } = props.data;
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
-  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result as string));
-    reader.readAsDataURL(img);
-  };
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const beforeUpload = (file: RcFile) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
+  const onFinish = (data: any) => {
+    const formdData = new FormData();
+    if (imageFile) {
+      formdData.append("img", imageFile);
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
+    formdData.append("data", data);
   };
-  const handleChange: UploadProps["onChange"] = (
-    info: UploadChangeParam<UploadFile>
-  ) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
+  const onFinishFailed = (error: any) => {
+    console.log(error);
   };
-  const onFinish = (data) => {};
-  const onFinishFailed = (error) => {};
   return (
     <div>
       <div>
-        <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+        <Form
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          initialValues={{}}
+        >
           <Form.Item>
             <div className="flex justify-center items-center py-6">
               <div className="relative">
-                <Upload
+                {/* <Upload
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -92,7 +76,46 @@ export default function EditMentor({ img, id }: any) {
                       <EditOutlined />
                     </span>
                   </div>
-                </Upload>
+                </Upload> */}
+                <CustomUpload
+                  name="avatar"
+                  className={`avatar-uploader`}
+                  showUploadList={false}
+                  setLoading={setLoading}
+                  setImageUrl={setImageUrl}
+                  setImageFile={setImageFile}
+                >
+                  <div
+                    className=" bg-customPrimary absolute"
+                    style={{
+                      width: "30px",
+                      color: "white",
+                      height: "30px",
+                      textAlign: "center",
+                      borderRadius: "50%",
+                      top: "90%",
+                      left: "80%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  >
+                    <span
+                      className="font-bold text-lg cursor-pointer"
+                      style={{}}
+                    >
+                      <EditOutlined />
+                    </span>
+                  </div>
+                </CustomUpload>
+                <img
+                  src={imageUrl ? imageUrl : img}
+                  alt="avatar"
+                  style={{
+                    width: "140px",
+                    height: "140px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </Form.Item>

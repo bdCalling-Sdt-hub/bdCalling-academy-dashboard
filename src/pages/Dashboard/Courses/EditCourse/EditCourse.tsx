@@ -11,9 +11,22 @@ import { useParams } from "react-router-dom";
 export default function EditCourse() {
   const { id } = useParams();
   const [courseType, setCourseType] = useState("Online");
-  console.log(id);
+  const [file, setFile] = useState<File | null>(null);
+  const [selectedValue, setSelectedValue] = useState();
+  console.log(selectedValue);
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
+    const finalData = {
+      ...values,
+      mentors: selectedValue,
+      startDate: values.startDate.format("DD-MM-YYYY"),
+    };
+    console.log(finalData);
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+    formData.append("data", finalData);
     console.log("Success:", values);
   };
 
@@ -67,19 +80,17 @@ export default function EditCourse() {
                 <Form.Item
                   key="language"
                   name="language"
-                  rules={[
-                    { required: true, message: "Please input course name" },
-                  ]}
+                  rules={[{ required: true, message: "Please input language" }]}
                 >
                   <Input placeholder="language" className="py-2" />
                 </Form.Item>
               </Col>
               <Col lg={24}>
                 <Form.Item
-                  key="courseName"
+                  key="courseDetails"
                   name="courseDetails"
                   rules={[
-                    { required: true, message: "Please input course name" },
+                    { required: true, message: "Please input course Details" },
                   ]}
                 >
                   <TextArea
@@ -133,8 +144,12 @@ export default function EditCourse() {
                 </Form.Item>
               </Col>
               <Col lg={12}>
-                <Form.Item key="mentor" name="mentor" rules={[]}>
-                  <SelectField options={options} placeholder="select mentor" />
+                <Form.Item key="mentors" name="mentors" rules={[]}>
+                  <SelectField
+                    setSelectedValue={setSelectedValue}
+                    options={options}
+                    placeholder="select mentor"
+                  />
                 </Form.Item>
               </Col>
               <Col lg={12}>
@@ -178,10 +193,10 @@ export default function EditCourse() {
                   <Col lg={12}>
                     <Form.Item
                       label="Course Time"
-                      key="image"
+                      key=""
                       name="image"
                       rules={[
-                        { required: true, message: "Please input iamge" },
+                        { required: true, message: "Please input course Time" },
                       ]}
                     >
                       <Input placeholder="Video hours" className="py-2" />
@@ -189,28 +204,19 @@ export default function EditCourse() {
                   </Col>
                   <Col lg={12}>
                     <Form.Item
-                      label="Upload"
+                      label="image"
                       key="image"
                       name="image"
-                      rules={[
-                        { required: true, message: "Please input address" },
-                      ]}
+                      rules={[]}
                     >
-                      <UploadImage />
+                      <UploadImage setFile={setFile} />
                     </Form.Item>
                   </Col>
                 </>
               ) : (
                 <Col lg={24}>
-                  <Form.Item
-                    label="Upload"
-                    key="Upload"
-                    name="Upload"
-                    rules={[
-                      { required: true, message: "Please input address" },
-                    ]}
-                  >
-                    <UploadImage />
+                  <Form.Item label="image" key="image" name="image" rules={[]}>
+                    <UploadImage setFile={setFile} />
                   </Form.Item>
                 </Col>
               )}

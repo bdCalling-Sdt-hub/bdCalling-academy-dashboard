@@ -12,7 +12,11 @@ export default function EditDepartment() {
   console.log(id);
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    const finalData = {
+      ...values,
+      startingDate: values.startingDate.format("DD.MM.YYYY"),
+    };
+    console.log(finalData);
   };
 
   const onFinishFailed = (errorInfo: any) => {

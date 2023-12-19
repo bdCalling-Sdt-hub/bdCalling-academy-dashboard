@@ -16,13 +16,13 @@ export default function CourseCard({ course }: any) {
   return (
     <div>
       <Card
-        style={{ width: 350, padding: "10px" }}
+        style={{ width: 372, padding: "20px" }}
         cover={
           <img
             alt="example"
             src={img}
             style={{
-              height: "250px",
+              height: "260px",
             }}
           />
         }
