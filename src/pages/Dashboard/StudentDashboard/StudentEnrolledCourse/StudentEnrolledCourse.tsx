@@ -47,8 +47,9 @@ export default function StudentEnrolledCourse() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [showNextButton, setShowNextButton] = useState(true);
   const [showPrevButton, setShowPrevButton] = useState(true);
-  const [encodedUrl, setencodedUrl] = useState("");
-  console.log("encodded url", encodedUrl);
+
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  console.log(activeVideoIndex, currentVideoIndex);
   useEffect(() => {
     fetch("/video.json")
       .then((res) => res.json())
@@ -142,6 +143,7 @@ export default function StudentEnrolledCourse() {
     ("clicked ");
     setCurrentModuleIndex(moduleId);
     setCurrentVideoIndex(videoIndex);
+    setActiveVideoIndex(videoIndex);
   };
 
   return (
@@ -202,20 +204,22 @@ export default function StudentEnrolledCourse() {
                         module.moduleName
                       )}/${encodeURIComponent(video.title)}`}
                     >
-                      <div
+                      <button
                         key={video.id}
-                        className="flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary"
+                        className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary ${
+                          videoIndex === activeVideoIndex ? "bg-red-500" : ""
+                        }`}
                         onClick={() =>
                           handleVideoClick(module.moduleId, videoIndex)
                         }
                       >
-                        <p>
+                        <span>
                           <PiVideo />
-                        </p>
-                        <p>
+                        </span>
+                        <span>
                           {video.id}. {video.title}
-                        </p>
-                      </div>
+                        </span>
+                      </button>
                     </Link>
                   ))}
                 </According>
