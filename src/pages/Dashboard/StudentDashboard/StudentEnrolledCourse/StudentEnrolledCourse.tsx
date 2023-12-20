@@ -147,7 +147,7 @@ export default function StudentEnrolledCourse() {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <div className="flex justify-around ">
         <div>
           <div className="text-[22px] flex justify-between  mb-8">

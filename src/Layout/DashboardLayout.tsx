@@ -104,20 +104,20 @@ const DashboardLayout = () => {
               alignItems: "center", // Added align-items: center
             }}
           >
+            <Button
+              type="text"
+              icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                marginLeft: collapsed ? "20px" : "60px",
+                fontSize: "16px",
+                width: 45,
+                height: 45,
+                marginRight: "10px",
+              }}
+            />
             <div className="flex items-center justify-between  container mx-auto">
               <div className="flex ">
-                <Button
-                  type="text"
-                  icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
-                  onClick={() => setCollapsed(!collapsed)}
-                  style={{
-                    marginLeft: collapsed ? "20px" : "60px",
-                    fontSize: "16px",
-                    width: 45,
-                    height: 45,
-                    marginRight: "10px",
-                  }}
-                />
                 <ConfigProvider
                   theme={{
                     components: {
@@ -144,7 +144,7 @@ const DashboardLayout = () => {
                   onChange={handleSelectLanguage}
                 ></Select>
 
-                <Badge count={5} className="cursor-pointer">
+                <Badge count={5} className="cur">
                   <IoIosNotificationsOutline
                     style={{ width: "30px", height: "30px" }}
                   />
