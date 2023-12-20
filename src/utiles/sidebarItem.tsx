@@ -5,6 +5,12 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { LuFolders } from "react-icons/lu";
 import { PiIdentificationCard } from "react-icons/pi";
 import { BsCalendar2Event } from "react-icons/bs";
+import { LuClipboardList } from "react-icons/lu";
+import { HiOutlineCreditCard } from "react-icons/hi";
+import { IoSettingsOutline } from "react-icons/io5";
+
+import { LoginOutlined } from "@ant-design/icons";
+
 const id = 1;
 export const sidebarItems = [
   {
@@ -60,17 +66,21 @@ export const sidebarItems = [
   {
     key: "/class-schedule",
     label: "Class Schedule",
+    icon: <LuClipboardList />,
   },
   {
     key: "/wallet",
     label: "Wallet",
+    icon: <HiOutlineCreditCard />,
   },
   {
     key: "/setting",
     label: "setting",
+    icon: <IoSettingsOutline />,
   },
   {
     key: "/logout",
     label: "Log Out",
+    icon: <LoginOutlined />,
   },
 ];

@@ -7,7 +7,7 @@ export default function Setting() {
     console.log(`switch to ${checked}`);
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <div className="flex bg-[#fff] justify-between p-4 rounded ">
         <p className="text-[#333] text-lg">Notification</p>
         <Switch defaultChecked onChange={onChange} />

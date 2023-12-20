@@ -78,7 +78,7 @@ const StudentEnrollmentChart = () => {
       </div>
       <div>
         <LineChart
-          width={900}
+          width={865}
           height={300}
           data={data}
           margin={{

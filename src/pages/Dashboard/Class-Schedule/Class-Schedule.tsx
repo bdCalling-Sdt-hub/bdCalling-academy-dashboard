@@ -16,37 +16,39 @@ export default function ClassSchedule() {
     console.log(value.format("YYYY-MM-DD"), mode);
   };
   return (
-    <Calendar
-      headerRender={() => (
-        <div className="">
-          <div className="flex gap-x-4 p-4">
-            <p
-              className="border flex items-center px-2 cursor-pointer hover: border-[#D6D6D6]"
-              onClick={handlePrevMonth}
-            >
-              <LeftOutlined style={{ color: "#D6D6D6" }} />
-            </p>
-            <p
-              className="border flex items-center cursor-pointer px-2 border-[#D6D6D6]"
-              onClick={handleNextMonth}
-            >
-              <RightOutlined style={{ color: "#D6D6D6" }} />
-            </p>
-            <button
-              className="bg-customPrimary text-[white] px-4 py-2  "
-              onClick={() => setValue(dayjs())}
-            >
-              Today
-            </button>
-            <h1 className="mx-auto text-2xl font-semibold">
-              {value.format("MMMM DD YYYY")}
-            </h1>
+    <div className="h-screen container mx-auto">
+      <Calendar
+        headerRender={() => (
+          <div className="">
+            <div className="flex gap-x-4 p-4">
+              <p
+                className="border flex items-center px-2 cursor-pointer hover: border-[#D6D6D6]"
+                onClick={handlePrevMonth}
+              >
+                <LeftOutlined style={{ color: "#D6D6D6" }} />
+              </p>
+              <p
+                className="border flex items-center cursor-pointer px-2 border-[#D6D6D6]"
+                onClick={handleNextMonth}
+              >
+                <RightOutlined style={{ color: "#D6D6D6" }} />
+              </p>
+              <button
+                className="bg-customPrimary text-[white] px-4 py-2  "
+                onClick={() => setValue(dayjs())}
+              >
+                Today
+              </button>
+              <h1 className="mx-auto text-2xl font-semibold">
+                {value.format("MMMM DD YYYY")}
+              </h1>
+            </div>
           </div>
-        </div>
-      )}
-      value={value}
-      onPanelChange={onPanelChange}
-      onSelect={onSelect}
-    />
+        )}
+        value={value}
+        onPanelChange={onPanelChange}
+        onSelect={onSelect}
+      />
+    </div>
   );
 }

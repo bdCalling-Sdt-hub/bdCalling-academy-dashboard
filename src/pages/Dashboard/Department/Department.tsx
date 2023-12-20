@@ -103,9 +103,9 @@ export default function Department() {
   });
   console.log(data);
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <h1 className="text-xl font-bold">Department List</h1>
-      <div className="mt-6">
+      <div className="">
         <Table
           theme={tablethemes}
           title={false}

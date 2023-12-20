@@ -13,6 +13,7 @@ export default function Table({
   needPagination,
   seeAll,
   theme,
+  style,
 }: any) {
   const handleSeeAll = (data: any) => {
     console.log(data);
@@ -31,13 +32,15 @@ export default function Table({
         boxShadow: "#000000",
       }}
     >
-      <div className="flex justify-between mb-4 pt-4 px-4">
-        <h1 className="text-lg font-semibold   ">{title ? title : ""}</h1>
+      <div
+        className={`flex justify-between  items-center py-4   px-4 ${style}`}
+      >
+        <h1 className="text-lg font-semibold   ">{title}</h1>
         <button
           onClick={handleSeeAll}
           className="text-lg text-customPrimary font-semibold cursor-pointer  "
         >
-          {seeAll ? seeAll : ""}
+          {seeAll}
         </button>
       </div>
       <ConfigProvider theme={combinedTheme}>

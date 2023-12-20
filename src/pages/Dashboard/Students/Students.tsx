@@ -40,8 +40,8 @@ export default function Students() {
       title: "Actions",
       render: function (data: any) {
         return (
-          <div className="flex gap-x-2">
-            <Link to={`/students/profile/${data.key}`}>
+          <div className="flex gap-x-2 ">
+            <Link to={`/profile/${data.key}`}>
               <FiEdit
                 className="cursor-pointer text-customPrimary"
                 onClick={() => console.log(data)}
@@ -136,7 +136,7 @@ export default function Students() {
   };
 
   return (
-    <div>
+    <div className="container mx-auto h-screen">
       <StudentSurvey></StudentSurvey>
       <div className="mt-6">
         <div className="flex justify-between items-center">
@@ -155,7 +155,7 @@ export default function Students() {
         </div>
         <div></div>
       </div>
-      <div className="mt-6">
+      <div className="">
         <Table
           theme={tablethemes}
           loading={false}

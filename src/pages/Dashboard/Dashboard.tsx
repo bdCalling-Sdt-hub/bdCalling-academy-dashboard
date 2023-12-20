@@ -216,7 +216,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div>
+    <div className="container mx-auto">
       <h1 className="text-2xl font-semibold mb-6 ">Overview</h1>
 
       <div>
@@ -231,6 +231,7 @@ export default function Dashboard() {
           </Col>
           <Col lg={10}>
             <Table
+              style="bg-[white]"
               theme={tablethemes}
               title="Mentors List"
               page={5}
@@ -248,6 +249,7 @@ export default function Dashboard() {
         <Row>
           <Col lg={24}>
             <Table
+              style="bg-[white]"
               title="Student List"
               seeAll="seeAll"
               loading={false}

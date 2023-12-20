@@ -137,7 +137,7 @@ export default function MentorsDashboard() {
     message.info(`Click on item ${key}`);
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <h1 className="text-xl font-bold">Overview</h1>
       <div className="mt-4">
         <Row justify={"center"} align={"middle"}>

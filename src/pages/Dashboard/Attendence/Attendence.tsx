@@ -115,7 +115,7 @@ export default function Attendence() {
     };
   });
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">{type} Attendance List</h1>
         <div className="flex items-center">
@@ -150,7 +150,7 @@ export default function Attendence() {
         </div>
       </div>
 
-      <div className="mt-6">
+      <div className="">
         <Table
           theme={tablethemes}
           columns={columns}

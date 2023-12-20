@@ -19,19 +19,19 @@ export default function Profile() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [show, setshow] = useState(false);
   const [action, setAction] = useState("");
-  console.log(action);
+  const [form] = Form.useForm();
   const onFinish = (data: any) => {
-    if (action === "save") {
-      //save logic here
-    } else if (action === "edit") {
-      //edit logic
-    }
+    const finalData = {
+      ...data,
+      dateOfBirth: data.dateOfBirth.format("DD-MM-YYYY"),
+      registrationDate: data.registrationDate.format("DD-MM-YYYY"),
+    };
+    console.log(finalData);
   };
 
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
-  console.log(loading, imageFile, imageUrl);
 
   return (
     <div className="container mx-auto h-screen ">
@@ -70,7 +70,10 @@ export default function Profile() {
         </Button>
         {action === "edit" ? (
           <Button
-            onClick={() => setAction("save")}
+            onClick={() => {
+              form.submit();
+              setAction("save");
+            }}
             className="bg-customPrimary ms-4"
             style={{
               color: "white",
@@ -105,7 +108,7 @@ export default function Profile() {
                 <div className="absolute right-5 top-[225px]">
                   <CustomUpload
                     name="avatar"
-                    disabled={action === ""}
+                    disabled={action === "" || action === "save"}
                     className={`avatar-uploader`}
                     showUploadList={false}
                     setLoading={setLoading}
@@ -143,12 +146,15 @@ export default function Profile() {
                 <Form
                   disabled={action === ""}
                   initialValues={{}}
+                  form={form}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
                 >
                   <Row gutter={16}>
                     <Col lg={12} xl={12}>
                       <Form.Item
+                        name="name"
+                        key="name"
                         rules={[
                           {
                             required: true,
@@ -159,6 +165,7 @@ export default function Profile() {
                         <Input
                           size="large"
                           type="text"
+                          name="name"
                           placeholder="name"
                           className={style.input}
                         />
@@ -166,6 +173,8 @@ export default function Profile() {
                     </Col>
                     <Col lg={12} xl={12}>
                       <Form.Item
+                        name="phone"
+                        key="phone"
                         rules={[
                           {
                             required: true,
@@ -176,23 +185,43 @@ export default function Profile() {
                         <Input
                           size="large"
                           type="number"
+                          name="phone"
                           placeholder="mobile number"
                           className={style.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        name="email"
+                        key="email"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input student email",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="text"
+                          name="email"
                           placeholder="email"
                           className={style.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        name="batchNo"
+                        key="batchNo"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input  batchNo",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="text"
@@ -202,7 +231,11 @@ export default function Profile() {
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item>
+                      <Form.Item
+                        name="registrationDate"
+                        key="registrationDate"
+                        rules={[]}
+                      >
                         <DatePicker
                           style={{ width: "100%", padding: "8px" }}
                           placeholder="start date"
@@ -212,6 +245,8 @@ export default function Profile() {
                     </Col>
                     <Col lg={12} xl={12}>
                       <Form.Item
+                        name="dateOfBirth"
+                        key="dateOfBirth"
                         rules={[
                           {
                             required: true,
@@ -244,17 +279,27 @@ export default function Profile() {
                       </Form.Item>
                     </Col>
                     <Col lg={12} xl={12}>
-                      <Form.Item rules={[]}>
+                      <Form.Item rules={[]} name="blood" key="blood">
                         <Input
                           size="large"
                           type="text"
+                          name="blood"
                           placeholder="blood group"
                           className={style.input}
                         />
                       </Form.Item>
                     </Col>
                     <Col lg={24} xl={24}>
-                      <Form.Item>
+                      <Form.Item
+                        name="address"
+                        key="address"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input address",
+                          },
+                        ]}
+                      >
                         <Input
                           size="large"
                           type="text"
