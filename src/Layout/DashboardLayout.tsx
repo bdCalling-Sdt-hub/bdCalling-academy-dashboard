@@ -1,22 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import logo from "../assets/logo.svg";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import usFlag from "../assets/flags/us.svg";
+
 import {
   Layout,
   Menu,
   Button,
   theme,
   Input,
-  Dropdown,
-  MenuProps,
   Badge,
   ConfigProvider,
+  Select,
 } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { sidebarItems } from "../utiles/sidebarItem";
@@ -26,7 +22,12 @@ const DashboardLayout = () => {
   const [selectedKey, setSelectedKey] = useState(sidebarItems[0].key);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  const handleSelectLanguage = (value: any) => {
+    setSelectedLanguage(value);
+    // i18n.changeLanguage(selectedLanguage);
+    localStorage.setItem("lang", value);
+  };
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -39,22 +40,33 @@ const DashboardLayout = () => {
     }
   };
 
-  const items: MenuProps["items"] = [
+  const options = [
     {
-      key: "1",
-      label: <img src={usFlag} alt="" />,
+      value: "english",
+      label: (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="https://cdn.britannica.com/29/22529-004-ED1907BE/Union-Flag-Cross-St-Andrew-of-George.jpg"
+            alt="English"
+            style={{ marginRight: 8, width: 16, height: 16 }}
+          />
+          English
+        </div>
+      ),
     },
   ];
   return (
     <ConfigProvider theme={sidebardThemes}>
       <Layout>
         <Sider
+          width="220px"
           trigger={null}
           collapsible
           collapsed={collapsed}
           style={{
             backgroundColor: "#2492EB",
             height: "100vh",
+
             zIndex: 2,
             overflow: "auto",
             position: "fixed",
@@ -64,7 +76,7 @@ const DashboardLayout = () => {
           <div
             style={{
               backgroundColor: "white",
-              padding: "10px 0",
+              padding: "14px 0",
             }}
           >
             <img src={logo} alt="" />
@@ -86,62 +98,67 @@ const DashboardLayout = () => {
           <Header
             style={{
               padding: 0,
-
+              height: "100px",
               background: colorBgContainer,
+              display: "flex", // Added display: flex
+              alignItems: "center", // Added align-items: center
             }}
           >
-            <div className="flex items-center">
-              <Button
-                type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setCollapsed(!collapsed)}
-                style={{
-                  fontSize: "16px",
-                  width: 64,
-                  paddingLeft: "20px",
-                  height: 64,
-                }}
-              />
-              <div className="flex justify-between items-center container mx-auto">
-                <div className="flex items-center">
-                  <ConfigProvider
-                    theme={{
-                      components: {
-                        Input: {
-                          colorBgContainer: "#F4F4F4",
-                        },
+            <div className="flex items-center justify-between  container mx-auto">
+              <div className="flex ">
+                <Button
+                  type="text"
+                  icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
+                  onClick={() => setCollapsed(!collapsed)}
+                  style={{
+                    marginLeft: collapsed ? "20px" : "60px",
+                    fontSize: "16px",
+                    width: 45,
+                    height: 45,
+                    marginRight: "10px",
+                  }}
+                />
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Input: {
+                        colorBgContainer: "rgb(244, 244, 244)",
                       },
-                    }}
-                  >
-                    <Input
-                      allowClear={true}
-                      prefix={<SearchOutlined className="text-[#A7A7A7] " />}
-                      placeholder="search here"
-                      className="h-[50px] w-[461px]"
-                    />
-                  </ConfigProvider>
-                </div>
+                    },
+                  }}
+                >
+                  <Input
+                    allowClear={true}
+                    prefix={<SearchOutlined className="text-[#A7A7A7] " />}
+                    placeholder="search here"
+                    className="h-[50px] w-[461px] border-0"
+                  />
+                </ConfigProvider>
+              </div>
+              <div className="flex items-center gap-x-6">
+                <Select
+                  options={options}
+                  defaultValue={options[0]}
+                  value={selectedLanguage}
+                  style={{ width: 150 }}
+                  onChange={handleSelectLanguage}
+                ></Select>
 
-                <div className="flex items-center gap-x-6 ">
-                  <Dropdown menu={{ items }}>
-                    <img className="cursor-pointer" src={usFlag} alt="" />
-                  </Dropdown>
-                  <p>EN</p>
-                  <Badge count={5}>
-                    <IoIosNotificationsOutline />
-                  </Badge>
-                  <div className="flex items-center gap-x-6">
-                    <div>
-                      <img
-                        src="https://t.ly/18Nvk"
-                        className="w-[40px] h-[40px] object-cover	rounded-full"
-                        alt=""
-                      />
-                    </div>
+                <Badge count={5} className="cursor-pointer">
+                  <IoIosNotificationsOutline
+                    style={{ width: "30px", height: "30px" }}
+                  />
+                </Badge>
 
-                    <div>
-                      <h1 className="font-semibold">Mr. Admin John Doe</h1>
-                    </div>
+                <div className="flex items-center gap-x-2">
+                  <img
+                    src="https://t.ly/18Nvk"
+                    className="w-[40px] h-[40px] object-cover rounded-full"
+                    alt=""
+                  />
+
+                  <div className="my-[2px]">
+                    <h1 className="font-semibold">Mr. Admin John Doe</h1>
                   </div>
                 </div>
               </div>
