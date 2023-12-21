@@ -31,20 +31,7 @@ export default function WalletActivity() {
     >
       <div className="flex justify-between">
         <h1 className="text-[22px] font-semibold">Overview Balance</h1>
-        {/* <Dropdown
-          open={dropdownOpen}
-          onOpenChange={handleOpenChange}
-          menu={{
-            items,
-            selectable: true,
-            defaultSelectedKeys: ["1"],
-            onClick,
-          }}
-        >
-          <button className={style.dateRang}>
-            Date Range <DownOutlined />
-          </button>
-        </Dropdown> */}
+
         <button
           className={style.dateRange}
           onClick={() => setIsvisilbe(!isVisible)}
@@ -59,10 +46,10 @@ export default function WalletActivity() {
       </div>
 
       {isVisible && (
-        <div className="flex justify-between  bg-[#ffffff] border-2 rounded border-[#8B8B8B]  p-2 gap-x-14 parent  absolute z-50  transform bottom-4">
+        <div className="flex justify-around items-center  bg-[#ffffff] border-2 rounded border-[#8B8B8B]  p-2 gap-x-14 parent  absolute z-50  transform bottom-4">
           <div className="relative " onClick={(e) => e.stopPropagation()}>
             <div className={`${style.date} `}>
-              <p className="absolute z-99  bg-white bottom-[30px] font-bold text-[#000] left-4 rounded  bg-[#fff]">
+              <p className="absolute  bottom-[34px] font-bold text-[#000] left-4 rounded ">
                 From
               </p>
               <DatePicker
@@ -75,7 +62,7 @@ export default function WalletActivity() {
           </div>
           <div className="relative " onClick={(e) => e.stopPropagation()}>
             <div className={`${style.date} `}>
-              <p className="absolute z-99 bg-white bottom-[30px] font-bold text-[#000] left-4 rounded  bg-[#fff]">
+              <p className="absolute bg-white  bottom-[34px] font-bold text-[#000] left-4 rounded  ">
                 To
               </p>
               <DatePicker
