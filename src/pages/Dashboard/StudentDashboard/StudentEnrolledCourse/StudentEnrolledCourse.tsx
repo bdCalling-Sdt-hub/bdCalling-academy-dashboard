@@ -136,7 +136,7 @@ export default function StudentEnrolledCourse() {
     }
   };
   const handleback = () => {
-    navigate("/");
+    navigate("/student/dashboard");
   };
   const handleVideoClick = (moduleId: number, videoIndex: number) => {
     console.log(moduleId, videoIndex);

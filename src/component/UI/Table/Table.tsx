@@ -29,16 +29,17 @@ export default function Table({
     <div
       style={{
         // backgroundColor: "#FFFFFF",
+
         boxShadow: "#000000",
       }}
     >
       <div
-        className={`flex justify-between  items-center py-4   px-4 ${style}`}
+        className={`flex justify-between  items-center py-4 rounded   px-4 ${style}`}
       >
         <h1 className="text-lg font-semibold   ">{title}</h1>
         <button
           onClick={handleSeeAll}
-          className="text-lg text-customPrimary font-semibold cursor-pointer  "
+          className="text-lg text-customPrimary  font-semibold cursor-pointer  "
         >
           {seeAll}
         </button>
