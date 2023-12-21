@@ -4,8 +4,8 @@ import {
   EyeTwoTone,
   LockOutlined,
 } from "@ant-design/icons";
-import { Button, Col, Form, Input, Row } from "antd";
-
+import { Col, Form, Input, Row } from "antd";
+import style from "./changePassword.module.css";
 export default function ChangePassword() {
   const [form] = Form.useForm();
 
@@ -112,14 +112,9 @@ export default function ChangePassword() {
           </Col>
         </Row>
         <div className="text-center">
-          <Button
-            size="large"
-            className="bg-customPrimary"
-            style={{ color: "white" }}
-            htmlType="submit"
-          >
+          <button className={style.saveBtn} type="submit">
             SAVE
-          </Button>
+          </button>
         </div>
       </Form>
     </div>

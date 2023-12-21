@@ -87,10 +87,20 @@ const DashboardLayout = () => {
           <div
             style={{
               backgroundColor: "white",
-              padding: "14px 0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100px",
             }}
           >
-            <img src={logo} alt="" />
+            <img
+              style={{
+                height: "40px",
+                width: "180px",
+              }}
+              src={logo}
+              alt=""
+            />
           </div>
           <Menu
             style={{

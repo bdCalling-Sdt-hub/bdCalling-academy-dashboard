@@ -27,8 +27,23 @@
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
   background-color: white;
   padding: 20px 20px;
+  width: 1164px;
+  border-radius: 6px;
+  height: 470px;
 }
-.studentImageSection {
-  width: 400px;
-  height: 400px;
+.editBtn {
+  padding: 12px 60px;
+  border-radius: 3px;
+  background-color: #d7263d;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+.saveBtn {
+  padding: 12px 60px;
+  border-radius: 3px;
+  background-color: #2492eb;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
 }
