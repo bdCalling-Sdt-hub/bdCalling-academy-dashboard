@@ -16,14 +16,16 @@ export default function Notification() {
     <div className="h-screen container mx-auto">
       <h1 className="text-[24px] font-semibold mb-4">Notification</h1>
       <div>
-        {notifications?.map((notification, index) => (
+        {notifications?.slice(0, 5)?.map?.((notification, index) => (
           <NotificationCard key={index} notification={notification} />
         ))}
       </div>
       <div className="flex justify-between items-center">
-        <p>SHOWING 1-10 OF {notifications.length}</p>
+        <p className="font-semibold text-[#333]">
+          SHOWING 1-10 OF {notifications.length}
+        </p>
         <CustomPaginations
-          pageSize={10}
+          pageSize={5}
           total={notifications.length}
           size="large"
           handleOnChange={(page: number) => {
