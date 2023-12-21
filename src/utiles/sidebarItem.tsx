@@ -78,6 +78,7 @@ export const sidebarItems = [
     label: "setting",
     icon: <IoSettingsOutline />,
   },
+
   {
     key: "/logout",
     label: "Log Out",

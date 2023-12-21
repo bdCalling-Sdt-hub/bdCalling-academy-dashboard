@@ -43,7 +43,7 @@ export default function LoginActivity() {
     },
   ];
   return (
-    <div className="h-screen">
+    <div className="h-screen container mx-auto">
       <h1 className="text-[24px] font-semibold mb-4"> Login Activity</h1>
       <div>
         <Table columns={columns} data={data} />

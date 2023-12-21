@@ -89,7 +89,7 @@ export default function StudentEnrolledCourse() {
       setCurrentVideoIndex(currentVideoIndex + 1);
       console.log(currentModuleIndex, currentVideoIndex);
       navigate(
-        `/studentEnrolledCourse/${course.id}/${encodeURIComponent(
+        `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex].moduleName
         )}/${encodeURIComponent(
           course.modules[currentModuleIndex].videos[currentVideoIndex + 1].title
@@ -99,7 +99,7 @@ export default function StudentEnrolledCourse() {
       setCurrentModuleIndex(currentModuleIndex + 1);
       setCurrentVideoIndex(0);
       navigate(
-        `/studentEnrolledCourse/${course.id}/${encodeURIComponent(
+        `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex + 1].moduleName
         )}/${encodeURIComponent(
           course.modules[currentModuleIndex + 1].videos[0].title
@@ -112,7 +112,7 @@ export default function StudentEnrolledCourse() {
     if (currentVideoIndex > 0) {
       setCurrentVideoIndex(currentVideoIndex - 1);
       navigate(
-        `/studentEnrolledCourse/${course.id}/${encodeURIComponent(
+        `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex].moduleName
         )}/${encodeURIComponent(
           course.modules[currentModuleIndex].videos[currentVideoIndex - 1].title
@@ -125,7 +125,7 @@ export default function StudentEnrolledCourse() {
       );
       console.log(currentModuleIndex, currentVideoIndex);
       navigate(
-        `/studentEnrolledCourse/${course.id}/${encodeURIComponent(
+        `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex - 1].moduleName
         )}/${encodeURIComponent(
           course.modules[currentModuleIndex - 1].videos[
@@ -198,7 +198,7 @@ export default function StudentEnrolledCourse() {
                 >
                   {module.videos.map((video, videoIndex) => (
                     <Link
-                      to={`/studentEnrolledCourse/${
+                      to={`/student/dashboard/course/${
                         course.id
                       }/${encodeURIComponent(
                         module.moduleName

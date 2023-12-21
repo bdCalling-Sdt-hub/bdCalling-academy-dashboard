@@ -19,6 +19,7 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebarItems } from "../utiles/sidebarItem";
 import { sidebardThemes } from "../themes/Index";
+
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   // const [selectedKey, setSelectedKey] = useState(sidebarItems[0].key);
@@ -26,8 +27,13 @@ const DashboardLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
   const { pathname } = useLocation();
-  const selectedKey = sidebarItems.find((item) => item.key === pathname)?.key;
+
+  const selectedKey = sidebarItems.find((item) =>
+    pathname.startsWith(item.key)
+  )?.key;
+
   console.log(selectedKey);
+  console.log(pathname);
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
     // i18n.changeLanguage(selectedLanguage);

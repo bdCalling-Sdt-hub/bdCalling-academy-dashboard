@@ -13,7 +13,7 @@ export default function ClassSchedule() {
     setValue(newValue);
   };
   const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>["mode"]) => {
-    console.log(value.format("YYYY-MM-DD"), mode);
+    console.log(value.format("YYYY.MM.DD"), mode);
   };
   return (
     <div className="h-screen container mx-auto">
@@ -40,7 +40,7 @@ export default function ClassSchedule() {
                 Today
               </button>
               <h1 className="mx-auto text-2xl font-semibold">
-                {value.format("MMMM DD YYYY")}
+                {value.format("MMMM.DD.YYYY")}
               </h1>
             </div>
           </div>
