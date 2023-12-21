@@ -115,48 +115,55 @@ const DashboardLayout = () => {
           ></Menu>
         </Sider>
 
-        <Layout style={{ marginLeft: collapsed ? 80 : 180 }}>
+        <Layout>
           <Header
             style={{
+              position: "fixed",
+              width: "100vw",
+              height: "80px",
+              zIndex: 1,
               padding: 0,
-              height: "100px",
               background: colorBgContainer,
-              display: "flex", // Added display: flex
-              alignItems: "center", // Added align-items: center
+              display: "flex",
+              justifyContent: "space-between",
+              paddingRight: "60px",
             }}
           >
-            <Button
-              type="text"
-              icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                marginLeft: collapsed ? "20px" : "60px",
-                fontSize: "16px",
-                width: 45,
-                height: 45,
-                marginRight: "10px",
-              }}
-            />
-            <div className="flex items-center justify-between  container mx-auto">
-              <div className="flex ">
-                <ConfigProvider
-                  theme={{
-                    components: {
-                      Input: {
-                        colorBgContainer: "rgb(244, 244, 244)",
-                      },
+            <div className="" style={{ display: "flex", alignItems: "center" }}>
+              <Button
+                type="text"
+                icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
+                onClick={() => setCollapsed(!collapsed)}
+                style={{
+                  marginLeft: collapsed ? "125px" : "360px",
+                  fontSize: "16px",
+                  width: 45,
+                  height: 45,
+                  marginRight: "10px",
+                }}
+              />
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Input: {
+                      colorBgContainer: "rgb(244, 244, 244)",
                     },
-                  }}
-                >
-                  <Input
-                    allowClear={true}
-                    prefix={<SearchOutlined className="text-[#A7A7A7] " />}
-                    placeholder="search here"
-                    className="h-[50px] w-[461px] border-0"
-                  />
-                </ConfigProvider>
-              </div>
-              <div className="flex items-center gap-x-6">
+                  },
+                }}
+              >
+                <Input
+                  allowClear={true}
+                  prefix={<SearchOutlined className="text-[#A7A7A7] " />}
+                  placeholder="search here"
+                  className="h-[50px] w-[461px] border-0"
+                />
+              </ConfigProvider>
+            </div>
+
+            <div
+              style={{ display: "flex", alignItems: "center", lineHeight: 0 }}
+            >
+              <div className="" style={{ marginRight: "20px" }}>
                 <Select
                   options={options}
                   defaultValue={options[0]}
@@ -164,7 +171,8 @@ const DashboardLayout = () => {
                   style={{ width: 150 }}
                   onChange={handleSelectLanguage}
                 ></Select>
-
+              </div>
+              <div>
                 <Link to="/notification " className="flex items-center">
                   <Badge count={5} className="cursor-pointer">
                     <IoIosNotificationsOutline
@@ -172,7 +180,9 @@ const DashboardLayout = () => {
                     />
                   </Badge>
                 </Link>
-                <div className="flex items-center gap-x-2">
+              </div>
+              <div className="ms-[20px]">
+                <div className="flex items-center gap-x-4">
                   <img
                     src="https://t.ly/18Nvk"
                     className="w-[40px] h-[40px] object-cover rounded-full"
@@ -188,10 +198,15 @@ const DashboardLayout = () => {
           </Header>
           <Content
             style={{
-              margin: "0 16px",
-              padding: 24,
-              backgroundColor: "#F6F8FA",
-              borderRadius: borderRadiusLG,
+              marginTop: "120px",
+              marginBottom: "50px",
+              marginLeft: collapsed ? "130px" : "360px",
+              marginRight: "60px",
+              background: "#e6e7f4",
+
+              padding: 50,
+              minHeight: 280,
+              overflow: "auto",
             }}
           >
             <Outlet />
