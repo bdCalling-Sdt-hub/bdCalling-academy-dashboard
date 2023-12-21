@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useLocation } from "react-router-dom";
+
 import { useState } from "react";
 import logo from "../assets/logo.svg";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
@@ -14,15 +16,18 @@ import {
   ConfigProvider,
   Select,
 } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebarItems } from "../utiles/sidebarItem";
 import { sidebardThemes } from "../themes/Index";
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
-  const [selectedKey, setSelectedKey] = useState(sidebarItems[0].key);
+  // const [selectedKey, setSelectedKey] = useState(sidebarItems[0].key);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
+  const { pathname } = useLocation();
+  const selectedKey = sidebarItems.find((item) => item.key === pathname)?.key;
+  console.log(selectedKey);
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
     // i18n.changeLanguage(selectedLanguage);
@@ -32,7 +37,7 @@ const DashboardLayout = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const handleMenuSelect = ({ key }: { key: string }) => {
-    setSelectedKey(key);
+    // setSelectedKey(key);
     if (key === "/logout") {
       console.log("dsfmks");
     } else {
@@ -87,7 +92,7 @@ const DashboardLayout = () => {
               color: "white",
               marginTop: "10px",
             }}
-            selectedKeys={[selectedKey]}
+            selectedKeys={[selectedKey ? selectedKey : "/dashboard"]}
             // defaultSelectedKeys={[sidebarItems[0].key]}
             items={sidebarItems}
             onClick={handleMenuSelect}
@@ -144,12 +149,13 @@ const DashboardLayout = () => {
                   onChange={handleSelectLanguage}
                 ></Select>
 
-                <Badge count={5} className="cur">
-                  <IoIosNotificationsOutline
-                    style={{ width: "30px", height: "30px" }}
-                  />
-                </Badge>
-
+                <Link to="/notification " className="flex items-center">
+                  <Badge count={5} className="cursor-pointer">
+                    <IoIosNotificationsOutline
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                  </Badge>
+                </Link>
                 <div className="flex items-center gap-x-2">
                   <img
                     src="https://t.ly/18Nvk"

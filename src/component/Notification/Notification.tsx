@@ -13,7 +13,7 @@ export default function Notification() {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen container mx-auto">
       <h1 className="text-[24px] font-semibold mb-4">Notification</h1>
       <div>
         {notifications?.map((notification, index) => (
