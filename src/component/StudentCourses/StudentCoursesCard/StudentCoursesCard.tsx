@@ -5,6 +5,8 @@ import { Progress } from "antd";
 import { FaStar } from "react-icons/fa";
 import style from "./studentCourseCard.module.css";
 import { Link } from "react-router-dom";
+import ProgressBar from "@ramonak/react-progress-bar";
+
 export default function StudentCoursesCard(props: any) {
   const { id, image, title, duration, modules, completation, rating } =
     props.course;
@@ -23,18 +25,20 @@ export default function StudentCoursesCard(props: any) {
           />
         }
       >
-        <h1 className="text-lg px-5	font-semibold pt-3 pb-5	text-customPrimary">
+        <h1 className="text-lg px-5	font-semibold mt-[10px] mb-[20px]	text-customPrimary">
           {title}
         </h1>
-        <div>
-          <Progress
-            percent={completation}
-            strokeColor="#2492EB"
-            showInfo={false}
+        <div className="mb-2">
+          <ProgressBar
+            completed={completation}
+            bgColor="#2492EB"
+            height="2px"
+            isLabelVisible={false}
+            animateOnRender={true}
           />
         </div>
         <div className="flex justify-between items-center px-5 pb-4">
-          <p>{completation}% complete</p>
+          <p className="text-[#5C5C5C]">{completation}% complete</p>
 
           <div className="flex items-center gap-x-2 text-[#FFC60B]">
             <FaStar />
@@ -42,7 +46,7 @@ export default function StudentCoursesCard(props: any) {
           </div>
         </div>
 
-        <div className="px-5 pb-4 pt-3">
+        <div className="px-5 pb-[22px] pt-3">
           <Link
             to={`/student/dashboard/course/${id}/${encodeURIComponent(
               modules[0].moduleName

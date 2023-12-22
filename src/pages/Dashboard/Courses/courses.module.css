@@ -21,3 +21,26 @@
 .icon {
   color: white;
 }
+.editCourseContainer {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.activeBtn {
+  border-radius: 3px;
+  padding: 10px 20px;
+  background-color: #2492eb;
+  color: #fff;
+}
+.inActiveBtn {
+  border-radius: 3px;
+  padding: 10px 20px;
+  border: 1px solid #2492eb;
+  color: #5c5c5c;
+}
+.AddcourseContainer {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}

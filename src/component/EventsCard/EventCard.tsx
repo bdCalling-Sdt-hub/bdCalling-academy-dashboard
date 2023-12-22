@@ -56,10 +56,10 @@ export default function EventCard(props: any) {
               onClick={() => handleDelete(id)}
               className={style.deleteEvents}
             >
-              Delete Course
+              Delete Events
             </button>
             <button onClick={() => setshow(true)} className={style.editEvents}>
-              Edit Course
+              Delete Events
             </button>
           </div>
         </div>
