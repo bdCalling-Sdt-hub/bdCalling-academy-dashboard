@@ -1,14 +1,15 @@
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import CourseCard from "../../../component/CourseCard/CourseCard";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
+import style from "./courses.module.css";
 export default function Courses() {
-  const [selectedButton, setSelectedButton] = useState("All");
+  const [courseType, setCourseType] = useState("All");
+  console.log(courseType);
   const [courses, setcourses] = useState([]);
   const handleButtonClick = (type: string) => {
-    setSelectedButton(type);
+    setCourseType(type);
   };
   useEffect(() => {
     fetch("/courseData.json")
@@ -21,70 +22,62 @@ export default function Courses() {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl  font-semibold mb-8 ">Courses</h1>
         <Link to="/courses/add">
-          <Button
+          <button
             style={{
               color: "white",
             }}
-            size="large"
-            className="flex items-center font-semibold bg-customPrimary"
-            icon={<FiPlus />}
+            className={style.addCourse}
           >
-            Add Course
-          </Button>
+            <span className="flex items-center gap-x-3">
+              <FiPlus
+                style={{
+                  color: "white",
+                }}
+              />{" "}
+              Add Course
+            </span>
+          </button>
         </Link>
       </div>
       <div className=" flex  gap-x-4">
-        <Button
-          className={selectedButton === "All" ? "bg-customPrimary" : ""}
-          size="large"
-          style={{
-            fontWeight: 600,
-            color: selectedButton === "All" ? "white" : "",
-          }}
+        <button
+          className={courseType === "All" ? style.activeBtn : style.inActiveBtn}
           onClick={() => handleButtonClick("All")}
         >
           All Course
-        </Button>
-        <Button
-          className={selectedButton === "Online" ? "bg-customPrimary" : ""}
-          size="large"
-          style={{
-            fontWeight: 600,
-            color: selectedButton === "Online" ? "white" : "",
-          }}
-          onClick={() => handleButtonClick("Online")}
-        >
-          Online Course
-        </Button>
-        <Button
-          className={selectedButton === "Offline" ? "bg-customPrimary" : ""}
-          size="large"
-          style={{
-            fontWeight: 600,
-            color: selectedButton === "Offline" ? "white" : "",
-          }}
+        </button>
+        <button
+          className={
+            courseType === "Offline" ? style.activeBtn : style.inActiveBtn
+          }
           onClick={() => handleButtonClick("Offline")}
         >
           Offline Course
-        </Button>
-        <Button
-          className={selectedButton === "Video" ? "bg-customPrimary" : ""}
-          size="large"
-          style={{
-            fontWeight: 600,
-            color: selectedButton === "Video" ? "white" : "",
-          }}
+        </button>
+        <button
+          className={
+            courseType === "Online" ? style.activeBtn : style.inActiveBtn
+          }
+          onClick={() => handleButtonClick("Online")}
+        >
+          Online Course
+        </button>
+
+        <button
+          className={
+            courseType === "Video" ? style.activeBtn : style.inActiveBtn
+          }
           onClick={() => handleButtonClick("Video")}
         >
           Video Course
-        </Button>
+        </button>
       </div>
 
       <div className="mt-6">
         <Row gutter={16}>
           {courses?.map((course, index) => (
-            <Col key={index}>
-              <CourseCard course={course}></CourseCard>
+            <Col key={index} lg={6} style={{ marginBottom: "16px" }}>
+              <CourseCard course={course} courseType={courseType}></CourseCard>
             </Col>
           ))}
         </Row>

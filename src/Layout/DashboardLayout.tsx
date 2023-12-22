@@ -40,7 +40,7 @@ const DashboardLayout = () => {
     localStorage.setItem("lang", value);
   };
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
   const handleMenuSelect = ({ key }: { key: string }) => {
     // setSelectedKey(key);
@@ -103,10 +103,12 @@ const DashboardLayout = () => {
             />
           </div>
           <Menu
+            mode="inline"
             style={{
               backgroundColor: "#2492EB",
               color: "white",
               marginTop: "10px",
+              // height: "100%",
             }}
             selectedKeys={[selectedKey ? selectedKey : "/dashboard"]}
             // defaultSelectedKeys={[sidebarItems[0].key]}
@@ -120,7 +122,7 @@ const DashboardLayout = () => {
             style={{
               position: "fixed",
               width: "100vw",
-              height: "80px",
+              height: "100px",
               zIndex: 1,
               padding: 0,
               background: colorBgContainer,
@@ -198,14 +200,12 @@ const DashboardLayout = () => {
           </Header>
           <Content
             style={{
-              marginTop: "120px",
-              marginBottom: "50px",
-              marginLeft: collapsed ? "130px" : "360px",
-              marginRight: "60px",
-              background: "#e6e7f4",
+              paddingTop: "120px",
 
-              padding: 50,
-              minHeight: 280,
+              paddingLeft: collapsed ? "50px" : "310px",
+
+              background: "#F6F8FA",
+
               overflow: "auto",
             }}
           >

@@ -17,3 +17,52 @@
   color: white !important;
   font-weight: 500;
 }
+.img {
+  height: 201px;
+  width: 332px;
+  border-radius: 6px;
+}
+.card {
+  border-radius: 12px;
+  background: var(--White-Full-White, #fff);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+}
+.btnInfo {
+  padding: 12px 30px;
+  border-radius: 6px;
+  background-color: #2492eb;
+  color: white;
+  font-size: 20px;
+}
+.btnEdit {
+  padding: 12px 30px;
+  border-radius: 6px;
+
+  border: 1px solid #2492eb;
+  background: #fff;
+  color: #2492eb;
+  font-size: 20px;
+}
+
+.btnDelete {
+  padding: 12px 30px;
+  border-radius: 6px;
+
+  border: 1px solid #d7263d;
+  color: #d7263d;
+  font-size: 20px;
+}
+.deleteCourse {
+  padding: 12px 30px;
+  border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #2492eb;
+  color: #2492eb;
+}
+.EditCourse {
+  padding: 12px 30px;
+  border-radius: 6px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #2492eb;
+}

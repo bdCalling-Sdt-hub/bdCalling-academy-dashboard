@@ -37,6 +37,12 @@ export const sidebarItems = [
     key: "/courses",
     label: "Courses",
     icon: <BsBook />,
+    children: [
+      {
+        key: "/courses",
+        label: "All Courses",
+      },
+    ],
   },
   {
     key: "/mentors",
