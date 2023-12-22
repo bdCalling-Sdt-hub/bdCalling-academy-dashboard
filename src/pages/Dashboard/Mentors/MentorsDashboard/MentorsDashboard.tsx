@@ -36,7 +36,7 @@ export default function MentorsDashboard() {
       .then((data) => setattendence(data));
   }, []);
 
-  const handlettendence = (id: string, value: string) => {
+  const handleAttendence = (id: string, value: string) => {
     console.log(id, value);
   };
   const columns = [
@@ -66,13 +66,13 @@ export default function MentorsDashboard() {
       render: (data: any) => (
         <span className="flex gap-x-2">
           <p
-            onClick={() => handlettendence("id", "present")}
+            onClick={() => handleAttendence("id", "present")}
             className={`${style.present}  cursor-pointer`}
           >
             present
           </p>
           <p
-            onClick={() => handlettendence("id", "absent")}
+            onClick={() => handleAttendence("id", "absent")}
             className={`${style.absent}  cursor-pointer`}
           >
             absent

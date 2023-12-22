@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Tag } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button } from "antd";
+import { useEffect, useState } from "react";
 import { Input } from "antd";
 import style from "./attendence.module.css";
-import { SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import Table from "../../../component/UI/Table/Table";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
@@ -36,6 +36,10 @@ export default function Attendence() {
       .then((data) => setattendence(data));
   }, []);
 
+  const handleAttendence = (id: string, value: string) => {
+    console.log(id, value);
+  };
+
   const columns = [
     {
       title: "#ID",
@@ -61,9 +65,18 @@ export default function Attendence() {
       title: "Attendence",
       dataIndex: "attendence",
       render: (data: any) => (
-        <span>
-          <p className={data === "present" ? style.present : style.absent}>
-            {data}
+        <span className="flex gap-x-2">
+          <p
+            onClick={() => handleAttendence("id", "present")}
+            className={`${style.present}  cursor-pointer`}
+          >
+            present
+          </p>
+          <p
+            onClick={() => handleAttendence("id", "absent")}
+            className={`${style.absent}  cursor-pointer`}
+          >
+            absent
           </p>
         </span>
       ),
@@ -116,29 +129,29 @@ export default function Attendence() {
   });
   return (
     <div className="h-screen container mx-auto">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">{type} Attendance List</h1>
+      <div className="flex justify-between items-center mb-[30px]">
+        <h1 className="text-[24px] font-[600] text-[#333]">
+          {type} Attendance List
+        </h1>
         <div className="flex items-center">
           <div className="flex gap-x-4">
-            <Button
+            <button
               className={`${
                 type === "Students" ? style.active : style.inactive
               }`}
-              size="large"
               onClick={() => settype("Students")}
             >
               Students
-            </Button>
+            </button>
 
-            <Button
+            <button
               className={`${
                 type === "Mentors" ? style.active : style.inactive
               }`}
-              size="large"
               onClick={() => settype("Mentors")}
             >
               Mentors
-            </Button>
+            </button>
           </div>
           <Input
             size="large"
