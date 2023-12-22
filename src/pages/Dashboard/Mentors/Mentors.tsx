@@ -1,8 +1,9 @@
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
-import { FiPlus } from "react-icons/fi";
+import style from "./Mentors.module.css";
 import { Link } from "react-router-dom";
 import MentorsCard from "../../../component/MentorsCard/MentorsCard";
+import { PlusOutlined } from "@ant-design/icons";
 
 export default function Mentors() {
   const [mentors, setMentors] = useState([]);
@@ -13,19 +14,12 @@ export default function Mentors() {
   }, []);
   return (
     <div className="container mx-auto">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl  font-semibold mb-8 ">Mentors</h1>
+      <div className="flex justify-between items-center mb-[30px]">
+        <h1 className="text-2xl  font-semibold  ">Mentors</h1>
         <Link to="/mentor/add">
-          <Button
-            style={{
-              color: "white",
-            }}
-            size="large"
-            className="flex items-center font-semibold bg-customPrimary"
-            icon={<FiPlus />}
-          >
-            Add Mentor
-          </Button>
+          <button className={style.addMentorsBtn}>
+            <PlusOutlined className="me-2" /> Add Mentor
+          </button>
         </Link>
       </div>
 

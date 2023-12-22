@@ -200,7 +200,7 @@ const DashboardLayout = () => {
           </Header>
           <Content
             style={{
-              paddingTop: "120px",
+              paddingTop: "130px",
 
               paddingLeft: collapsed ? "50px" : "310px",
 

@@ -28,7 +28,9 @@ export default function CourseCard({ course, courseType }: any) {
     videoDuration,
   } = course;
 
-  const handleDelete = () => {};
+  const handleDelete = (id: string) => {
+    console.log(id);
+  };
   return (
     <div className={style.card}>
       <div className="p-[20px]">
@@ -97,8 +99,18 @@ export default function CourseCard({ course, courseType }: any) {
             </p>
             {courseType === "Online" || courseType === "Video" ? (
               <div className="flex justify-between">
-                <button className={style.deleteCourse}>Delete Course</button>
-                <button className={style.EditCourse}>Edit Course</button>
+                <button
+                  onClick={() => handleDelete(id)}
+                  className={style.deleteCourse}
+                >
+                  Delete Course
+                </button>
+                <button
+                  className={style.EditCourse}
+                  onClick={() => navigate(`/courses/edit/${id}`)}
+                >
+                  Edit Course
+                </button>
               </div>
             ) : (
               <div className="flex justify-between">

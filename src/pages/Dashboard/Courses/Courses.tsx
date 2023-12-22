@@ -1,9 +1,10 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import CourseCard from "../../../component/CourseCard/CourseCard";
-import { FiPlus } from "react-icons/fi";
+
 import { Link } from "react-router-dom";
 import style from "./courses.module.css";
+import { PlusOutlined } from "@ant-design/icons";
 export default function Courses() {
   const [courseType, setCourseType] = useState("All");
   console.log(courseType);
@@ -19,23 +20,12 @@ export default function Courses() {
 
   return (
     <div className="container mx-auto">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl  font-semibold mb-8 ">Courses</h1>
+      <div className="flex justify-between items-center mb-[30px]">
+        <h1 className="text-2xl  font-semibold  ">Courses</h1>
         <Link to="/courses/add">
-          <button
-            style={{
-              color: "white",
-            }}
-            className={style.addCourse}
-          >
-            <span className="flex items-center gap-x-3">
-              <FiPlus
-                style={{
-                  color: "white",
-                }}
-              />{" "}
-              Add Course
-            </span>
+          <button className={style.addCourse}>
+            {" "}
+            <PlusOutlined className="me-2 text-white" /> Add Course
           </button>
         </Link>
       </div>

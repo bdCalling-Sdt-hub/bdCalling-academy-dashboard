@@ -7,6 +7,8 @@ import { FiPlus } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import EventCard from "../../../component/EventsCard/EventCard";
 import CustomPaginations from "../../../component/UI/Pagination/Pagination";
+import { PlusOutlined } from "@ant-design/icons";
+import style from "./Events.module.css";
 export default function Events() {
   const [events, setevents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,25 +20,18 @@ export default function Events() {
   console.log(events);
   return (
     <div className="container mx-auto">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl  font-semibold mb-8 ">Events</h1>
+      <div className="flex justify-between items-center mb-[30px]">
+        <h1 className="text-2xl  font-semibold ">Events</h1>
         <Link to="/events/add">
-          <Button
-            style={{
-              color: "white",
-            }}
-            size="large"
-            className="flex items-center font-semibold bg-customPrimary"
-            icon={<FiPlus />}
-          >
-            Add Event
-          </Button>
+          <button className={style.addEventsBtn}>
+            <PlusOutlined className="me-3" /> Add Event
+          </button>
         </Link>
       </div>
       <div>
         <Row gutter={12}>
           {events?.map((e, index) => (
-            <Col style={{ marginBottom: "12px" }}>
+            <Col style={{ marginBottom: "12px" }} lg={8}>
               <EventCard key={index} events={e} />
             </Col>
           ))}
