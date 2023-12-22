@@ -83,38 +83,52 @@ const DashboardLayout = () => {
             position: "fixed",
           }}
         >
-          <div className="demo-logo-vertical" />
           <div
             style={{
-              backgroundColor: "white",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100px",
+              flexDirection: "column",
+              height: "inherit",
             }}
           >
-            <img
+            <div className="demo-logo-vertical" />
+            <div
               style={{
-                height: "40px",
-                width: "180px",
+                backgroundColor: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100px",
               }}
-              src={logo}
-              alt=""
-            />
+            >
+              <img
+                style={{
+                  height: "40px",
+                  width: "180px",
+                }}
+                src={logo}
+                alt=""
+              />
+            </div>
+            <Menu
+              mode="inline"
+              style={{
+                backgroundColor: "#2492EB",
+                color: "white",
+                marginTop: "10px",
+                flexGrow: 1,
+                display: "flex",
+                flexDirection: "column",
+                paddingBlockEnd: "1rem",
+                // height: "100%",
+              }}
+              selectedKeys={[selectedKey ? selectedKey : "/dashboard"]}
+              // defaultSelectedKeys={[sidebarItems[0].key]}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              items={sidebarItems}
+              onClick={handleMenuSelect}
+            ></Menu>
           </div>
-          <Menu
-            mode="inline"
-            style={{
-              backgroundColor: "#2492EB",
-              color: "white",
-              marginTop: "10px",
-              // height: "100%",
-            }}
-            selectedKeys={[selectedKey ? selectedKey : "/dashboard"]}
-            // defaultSelectedKeys={[sidebarItems[0].key]}
-            items={sidebarItems}
-            onClick={handleMenuSelect}
-          ></Menu>
         </Sider>
 
         <Layout>
@@ -128,7 +142,8 @@ const DashboardLayout = () => {
               background: colorBgContainer,
               display: "flex",
               justifyContent: "space-between",
-              paddingRight: "60px",
+              paddingRight: "65px",
+              // paddingRight: "60px",
             }}
           >
             <div className="" style={{ display: "flex", alignItems: "center" }}>
@@ -137,7 +152,7 @@ const DashboardLayout = () => {
                 icon={collapsed ? <MenuOutlined /> : <MenuOutlined />}
                 onClick={() => setCollapsed(!collapsed)}
                 style={{
-                  marginLeft: collapsed ? "125px" : "360px",
+                  marginLeft: collapsed ? "130px" : "270px",
                   fontSize: "16px",
                   width: 45,
                   height: 45,
@@ -202,8 +217,8 @@ const DashboardLayout = () => {
             style={{
               paddingTop: "130px",
 
-              paddingLeft: collapsed ? "50px" : "310px",
-
+              paddingLeft: collapsed ? "130px" : "270px",
+              paddingRight: "50px",
               background: "#F6F8FA",
 
               overflow: "auto",

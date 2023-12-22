@@ -147,7 +147,7 @@ export default function StudentEnrolledCourse() {
   };
 
   return (
-    <div className="h-screen container mx-auto">
+    <div className="h-screen ">
       <div className="flex justify-around ">
         <div>
           <div className="text-[22px] flex justify-between  mb-8">
@@ -194,7 +194,8 @@ export default function StudentEnrolledCourse() {
                   key={module.moduleId}
                   title={module.moduleName}
                   moduleDuration={module.moduleDuration}
-                  index={module.moduleId}
+                  index={moduleIndex}
+                  moduleLenth={course.modules.length}
                 >
                   {module.videos.map((video, videoIndex) => (
                     <Link

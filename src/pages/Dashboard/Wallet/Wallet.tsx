@@ -5,7 +5,7 @@ import WalletActivity from "../../../component/Wallets/WalletActivity/WalletActi
 
 export default function Wallet() {
   return (
-    <div className="h-screen container mx-auto">
+    <div className="h-screen ">
       <WalletSurvey />
       <Row gutter={16}>
         <Col lg={14}>

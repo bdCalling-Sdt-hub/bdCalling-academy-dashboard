@@ -128,7 +128,7 @@ export default function Attendence() {
     };
   });
   return (
-    <div className="h-screen container mx-auto">
+    <div className="h-screen ">
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-[24px] font-[600] text-[#333]">
           {type} Attendance List

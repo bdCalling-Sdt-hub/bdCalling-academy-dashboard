@@ -13,9 +13,9 @@ export default function Mentors() {
       .then((data) => setMentors(data));
   }, []);
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className="flex justify-between items-center mb-[30px]">
-        <h1 className="text-2xl  font-semibold  ">Mentors</h1>
+        <h1 className="text-2xl  font-semibold text-customHeader ">Mentors</h1>
         <Link to="/mentor/add">
           <button className={style.addMentorsBtn}>
             <PlusOutlined className="me-2" /> Add Mentor

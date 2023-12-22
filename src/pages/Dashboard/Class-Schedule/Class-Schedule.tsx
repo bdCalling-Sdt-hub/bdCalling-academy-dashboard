@@ -16,7 +16,7 @@ export default function ClassSchedule() {
     console.log(value.format("YYYY.MM.DD"), mode);
   };
   return (
-    <div className="h-screen container mx-auto">
+    <div className="h-screen">
       <Calendar
         headerRender={() => (
           <div className="">

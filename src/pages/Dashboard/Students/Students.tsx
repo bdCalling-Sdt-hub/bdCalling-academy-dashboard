@@ -136,7 +136,7 @@ export default function Students() {
   };
 
   return (
-    <div className="container mx-auto h-screen">
+    <div className=" h-screen">
       <StudentSurvey></StudentSurvey>
       <div className="mt-6">
         <div className="flex justify-between items-center">

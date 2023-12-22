@@ -51,7 +51,7 @@ export default function Addcourse() {
     },
   ];
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold  text-customHeader">
           Add Course
@@ -63,7 +63,7 @@ export default function Addcourse() {
             }
             onClick={() => handleButtonClick("Offline")}
           >
-            Online
+            Offline
           </button>
           <button
             className={
@@ -79,215 +79,211 @@ export default function Addcourse() {
             }
             onClick={() => handleButtonClick("Video")}
           >
-            Online
+            Video
           </button>
         </div>
       </div>
-      <div className={style.AddcourseContainer}>
-        <div className="px-[30px] pt-[30px] mb-6">
-          <Form
-            layout="vertical"
-            form={form}
-            name="add-course"
-            initialValues={{}}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <Row gutter={16}>
-              <Col lg={12}>
-                <Form.Item
-                  key="courseName"
-                  name="courseName"
-                  rules={[
-                    { required: true, message: "Please input course name" },
-                  ]}
-                >
-                  <Input placeholder="enter course name" className="py-2" />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="language"
-                  name="language"
-                  rules={[
-                    { required: true, message: "Please input course name" },
-                  ]}
-                >
-                  <Input placeholder="language" className="py-2" />
-                </Form.Item>
-              </Col>
-              <Col lg={24}>
-                <Form.Item
-                  key="courseName"
-                  name="courseDetails"
-                  rules={[
-                    { required: true, message: "Please input course name" },
-                  ]}
-                >
-                  <TextArea
-                    showCount
-                    maxLength={100}
-                    placeholder="course details"
-                    style={{ height: 200, resize: "none" }}
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="startDate"
-                  name="startDate"
-                  rules={[
-                    { required: true, message: "Please input start date" },
-                  ]}
-                >
-                  <DatePicker
-                    style={{ width: "100%", padding: "8px" }}
-                    placeholder="start date"
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="duration"
-                  name="duration"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input Course Time Length",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Course Time Length*" className="py-2" />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="price"
-                  name="price"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input course price",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Course name*" className="py-2" />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item key="mentors" name="mentors" rules={[]}>
-                  <SelectField
-                    setSelectedValue={setSelectedValue}
-                    options={options}
-                    placeholder="select mentor"
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="studentLength"
-                  name="studentLength"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input maximum student length",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Maximum Students Length*"
-                    className="py-2"
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item key="skillLevel" name="skillLevel" rules={[]}>
-                  <Input placeholder="skillLevel" className="py-2" />
-                </Form.Item>
-              </Col>
-              <Col lg={24}>
-                <Form.Item
-                  key="address"
-                  name="address"
-                  rules={[{ required: true, message: "Please input address" }]}
-                >
-                  <TextArea
-                    showCount
-                    maxLength={50}
-                    placeholder="address"
-                    style={{ height: 100, resize: "none" }}
-                  />
-                </Form.Item>
-              </Col>
-              {courseType === "Video" ? (
-                <>
-                  <Col lg={12}>
-                    <Form.Item
-                      label="Course Time"
-                      key="courseTime"
-                      name="courseTime"
-                      rules={[]}
-                    >
-                      <Input placeholder="Video hours" className="py-2" />
-                    </Form.Item>
-                  </Col>
-                  <Col lg={12}>
-                    <Form.Item
-                      label="Upload"
-                      key="image"
-                      name="image"
-                      rules={[
-                        { required: true, message: "Please input address" },
-                      ]}
-                    >
-                      <UploadImage setFile={setFile} />
-                    </Form.Item>
-                  </Col>
-                </>
-              ) : (
-                <Col lg={24}>
-                  <Form.Item label="Upload" key="image" name="image" rules={[]}>
+      <div className={`${style.AddcourseContainer} px-[30px] pt-[30px] mb-6`}>
+        <Form
+          layout="vertical"
+          form={form}
+          name="add-course"
+          initialValues={{}}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Row gutter={16}>
+            <Col lg={12}>
+              <Form.Item
+                key="courseName"
+                name="courseName"
+                rules={[
+                  { required: true, message: "Please input course name" },
+                ]}
+              >
+                <Input placeholder="enter course name" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="language"
+                name="language"
+                rules={[
+                  { required: true, message: "Please input course name" },
+                ]}
+              >
+                <Input placeholder="language" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={24}>
+              <Form.Item
+                key="courseName"
+                name="courseDetails"
+                rules={[
+                  { required: true, message: "Please input course name" },
+                ]}
+              >
+                <TextArea
+                  showCount
+                  maxLength={100}
+                  placeholder="course details"
+                  style={{ height: 200, resize: "none" }}
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="startDate"
+                name="startDate"
+                rules={[{ required: true, message: "Please input start date" }]}
+              >
+                <DatePicker
+                  style={{ width: "100%", padding: "8px" }}
+                  placeholder="start date"
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="duration"
+                name="duration"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Course Time Length",
+                  },
+                ]}
+              >
+                <Input placeholder="Course Time Length*" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="price"
+                name="price"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input course price",
+                  },
+                ]}
+              >
+                <Input placeholder="Course name*" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item key="mentors" name="mentors" rules={[]}>
+                <SelectField
+                  setSelectedValue={setSelectedValue}
+                  options={options}
+                  placeholder="select mentor"
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="studentLength"
+                name="studentLength"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input maximum student length",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Maximum Students Length*"
+                  className="py-2"
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item key="skillLevel" name="skillLevel" rules={[]}>
+                <Input placeholder="skillLevel" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={24}>
+              <Form.Item
+                key="address"
+                name="address"
+                rules={[{ required: true, message: "Please input address" }]}
+              >
+                <TextArea
+                  showCount
+                  maxLength={50}
+                  placeholder="address"
+                  style={{ height: 100, resize: "none" }}
+                />
+              </Form.Item>
+            </Col>
+            {courseType === "Video" ? (
+              <>
+                <Col lg={12}>
+                  <Form.Item
+                    label="Course Time"
+                    key="courseTime"
+                    name="courseTime"
+                    rules={[]}
+                  >
+                    <Input placeholder="Video hours" className="py-2" />
+                  </Form.Item>
+                </Col>
+                <Col lg={12}>
+                  <Form.Item
+                    label="Upload"
+                    key="image"
+                    name="image"
+                    rules={[
+                      { required: true, message: "Please input address" },
+                    ]}
+                  >
                     <UploadImage setFile={setFile} />
                   </Form.Item>
                 </Col>
-              )}
-            </Row>
-            <div className="flex justify-between">
-              <div>
-                <Form.Item>
-                  <Button
-                    size="large"
-                    style={{
-                      color: "white",
-                      borderRadius: "4px",
-                    }}
-                    htmlType="submit"
-                    className="bg-customPrimary"
-                  >
-                    Submit
-                  </Button>
+              </>
+            ) : (
+              <Col lg={24}>
+                <Form.Item label="Upload" key="image" name="image" rules={[]}>
+                  <UploadImage setFile={setFile} />
                 </Form.Item>
-              </div>
-              <div>
-                <Form.Item>
-                  <Button
-                    size="large"
-                    htmlType="button"
-                    onClick={onReset}
-                    style={{
-                      color: "white",
-                      backgroundColor: "#D7263D",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    cancel
-                  </Button>
-                </Form.Item>
-              </div>
+              </Col>
+            )}
+          </Row>
+          <div className="flex justify-between">
+            <div>
+              <Form.Item>
+                <Button
+                  size="large"
+                  style={{
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                  htmlType="submit"
+                  className="bg-customPrimary"
+                >
+                  Submit
+                </Button>
+              </Form.Item>
             </div>
-          </Form>
-        </div>
+            <div>
+              <Form.Item>
+                <Button
+                  size="large"
+                  htmlType="button"
+                  onClick={onReset}
+                  style={{
+                    color: "white",
+                    backgroundColor: "#D7263D",
+                    borderRadius: "4px",
+                  }}
+                >
+                  cancel
+                </Button>
+              </Form.Item>
+            </div>
+          </div>
+        </Form>
       </div>
     </div>
   );

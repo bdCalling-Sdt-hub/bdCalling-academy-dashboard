@@ -216,8 +216,10 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-semibold mb-6 ">Overview</h1>
+    <div className="">
+      <h1 className="text-2xl font-semibold  mb-[30px] text-customHeader">
+        Overview
+      </h1>
 
       <div>
         <DashboardSurvery />

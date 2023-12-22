@@ -6,7 +6,7 @@ import { DownOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import { CgMailOpen } from "react-icons/cg";
 import { IoPeopleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
-
+import style from "../department.module.css";
 export default function EditDepartment() {
   const { id } = useParams();
   console.log(id);
@@ -28,9 +28,11 @@ export default function EditDepartment() {
   };
 
   return (
-    <div>
-      <h1 className="text-xl mb-6 font-bold">Edit Department</h1>
-      <div>
+    <div className="container ">
+      <h1 className="text-xl mb-[30px] font-bold text-customHeader">
+        Edit Department
+      </h1>
+      <div className={style.editDePartmentContainer}>
         <Form
           layout="vertical"
           form={form}

@@ -19,9 +19,9 @@ export default function Courses() {
   }, []);
 
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className="flex justify-between items-center mb-[30px]">
-        <h1 className="text-2xl  font-semibold  ">Courses</h1>
+        <h1 className="text-2xl  font-semibold  text-customHeader">Courses</h1>
         <Link to="/courses/add">
           <button className={style.addCourse}>
             {" "}

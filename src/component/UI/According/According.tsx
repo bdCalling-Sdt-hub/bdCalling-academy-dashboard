@@ -2,30 +2,43 @@
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
-const According = ({ title, index, children, moduleDuration }: any) => {
+const According = ({
+  title,
+  index,
+  children,
+  moduleDuration,
+  moduleLenth,
+}: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+  const shouldApplyBottomBorder = isOpen || index === moduleLenth - 1;
 
   return (
     <div>
-      <div className="border p-4 border-[#333333]">
+      <div
+        className={`border-t-2 border-x-2 p-4 border-[#858585] ${
+          shouldApplyBottomBorder ? "border-b-2" : ""
+        }`}
+      >
         <div
           className="flex justify-between items-center cursor-pointer"
           onClick={toggleAccordion}
         >
-          <button className="text-lg font-semibold text-[#333333] ">
+          <button className="text-lg  text-customHeader ">
             {isOpen ? <DownOutlined /> : <RightOutlined />}
-            {index}. {title}
+            <span className="ms-2">
+              {index}. {title}
+            </span>
           </button>
-          <button className="text-lg font-semibold text-[#333333] ">
+          <button className="text-lg  text-customHeader ">
             {moduleDuration}
           </button>
         </div>
       </div>
-      {isOpen && <div className={``}>{children}</div>}
+      {isOpen && <div className={`p-4`}>{children}</div>}
     </div>
   );
 };

@@ -11,7 +11,7 @@ export default function StudentDashbord() {
     setSelectedTab(selectedTab === "courses" ? "certificates" : "courses");
   };
   return (
-    <div className="h-screen container mx-auto">
+    <div className="h-screen ">
       <h1 className="text-[#333] text-[24px] font-semibold mb-[20px]">
         Overview
       </h1>

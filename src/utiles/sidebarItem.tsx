@@ -84,7 +84,11 @@ export const sidebarItems = [
     label: "setting",
     icon: <IoSettingsOutline />,
   },
-
+  {
+    key: "/divider",
+    label: "divider",
+    style: { margin: 0, border: 0, flexGrow: 1, visibility: "hidden" },
+  },
   {
     key: "/logout",
     label: "Log Out",

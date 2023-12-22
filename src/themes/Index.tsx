@@ -15,3 +15,11 @@ export const sidebardThemes = {
     },
   },
 };
+export const inputTheme = {
+  components: {
+    Input: {
+      colorBgContainer: "rgb(246, 246, 246)",
+      colorBorder: "rgb(255, 255, 255)",
+    },
+  },
+};

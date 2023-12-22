@@ -19,9 +19,9 @@ export default function Events() {
   }, []);
   console.log(events);
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className="flex justify-between items-center mb-[30px]">
-        <h1 className="text-2xl  font-semibold ">Events</h1>
+        <h1 className="text-2xl  font-semibold text-customHeader ">Events</h1>
         <Link to="/events/add">
           <button className={style.addEventsBtn}>
             <PlusOutlined className="me-3" /> Add Event

@@ -103,8 +103,10 @@ export default function Department() {
   });
   console.log(data);
   return (
-    <div className="h-screen container mx-auto">
-      <h1 className="text-xl font-bold">Department List</h1>
+    <div className="h-screen ">
+      <h1 className="text-[24px] font-[600] text-customHeader">
+        Department List
+      </h1>
       <div className="">
         <Table
           theme={tablethemes}

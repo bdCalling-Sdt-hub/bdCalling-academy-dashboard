@@ -59,9 +59,9 @@ export default function StudentProfile() {
       });
     }
   };
-  const customUploadClass = "custom-upload";
+
   return (
-    <div className="container mx-auto h-screen ">
+    <div className=" h-screen ">
       <div className="text-right">
         <Button
           onClick={() => setAction("edit")}

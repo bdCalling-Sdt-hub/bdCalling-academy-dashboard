@@ -137,8 +137,8 @@ export default function MentorsDashboard() {
     message.info(`Click on item ${key}`);
   };
   return (
-    <div className="h-screen container mx-auto">
-      <h1 className="text-xl font-bold">Overview</h1>
+    <div className="h-screen ">
+      <h1 className="text-[24px] font-[600] text-customHeader">Overview</h1>
       <div className="mt-4">
         <Row justify={"center"} align={"middle"}>
           <Col lg={8} className="  flex justify-center ">
@@ -170,7 +170,7 @@ export default function MentorsDashboard() {
               />
             </div>
           </Col>
-          <Col lg={8} className="">
+          <Col lg={8} className="flex flex-col">
             <label className="">Subject</label>
             <Input
               size="large"
