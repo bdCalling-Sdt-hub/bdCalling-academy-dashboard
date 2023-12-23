@@ -61,7 +61,7 @@ export default function Students() {
       key: "1",
 
       studentName: (
-        <div>
+        <div className="flex gap-x-2 items-center">
           <img src={person} alt="" />
           <p>jhon doe</p>
         </div>
@@ -75,7 +75,7 @@ export default function Students() {
       key: "2",
 
       studentName: (
-        <div>
+        <div className="flex gap-x-2 items-center">
           <img src={person} alt="" />
           <p>jhon doe</p>
         </div>
@@ -89,7 +89,7 @@ export default function Students() {
       key: "3",
 
       studentName: (
-        <div>
+        <div className="flex gap-x-2 items-center">
           <img src={person} alt="" />
           <p>jhon doe</p>
         </div>
@@ -103,7 +103,7 @@ export default function Students() {
       key: "4",
 
       studentName: (
-        <div>
+        <div className="flex gap-x-2 items-center">
           <img src={person} alt="" />
           <p>jhon doe</p>
         </div>
@@ -117,7 +117,7 @@ export default function Students() {
       key: "5",
 
       studentName: (
-        <div>
+        <div className="flex gap-x-2 items-center">
           <img src={person} alt="" />
           <p>jhon doe</p>
         </div>

@@ -13,6 +13,7 @@ export const sidebardThemes = {
       borderRadius: 0,
       borderRadiusLG: 0,
       subMenuItemBg: "rgba(255, 255, 255, 0.02)",
+      itemMarginInline: 0,
     },
   },
 };
