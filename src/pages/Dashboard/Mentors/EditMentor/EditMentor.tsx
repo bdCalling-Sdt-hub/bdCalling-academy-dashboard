@@ -3,13 +3,8 @@
 import { EditOutlined } from "@ant-design/icons";
 import { Col, Form, Input, Row, message } from "antd";
 import style from "./editmentor.module.css";
-import Upload, {
-  RcFile,
-  UploadChangeParam,
-  UploadFile,
-  UploadProps,
-} from "antd/es/upload";
-import React, { useState } from "react";
+
+import { useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 
 export default function EditMentor(props: any) {

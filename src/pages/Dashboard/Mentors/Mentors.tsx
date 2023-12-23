@@ -1,9 +1,11 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import style from "./Mentors.module.css";
-import { Link } from "react-router-dom";
+
 import MentorsCard from "../../../component/MentorsCard/MentorsCard";
 import { PlusOutlined } from "@ant-design/icons";
+import CustomModal from "../../../component/UI/Modal/Modal";
+import CreateMentor from "./CreateMentor/CreateMentor";
 
 export default function Mentors() {
   const [mentors, setMentors] = useState([]);
@@ -12,15 +14,28 @@ export default function Mentors() {
       .then((res) => res.json())
       .then((data) => setMentors(data));
   }, []);
+  const handleShowModal = () => {
+    setshow(true);
+  };
+  const [show, setshow] = useState(false);
+
   return (
     <div className="">
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <CreateMentor />
+      </CustomModal>
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold text-customHeader ">Mentors</h1>
-        <Link to="/mentor/add">
-          <button className={style.addMentorsBtn}>
-            <PlusOutlined className="me-2" /> Add Mentor
-          </button>
-        </Link>
+
+        <button onClick={handleShowModal} className={style.addMentorsBtn}>
+          <PlusOutlined className="me-2" /> Add Mentor
+        </button>
       </div>
 
       <div>
