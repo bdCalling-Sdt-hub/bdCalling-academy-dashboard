@@ -186,6 +186,7 @@ const DashboardLayout = () => {
                   defaultValue={options[0]}
                   value={selectedLanguage}
                   style={{ width: 150 }}
+                  placeholder="dsfsdafd"
                   onChange={handleSelectLanguage}
                 ></Select>
               </div>

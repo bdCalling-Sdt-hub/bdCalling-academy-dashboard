@@ -7,7 +7,6 @@ import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePasswor
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
-
 import Courses from "../pages/Dashboard/Courses/Courses";
 import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
@@ -26,6 +25,7 @@ import LoginActivity from "../component/LoginActivity/LoginActivity";
 import Notification from "../component/Notification/Notification";
 import StudentDashbord from "../pages/Dashboard/StudentDashboard/StudentDashbord";
 import StudentEnrolledCourse from "../pages/Dashboard/StudentDashboard/StudentEnrolledCourse/StudentEnrolledCourse";
+import EditModuleList from "../pages/Dashboard/Courses/EditCourse/EditModuleList";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +67,10 @@ export const router = createBrowserRouter([
       {
         path: "/courses/edit/:id",
         element: <EditCourse></EditCourse>,
+      },
+      {
+        path: "/courses/edit/modulelist/:id",
+        element: <EditModuleList></EditModuleList>,
       },
       {
         path: "/mentors",

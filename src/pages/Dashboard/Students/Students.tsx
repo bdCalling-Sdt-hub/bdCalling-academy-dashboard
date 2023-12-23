@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button } from "antd";
 import StudentSurvey from "../../../component/StudentSurvey/StudentSurvey";
 import person from "../../../assets/table/person.svg";
 
@@ -9,6 +8,7 @@ import Table from "../../../component/UI/Table/Table";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import Dropdown from "../../../component/UI/Dropdown/Dropdown";
 
 export default function Students() {
   const handleDownload = () => {
@@ -134,24 +134,42 @@ export default function Students() {
       headerColor: "white",
     },
   };
-
+  const options = [
+    {
+      key: "1",
+      value: "All Students",
+    },
+    {
+      key: "2",
+      value: "New Students",
+    },
+  ];
+  const onOptionSelect = (option: { key: string; value: string }) => {
+    console.log(option);
+  };
   return (
     <div className=" h-screen">
       <StudentSurvey></StudentSurvey>
       <div className="mt-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">Student list</h1>
-          <Button
+          <div className="flex items-center gap-x-10">
+            <h1 className="text-[24px] font-bold text-customHeader ">
+              Student list
+            </h1>
+
+            <Dropdown
+              options={options}
+              buttonText={options[0].value}
+              label="Sort By"
+              onOptionSelect={onOptionSelect}
+            ></Dropdown>
+          </div>
+          <button
+            className="bg-customPrimary text-[#fff] p-[16px] rounded-lg text-[18px] font-[500]"
             onClick={handleDownload}
-            className="bg-customPrimary"
-            style={{
-              color: "white",
-            }}
-            icon={<PlusOutlined />}
-            size={"large"}
           >
-            Add Students
-          </Button>
+            <PlusOutlined /> <span className="ms-2">Add Students</span>
+          </button>
         </div>
         <div></div>
       </div>

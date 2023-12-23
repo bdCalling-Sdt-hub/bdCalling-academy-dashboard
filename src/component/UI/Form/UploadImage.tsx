@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { UploadProps } from "antd";
@@ -5,7 +6,7 @@ import { Button, message, Upload } from "antd";
 
 const { Dragger } = Upload;
 interface UploadImageProps {
-  setFile: (file: any) => void;
+  setFile?: (file: any) => void;
 }
 const UploadImage = ({ setFile }: UploadImageProps) => {
   const props: UploadProps = {
@@ -18,7 +19,10 @@ const UploadImage = ({ setFile }: UploadImageProps) => {
         console.log(info.file, info.fileList);
       }
       if (status === "done") {
-        setFile(info.file);
+        // @ts-ignore
+        setFile(info.fileList ? info.fileList : info.file);
+        // @ts-ignore
+
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
@@ -35,7 +39,7 @@ const UploadImage = ({ setFile }: UploadImageProps) => {
         backgroundColor: "white",
       }}
     >
-      <div className="flex justify-start px-4  gap-x-4 ">
+      <div className="flex justify-start px-4 items-center  gap-x-4 ">
         <Button>choose file</Button>
         <p className="ant-upload-text">or drag and drop file here</p>
       </div>
