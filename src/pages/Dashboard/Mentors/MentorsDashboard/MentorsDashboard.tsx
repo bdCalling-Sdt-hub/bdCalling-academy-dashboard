@@ -31,7 +31,7 @@ export default function MentorsDashboard() {
   query["searchTerm"] = searchTerm;
 
   useEffect(() => {
-    fetch("./attendence.json")
+    fetch("/attendence.json")
       .then((res) => res.json())
       .then((data) => setattendence(data));
   }, []);

@@ -7,17 +7,17 @@ import personimage from "../../../../assets/table/person.svg";
 import { useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 
-export default function CreateMentor(props: any) {
+export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-
   const onFinish = (data: any) => {
     const formdData = new FormData();
     if (imageFile) {
       formdData.append("img", imageFile);
     }
     formdData.append("data", data);
+    setshow(false);
   };
   const onFinishFailed = (error: any) => {
     console.log(error);

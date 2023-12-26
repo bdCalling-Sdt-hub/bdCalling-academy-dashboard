@@ -5,15 +5,44 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import singupImage from "../../assets/auth/isometric.svg";
 import logo from "../../assets/auth/Component 2.svg";
 import style from "./Signin.module.css";
-import { Button, Checkbox, Form, Input, Row, Col, ConfigProvider } from "antd";
-import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Row,
+  Col,
+  ConfigProvider,
+  message,
+} from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
+
+// Assume your dummy data looks like this
+const dummyUserData = [
+  { email: "admin@example.com", password: "admin", role: "admin" },
+  { email: "student@example.com", password: "student", role: "student" },
+  { email: "mentor@example.com", password: "mentor", role: "mentor" },
+];
 export default function SignIn() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const form = location?.state?.from.pathname;
+
   const onSubmit = async (data: any) => {
-    console.log(data);
     try {
-      console.log("something");
+      const findUser = dummyUserData.find((user) => user.email === data.email);
+      if (!findUser) {
+        message.error("user not found ");
+        return;
+      }
+      const checkValidPassword = findUser?.password === data.password;
+      if (!checkValidPassword) {
+        message.error("password did not match ");
+        return;
+      }
+      localStorage.setItem("user", JSON.stringify(findUser));
+      navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
     } catch (error) {}
   };
 

@@ -18,7 +18,7 @@ export default function Department() {
   const [departments, setdepartments] = useState<departmentData[] | []>([]);
 
   useEffect(() => {
-    fetch("./departments.json")
+    fetch("/departments.json")
       .then((res) => res.json())
       .then((data) => setdepartments(data));
   }, []);
@@ -59,7 +59,7 @@ export default function Department() {
       render: function (data: any) {
         return (
           <div className="flex gap-x-2">
-            <Link to={`/department/edit/${data.id}`}>
+            <Link to={`/admin/department/edit/${data.id}`}>
               {" "}
               <FiEdit
                 className="cursor-pointer text-customPrimary"

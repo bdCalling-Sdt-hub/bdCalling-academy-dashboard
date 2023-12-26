@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsCalendar2Event } from "react-icons/bs";
 import { IoMdTime } from "react-icons/io";
 import { MdMyLocation } from "react-icons/md";
-
 import style from "./eventsCard.module.css";
 
 import CustomModal from "../UI/Modal/Modal";
@@ -59,7 +58,7 @@ export default function EventCard(props: any) {
               Delete Events
             </button>
             <button onClick={() => setshow(true)} className={style.editEvents}>
-              Delete Events
+              Edit Events
             </button>
           </div>
         </div>

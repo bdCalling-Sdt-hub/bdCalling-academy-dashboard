@@ -124,7 +124,7 @@ export default function CourseCard({ course, courseType }: any) {
                 </button>
                 <button
                   className={style.btnEdit}
-                  onClick={() => navigate(`/courses/edit/${id}`)}
+                  onClick={() => navigate(`/admin/courses/edit/${id}`)}
                 >
                   <PiNotePencilDuotone
                     style={{

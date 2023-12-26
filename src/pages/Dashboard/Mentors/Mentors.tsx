@@ -10,17 +10,18 @@ import CreateMentor from "./CreateMentor/CreateMentor";
 export default function Mentors() {
   const [mentors, setMentors] = useState([]);
   useEffect(() => {
-    fetch("./mentorsData.json")
+    fetch("/mentorsData.json")
       .then((res) => res.json())
       .then((data) => setMentors(data));
   }, []);
+
   const handleShowModal = () => {
     setshow(true);
   };
   const [show, setshow] = useState(false);
 
   return (
-    <div className="">
+    <div className="h-screen">
       <CustomModal
         showCancelButton={false}
         showOkButton={false}
@@ -28,7 +29,7 @@ export default function Mentors() {
         isOpen={show}
         closeModal={() => setshow(false)}
       >
-        <CreateMentor />
+        <CreateMentor setshow={setshow} />
       </CustomModal>
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold text-customHeader ">Mentors</h1>

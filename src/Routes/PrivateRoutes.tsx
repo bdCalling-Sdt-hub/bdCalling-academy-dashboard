@@ -1,20 +1,20 @@
+import { Spin } from "antd";
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { getuser } from "../service/auth.service";
 interface PrivateRouteProps {
   children: ReactNode;
 }
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const loading = false;
-  const user = {
-    email: "@gmail.com",
-  };
+  const user = getuser("user");
   const location = useLocation();
 
   if (loading) {
-    return <progress className="progress w-56"></progress>;
+    return <Spin />;
   }
 
-  if (user) {
+  if (user && user.role) {
     return children;
   }
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;

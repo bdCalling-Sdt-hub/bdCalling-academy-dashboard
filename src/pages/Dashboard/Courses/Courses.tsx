@@ -22,7 +22,7 @@ export default function Courses() {
     <div className="">
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold  text-customHeader">Courses</h1>
-        <Link to="/courses/add">
+        <Link to="/admin/courses/add">
           <button className={style.addCourse}>
             {" "}
             <PlusOutlined className="me-2 text-white" /> Add Course

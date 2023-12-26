@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLocation } from "react-router-dom";
 
@@ -17,26 +18,29 @@ import {
   Select,
 } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { sidebarItems } from "../utiles/sidebarItem";
 import { sidebardThemes } from "../themes/Index";
+import { sidebarItems } from "../constants/sidebarItems";
+import { getuser } from "../service/auth.service";
 
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
-  // const [selectedKey, setSelectedKey] = useState(sidebarItems[0].key);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const { pathname } = useLocation();
+  const { role } = getuser("user");
 
-  const selectedKey = sidebarItems.find((item) =>
-    pathname.startsWith(item.key)
-  )?.key;
+  const selectedKey =
+    // @ts-ignore
+    sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
+    `/${role}/dashboard`;
 
   console.log(selectedKey);
+
   console.log(pathname);
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
-    // i18n.changeLanguage(selectedLanguage);
+
     localStorage.setItem("lang", value);
   };
   const {
@@ -121,11 +125,11 @@ const DashboardLayout = () => {
                 paddingBlockEnd: "1rem",
                 // height: "100%",
               }}
-              selectedKeys={[selectedKey ? selectedKey : "/dashboard"]}
+              selectedKeys={[selectedKey as string]}
               // defaultSelectedKeys={[sidebarItems[0].key]}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
-              items={sidebarItems}
+              items={sidebarItems(role)}
               onClick={handleMenuSelect}
             ></Menu>
           </div>

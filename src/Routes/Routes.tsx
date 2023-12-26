@@ -16,7 +16,7 @@ import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDep
 import Attendence from "../pages/Dashboard/Attendence/Attendence";
 import Events from "../pages/Dashboard/Events/Events";
 import ClassSchedule from "../pages/Dashboard/Class-Schedule/Class-Schedule";
-import StudentProfile from "../pages/Dashboard/Students/EditStudent/StudentProfile";
+
 import Profile from "../pages/Dashboard/Profile/Profile";
 import MentorsDashboard from "../pages/Dashboard/Mentors/MentorsDashboard/MentorsDashboard";
 import Wallet from "../pages/Dashboard/Wallet/Wallet";
@@ -26,6 +26,7 @@ import Notification from "../component/Notification/Notification";
 import StudentDashbord from "../pages/Dashboard/StudentDashboard/StudentDashbord";
 import StudentEnrolledCourse from "../pages/Dashboard/StudentDashboard/StudentEnrolledCourse/StudentEnrolledCourse";
 import EditModuleList from "../pages/Dashboard/Courses/EditCourse/EditModuleList";
+import PrivateRoute from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -37,35 +38,35 @@ export const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
-      {
-        path: "/students",
-        element: <Students></Students>,
+        path: "/admin/dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile/:id",
         element: <Profile />,
       },
       {
-        path: "/students/profile/:id",
-        element: <StudentProfile></StudentProfile>,
+        path: "/:role/class-schedule",
+        element: <ClassSchedule />,
       },
       {
-        path: "/student/dashboard",
-        element: <StudentDashbord />,
+        path: "/admin/students",
+        element: <Students></Students>,
       },
       {
-        path: "/courses",
+        path: "/admin/courses",
         element: <Courses></Courses>,
       },
       {
-        path: "/courses/add",
+        path: "/admin/courses/add",
         element: <Addcourse></Addcourse>,
       },
       {
-        path: "/courses/edit/:id",
+        path: "/admin/courses/edit/:id",
         element: <EditCourse></EditCourse>,
       },
       {
@@ -73,40 +74,49 @@ export const router = createBrowserRouter([
         element: <EditModuleList></EditModuleList>,
       },
       {
-        path: "/mentors",
+        path: "/admin/mentors",
         element: <Mentors />,
       },
+
       {
-        path: "/MentorsDashboard",
-        element: <MentorsDashboard />,
-      },
-      {
-        path: "/departments",
+        path: "/admin/departments",
         element: <Department />,
       },
       {
-        path: "/departments",
+        path: "/admin/departments",
         element: <Department />,
       },
       {
-        path: "/department/edit/:id",
+        path: "/admin/department/edit/:id",
         element: <EditDepartment />,
       },
       {
-        path: "/attendence",
+        path: "/admin/attendence",
         element: <Attendence />,
       },
       {
-        path: "/events",
+        path: "/admin/events",
         element: <Events />,
       },
+
       {
-        path: "/class-schedule",
-        element: <ClassSchedule />,
-      },
-      {
-        path: "/wallet",
+        path: "/admin/wallet",
         element: <Wallet />,
+      },
+      // =========================================student route part ======================================================================
+      {
+        path: "/student/dashboard",
+        element: <StudentDashbord />,
+      },
+
+      {
+        path: "/student/dashboard/course/:id/:moduleName/:videoId",
+        element: <StudentEnrolledCourse />,
+      },
+      // =========================================mentor route part =================================================================
+      {
+        path: "/mentor/dashboard",
+        element: <MentorsDashboard />,
       },
       {
         path: "/setting",
@@ -119,10 +129,6 @@ export const router = createBrowserRouter([
       {
         path: "/notification",
         element: <Notification />,
-      },
-      {
-        path: "/student/dashboard/course/:id/:moduleName/:videoId",
-        element: <StudentEnrolledCourse />,
       },
     ],
   },
