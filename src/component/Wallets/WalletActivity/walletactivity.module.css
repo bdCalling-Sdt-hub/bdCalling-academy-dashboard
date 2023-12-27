@@ -8,7 +8,7 @@
   border-radius: 23.802px;
   padding: 4px 14.876px;
   border: 2px solid #8b8b8b;
-
+  width: 160px;
   background: #f4f4f4;
 }
 .setBtn {
@@ -16,5 +16,6 @@
   border-radius: 23.802px;
   background: #2492eb;
   color: white;
+  width: 160px;
   font-weight: 500;
 }

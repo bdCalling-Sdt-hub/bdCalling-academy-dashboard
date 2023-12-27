@@ -26,106 +26,184 @@ import Notification from "../component/Notification/Notification";
 import StudentDashbord from "../pages/Dashboard/StudentDashboard/StudentDashbord";
 import StudentEnrolledCourse from "../pages/Dashboard/StudentDashboard/StudentEnrolledCourse/StudentEnrolledCourse";
 import EditModuleList from "../pages/Dashboard/Courses/EditCourse/EditModuleList";
-import PrivateRoute from "./PrivateRoutes";
+
+import NotFound from "../NotFound";
+import AdminRoutes from "./AdminRoutes";
+import PrivateRoutes from "./PrivateRoutes";
+import StudentRoutes from "./StudentRoutes";
+import MentorRoutes from "./MentorRoutes";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SignIn />,
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
   {
     path: "/",
     element: <Dashboardlayout></Dashboardlayout>,
     children: [
       {
-        path: "/",
-        element: <Dashboard></Dashboard>,
-      },
-      {
         path: "/admin/dashboard",
         element: (
-          <PrivateRoute>
-            <Dashboard></Dashboard>
-          </PrivateRoute>
+          <AdminRoutes>
+            <Dashboard />
+          </AdminRoutes>
         ),
       },
       {
         path: "/profile/:id",
-        element: <Profile />,
+        element: (
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/:role/class-schedule",
-        element: <ClassSchedule />,
+        element: (
+          <PrivateRoutes>
+            <ClassSchedule />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/admin/students",
-        element: <Students></Students>,
+        element: (
+          <AdminRoutes>
+            <Students></Students>
+          </AdminRoutes>
+        ),
       },
       {
         path: "/admin/courses",
-        element: <Courses></Courses>,
+        element: (
+          <AdminRoutes>
+            <Courses></Courses>
+          </AdminRoutes>
+        ),
       },
 
       {
         path: "/admin/courses/add",
-        element: <Addcourse></Addcourse>,
+        element: (
+          <AdminRoutes>
+            <Addcourse></Addcourse>
+          </AdminRoutes>
+        ),
       },
       {
         path: "/admin/courses/edit/:id",
-        element: <EditCourse></EditCourse>,
+        element: (
+          <AdminRoutes>
+            <EditCourse></EditCourse>
+          </AdminRoutes>
+        ),
       },
       {
-        path: "/courses/edit/modulelist/:id",
-        element: <EditModuleList></EditModuleList>,
+        path: "/admin/courses/edit/modulelist/:id",
+        element: (
+          <AdminRoutes>
+            <EditModuleList></EditModuleList>s
+          </AdminRoutes>
+        ),
       },
       {
         path: "/admin/mentors",
-        element: <Mentors />,
+        element: (
+          <AdminRoutes>
+            <Mentors />
+          </AdminRoutes>
+        ),
       },
 
       {
         path: "/admin/departments",
-        element: <Department />,
+        element: (
+          <AdminRoutes>
+            <Department />
+          </AdminRoutes>
+        ),
       },
-      {
-        path: "/admin/departments",
-        element: <Department />,
-      },
+
       {
         path: "/admin/department/edit/:id",
-        element: <EditDepartment />,
+        element: (
+          <AdminRoutes>
+            <EditDepartment />
+          </AdminRoutes>
+        ),
       },
       {
         path: "/admin/attendence",
-        element: <Attendence />,
+        element: (
+          <AdminRoutes>
+            <Attendence />
+          </AdminRoutes>
+        ),
       },
       {
         path: "/admin/events",
-        element: <Events />,
+        element: (
+          <AdminRoutes>
+            <Events />
+          </AdminRoutes>
+        ),
       },
 
       {
         path: "/admin/wallet",
-        element: <Wallet />,
+        element: (
+          <AdminRoutes>
+            <Wallet />
+          </AdminRoutes>
+        ),
       },
       // =========================================student route part ======================================================================
       {
         path: "/student/dashboard",
-        element: <StudentDashbord />,
+        element: (
+          <StudentRoutes>
+            <StudentDashbord />
+          </StudentRoutes>
+        ),
       },
 
       {
         path: "/student/dashboard/course/:id/:moduleName/:videoId",
-        element: <StudentEnrolledCourse />,
+        element: (
+          <StudentRoutes>
+            <StudentEnrolledCourse />
+          </StudentRoutes>
+        ),
       },
       // =========================================mentor route part =================================================================
       {
         path: "/mentor/dashboard",
-        element: <MentorsDashboard />,
+        element: (
+          <MentorRoutes>
+            <MentorsDashboard />
+          </MentorRoutes>
+        ),
       },
       {
         path: "/setting",
-        element: <Setting />,
+        element: (
+          <AdminRoutes>
+            <Setting />
+          </AdminRoutes>
+        ),
       },
       {
         path: "/setting/login-activity",
-        element: <LoginActivity />,
+        element: (
+          <AdminRoutes>
+            <LoginActivity />
+          </AdminRoutes>
+        ),
       },
       {
         path: "/notification",
@@ -133,10 +211,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/signin",
-    element: <SignIn></SignIn>,
-  },
+
   {
     path: "/forgetpassword/email",
     element: <Email></Email>,
@@ -148,5 +223,9 @@ export const router = createBrowserRouter([
   {
     path: "/forgetpassword/update",
     element: <UpdatePassword></UpdatePassword>,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);

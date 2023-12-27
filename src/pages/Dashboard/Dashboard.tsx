@@ -149,7 +149,7 @@ export default function Dashboard() {
       admissionDate: "12-08-2023",
     },
     {
-      key: "1",
+      key: "2",
       img: (
         <>
           <img src={person} alt="" />
@@ -162,7 +162,7 @@ export default function Dashboard() {
       admissionDate: "12-08-2023",
     },
     {
-      key: "1",
+      key: "3",
       img: (
         <>
           <img src={person} alt="" />
@@ -175,7 +175,7 @@ export default function Dashboard() {
       admissionDate: "12-08-2023",
     },
     {
-      key: "1",
+      key: "4",
       img: (
         <>
           <img src={person} alt="" />
@@ -188,7 +188,7 @@ export default function Dashboard() {
       admissionDate: "12-08-2023",
     },
     {
-      key: "1",
+      key: "5",
       img: (
         <>
           <img src={person} alt="" />
@@ -201,7 +201,7 @@ export default function Dashboard() {
       admissionDate: "12-08-2023",
     },
     {
-      key: "1",
+      key: "6",
       img: (
         <>
           <img src={person} alt="" />

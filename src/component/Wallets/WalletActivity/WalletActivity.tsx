@@ -46,10 +46,10 @@ export default function WalletActivity() {
       </div>
 
       {isVisible && (
-        <div className="flex justify-around items-center  bg-[#ffffff] border-2 rounded border-[#8B8B8B]  p-2 gap-x-14 parent  absolute z-50  transform bottom-4">
+        <div className="flex justify-between items-center  shadow-md  bg-[#ffffff]  rounded   p-2 gap-x-14 parent  absolute z-50   bottom-4">
           <div className="relative " onClick={(e) => e.stopPropagation()}>
             <div className={`${style.date} `}>
-              <p className="absolute  bottom-[34px] font-bold text-[#000] left-4 rounded ">
+              <p className="absolute  bottom-[34px] font-bold bg-[white] px-2 text-[#000] left-4 rounded ">
                 From
               </p>
               <DatePicker
@@ -62,7 +62,7 @@ export default function WalletActivity() {
           </div>
           <div className="relative " onClick={(e) => e.stopPropagation()}>
             <div className={`${style.date} `}>
-              <p className="absolute bg-white  bottom-[34px] font-bold text-[#000] left-4 rounded  ">
+              <p className="absolute bg-white bg-[white] px-2  bottom-[34px] font-bold text-[#000] left-4 rounded  ">
                 To
               </p>
               <DatePicker

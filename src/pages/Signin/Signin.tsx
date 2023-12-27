@@ -17,6 +17,8 @@ import {
 } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
+import { userKey } from "../../constants/authKey";
+import { storeUserInfo } from "../../service/auth.service";
 
 // Assume your dummy data looks like this
 const dummyUserData = [
@@ -41,7 +43,7 @@ export default function SignIn() {
         message.error("password did not match ");
         return;
       }
-      localStorage.setItem("user", JSON.stringify(findUser));
+      storeUserInfo(userKey, findUser);
       navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
     } catch (error) {}
   };

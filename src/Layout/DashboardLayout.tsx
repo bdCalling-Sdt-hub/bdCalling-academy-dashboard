@@ -16,12 +16,12 @@ import {
   Badge,
   ConfigProvider,
   Select,
-  message,
 } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
-import { getuser } from "../service/auth.service";
+import { getuser, removeUserInfo } from "../service/auth.service";
+import { userKey } from "../constants/authKey";
 
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const { role } = getuser("user");
+  const { role } = getuser(userKey);
 
   const selectedKey =
     // @ts-ignore
@@ -51,7 +51,8 @@ const DashboardLayout = () => {
   const handleMenuSelect = ({ key }: { key: string }) => {
     // setSelectedKey(key);
     if (key === "/logout") {
-      message.info("logout ");
+      removeUserInfo(userKey);
+      navigate("/signin");
     } else {
       navigate(key);
     }
