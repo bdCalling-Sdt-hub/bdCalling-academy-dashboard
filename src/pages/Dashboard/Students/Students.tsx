@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import StudentSurvey from "../../../component/StudentSurvey/StudentSurvey";
+import StudentSurvey from "../../../component/Survey/StudentSurvey/StudentSurvey";
 import person from "../../../assets/table/person.svg";
 
 import { PlusOutlined } from "@ant-design/icons";

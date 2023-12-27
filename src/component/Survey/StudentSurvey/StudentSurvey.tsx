@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 
-import studentsLogo from "../../assets/students/student.svg";
+import studentsLogo from "../../../assets/students/student.svg";
 import { MdOutlineShowChart } from "react-icons/md";
 export default function StudentSurvey() {
   const percantage = 10;

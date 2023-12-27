@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Col, Row } from "antd";
-import DashboardSurvery from "../../component/DashboardSurvey/DashboardSurvery";
+import DashboardSurvery from "../../component/Survey/DashboardSurvey/DashboardSurvery";
 import StudentEnrollmentChart from "../../component/Chart/surveyChart";
 import Table from "../../component/UI/Table/Table";
 import { BsThreeDotsVertical } from "react-icons/bs";

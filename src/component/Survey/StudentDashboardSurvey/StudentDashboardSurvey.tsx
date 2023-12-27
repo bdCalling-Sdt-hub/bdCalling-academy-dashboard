@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 
-import videoicon from "../../assets/studentDashboard/video.png";
-import cashIcon from "../../assets/studentDashboard/cash.png";
+import videoicon from "../../../assets/studentDashboard/video.png";
+import cashIcon from "../../../assets/studentDashboard/cash.png";
 export default function StudentDashboardSurvey() {
   const fakeData = {
     amount: "15000",

@@ -1,4 +1,4 @@
-import StudentDashboardSurvey from "../../../component/StudentDashboardSurvey/StudentDashboardSurvey";
+import StudentDashboardSurvey from "../../../component/Survey/StudentDashboardSurvey/StudentDashboardSurvey";
 import { useState } from "react";
 import style from "./studentDashboard.module.css";
 import StudentCourses from "../../../component/StudentCourses/StudentCourses";
