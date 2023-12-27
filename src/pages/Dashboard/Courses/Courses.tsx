@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
-import CourseCard from "../../../component/CourseCard/CourseCard";
+import CourseCard from "../../../component/cards/CourseCard/CourseCard";
 
 import { Link } from "react-router-dom";
 import style from "./courses.module.css";

@@ -4,7 +4,7 @@
 import { Col, Row } from "antd";
 
 import { useEffect, useState } from "react";
-import EventCard from "../../../component/EventsCard/EventCard";
+import EventCard from "../../../component/cards/EventsCard/EventCard";
 import CustomPaginations from "../../../component/UI/Pagination/Pagination";
 import { PlusOutlined } from "@ant-design/icons";
 import style from "./Events.module.css";

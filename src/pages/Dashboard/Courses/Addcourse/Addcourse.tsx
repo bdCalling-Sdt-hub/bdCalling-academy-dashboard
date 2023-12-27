@@ -3,8 +3,8 @@ import { Button, Col, DatePicker, Form, Input, Row, SelectProps } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 import { useState } from "react";
-import UploadImage from "../../../../component/UI/Form/UploadImage";
-import SelectField from "../../../../component/UI/Form/SelectField";
+import UploadImage from "../../../../component/Form/UploadImage";
+import SelectField from "../../../../component/Form/SelectField";
 import style from "../courses.module.css";
 export default function Addcourse() {
   const [form] = Form.useForm();

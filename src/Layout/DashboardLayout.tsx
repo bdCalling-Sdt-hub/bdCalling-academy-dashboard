@@ -16,6 +16,7 @@ import {
   Badge,
   ConfigProvider,
   Select,
+  message,
 } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
@@ -25,6 +26,7 @@ import { getuser } from "../service/auth.service";
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   const navigate = useNavigate();
+
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
@@ -49,7 +51,7 @@ const DashboardLayout = () => {
   const handleMenuSelect = ({ key }: { key: string }) => {
     // setSelectedKey(key);
     if (key === "/logout") {
-      console.log("dsfmks");
+      message.info("logout ");
     } else {
       navigate(key);
     }
@@ -125,7 +127,7 @@ const DashboardLayout = () => {
                 paddingBlockEnd: "1rem",
                 // height: "100%",
               }}
-              selectedKeys={[selectedKey as string]}
+              selectedKeys={[pathname]}
               // defaultSelectedKeys={[sidebarItems[0].key]}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore

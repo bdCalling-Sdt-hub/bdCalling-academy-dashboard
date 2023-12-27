@@ -61,6 +61,7 @@ export const router = createBrowserRouter([
         path: "/admin/courses",
         element: <Courses></Courses>,
       },
+
       {
         path: "/admin/courses/add",
         element: <Addcourse></Addcourse>,

@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import style from "./Mentors.module.css";
 
-import MentorsCard from "../../../component/MentorsCard/MentorsCard";
+import MentorsCard from "../../../component/cards/MentorsCard/MentorsCard";
 import { PlusOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateMentor from "./CreateMentor/CreateMentor";

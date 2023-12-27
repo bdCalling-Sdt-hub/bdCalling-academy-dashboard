@@ -2,9 +2,9 @@
 import { Card } from "antd";
 import style from "./mentorsCard.module.css";
 import { useState } from "react";
-import CustomModal from "../UI/Modal/Modal";
+import CustomModal from "../../UI/Modal/Modal";
 
-import EditMentor from "../../pages/Dashboard/Mentors/EditMentor/EditMentor";
+import EditMentor from "../../../pages/Dashboard/Mentors/EditMentor/EditMentor";
 
 export default function MentorsCard(props: any) {
   const { certification, department, img, name } = props.mentor;

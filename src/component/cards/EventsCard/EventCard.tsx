@@ -5,8 +5,8 @@ import { IoMdTime } from "react-icons/io";
 import { MdMyLocation } from "react-icons/md";
 import style from "./eventsCard.module.css";
 
-import CustomModal from "../UI/Modal/Modal";
-import EditEvent from "../../pages/Dashboard/Events/EditEvent/EditEvent";
+import CustomModal from "../../UI/Modal/Modal";
+import EditEvent from "../../../pages/Dashboard/Events/EditEvent/EditEvent";
 export default function EventCard(props: any) {
   const { img, date, time, location, title, id } = props.events;
   const [show, setshow] = useState(false);

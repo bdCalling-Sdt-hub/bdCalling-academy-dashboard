@@ -12,7 +12,7 @@ import CustomUpload from "../../../component/UI/Upload/Upload";
 
 export default function Profile() {
   // const { id } = useSearchParams();
-  const img = "https://t.ly/aBlAZ ";
+  const img = "https://shorturl.at/qvEFR";
   let role = "student";
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");

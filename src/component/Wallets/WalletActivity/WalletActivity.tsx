@@ -13,7 +13,7 @@ export default function WalletActivity() {
   console.log(startDate, endDate);
   //   const onChange: DatePickerProps["onChange"] = (date, dateString) => {};
   useEffect(() => {
-    fetch("./studentWallet.json")
+    fetch("/studentWallet.json")
       .then((res) => res.json())
       .then((data) => setdata(data));
   }, []);

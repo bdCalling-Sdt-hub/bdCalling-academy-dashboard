@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import UploadImage from "../../../../component/UI/Form/UploadImage";
+import UploadImage from "../../../../component/Form/UploadImage";
 import style from "../courses.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 
