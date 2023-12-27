@@ -22,9 +22,9 @@ import { storeUserInfo } from "../../service/auth.service";
 
 // Assume your dummy data looks like this
 const dummyUserData = [
-  { email: "admin@example.com", password: "admin", role: "admin" },
-  { email: "student@example.com", password: "student", role: "student" },
-  { email: "mentor@example.com", password: "mentor", role: "mentor" },
+  { email: "admin@gmail.com", password: "111111", role: "admin" },
+  { email: "student@gmail.com", password: "111111", role: "student" },
+  { email: "mentor@gmail.com", password: "111111", role: "mentor" },
 ];
 export default function SignIn() {
   const navigate = useNavigate();
