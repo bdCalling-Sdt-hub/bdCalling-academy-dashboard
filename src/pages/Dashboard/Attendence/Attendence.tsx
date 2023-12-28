@@ -64,7 +64,7 @@ export default function Attendence() {
     {
       title: "Attendence",
       dataIndex: "attendence",
-      render: (data: any) => (
+      render: () => (
         <span className="flex gap-x-2">
           <p
             onClick={() => handleAttendence("id", "present")}
