@@ -123,7 +123,7 @@ export default function Profile() {
 
           <div className={style.editStudentContainer}>
             <Form
-              disabled={action !== "edit"}
+              // disabled={action !== "edit"}
               initialValues={{}}
               form={form}
               className="mt-4"
