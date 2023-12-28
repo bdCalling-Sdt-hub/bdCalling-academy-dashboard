@@ -6,12 +6,9 @@ import style from "./Profile.module.css";
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
-
 import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import CustomUpload from "../../../component/UI/Upload/Upload";
-
 export default function Profile() {
-  // const { id } = useSearchParams();
   const img = "https://shorturl.at/qvEFR";
   let role = "student";
   const [loading, setLoading] = useState(false);
@@ -28,12 +25,19 @@ export default function Profile() {
     };
     console.log(finalData);
   };
+  console.log(action);
 
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
   const handleChagePassword = (value: any) => {
     console.log(value);
+  };
+
+  const handleEditProfile = async () => {
+    console.log("called");
+    form.submit();
+    setAction("save");
   };
   return (
     <div className=" h-screen ">
@@ -52,17 +56,13 @@ export default function Profile() {
             CHANGE PASSWORD
           </button>
         )}
-        <button className={style.editBtn} onClick={() => setAction("edit")}>
-          EDIT
-        </button>
+        {(action === "save" || action === "") && (
+          <button className={style.editBtn} onClick={() => setAction("edit")}>
+            EDIT
+          </button>
+        )}
         {action === "edit" ? (
-          <button
-            onClick={() => {
-              form.submit();
-              setAction("save");
-            }}
-            className={style.saveBtn}
-          >
+          <button onClick={handleEditProfile} className={style.saveBtn}>
             SAVE
           </button>
         ) : null}
@@ -123,7 +123,7 @@ export default function Profile() {
 
           <div className={style.editStudentContainer}>
             <Form
-              // disabled={action !== "edit"}
+              disabled={action !== "edit"}
               initialValues={{}}
               form={form}
               className="mt-4"
