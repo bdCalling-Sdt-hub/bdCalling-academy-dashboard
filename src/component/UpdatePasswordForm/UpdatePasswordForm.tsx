@@ -1,5 +1,9 @@
 import { Button, Form, Input } from "antd";
-import { LockOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LockOutlined,
+} from "@ant-design/icons";
 import style from "./updatePasswordForm.module.css";
 interface IpasswordObject {
   oldPassword: string;
@@ -8,9 +12,15 @@ interface IpasswordObject {
 }
 interface IUpdatepasswordForm {
   onSubmit: (value: IpasswordObject) => void;
+  containerStyle?: string;
+  btnStyle?: string;
 }
 
-const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
+const UpdatePasswordForm = ({
+  onSubmit,
+  containerStyle,
+  btnStyle,
+}: IUpdatepasswordForm) => {
   const onFinish = (value: IpasswordObject) => {
     console.log(value);
     onSubmit(value);
@@ -18,7 +28,7 @@ const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
   return (
     <Form
       name="update-password"
-      className=""
+      className={`${containerStyle} flex flex-col`}
       initialValues={{}}
       onFinish={onFinish}
     >
@@ -35,12 +45,15 @@ const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
             },
           ]}
         >
-          <Input
+          <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
             name="newPassword"
             type="password"
             placeholder="Password"
             className={style.input}
+            iconRender={(visible: boolean) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
           />
         </Form.Item>
       </div>
@@ -49,7 +62,8 @@ const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
           Confirm Password
         </label>
         <Form.Item
-          name="password"
+          key="confirmPassword"
+          name="confirmPassword"
           rules={[
             {
               required: true,
@@ -57,17 +71,20 @@ const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
             },
           ]}
         >
-          <Input
+          <Input.Password
             name="confirmPassword"
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
             className={style.input}
+            iconRender={(visible: boolean) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
           />
         </Form.Item>
       </div>
 
-      <Form.Item>
+      <div className={btnStyle}>
         <Button
           type="primary"
           htmlType="submit"
@@ -82,9 +99,9 @@ const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
         >
           Confirm
         </Button>
-      </Form.Item>
+      </div>
     </Form>
   );
 };
 
-export default ChangePasswordForm;
+export default UpdatePasswordForm;

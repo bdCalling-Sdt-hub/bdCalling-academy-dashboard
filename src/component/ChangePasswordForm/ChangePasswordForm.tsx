@@ -15,6 +15,7 @@ interface IChangePassword {
 export default function ChangePassword({
   onSubmit,
   btnText,
+
   setOpenOtpModal,
 }: IChangePassword) {
   const [form] = Form.useForm();

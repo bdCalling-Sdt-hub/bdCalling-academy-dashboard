@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-const */
 
-import { Button, Col, Input, InputRef, Row, message } from "antd";
+import { Button, Col, Input, InputRef, Row } from "antd";
 import { useRef, useState } from "react";
 import style from "./OtpForm.module.css";
 interface IotpForm {

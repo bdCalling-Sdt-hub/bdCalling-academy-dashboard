@@ -4,13 +4,16 @@ import { Switch } from "antd";
 import { Link } from "react-router-dom";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import { useState } from "react";
-import ChangePassword from "../../../component/ChangePassword/ChangePassword";
+import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import OtpForm from "../../../component/OtpForm/OtpForm";
 import { getuser } from "../../../service/auth.service";
+
+import UpdatePasswordForm from "../../../component/UpdatePasswordForm/UpdatePasswordForm";
 
 export default function Setting() {
   const [open, setOpen] = useState(false);
   const [openOtpModal, setOpenOtpModal] = useState(false);
+  const [openUpdatePasswordModal, setOpenUpdatePasswordModal] = useState(false);
   const { email } = getuser("user") || {};
   const onChange = (checked: boolean) => {
     console.log(`switch to ${checked}`);
@@ -19,14 +22,23 @@ export default function Setting() {
     console.log(data);
   };
   const handleOtpSubmit = (data: any) => {
-    console.log(data);
+    if (data) {
+      setOpenUpdatePasswordModal(true);
+      setOpenOtpModal(false);
+    }
   };
   const handleOtpModal = () => {
     setOpenOtpModal(true);
     setOpen(false);
   };
+
+  const handleUpdatePasswordSubmit = (data: any) => {
+    console.log(data);
+    setOpenUpdatePasswordModal(false);
+  };
   return (
     <div className="h-screen">
+      {/* modal for change password */}
       <CustomModal
         showCancelButton={false}
         showOkButton={false}
@@ -41,6 +53,7 @@ export default function Setting() {
           setOpenOtpModal={handleOtpModal}
         />
       </CustomModal>
+      {/* modal for otp */}
       <CustomModal
         showCancelButton={false}
         showOkButton={false}
@@ -49,7 +62,7 @@ export default function Setting() {
         closeModal={() => setOpenOtpModal(false)}
       >
         <div>
-          <h1 className="text-2xl font-semibold text-customPrimary">
+          <h1 className="text-2xl font-semibold text-customHeader">
             Verify Otp
           </h1>
           <p className="py-4">
@@ -61,6 +74,26 @@ export default function Setting() {
             handleOtpSubmit={handleOtpSubmit}
             btnText="Continue"
             containerStyle="h-[300px]"
+            btnStyle="mt-auto"
+          />
+        </div>
+      </CustomModal>
+      {/* modal for update password */}
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={openUpdatePasswordModal}
+        closeModal={() => setOpenUpdatePasswordModal(false)}
+      >
+        <div className="">
+          <h1 className="text-2xl text-customHeader font-semibold my-2">
+            Update Your Password
+          </h1>
+
+          <UpdatePasswordForm
+            onSubmit={handleUpdatePasswordSubmit}
+            containerStyle="h-[300px] mt-10"
             btnStyle="mt-auto"
           />
         </div>

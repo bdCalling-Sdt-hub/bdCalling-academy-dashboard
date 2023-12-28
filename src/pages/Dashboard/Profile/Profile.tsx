@@ -7,7 +7,7 @@ import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
 
-import ChangePassword from "../../../component/ChangePassword/ChangePassword";
+import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import CustomUpload from "../../../component/UI/Upload/Upload";
 
 export default function Profile() {

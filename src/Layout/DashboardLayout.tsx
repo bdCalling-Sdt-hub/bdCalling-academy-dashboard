@@ -18,7 +18,7 @@ import {
   Dropdown,
   MenuProps,
 } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
 import { getuser, removeUserInfo } from "../service/auth.service";
@@ -181,7 +181,7 @@ const DashboardLayout = () => {
               }}
               selectedKeys={[pathname]}
               // defaultSelectedKeys={[sidebarItems[0].key]}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
               // @ts-ignore
               items={sidebarItems(role)}
               onClick={handleMenuSelect}
