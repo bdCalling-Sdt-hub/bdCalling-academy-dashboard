@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty */
-import { LockOutlined } from "@ant-design/icons";
+
 import updatePasswordImage from "../../../assets/forget-password/updatepassword.svg";
 import logo from "../../../assets/logo.svg";
-import style from "./updatePassword.module.css";
-import { Button, Form, Input, Row, Col, ConfigProvider } from "antd";
+
+import { ConfigProvider } from "antd";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { inputTheme } from "../../../themes/Index";
-import ChangePasswordForm from "../../../component/ChangePasswordForm/ChangePasswordForm";
+import ChangePasswordForm from "../../../component/UpdatePasswordForm/UpdatePasswordForm";
 
 export default function UpdatePassword() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function UpdatePassword() {
             </div>
             <div>
               <div>
-                <div className={`${style.updatePasswordContainer} mt-2`}>
+                <div className={` mt-2`}>
                   <div className="logo-image">
                     <img src={logo} alt="" />
                   </div>

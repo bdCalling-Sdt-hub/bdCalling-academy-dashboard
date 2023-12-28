@@ -1,16 +1,16 @@
 import { Button, Form, Input } from "antd";
 import { LockOutlined } from "@ant-design/icons";
-import style from "./ChangePasswordForm.module.css";
+import style from "./updatePasswordForm.module.css";
 interface IpasswordObject {
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;
 }
-interface IChangepasswordForm {
+interface IUpdatepasswordForm {
   onSubmit: (value: IpasswordObject) => void;
 }
 
-const ChangePasswordForm = ({ onSubmit }: IChangepasswordForm) => {
+const ChangePasswordForm = ({ onSubmit }: IUpdatepasswordForm) => {
   const onFinish = (value: IpasswordObject) => {
     console.log(value);
     onSubmit(value);

@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Col, Row, Form, Input, DatePicker } from "antd";
+import { Col, Row, Form, Input, DatePicker } from "antd";
 import style from "./Profile.module.css";
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
@@ -32,7 +32,9 @@ export default function Profile() {
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
-
+  const handleChagePassword = (value: any) => {
+    console.log(value);
+  };
   return (
     <div className=" h-screen ">
       <CustomModal
@@ -42,7 +44,7 @@ export default function Profile() {
         isOpen={show}
         closeModal={() => setshow(false)}
       >
-        <ChangePassword />
+        <ChangePassword btnText="SAVE" onSubmit={handleChagePassword} />
       </CustomModal>
       <div className="flex justify-end gap-x-[30px]">
         {role !== "admin" && (

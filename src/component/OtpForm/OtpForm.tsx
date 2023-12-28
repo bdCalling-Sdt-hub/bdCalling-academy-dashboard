@@ -47,9 +47,13 @@ const OtpForm = ({
   const handleSubmit = () => {
     handleOtpSubmit(otp.join(""), otpError);
   };
+  console.log(btnStyle);
   const resendOtp = () => {};
   return (
-    <div className={`${containerStyle} mt-2`}>
+    <div
+      className={`${containerStyle} mt-2  flex flex-col`}
+      style={{ height: "300px" }}
+    >
       <Row>
         {otp.map((digit, index) => (
           <Col lg={4} className="text-center">
@@ -77,16 +81,18 @@ const OtpForm = ({
           Resend
         </a>
       </div>
-      <Button
-        onClick={handleSubmit}
-        type="primary"
-        disabled={otp.join("").length !== 6}
-        htmlType="submit"
-        className={`${style.otpButton} ${btnStyle}`}
-        block
-      >
-        {btnText}
-      </Button>
+      <div className={btnStyle}>
+        <Button
+          onClick={handleSubmit}
+          type="primary"
+          disabled={otp.join("").length !== 6}
+          htmlType="submit"
+          className={`${style.otpButton}  `}
+          block
+        >
+          {btnText}
+        </Button>
+      </div>
     </div>
   );
 };

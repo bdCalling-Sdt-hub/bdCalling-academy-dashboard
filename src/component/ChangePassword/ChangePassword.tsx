@@ -4,16 +4,27 @@ import {
   EyeTwoTone,
   LockOutlined,
 } from "@ant-design/icons";
-import { Col, Form, Input, Row } from "antd";
+import { Col, Form, Input, Row, message } from "antd";
 import style from "./changePassword.module.css";
-export default function ChangePassword() {
+interface IChangePassword {
+  onSubmit: (data: any) => void;
+  btnText: string;
+  showForgotPassword?: boolean;
+  setOpenOtpModal?: (value: boolean) => void;
+}
+export default function ChangePassword({
+  onSubmit,
+  btnText,
+  setOpenOtpModal,
+}: IChangePassword) {
   const [form] = Form.useForm();
 
   const onFinish = (data: any) => {
-    console.log(data);
+    onSubmit(data);
   };
   const onFinishFailed = (error: any) => {
     console.log(error);
+    message.error(error.message);
   };
 
   return (
@@ -111,9 +122,17 @@ export default function ChangePassword() {
             </Form.Item>
           </Col>
         </Row>
+        {setOpenOtpModal && (
+          <p
+            onClick={() => setOpenOtpModal && setOpenOtpModal(true)}
+            className="text-end font-semibold mb-2 text-customHeader hover:text-customPrimary cursor-pointer"
+          >
+            Forgot Password
+          </p>
+        )}
         <div className="text-center">
           <button className={style.saveBtn} type="submit">
-            SAVE
+            {btnText}
           </button>
         </div>
       </Form>
