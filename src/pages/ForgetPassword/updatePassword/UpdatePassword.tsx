@@ -9,6 +9,7 @@ import { Button, Form, Input, Row, Col, ConfigProvider } from "antd";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { inputTheme } from "../../../themes/Index";
+import ChangePasswordForm from "../../../component/ChangePasswordForm/ChangePasswordForm";
 
 export default function UpdatePassword() {
   const navigate = useNavigate();
@@ -46,78 +47,7 @@ export default function UpdatePassword() {
                   </div>
                   {/* form */}
                   <div>
-                    <Form
-                      name="update-password"
-                      className=""
-                      initialValues={{}}
-                      onFinish={onSubmit}
-                    >
-                      <div>
-                        <label htmlFor="email" className="font-semibold">
-                          New password
-                        </label>
-                        <Form.Item
-                          name="password"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your Password!",
-                            },
-                          ]}
-                        >
-                          <Input
-                            prefix={
-                              <LockOutlined className="site-form-item-icon" />
-                            }
-                            name="newPassword"
-                            type="password"
-                            placeholder="Password"
-                            className={style.input}
-                          />
-                        </Form.Item>
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="font-semibold">
-                          Confirm Password
-                        </label>
-                        <Form.Item
-                          name="password"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your Password!",
-                            },
-                          ]}
-                        >
-                          <Input
-                            name="confirmPassword"
-                            prefix={
-                              <LockOutlined className="site-form-item-icon" />
-                            }
-                            type="password"
-                            placeholder="Password"
-                            className={style.input}
-                          />
-                        </Form.Item>
-                      </div>
-
-                      <Form.Item>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          className="login-form-button"
-                          block
-                          style={{
-                            height: "45px",
-                            fontWeight: "400px",
-                            fontSize: "18px",
-                            background: "#2492EB",
-                          }}
-                        >
-                          Confirm
-                        </Button>
-                      </Form.Item>
-                    </Form>
+                    <ChangePasswordForm onSubmit={onSubmit} />
                   </div>
                 </div>
               </div>
