@@ -217,12 +217,22 @@ const DashboardLayout = () => {
                   marginRight: "10px",
                 }}
               />
-              <Input
-                allowClear={true}
-                prefix={<SearchOutlined className="text-[#A7A7A7] " />}
-                placeholder="search here"
-                className="h-[50px] w-[461px] border-0"
-              />
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Input: {
+                      colorBgContainer: "rgb(244, 244, 244)",
+                    },
+                  },
+                }}
+              >
+                <Input
+                  allowClear={true}
+                  prefix={<SearchOutlined className="text-[#A7A7A7] " />}
+                  placeholder="search here"
+                  className="h-[50px] w-[461px] border-0"
+                />
+              </ConfigProvider>
             </div>
 
             <div
