@@ -1,0 +1,16 @@
+.nextBtn {
+  padding: 16px 10px;
+  width: 433px;
+  border-radius: 3px;
+  background-color: #2492eb;
+  color: white;
+  cursor: pointer !important;
+}
+.prevBtn {
+  padding: 16px 10px;
+  width: 433px;
+  border-radius: 3px;
+  border: 1px solid #858585;
+  color: #858585;
+  cursor: pointer;
+}

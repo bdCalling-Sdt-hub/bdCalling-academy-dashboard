@@ -46,6 +46,7 @@ export const sidebarItems = (role: string) => {
       key: `/${role}/courses`,
       label: "Courses",
       icon: <BsBook />,
+
       children: [
         {
           key: `/${role}/courses/`,
