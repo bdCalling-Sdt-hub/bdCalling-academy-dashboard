@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty */
@@ -17,25 +18,56 @@ import {
 } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
-import { userKey } from "../../constants/authKey";
-import { storeUserInfo } from "../../service/auth.service";
-import { useLoginMutation } from "../../redux/features/auth/authApi";
+
+import {
+  getToken,
+  storeToken,
+  storeUserInfo,
+} from "../../service/auth.service";
+import {
+  useGetmyprofileQuery,
+  useLoginMutation,
+} from "../../redux/features/auth/authApi";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  setUser,
+  useCurrentGetUser,
+  useCurrentToken,
+} from "../../redux/features/auth/authSlice";
 
 // Assume your dummy data looks like this
 
 export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const form = location?.state?.from.pathname;
-  const [signin, { isLoading, isError, error }] = useLoginMutation();
+  const [signin, { error }] = useLoginMutation();
+  const token = useAppSelector(useCurrentToken);
+  const currentUser = useAppSelector(useCurrentGetUser);
+  const dispatch = useAppDispatch();
+  const { data: user, isLoading }: any = useGetmyprofileQuery(undefined);
+
   const onSubmit = async (data: any) => {
     try {
-      signin(data);
-      if (!isError) {
-        message.info("login successfully");
+      const result: any = await signin(data);
+      if (result?.data) {
+        dispatch(setUser({ token: token }));
+        localStorage.setItem("token", result?.data?.access_token);
       }
+      if (result?.error) {
+        message.error(result?.error?.message);
+      }
+      console.log(result?.data);
+      // if (token) {
+      //   dispatch(setUser({ user: user }));
+      // }
+      console.log(user);
 
-      // navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
+      // if(currentUser){
+      //        navigate(form ? form : `/${currentUser?.user?}/dashboard`, { replace: true });
+      // }
     } catch (error) {
       console.log(error);
     }

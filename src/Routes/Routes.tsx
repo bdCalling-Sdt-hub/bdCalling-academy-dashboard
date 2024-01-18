@@ -164,7 +164,7 @@ export const router = createBrowserRouter([
       },
       // =========================================student route part ======================================================================
       {
-        path: "/student/dashboard",
+        path: "/STUDENT/dashboard",
         element: (
           <StudentRoutes>
             <StudentDashbord />
@@ -173,7 +173,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/student/dashboard/course/:id/:moduleName/:videoId",
+        path: "/STUDENT/dashboard/course/:id/:moduleName/:videoId",
         element: (
           <StudentRoutes>
             <StudentEnrolledCourse />

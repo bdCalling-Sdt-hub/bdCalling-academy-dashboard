@@ -105,7 +105,7 @@ export const sidebarItems = (role: string) => {
 
     ...defaultSidebarItems,
   ];
-  if (role === "admin") return adminSidebarItems;
-  else if (role === "mentor") return mentorSidebarItems;
-  else if (role === "student") return studentSidebarItmes;
+  if (role === "SUPER-ADMIN") return adminSidebarItems;
+  else if (role === "MENTOR") return mentorSidebarItems;
+  else if (role === "STUDENT") return studentSidebarItmes;
 };

@@ -2,12 +2,19 @@
 import Cookies from "universal-cookie";
 
 export const storeUserInfo = (key: string, value: any) => {
+  console.log(value);
+  const data = {
+    userName: value?.userName,
+    email: value?.email,
+    userType: value?.userType,
+  };
+  console.log(data);
   const cookie = new Cookies();
-  cookie.set(key, value);
+  cookie.set(key, data);
 };
-export const storeToken = (key: string, value: string) => {
+export const storeToken = (key: string, value: any) => {
   const cookie = new Cookies();
-  cookie.set(key, value);
+  cookie.set(key, JSON.stringify(value));
 };
 export const getuserInfo = (key: string) => {
   const cookie = new Cookies();

@@ -20,7 +20,7 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
-import { getuser, removeUserInfo } from "../service/auth.service";
+import { getuserInfo, removeUserInfo } from "../service/auth.service";
 import { userKey } from "../constants/authKey";
 
 const { Header, Sider, Content } = Layout;
@@ -30,16 +30,8 @@ const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const { role } = getuser(userKey);
+  const { userType: role } = getuserInfo(userKey);
 
-  const selectedKey =
-    // @ts-ignore
-    sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
-    `/${role}/dashboard`;
-
-  console.log(selectedKey);
-
-  console.log(pathname);
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
 
