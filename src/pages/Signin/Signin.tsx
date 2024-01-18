@@ -19,33 +19,26 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
 import { userKey } from "../../constants/authKey";
 import { storeUserInfo } from "../../service/auth.service";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
 
 // Assume your dummy data looks like this
-const dummyUserData = [
-  { email: "admin@gmail.com", password: "111111", role: "admin" },
-  { email: "student@gmail.com", password: "111111", role: "student" },
-  { email: "mentor@gmail.com", password: "111111", role: "mentor" },
-];
+
 export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const form = location?.state?.from.pathname;
-
+  const [signin, { isLoading, isError }] = useLoginMutation();
   const onSubmit = async (data: any) => {
     try {
-      const findUser = dummyUserData.find((user) => user.email === data.email);
-      if (!findUser) {
-        message.error("user not found ");
-        return;
+      signin(data);
+      if (!isError) {
+        message.info("login successfully");
       }
-      const checkValidPassword = findUser?.password === data.password;
-      if (!checkValidPassword) {
-        message.error("password did not match ");
-        return;
-      }
-      storeUserInfo(userKey, findUser);
-      navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
-    } catch (error) {}
+
+      // navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleForget = () => {
