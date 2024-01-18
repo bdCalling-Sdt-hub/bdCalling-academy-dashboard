@@ -27,7 +27,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const form = location?.state?.from.pathname;
-  const [signin, { isLoading, isError }] = useLoginMutation();
+  const [signin, { isLoading, isError, error }] = useLoginMutation();
   const onSubmit = async (data: any) => {
     try {
       signin(data);
@@ -111,15 +111,7 @@ export default function SignIn() {
                       <label htmlFor="email" className={style.label}>
                         Password
                       </label>
-                      <Form.Item
-                        name="password"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your Password!",
-                          },
-                        ]}
-                      >
+                      <Form.Item name="password">
                         <Input
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
