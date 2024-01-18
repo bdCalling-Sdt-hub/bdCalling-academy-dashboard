@@ -20,21 +20,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
 
 import {
-  getToken,
-  storeToken,
-  storeUserInfo,
-} from "../../service/auth.service";
-import {
   useGetmyprofileQuery,
   useLoginMutation,
 } from "../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
+
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setUser,
   useCurrentGetUser,
   useCurrentToken,
 } from "../../redux/features/auth/authSlice";
+import { storeToken, storeUserInfo } from "../../service/auth.service";
 
 // Assume your dummy data looks like this
 
@@ -45,7 +41,6 @@ export default function SignIn() {
   const form = location?.state?.from.pathname;
   const [signin, { error }] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
-  const currentUser = useAppSelector(useCurrentGetUser);
   const dispatch = useAppDispatch();
   const { data: user, isLoading }: any = useGetmyprofileQuery(undefined);
 
@@ -54,20 +49,12 @@ export default function SignIn() {
       const result: any = await signin(data);
       if (result?.data) {
         dispatch(setUser({ token: token }));
-        localStorage.setItem("token", result?.data?.access_token);
+        storeToken("token", result?.data?.access_Token);
       }
       if (result?.error) {
         message.error(result?.error?.message);
       }
-      console.log(result?.data);
-      // if (token) {
-      //   dispatch(setUser({ user: user }));
-      // }
-      console.log(user);
-
-      // if(currentUser){
-      //        navigate(form ? form : `/${currentUser?.user?}/dashboard`, { replace: true });
-      // }
+      console.log(user, error, result);
     } catch (error) {
       console.log(error);
     }

@@ -20,8 +20,7 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
-import { getuserInfo, removeUserInfo } from "../service/auth.service";
-import { userKey } from "../constants/authKey";
+import { getuserInfo, removeFromStroage } from "../service/auth.service";
 
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
@@ -30,7 +29,7 @@ const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const { userType: role } = getuserInfo(userKey);
+  const { userType: role } = getuserInfo();
 
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
@@ -43,7 +42,8 @@ const DashboardLayout = () => {
   const handleMenuSelect = ({ key }: { key: string }) => {
     // setSelectedKey(key);
     if (key === "/logout") {
-      removeUserInfo(userKey);
+      removeFromStroage("token");
+      removeFromStroage("user");
       navigate("/signin");
     } else {
       navigate(key);
