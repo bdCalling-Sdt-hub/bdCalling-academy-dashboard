@@ -20,21 +20,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
 
 import {
-  getToken,
-  storeToken,
-  storeUserInfo,
-} from "../../service/auth.service";
-import {
   useGetmyprofileQuery,
   useLoginMutation,
 } from "../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
+
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setUser,
   useCurrentToken,
   useCurrentUser,
 } from "../../redux/features/auth/authSlice";
+import { storeToken, storeUserInfo } from "../../service/auth.service";
 
 // Assume your dummy data looks like this
 
@@ -45,15 +41,15 @@ export default function SignIn() {
   const form = location?.state?.from.pathname;
   const [signin] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
-  const currentUser = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
   const { data: user }: any = useGetmyprofileQuery(undefined);
 
   const onSubmit = async (data: any) => {
     try {
-      const result: any = await signin(data).unwrap();
-      if (result) {
-        dispatch(setUser({ token: result.access_token }));
+      const result: any = await signin(data);
+      if (result?.data) {
+        dispatch(setUser({ token: token }));
+        storeToken("token", result?.data?.access_Token);
       }
       let newUser: any = {};
       if (user) {

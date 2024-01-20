@@ -1,3 +1,4 @@
+import { getToken } from "./../../service/auth.service";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import axios, { AxiosError } from "axios";
@@ -5,7 +6,7 @@ import axios, { AxiosError } from "axios";
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.token;
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
