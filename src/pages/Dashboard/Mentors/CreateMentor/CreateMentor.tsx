@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditOutlined } from "@ant-design/icons";
@@ -9,6 +10,7 @@ import {
   Row,
   Select,
   SelectProps,
+  message,
 } from "antd";
 import style from "../EditMentor/editmentor.module.css";
 import personimage from "../../../../assets/table/person.svg";
@@ -18,24 +20,44 @@ import { useRegisterMutation } from "../../../../redux/api/authApi";
 import { useGetallCategoriesQuery } from "../../../../redux/api/categoryapi";
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { useForm } from "antd/es/form/Form";
+import errorResponse from "../../../../utils/errorResponse";
+import Loading from "../../../../component/UI/Loading/Loading";
 
 export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const [form] = useForm();
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
-  const onFinish = (data: { [key: string]: string | Blob }) => {
+  const onFinish = async (data: { [key: string]: string | Blob | number }) => {
+    if (data?.password !== data?.password_confirmation) {
+      message.error("re entered password did not match");
+      return;
+    }
+    data.userType = "MENTOR";
+    data.approve = 1;
     const formdData = new FormData();
     console.log(data);
     if (imageFile) {
       formdData.append("image", imageFile);
     }
     for (const [key, value] of Object.entries(data)) {
+      // @ts-ignore
       formdData.append(key, value);
     }
-    setshow(false);
+    try {
+      const res: any = await register(formdData).unwrap();
+      console.log(res);
+      if (res?.message) {
+        message.info(res?.message);
+        form.resetFields();
+        setshow(false);
+      }
+    } catch (error) {
+      console.log(error);
+      errorResponse(error);
+    }
   };
   const onFinishFailed = (error: any) => {
     console.log(error);
@@ -65,7 +87,7 @@ export default function CreateMentor({ setshow }: any) {
               {
                 required: true,
                 message: (
-                  <p className="flex justify-center">
+                  <p className="flex justify-center ">
                     Please input mentor image{" "}
                   </p>
                 ),
@@ -268,7 +290,7 @@ export default function CreateMentor({ setshow }: any) {
           </Row>
           <div className={style.buttonContainer}>
             <button type="submit" className={style.mentorsCardEditBtn}>
-              CREATE
+              {isLoading ? <Loading /> : "CREATE"}
             </button>
           </div>
         </Form>
