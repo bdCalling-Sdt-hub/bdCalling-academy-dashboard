@@ -25,12 +25,8 @@ import {
 } from "../../redux/features/auth/authApi";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  setUser,
-  useCurrentToken,
-  useCurrentUser,
-} from "../../redux/features/auth/authSlice";
-import { storeToken, storeUserInfo } from "../../service/auth.service";
+import { setUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { storeToken } from "../../service/auth.service";
 
 // Assume your dummy data looks like this
 
@@ -46,11 +42,12 @@ export default function SignIn() {
 
   const onSubmit = async (data: any) => {
     try {
-      const result: any = await signin(data);
+      const result: any = await signin(data).unwrap();
       if (result?.data) {
         dispatch(setUser({ token: token }));
         storeToken("token", result?.data?.access_Token);
       }
+      console.log(result);
       let newUser: any = {};
       if (user) {
         newUser = { ...user.user };
@@ -61,6 +58,7 @@ export default function SignIn() {
         console.log(user);
         navigate(`/${newUser.userType}/dashboard`);
       }
+      console.log(result);
     } catch (error: any) {
       console.log(error);
       message.error(error?.data?.error);

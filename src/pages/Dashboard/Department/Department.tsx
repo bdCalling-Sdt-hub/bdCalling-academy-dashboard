@@ -4,6 +4,10 @@ import Table from "../../../component/UI/Table/Table";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
+import CustomModal from "../../../component/UI/Modal/Modal";
+import AddDepartment from "./AddDepartment/AddDepartment";
+import style from "./department.module.css";
+import { PlusOutlined } from "@ant-design/icons";
 interface departmentData {
   id: string;
   img: string;
@@ -16,7 +20,7 @@ interface departmentData {
 }
 export default function Department() {
   const [departments, setdepartments] = useState<departmentData[] | []>([]);
-
+  const [show, setshow] = useState(false);
   useEffect(() => {
     fetch("/departments.json")
       .then((res) => res.json())
@@ -104,9 +108,25 @@ export default function Department() {
   console.log(data);
   return (
     <div className="h-screen ">
-      <h1 className="text-[24px] font-[600] text-customHeader">
-        Department List
-      </h1>
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <AddDepartment setshow={setshow} />
+      </CustomModal>
+      <div className="flex items-center justify-between">
+        <h1 className="text-[24px] font-[600] text-customHeader">Department</h1>
+        <button
+          onClick={() => setshow(true)}
+          className={style.addDepartmentBtn}
+        >
+          <PlusOutlined className="me-2" /> Add Department
+        </button>
+      </div>
+
       <div className="">
         <Table
           theme={tablethemes}

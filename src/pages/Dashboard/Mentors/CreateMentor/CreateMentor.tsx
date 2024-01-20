@@ -6,11 +6,13 @@ import style from "../EditMentor/editmentor.module.css";
 import personimage from "../../../../assets/table/person.svg";
 import { useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
+import { useRegisterMutation } from "../../../../redux/features/auth/authApi";
 
 export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [register] = useRegisterMutation();
   const onFinish = (data: any) => {
     const formdData = new FormData();
     if (imageFile) {

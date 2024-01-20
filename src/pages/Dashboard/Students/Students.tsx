@@ -3,12 +3,17 @@
 import StudentSurvey from "../../../component/Survey/StudentSurvey/StudentSurvey";
 import person from "../../../assets/table/person.svg";
 
-import { PlusOutlined } from "@ant-design/icons";
+import {
+  ArrowRightOutlined,
+  DownOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import Table from "../../../component/UI/Table/Table";
 import { FiEdit } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import Dropdown from "../../../component/UI/Dropdown/Dropdown";
+
+import { MenuProps, Space, message, Dropdown } from "antd";
 
 export default function Students() {
   const handleDownload = () => {
@@ -134,35 +139,57 @@ export default function Students() {
       headerColor: "white",
     },
   };
-  const options = [
+  const onClick: MenuProps["onClick"] = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
+  const items: MenuProps["items"] = [
     {
+      label: (
+        <div className="flex items-center gap-x-10">
+          <p>Certified UI/UX Designer Course</p>
+          <span>
+            <ArrowRightOutlined />
+          </span>
+        </div>
+      ),
       key: "1",
-      value: "All Students",
-    },
-    {
-      key: "2",
-      value: "New Students",
     },
   ];
-  const onOptionSelect = (option: { key: string; value: string }) => {
-    console.log(option);
-  };
   return (
     <div className=" h-screen">
       <StudentSurvey></StudentSurvey>
       <div className="mt-6">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-x-10">
-            <h1 className="text-[24px] font-bold text-customHeader ">
-              Student list
-            </h1>
-
+        <div
+          className="flex 
+          justify-between
+        items-center"
+        >
+          <div className="flex gap-x-4 items-center">
+            <h1 className="text-[24px] font-[600]">Student List</h1>
             <Dropdown
-              options={options}
-              buttonText={options[0].value}
-              label="Sort By"
-              onOptionSelect={onOptionSelect}
-            ></Dropdown>
+              menu={{ items, onClick }}
+              placement="bottomLeft"
+              arrow={{ pointAtCenter: true }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="border p-4 border-[#858585]">
+                  Department Name
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+            <Dropdown
+              menu={{ items, onClick }}
+              placement="bottomLeft"
+              arrow={{ pointAtCenter: true }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="border p-4 border-[#858585]">
+                  Batch Number
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
           </div>
           <button
             className="bg-customPrimary text-[#fff] p-[16px] rounded-lg text-[18px] font-[500]"
