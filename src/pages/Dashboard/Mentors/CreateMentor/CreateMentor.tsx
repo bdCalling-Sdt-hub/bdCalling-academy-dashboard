@@ -1,38 +1,77 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditOutlined } from "@ant-design/icons";
-import { Col, Form, Input, Row } from "antd";
+import {
+  Col,
+  ConfigProvider,
+  Form,
+  Input,
+  Row,
+  Select,
+  SelectProps,
+} from "antd";
 import style from "../EditMentor/editmentor.module.css";
 import personimage from "../../../../assets/table/person.svg";
 import { useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 import { useRegisterMutation } from "../../../../redux/api/authApi";
+import { useGetallCategoriesQuery } from "../../../../redux/api/categoryapi";
+import { selectedFiledTheme } from "../../../../themes/Index";
+import { useForm } from "antd/es/form/Form";
 
 export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [register] = useRegisterMutation();
-  const onFinish = (data: any) => {
+  const [form] = useForm();
+  const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
+  const onFinish = (data: { [key: string]: string | Blob }) => {
     const formdData = new FormData();
+    console.log(data);
     if (imageFile) {
-      formdData.append("img", imageFile);
+      formdData.append("image", imageFile);
     }
-    formdData.append("data", data);
+    for (const [key, value] of Object.entries(data)) {
+      formdData.append(key, value);
+    }
     setshow(false);
   };
   const onFinishFailed = (error: any) => {
     console.log(error);
   };
+  const options: SelectProps["options"] = categoryData?.data?.map(
+    (category: any) => {
+      return {
+        value: category?.id,
+        label: category?.category_name,
+      };
+    }
+  );
   return (
-    <div>
+    <ConfigProvider theme={selectedFiledTheme}>
       <div>
         <Form
           onFinish={onFinish}
+          layout="vertical"
           onFinishFailed={onFinishFailed}
           initialValues={{}}
+          form={form}
         >
-          <Form.Item>
+          <Form.Item
+            key="image"
+            name="image"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <p className="flex justify-center">
+                    Please input mentor image{" "}
+                  </p>
+                ),
+              },
+            ]}
+          >
             <div className="flex justify-center items-center py-6">
               <div className="relative">
                 <CustomUpload
@@ -80,36 +119,112 @@ export default function CreateMentor({ setshow }: any) {
           <Row gutter={16} justify={"center"} align={"middle"}>
             <Col lg={12}>
               <Form.Item
-                key="firstName"
-                name="firstName"
+                key="fullName"
+                name="fullName"
+                label="Full Name"
                 rules={[
                   {
                     required: true,
-                    message: "Please input first name",
+                    message: "Please input your user name ",
                   },
                 ]}
               >
-                <Input placeholder="first name" className="py-2" />
+                <Input placeholder="full  name" className="py-2" />
               </Form.Item>
             </Col>
             <Col lg={12}>
               <Form.Item
-                key="lastName"
-                name="lastName"
+                key="userName"
+                name="userName"
+                label="User Name"
                 rules={[
                   {
                     required: true,
-                    message: "Please input last name",
+                    message: "Please input your full  name",
                   },
                 ]}
               >
-                <Input placeholder="last name*" className="py-2" />
+                <Input placeholder="user  name" className="py-2" />
               </Form.Item>
             </Col>
-            <Col lg={24}>
+            <Col lg={12}>
               <Form.Item
-                key="Designation"
-                name="Designation"
+                key="mobileNumber"
+                name="mobileNumber"
+                label=" phone Number"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input phone  number",
+                  },
+                ]}
+              >
+                <Input
+                  type="number"
+                  placeholder="mobile number"
+                  className="py-2"
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="email"
+                name="email"
+                label="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input  email",
+                  },
+                ]}
+              >
+                <Input type="email" placeholder="email" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="password"
+                name="password"
+                label="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input  password",
+                  },
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  placeholder="password"
+                  className="py-2"
+                />
+              </Form.Item>
+            </Col>
+            <Col lg={12}>
+              <Form.Item
+                key="password_confirmation"
+                name="password_confirmation"
+                label="Confirm Password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please re enter password",
+                  },
+                ]}
+              >
+                <Input.Password
+                  type="password"
+                  placeholder="password"
+                  className="py-2"
+                />
+              </Form.Item>
+            </Col>
+
+            <Col lg={12}>
+              <Form.Item
+                key="designation"
+                name="designation"
+                label="Designation"
                 rules={[
                   {
                     required: true,
@@ -120,18 +235,34 @@ export default function CreateMentor({ setshow }: any) {
                 <Input placeholder="Designation" className="py-2" />
               </Form.Item>
             </Col>
-            <Col lg={24}>
+            <Col lg={12}>
               <Form.Item
-                key="courseName"
-                name="courseName"
+                key="expert"
+                name="expert"
+                label="Expert"
                 rules={[
                   {
                     required: true,
-                    message: "please input courseName",
+                    message: "please input expert",
                   },
                 ]}
               >
-                <Input placeholder="courseName" className="py-2" />
+                <Input placeholder="expert" className="py-2" />
+              </Form.Item>
+            </Col>
+            <Col lg={24}>
+              <Form.Item
+                label="Please select department"
+                name="department"
+                rules={[
+                  { required: true, message: "Please select a department" },
+                ]}
+              >
+                <Select
+                  style={{ width: "100%" }}
+                  options={options}
+                  placeholder="please select a department"
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -142,6 +273,6 @@ export default function CreateMentor({ setshow }: any) {
           </div>
         </Form>
       </div>
-    </div>
+    </ConfigProvider>
   );
 }
