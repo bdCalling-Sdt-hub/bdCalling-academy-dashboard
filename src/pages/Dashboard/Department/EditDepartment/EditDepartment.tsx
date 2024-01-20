@@ -1,202 +1,83 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Col, DatePicker, Form, Input, Row } from "antd";
-import TextArea from "antd/es/input/TextArea";
 
-import { DownOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
-import { CgMailOpen } from "react-icons/cg";
-import { IoPeopleOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
-import style from "../department.module.css";
-export default function EditDepartment() {
-  const { id } = useParams();
-  console.log(id);
-  const [form] = Form.useForm();
-  const onFinish = (values: any) => {
-    const finalData = {
-      ...values,
-      startingDate: values.startingDate.format("DD.MM.YYYY"),
-    };
-    console.log(finalData);
-  };
+import { Col, Form, Input, Row, message } from "antd";
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-  const onReset = () => {
-    console.log(form);
-    form.resetFields();
-  };
+import errorResponse from "../../../../utils/errorResponse";
 
+import { useForm } from "antd/es/form/Form";
+import { useUpdateDepartmentMutation } from "../../../../redux/features/department/departmentApi";
+
+const EditDepartMent = ({ setshow, data: formdata }: any) => {
+  const [updateDepartment] = useUpdateDepartmentMutation();
+  const [form] = useForm();
+  const { id } = formdata;
+  const onFinish = async (data: any) => {
+    console.log("data from here", data);
+    console.log({ data: data });
+    try {
+      const res: any = await updateDepartment({
+        id,
+        body: data,
+      }).unwrap();
+
+      if (res?.data) {
+        message.info(res.message);
+        setshow(false);
+        form.resetFields();
+      }
+    } catch (err) {
+      console.log(err);
+      errorResponse(err);
+    }
+  };
+  const onFinishFailed = (error: any) => {
+    console.log(error);
+  };
+  form.setFieldsValue({
+    department_name: formdata.department_name,
+  });
   return (
-    <div className="container ">
-      <h1 className="text-xl mb-[30px] font-bold text-customHeader">
-        Edit Department
-      </h1>
-      <div className={style.editDePartmentContainer}>
-        <Form
-          layout="vertical"
-          form={form}
-          name="add-course"
-          //   style={{ maxWidth: 600 }}
-          initialValues={{
-            department: "",
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Row gutter={16}>
-            <Col lg={24}>
-              <Form.Item
-                key="department"
-                name="department"
-                rules={[
-                  { required: true, message: "Please input course name" },
-                ]}
-              >
-                <Input
-                  placeholder="Department Name"
-                  className="py-2"
-                  suffix={<DownOutlined style={{ color: "gray" }} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="head"
-                name="head"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input head of department name",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="Head of Department"
-                  className="py-2"
-                  suffix={<UserOutlined style={{ color: "gray" }} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="phone"
-                name="phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Phone Number",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="Phone"
-                  className="py-2"
-                  suffix={<PhoneOutlined style={{ color: "gray" }} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Email",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="email"
-                  className="py-2"
-                  suffix={<CgMailOpen style={{ color: "gray" }} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="startingDate"
-                name="startingDate"
-                rules={[{ required: true, message: "Please input start date" }]}
-              >
-                <DatePicker
-                  style={{ width: "100%", padding: "8px" }}
-                  placeholder="startingDate"
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="totalStudents"
-                name="totalStudents"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input totalStudents",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="totalStudents"
-                  className="py-2"
-                  suffix={<IoPeopleOutline style={{ color: "gray" }} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col lg={24}>
-              <Form.Item
-                key="courseDetails"
-                name="courseDetails"
-                rules={[
-                  { required: true, message: "Please input courseDetails" },
-                ]}
-              >
-                <TextArea
-                  showCount
-                  maxLength={500}
-                  placeholder="courseDetails"
-                  style={{ height: 150, resize: "none" }}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <div className="flex justify-between">
-            <div>
-              <Form.Item>
-                <Button
-                  size="large"
-                  style={{
-                    color: "white",
-                    borderRadius: "4px",
-                  }}
-                  htmlType="submit"
-                  className="bg-customPrimary"
-                >
-                  Submit
-                </Button>
-              </Form.Item>
-            </div>
-            <div>
-              <Form.Item>
-                <Button
-                  size="large"
-                  htmlType="button"
-                  onClick={onReset}
-                  style={{
-                    color: "white",
-                    backgroundColor: "#D7263D",
-                    borderRadius: "4px",
-                  }}
-                >
-                  cancel
-                </Button>
-              </Form.Item>
-            </div>
+    <div>
+      {" "}
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        initialValues={formdata}
+      >
+        <Form.Item>
+          <div className="flex justify-center items-center py-6">
+            <div className="relative"></div>
           </div>
-        </Form>
-      </div>
+        </Form.Item>
+        <Row gutter={16} justify={"center"} align={"middle"}>
+          <Col lg={24}>
+            <Form.Item
+              key="department_name"
+              name="department_name"
+              label="Department Name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input department Name",
+                },
+              ]}
+            >
+              <Input placeholder="department Name" className="py-2" />
+            </Form.Item>
+          </Col>
+        </Row>
+        <div className="flex justify-center">
+          <button
+            className="bg-customPrimary text-[#fff] px-6 py-2 rounded"
+            type="submit"
+          >
+            EDIT
+          </button>
+        </div>
+      </Form>
     </div>
   );
-}
+};
+export default EditDepartMent;

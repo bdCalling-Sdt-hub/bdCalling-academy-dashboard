@@ -3,8 +3,11 @@
 import { Col, Form, Input, Row, message } from "antd";
 import { useAddDepartmentMutation } from "../../../../redux/features/department/departmentApi";
 import errorResponse from "../../../../utils/errorResponse";
+import { useForm } from "antd/es/form/Form";
+
 const AddDepartment = ({ setshow }: any) => {
   const [postDepartment] = useAddDepartmentMutation();
+  const [form] = useForm();
   const onFinish = async (data: any) => {
     console.log(data);
     try {
@@ -12,6 +15,7 @@ const AddDepartment = ({ setshow }: any) => {
       if (res.data) {
         message.info(res.data.message);
         setshow(false);
+        form.resetFields();
       }
     } catch (err) {
       errorResponse(err);
@@ -24,6 +28,7 @@ const AddDepartment = ({ setshow }: any) => {
     <div>
       {" "}
       <Form
+        form={form}
         layout="vertical"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

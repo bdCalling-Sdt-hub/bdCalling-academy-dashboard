@@ -30,10 +30,10 @@ const departmentApi = baseApi.injectEndpoints({
     }),
     updateDepartment: builder.mutation({
       query: (data: any) => ({
-        url: `/department/${data.id}`,
+        url: `/department/${data?.id}`,
         method: "PUT",
         params: { _method: "PUT" },
-        body: data.data,
+        body: data.body,
       }),
       invalidatesTags: [tagTypes.department],
     }),
@@ -42,7 +42,7 @@ const departmentApi = baseApi.injectEndpoints({
 
 export const {
   useAddDepartmentMutation,
-  useGetallDepartmentsMutation,
+  useGetallDepartmentsQuery,
   useGetsingleDepartmentMutation,
   useUpdateDepartmentMutation,
 } = departmentApi;
