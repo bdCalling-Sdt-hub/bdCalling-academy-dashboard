@@ -32,8 +32,8 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setUser,
-  useCurrentGetUser,
   useCurrentToken,
+  useCurrentUser,
 } from "../../redux/features/auth/authSlice";
 
 // Assume your dummy data looks like this
@@ -43,33 +43,31 @@ export default function SignIn() {
   const location = useLocation();
 
   const form = location?.state?.from.pathname;
-  const [signin, { error }] = useLoginMutation();
+  const [signin] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
-  const currentUser = useAppSelector(useCurrentGetUser);
+  const currentUser = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
-  const { data: user, isLoading }: any = useGetmyprofileQuery(undefined);
+  const { data: user }: any = useGetmyprofileQuery(undefined);
 
   const onSubmit = async (data: any) => {
     try {
-      const result: any = await signin(data);
-      if (result?.data) {
-        dispatch(setUser({ token: token }));
-        localStorage.setItem("token", result?.data?.access_token);
+      const result: any = await signin(data).unwrap();
+      if (result) {
+        dispatch(setUser({ token: result.access_token }));
       }
-      if (result?.error) {
-        message.error(result?.error?.message);
+      let newUser: any = {};
+      if (user) {
+        newUser = { ...user.user };
+        if (user?.user?.userType === "SUPER ADMIN") {
+          newUser = { ...user.user, userType: "SUPER_ADMIN" };
+        }
+        dispatch(setUser({ token: result.access_token, user: newUser }));
+        console.log(user);
+        navigate(`/${newUser.userType}/dashboard`);
       }
-      console.log(result?.data);
-      // if (token) {
-      //   dispatch(setUser({ user: user }));
-      // }
-      console.log(user);
-
-      // if(currentUser){
-      //        navigate(form ? form : `/${currentUser?.user?}/dashboard`, { replace: true });
-      // }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      message.error(error?.data?.error);
     }
   };
 

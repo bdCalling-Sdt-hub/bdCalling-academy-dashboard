@@ -9,7 +9,7 @@ const authApi = baseApi.injectEndpoints({
       query: (userInfo: any) => ({
         url: "/login",
         method: "POST",
-        data: userInfo,
+        body: userInfo,
       }),
       invalidatesTags: [tagTypes.user],
     }),

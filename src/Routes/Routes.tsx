@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
     element: <Dashboardlayout></Dashboardlayout>,
     children: [
       {
-        path: "/admin/dashboard",
+        path: "/SUPER_ADMIN/dashboard",
         element: (
           <AdminRoutes>
             <Dashboard />
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/students",
+        path: "/SUPER_ADMIN/students",
         element: (
           <AdminRoutes>
             <Students></Students>
@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/courses",
+        path: "/SUPER_ADMIN/courses",
         element: (
           <AdminRoutes>
             <Courses></Courses>
@@ -88,7 +88,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/courses/add",
+        path: "/SUPER_ADMIN/courses/add",
         element: (
           <AdminRoutes>
             <Addcourse></Addcourse>
@@ -96,7 +96,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/courses/edit/:id",
+        path: "/SUPER_ADMIN/courses/edit/:id",
         element: (
           <AdminRoutes>
             <EditCourse></EditCourse>
@@ -104,7 +104,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/courses/edit/modulelist/:id",
+        path: "/SUPER_ADMIN/courses/edit/modulelist/:id",
         element: (
           <AdminRoutes>
             <EditModuleList></EditModuleList>s
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/mentors",
+        path: "/SUPER_ADMIN/mentors",
         element: (
           <AdminRoutes>
             <Mentors />
@@ -121,7 +121,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/departments",
+        path: "/SUPER_ADMIN/departments",
         element: (
           <AdminRoutes>
             <Department />
@@ -130,7 +130,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/department/edit/:id",
+        path: "/SUPER_ADMIN/department/edit/:id",
         element: (
           <AdminRoutes>
             <EditDepartment />
@@ -138,7 +138,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/attendence",
+        path: "/SUPER_ADMIN/attendence",
         element: (
           <AdminRoutes>
             <Attendence />
@@ -146,7 +146,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/events",
+        path: "/SUPER_ADMIN/events",
         element: (
           <AdminRoutes>
             <Events />
@@ -155,7 +155,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/wallet",
+        path: "/SUPER_ADMIN/wallet",
         element: (
           <AdminRoutes>
             <Wallet />

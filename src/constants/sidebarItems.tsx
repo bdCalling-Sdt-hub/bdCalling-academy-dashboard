@@ -8,6 +8,7 @@ import { LuClipboardList, LuFolders } from "react-icons/lu";
 import { MdOutlineDashboard } from "react-icons/md";
 import { PiIdentificationCard } from "react-icons/pi";
 export const sidebarItems = (role: string) => {
+  console.log(role);
   const defaultSidebarItems: MenuProps["items"] = [
     {
       key: `/${role}/class-schedule`,
@@ -105,7 +106,7 @@ export const sidebarItems = (role: string) => {
 
     ...defaultSidebarItems,
   ];
-  if (role === "SUPER-ADMIN") return adminSidebarItems;
+  if (role === "SUPER_ADMIN") return adminSidebarItems;
   else if (role === "MENTOR") return mentorSidebarItems;
   else if (role === "STUDENT") return studentSidebarItmes;
 };

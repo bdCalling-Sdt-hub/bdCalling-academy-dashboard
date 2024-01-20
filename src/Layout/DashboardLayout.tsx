@@ -20,8 +20,10 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
-import { getuserInfo, removeUserInfo } from "../service/auth.service";
+import { removeUserInfo } from "../service/auth.service";
 import { userKey } from "../constants/authKey";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
@@ -30,8 +32,10 @@ const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const { userType: role } = getuserInfo(userKey);
+  const dispatch = useAppDispatch();
 
+  const { userType: role }: any = useAppSelector(useCurrentUser);
+  console.log("userType", role);
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
 
@@ -44,6 +48,7 @@ const DashboardLayout = () => {
     // setSelectedKey(key);
     if (key === "/logout") {
       removeUserInfo(userKey);
+      dispatch(logout());
       navigate("/signin");
     } else {
       navigate(key);
