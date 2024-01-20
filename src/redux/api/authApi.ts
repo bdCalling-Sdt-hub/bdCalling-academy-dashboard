@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { baseApi } from "../../api/baseApi";
-import { tagTypes } from "../tags";
+import { baseApi } from "./baseApi";
+import { tagTypes } from "../features/tags";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({

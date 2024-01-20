@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Col, Form, Input, Row, message } from "antd";
-import { useAddDepartmentMutation } from "../../../../redux/features/department/departmentApi";
+import { useAddDepartmentMutation } from "../../../../redux/api/departmentApi";
 import errorResponse from "../../../../utils/errorResponse";
 import { useForm } from "antd/es/form/Form";
 

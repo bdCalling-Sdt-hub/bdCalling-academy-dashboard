@@ -22,7 +22,7 @@ import { inputTheme } from "../../themes/Index";
 import {
   useGetmyprofileQuery,
   useLoginMutation,
-} from "../../redux/features/auth/authApi";
+} from "../../redux/api/authApi";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setUser, useCurrentToken } from "../../redux/features/auth/authSlice";

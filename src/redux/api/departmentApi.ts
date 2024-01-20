@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { baseApi } from "../../api/baseApi";
-import { tagTypes } from "../tags";
+import { baseApi } from "./baseApi";
+import { tagTypes } from "../features/tags";
 
 const departmentApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({

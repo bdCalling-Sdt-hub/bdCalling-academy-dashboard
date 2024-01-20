@@ -32,6 +32,7 @@ import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import StudentRoutes from "./StudentRoutes";
 import MentorRoutes from "./MentorRoutes";
+import Category from "../pages/Dashboard/Category/Category";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +121,14 @@ export const router = createBrowserRouter([
         ),
       },
 
+      {
+        path: "/SUPER_ADMIN/category",
+        element: (
+          <AdminRoutes>
+            <Category />
+          </AdminRoutes>
+        ),
+      },
       {
         path: "/SUPER_ADMIN/departments",
         element: (

@@ -35,3 +35,11 @@ export const selectorTheme = {
     },
   },
 };
+
+export const selectedFiledTheme = {
+  components: {
+    Select: {
+      controlHeight: 40,
+    },
+  },
+};

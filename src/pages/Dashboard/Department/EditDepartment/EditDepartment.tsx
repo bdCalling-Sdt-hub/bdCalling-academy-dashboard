@@ -5,7 +5,7 @@ import { Col, Form, Input, Row, message } from "antd";
 import errorResponse from "../../../../utils/errorResponse";
 
 import { useForm } from "antd/es/form/Form";
-import { useUpdateDepartmentMutation } from "../../../../redux/features/department/departmentApi";
+import { useUpdateDepartmentMutation } from "../../../../redux/api/departmentApi";
 
 const EditDepartMent = ({ setshow, data: formdata }: any) => {
   const [updateDepartment] = useUpdateDepartmentMutation();

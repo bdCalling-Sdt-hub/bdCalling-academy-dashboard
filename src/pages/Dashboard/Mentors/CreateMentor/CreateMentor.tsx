@@ -6,7 +6,7 @@ import style from "../EditMentor/editmentor.module.css";
 import personimage from "../../../../assets/table/person.svg";
 import { useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
-import { useRegisterMutation } from "../../../../redux/features/auth/authApi";
+import { useRegisterMutation } from "../../../../redux/api/authApi";
 
 export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);

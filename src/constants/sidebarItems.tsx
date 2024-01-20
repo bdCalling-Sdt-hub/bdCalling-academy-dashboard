@@ -55,6 +55,11 @@ export const sidebarItems = (role: string) => {
       ],
     },
     {
+      key: `/${role}/category`,
+      label: "Category",
+      icon: <IoPersonCircleOutline />,
+    },
+    {
       key: `/${role}/mentors`,
       label: "Mentors",
       icon: <IoPersonCircleOutline />,

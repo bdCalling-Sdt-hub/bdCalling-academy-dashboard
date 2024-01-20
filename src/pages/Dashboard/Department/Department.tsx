@@ -5,7 +5,7 @@ import CustomModal from "../../../component/UI/Modal/Modal";
 import AddDepartment from "./AddDepartment/AddDepartment";
 import style from "./department.module.css";
 import { PlusOutlined } from "@ant-design/icons";
-import { useGetallDepartmentsQuery } from "../../../redux/features/department/departmentApi";
+import { useGetallDepartmentsQuery } from "../../../redux/api/departmentApi";
 import dayjs from "dayjs";
 import { FiEdit } from "react-icons/fi";
 import EditDepartMent from "./EditDepartment/EditDepartment";
