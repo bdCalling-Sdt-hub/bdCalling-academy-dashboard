@@ -58,7 +58,7 @@ export default function SignIn() {
         console.log(user);
         navigate(`/${newUser.userType}/dashboard`);
       }
-      console.log(result);
+      console.log(newUser);
     } catch (error: any) {
       console.log(error);
       message.error(error?.data?.error);
