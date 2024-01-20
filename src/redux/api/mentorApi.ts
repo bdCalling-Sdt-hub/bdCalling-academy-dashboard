@@ -1,40 +1,40 @@
-// /* eslint-disable @typescript-eslint/no-unused-vars */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import { baseApi } from "./baseApi";
-// import { tagTypes } from "../features/tags";
+import { baseApi } from "./baseApi";
+import { tagTypes } from "../../types/tags";
 
-// const mentorsApi = baseApi.injectEndpoints({
-//   endpoints: (builder: any) => ({
-//     getallDepartments: builder.query({
-//       query: () => ({
-//         url: "/department",
-//         method: "GET",
-//       }),
-//       providesTags: [tagTypes.department],
-//     }),
-//     getsingleDepartment: builder.query({
-//       query: (id: number) => ({
-//         url: `/department/${id}`,
-//         method: "GET",
-//       }),
-//       providesTags: [tagTypes.department],
-//     }),
-//     updateDepartment: builder.mutation({
-//       query: (data: any) => ({
-//         url: `/department/${data?.id}`,
-//         method: "PUT",
-//         params: { _method: "PUT" },
-//         body: data.body,
-//       }),
-//       invalidatesTags: [tagTypes.department],
-//     }),
-//   }),
-// });
+const mentorsApi = baseApi.injectEndpoints({
+  endpoints: (builder: any) => ({
+    getallmentors: builder.query({
+      query: () => ({
+        url: "/mentor",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.mentor],
+    }),
+    getsinglementor: builder.query({
+      query: (id: number) => ({
+        url: `/mentor/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.mentor],
+    }),
+    updatementor: builder.mutation({
+      query: (data: any) => ({
+        url: `/mentor/${data?.id}`,
+        method: "PUT",
+        params: { _method: "PUT" },
+        body: data.body,
+      }),
+      invalidatesTags: [tagTypes.mentor],
+    }),
+  }),
+});
 
-// export const {
-//   useAddDepartmentMutation,
-//   useGetallDepartmentsQuery,
-//   useGetsingleDepartmentMutation,
-//   useUpdateDepartmentMutation,
-// } = departmentApi;
+export const {
+  useUpdatementorMutation,
+  useGetallmentorsQuery,
+  useGetallmentorsMutation,
+  useUpdatementorQuery,
+} = mentorsApi;

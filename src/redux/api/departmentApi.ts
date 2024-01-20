@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { baseApi } from "./baseApi";
-import { tagTypes } from "../features/tags";
+import { tagTypes } from "../../types/tags";
 
 const departmentApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({

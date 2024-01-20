@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { tagTypesList } from "../features/tags";
+import { tagTypesList } from "../../types/tags";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
