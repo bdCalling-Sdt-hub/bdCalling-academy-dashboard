@@ -28,15 +28,13 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
-    updateProfile: builder.mutation({
-      query: ({ id, body }: any) => ({
-        url: `/profile/edit/${id}`,
+    updateprofile: builder.mutation({
+      query: (data: any) => ({
+        url: `/profile/edit/${data?.id}`,
         method: "PUT",
         params: { _method: "PUT" },
-
-        body: body,
+        body: data.body,
       }),
-      invalidatesTags: [tagTypes.user, tagTypes.mentor],
     }),
     deleteProfile: builder.mutation({
       query: (id: number) => ({
@@ -52,6 +50,6 @@ export const {
   useLoginMutation,
   useGetmyprofileQuery,
   useRegisterMutation,
-  useUpdateProfileMutation,
+  useUpdateprofileMutation,
   useDeleteProfileMutation,
 } = authApi;

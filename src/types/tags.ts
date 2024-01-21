@@ -3,6 +3,7 @@ export enum tagTypes {
   department = "department",
   category = "category",
   mentor = "mentor",
+  course = "course",
 }
 
 export const tagTypesList = [
@@ -10,4 +11,5 @@ export const tagTypesList = [
   tagTypes.department,
   tagTypes.category,
   tagTypes.mentor,
+  tagTypes.course,
 ];

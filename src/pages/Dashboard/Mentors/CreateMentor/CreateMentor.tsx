@@ -273,21 +273,6 @@ export default function CreateMentor({ setshow }: any) {
                 <Input placeholder="expert" className="py-2" />
               </Form.Item>
             </Col>
-            <Col lg={24}>
-              <Form.Item
-                label="Please select department"
-                name="category_id"
-                rules={[
-                  { required: true, message: "Please select a department" },
-                ]}
-              >
-                <Select
-                  style={{ width: "100%" }}
-                  options={options}
-                  placeholder="please select a department"
-                />
-              </Form.Item>
-            </Col>
           </Row>
           <div className={style.buttonContainer}>
             <button type="submit" className={style.mentorsCardEditBtn}>

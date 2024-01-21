@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 import {
   useRegisterMutation,
-  useUpdateProfileMutation,
+  useUpdateprofileMutation,
 } from "../../../../redux/api/authApi";
 import { useGetallCategoriesQuery } from "../../../../redux/api/categoryapi";
 import { selectedFiledTheme } from "../../../../themes/Index";
@@ -31,10 +31,10 @@ export default function EditMentor({ setshow, mentorData }: any) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-
+  const [updateMentor, { isLoading }] = useUpdateprofileMutation();
   const [form] = useForm();
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
-  const [updateMentor, { isLoading }] = useUpdateProfileMutation();
+
   const {
     id,
     image,
