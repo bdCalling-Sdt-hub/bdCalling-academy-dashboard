@@ -33,6 +33,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import StudentRoutes from "./StudentRoutes";
 import MentorRoutes from "./MentorRoutes";
 import Category from "../pages/Dashboard/Category/Category";
+import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 
 export const router = createBrowserRouter([
   {
@@ -101,6 +102,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <EditCourse></EditCourse>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/SUPER_ADMIN/class",
+        element: (
+          <AdminRoutes>
+            <AddClass></AddClass>
           </AdminRoutes>
         ),
       },
