@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Dropdown, MenuProps, Row, Space, message } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./Mentors.module.css";
 
 import MentorsCard from "../../../component/cards/MentorsCard/MentorsCard";
@@ -10,19 +11,17 @@ import {
 } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateMentor from "./CreateMentor/CreateMentor";
+import { useGetallmentorsQuery } from "../../../redux/api/mentorApi";
+import Loading from "../../../component/UI/Loading/Loading";
 
 export default function Mentors() {
-  const [mentors, setMentors] = useState([]);
-  useEffect(() => {
-    fetch("/mentorsData.json")
-      .then((res) => res.json())
-      .then((data) => setMentors(data));
-  }, []);
-
+  const [show, setshow] = useState(false);
   const handleShowModal = () => {
     setshow(true);
   };
-  const [show, setshow] = useState(false);
+  const { data: mentorsData, isLoading }: any =
+    useGetallmentorsQuery(undefined);
+
   const onClick: MenuProps["onClick"] = ({ key }) => {
     message.info(`Click on item ${key}`);
   };
@@ -39,6 +38,9 @@ export default function Mentors() {
       key: "1",
     },
   ];
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="h-screen">
       <CustomModal
@@ -77,7 +79,7 @@ export default function Mentors() {
 
       <div className="mt-[30px]">
         <Row gutter={16} align={"middle"}>
-          {mentors?.map((mentor, index) => (
+          {mentorsData?.data?.map((mentor: any, index: number) => (
             <Col key={index} lg={6} xl={6} style={{ marginBottom: "16px" }}>
               <MentorsCard mentor={mentor}></MentorsCard>
             </Col>

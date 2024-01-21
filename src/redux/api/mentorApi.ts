@@ -8,26 +8,26 @@ const mentorsApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({
     getallmentors: builder.query({
       query: () => ({
-        url: "/mentor",
+        url: "/mentors/all/",
         method: "GET",
       }),
-      providesTags: [tagTypes.mentor],
+      providesTags: [tagTypes.mentor, tagTypes.user],
     }),
     getsinglementor: builder.query({
       query: (id: number) => ({
-        url: `/mentor/${id}`,
+        url: `/mentors/all/${id}`,
         method: "GET",
       }),
-      providesTags: [tagTypes.mentor],
+      providesTags: [tagTypes.mentor, tagTypes.user],
     }),
     updatementor: builder.mutation({
-      query: (data: any) => ({
-        url: `/mentor/${data?.id}`,
+      query: ({ id, data }: any) => ({
+        url: `/mentor/${id}`,
         method: "PUT",
         params: { _method: "PUT" },
-        body: data.body,
+        body: data,
       }),
-      invalidatesTags: [tagTypes.mentor],
+      invalidatesTags: [tagTypes.mentor, tagTypes.user],
     }),
   }),
 });

@@ -6,12 +6,12 @@ import { tagTypes } from "../../types/tags";
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({
     register: builder.mutation({
-      query: (data: any) => ({
+      query: ({ body }: any) => ({
         url: "/register",
         method: "POST",
-        body: data,
+        body: body,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.user, tagTypes.mentor],
     }),
     login: builder.mutation({
       query: (userInfo: any) => ({
@@ -28,8 +28,30 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    updateProfile: builder.mutation({
+      query: ({ id, body }: any) => ({
+        url: `/profile/edit/${id}`,
+        method: "PUT",
+        params: { _method: "PUT" },
+
+        body: body,
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.mentor],
+    }),
+    deleteProfile: builder.mutation({
+      query: (id: number) => ({
+        url: `/profile/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.mentor],
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetmyprofileQuery, useRegisterMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useGetmyprofileQuery,
+  useRegisterMutation,
+  useUpdateProfileMutation,
+  useDeleteProfileMutation,
+} = authApi;

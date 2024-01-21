@@ -29,6 +29,7 @@ export default function CreateMentor({ setshow }: any) {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [register, { isLoading }] = useRegisterMutation();
   const [form] = useForm();
+  console.log(imageFile);
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
     if (data?.password !== data?.password_confirmation) {
@@ -38,7 +39,7 @@ export default function CreateMentor({ setshow }: any) {
     data.userType = "MENTOR";
     data.approve = 1;
     const formdData = new FormData();
-    console.log(data);
+    console.log("data from ", data);
     if (imageFile) {
       formdData.append("image", imageFile);
     }
@@ -47,7 +48,7 @@ export default function CreateMentor({ setshow }: any) {
       formdData.append(key, value);
     }
     try {
-      const res: any = await register(formdData).unwrap();
+      const res: any = await register({ body: formdData }).unwrap();
       console.log(res);
       if (res?.message) {
         message.info(res?.message);
@@ -275,7 +276,7 @@ export default function CreateMentor({ setshow }: any) {
             <Col lg={24}>
               <Form.Item
                 label="Please select department"
-                name="department"
+                name="category_id"
                 rules={[
                   { required: true, message: "Please select a department" },
                 ]}
