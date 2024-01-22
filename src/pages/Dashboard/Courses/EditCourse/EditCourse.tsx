@@ -93,21 +93,25 @@ export default function EditCourse() {
       return;
     }
 
-    const formData = new FormData();
-    if (file) {
-      formData.append("courseThumbnail", file);
-    }
-    for (const [key, value] of Object.entries(finalData)) {
-      // @ts-ignore
-
-      formData.append(key, value);
-    }
-
     try {
-      const res: any = await editCourse({ id: data?.data?.id, body: formData });
+      const formData = new FormData();
+      if (file) {
+        formData.append("courseThumbnail", file);
+      }
+      for (const [key, value] of Object.entries(finalData)) {
+        // @ts-ignore
+
+        formData.append(key, value);
+      }
+
+      const res: any = await editCourse({
+        id: data?.data?.id,
+        body: formData,
+      });
       console.log(res);
     } catch (err: any) {
-      message.error(err.data.message);
+      // message.error(err.data.message);
+      console.log(err);
     }
   };
 
@@ -175,7 +179,7 @@ export default function EditCourse() {
             layout="vertical"
             form={form}
             name="add-course"
-            initialValues={data}
+            initialValues={data?.data}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"

@@ -30,9 +30,9 @@ const CourseApi = baseApi.injectEndpoints({
     updateCourse: builder.mutation({
       query: (data: any) => ({
         url: `/course/${data.id}`,
-        method: "PUT",
+        method: "POST",
         params: { _method: "PUT" },
-        body: data.body,
+        body: data?.body,
       }),
       providesTags: [tagTypes.course],
     }),

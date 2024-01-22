@@ -25,20 +25,27 @@ import {
 } from "../../redux/api/authApi";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import {
+  setUser,
+  useCurrentToken,
+  useCurrentUser,
+} from "../../redux/features/auth/authSlice";
 import { storeToken } from "../../service/auth.service";
+import { useState } from "react";
 
 // Assume your dummy data looks like this
 
 export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
-
   const form = location?.state?.from.pathname;
   const [signin] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
+  const currentUser = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
-  const { data: user }: any = useGetmyprofileQuery(undefined);
+  const { data: user }: any = useGetmyprofileQuery({
+    skip: !currentUser,
+  });
 
   const onSubmit = async (data: any) => {
     try {
