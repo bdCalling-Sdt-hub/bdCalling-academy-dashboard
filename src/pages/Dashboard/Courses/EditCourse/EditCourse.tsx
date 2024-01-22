@@ -26,7 +26,10 @@ import {
 import { useGetallmentorsQuery } from "../../../../redux/api/mentorApi";
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { useUpdateCourseMutation } from "../../../../redux/api/courseApi";
+import {
+  useGetSingleCourseQuery,
+  useUpdateCourseMutation,
+} from "../../../../redux/api/courseApi";
 
 import { useParams } from "react-router-dom";
 export default function EditCourse() {
@@ -38,7 +41,9 @@ export default function EditCourse() {
 
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
-  const { data }: any = useGetsingleCategoryQuery(id);
+  const { data: categorySingleData }: any = useGetsingleCategoryQuery(id);
+  const { data }: any = useGetSingleCourseQuery(id);
+  console.log("course data", data);
   console.log("ediatble data");
   const [editCourse] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
@@ -47,31 +52,31 @@ export default function EditCourse() {
 
   useEffect(() => {
     form.setFieldsValue({
-      courseName: data?.courseName,
-      language: data?.language,
-      courseDetails: data?.courseDetails,
-      startDate: data?.startDate,
-      courseTimeLength: data?.courseTimeLength,
-      price: data?.price,
-      mentorId: data?.mentorId,
-      maxStudentLength: data?.maxStudentLength,
-      skillLevel: data?.skillLevel,
-      address: data?.address,
-      category_id: data?.category_id,
-      status: data?.status,
-      batch: data?.batch,
-      discount_price: data?.discount_price,
-      coupon_code: data?.coupon_code,
-      coupon_code_price: data?.coupon_code_price,
-      end_date: data?.end_date,
-      seat_left: data?.seat_left,
-      courseThumbnail: data?.courseThumbnail,
-      careeropportunities: data?.careeropportunities || [], // Check if it exists
-      carriculum: data?.carriculum || [], // Check if it exists
-      job_position: data?.job_position || [], // Check if it exists
-      software: data?.software || [], // Check if it exists
+      courseName: data?.data?.courseName,
+      language: data?.data?.language,
+      courseDetails: data?.data?.courseDetails,
+      // startDate: new Date(data?.data?.startDate),
+      courseTimeLength: data?.data?.courseTimeLength,
+      price: data?.data?.price,
+      mentorId: data?.data?.mentorId,
+      maxStudentLength: data?.data?.maxStudentLength,
+      skillLevel: data?.data?.skillLevel,
+      address: data?.data?.address,
+      category_id: data?.data?.category_id,
+      status: data?.data?.status,
+      batch: data?.data?.batch,
+      discount_price: data?.data?.discount_price,
+      coupon_code: data?.data?.coupon_code,
+      coupon_code_price: data?.data?.coupon_code_price,
+      // end_date: new Date(data?.data?.end_date),
+      seat_left: data?.data?.seat_left,
+      courseThumbnail: data?.data?.courseThumbnail,
+      careeropportunities: data?.data?.careeropportunities || [], // Check if it exists
+      carriculum: data?.data?.carriculum || [], // Check if it exists
+      job_position: data?.data?.job_position || [], // Check if it exists
+      software: data?.data?.software || [], // Check if it exists
     });
-  }, []);
+  }, [data, form]);
 
   console.log(file, "file");
   const onFinish = async (values: any) => {
@@ -99,7 +104,8 @@ export default function EditCourse() {
     }
 
     try {
-      console.log("dsfsd");
+      const res: any = await editCourse({ id: data?.data?.id, body: formData });
+      console.log(res);
     } catch (err: any) {
       message.error(err.data.message);
     }

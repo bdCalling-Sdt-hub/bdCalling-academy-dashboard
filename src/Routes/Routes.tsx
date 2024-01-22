@@ -37,10 +37,10 @@ import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <SignIn />,
-  },
+  // {
+  //   path: "/",
+  //   element: <SignIn />,
+  // },
   {
     path: "/signin",
     element: <SignIn />,

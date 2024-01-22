@@ -14,6 +14,7 @@ import {
 
 const PrivateRoutes = ({ children }: { children: ReactNode }) => {
   const loading = false;
+  const location = useLocation();
   const token: any = useAppSelector(useCurrentToken);
   const user: any = useAppSelector(useCurrentUser);
   if (loading) {
