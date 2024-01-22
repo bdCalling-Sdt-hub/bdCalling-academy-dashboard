@@ -5,6 +5,7 @@ export default function SelectField({
   setSelectedValue,
   placeholder,
   options,
+  maxCount = 1,
 }: any) {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -13,7 +14,8 @@ export default function SelectField({
   return (
     <div>
       <Select
-        mode="tags"
+        mode="multiple"
+        maxCount={maxCount}
         size="large"
         style={{ width: "100%" }}
         placeholder={placeholder}

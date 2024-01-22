@@ -42,7 +42,7 @@ export default function UpdatePassword() {
                       <span className="cursor-pointer font-bold me-2 mt-1">
                         <IoIosArrowBack />
                       </span>{" "}
-                      Update Password
+                      Reset Password
                     </h1>
                   </div>
                   {/* form */}

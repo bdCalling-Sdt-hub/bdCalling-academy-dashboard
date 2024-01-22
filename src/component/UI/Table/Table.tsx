@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table as AntTable, ConfigProvider } from "antd";
 import { paginationThemes2 } from "../../../themes/Index";
+import { useNavigate } from "react-router-dom";
 
 export default function Table({
   page,
@@ -14,9 +15,11 @@ export default function Table({
   seeAll,
   theme,
   style,
+  link,
 }: any) {
-  const handleSeeAll = (data: any) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const handleSeeAll = () => {
+    navigate(link);
   };
   const combinedTheme = {
     components: {
@@ -38,7 +41,7 @@ export default function Table({
         <h1 className="text-lg font-semibold   ">{title}</h1>
         <button
           onClick={handleSeeAll}
-          className="text-lg text-customPrimary  font-semibold cursor-pointer  "
+          className="text-lg text-customPrimary  font-semibold cursor-pointer "
         >
           {seeAll}
         </button>

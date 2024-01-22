@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty */
@@ -17,35 +18,58 @@ import {
 } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
-import { userKey } from "../../constants/authKey";
-import { storeUserInfo } from "../../service/auth.service";
+
+import {
+  useGetmyprofileQuery,
+  useLoginMutation,
+} from "../../redux/api/authApi";
+
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  setUser,
+  useCurrentToken,
+  useCurrentUser,
+} from "../../redux/features/auth/authSlice";
+import { storeToken } from "../../service/auth.service";
+import { useState } from "react";
 
 // Assume your dummy data looks like this
-const dummyUserData = [
-  { email: "admin@gmail.com", password: "111111", role: "admin" },
-  { email: "student@gmail.com", password: "111111", role: "student" },
-  { email: "mentor@gmail.com", password: "111111", role: "mentor" },
-];
+
 export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const form = location?.state?.from.pathname;
+  const [signin] = useLoginMutation();
+  const token = useAppSelector(useCurrentToken);
+  const currentUser = useAppSelector(useCurrentUser);
+  const dispatch = useAppDispatch();
+  const { data: user }: any = useGetmyprofileQuery({
+    skip: !currentUser,
+  });
 
   const onSubmit = async (data: any) => {
     try {
-      const findUser = dummyUserData.find((user) => user.email === data.email);
-      if (!findUser) {
-        message.error("user not found ");
-        return;
+      const result: any = await signin(data).unwrap();
+      if (result?.data) {
+        dispatch(setUser({ token: token }));
+        storeToken("token", result?.data?.access_Token);
       }
-      const checkValidPassword = findUser?.password === data.password;
-      if (!checkValidPassword) {
-        message.error("password did not match ");
-        return;
+      console.log(result);
+      let newUser: any = {};
+      if (user) {
+        newUser = { ...user.user };
+        if (user?.user?.userType === "SUPER ADMIN") {
+          newUser = { ...user.user, userType: "SUPER_ADMIN" };
+        }
+        dispatch(setUser({ token: result.access_token, user: newUser }));
+        console.log(user);
+        navigate(`/${newUser.userType}/dashboard`);
       }
-      storeUserInfo(userKey, findUser);
-      navigate(form ? form : `/${findUser.role}/dashboard`, { replace: true });
-    } catch (error) {}
+      console.log(newUser);
+    } catch (error: any) {
+      console.log(error);
+      message.error(error?.data?.error);
+    }
   };
 
   const handleForget = () => {
@@ -118,15 +142,7 @@ export default function SignIn() {
                       <label htmlFor="email" className={style.label}>
                         Password
                       </label>
-                      <Form.Item
-                        name="password"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your Password!",
-                          },
-                        ]}
-                      >
+                      <Form.Item name="password">
                         <Input
                           prefix={
                             <LockOutlined className="site-form-item-icon" />

@@ -66,6 +66,8 @@ export default function CustomUpload({
 
   return (
     <Upload
+      maxCount={1}
+      multiple={false}
       name={name}
       disabled={disabled}
       className={className}

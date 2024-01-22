@@ -1,19 +1,20 @@
-import { Spin } from "antd";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ReactNode } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { getuser } from "../service/auth.service";
+import { Navigate } from "react-router-dom";
 import { USER_ROLE } from "../constants/role";
-import { userKey } from "../constants/authKey";
+import { useAppSelector } from "../redux/hooks";
+import {
+  useCurrentToken,
+  useCurrentUser,
+} from "../redux/features/auth/authSlice";
 
 const StudentRoutes = ({ children }: { children: ReactNode }) => {
-  const loading = false;
-  const user = getuser(userKey);
-  const location = useLocation();
-  if (loading) {
-    return <Spin />;
-  }
-
-  if (user && user.role === USER_ROLE.STUDENT) {
+  const token = useAppSelector(useCurrentToken);
+  const user: any = useAppSelector(useCurrentUser);
+  console.log(token, user);
+  if (token && user && user.userType === USER_ROLE.STUDENT) {
+    console.log("true");
     return children;
   }
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;

@@ -21,8 +21,9 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
-import { getuser, removeUserInfo } from "../service/auth.service";
-import { userKey } from "../constants/authKey";
+
+import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 interface Inotification {
   id: string;
@@ -35,9 +36,14 @@ interface Inotification {
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState();
+
+  const { userType: role }: any = useAppSelector(useCurrentUser);
+  console.log("userType", role);
   const [notifications, setnotifications] = useState<Inotification[]>([]);
   useEffect(() => {
     fetch("/notification.json")
@@ -102,7 +108,7 @@ const DashboardLayout = () => {
   const handleMenuSelect = ({ key }: { key: string }) => {
     // setSelectedKey(key);
     if (key === "/logout") {
-      removeUserInfo(userKey);
+      dispatch(logout());
       navigate("/signin");
     } else {
       navigate(key);

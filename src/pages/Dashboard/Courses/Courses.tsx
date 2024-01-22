@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import CourseCard from "../../../component/cards/CourseCard/CourseCard";
@@ -5,24 +7,21 @@ import CourseCard from "../../../component/cards/CourseCard/CourseCard";
 import { Link } from "react-router-dom";
 import style from "./courses.module.css";
 import { PlusOutlined } from "@ant-design/icons";
+import { useGetallCourseQuery } from "../../../redux/api/courseApi";
 export default function Courses() {
   const [courseType, setCourseType] = useState("All");
-  console.log(courseType);
-  const [courses, setcourses] = useState([]);
+
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
-  useEffect(() => {
-    fetch("/courseData.json")
-      .then((res) => res.json())
-      .then((data) => setcourses(data));
-  }, []);
 
+  const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
+  const courses = courseData?.data?.data;
   return (
     <div className="">
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold  text-customHeader">Courses</h1>
-        <Link to="/admin/courses/add">
+        <Link to="/SUPER_ADMIN/courses/add">
           <button className={style.addCourse}>
             {" "}
             <PlusOutlined className="me-2 text-white" /> Add Course
@@ -65,7 +64,7 @@ export default function Courses() {
 
       <div className="mt-6">
         <Row gutter={16}>
-          {courses?.map((course, index) => (
+          {courses?.map((course: any, index: number) => (
             <Col key={index} lg={6} style={{ marginBottom: "16px" }}>
               <CourseCard course={course} courseType={courseType}></CourseCard>
             </Col>

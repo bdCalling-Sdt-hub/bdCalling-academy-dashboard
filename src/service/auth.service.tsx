@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getuserFromLocalStroage } from "../utils/localStroage";
-
 export const storeUserInfo = (key: string, value: any) => {
-  console.log(key, value);
-  localStorage.setItem(key, JSON.stringify(value));
+  localStorage.setItem(key, value);
 };
-export const getuser = (key: string) => {
-  const getuserInfo = getuserFromLocalStroage(key);
-  if (!getuserInfo) return {};
-  const user = JSON.parse(getuserInfo);
-  return user;
+export const storeToken = (key: string, value: any) => {
+  localStorage.setItem(key, value);
+};
+export const getuserInfo = () => {
+  return localStorage.user ?? {};
+};
+export const getToken = () => {
+  return localStorage.user ?? {};
 };
 export const isLoggedIn = (): boolean => {
-  const user = getuserFromLocalStroage("user");
+  const user = getToken();
   return !!user;
 };
-export const removeUserInfo = (key: string): void => {
+export const removeFromStroage = (key: string): void => {
   localStorage.removeItem(key);
 };

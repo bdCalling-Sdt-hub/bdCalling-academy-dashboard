@@ -9,7 +9,7 @@ export const sidebardThemes = {
   components: {
     Menu: {
       itemSelectedBg: "rgb(255, 255, 255)",
-      itemSelectedColor: "rgb(36, 146, 235)",
+      itemSelectedColor: "black",
       borderRadius: 0,
       borderRadiusLG: 0,
       subMenuItemBg: "rgba(255, 255, 255, 0.02)",
@@ -36,6 +36,14 @@ export const selectorTheme = {
       selectorBg: "rgb(246, 248, 250)",
       colorPrimaryHover: "rgb(246, 248, 250)",
       colorPrimary: "rgb(246, 248, 250)",
+    },
+  },
+};
+
+export const selectedFiledTheme = {
+  components: {
+    Select: {
+      controlHeight: 40,
     },
   },
 };

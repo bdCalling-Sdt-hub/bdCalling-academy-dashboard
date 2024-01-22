@@ -18,3 +18,23 @@
   width: 400px;
   height: 400px;
 }
+.approve {
+  background: #eaf6ee;
+  text-align: center;
+  color: #2ba24c;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 3px;
+  /* width: 94px; */
+  text-align: center;
+}
+.disapprove {
+  background: var(--Red-Red-10, #fbeaec);
+  color: #d7263d;
+  padding: 2 8px;
+  border: none;
+  border-radius: 3px;
+  /* width: 94px; */
+  text-align: center;
+  margin: auto 0;
+}

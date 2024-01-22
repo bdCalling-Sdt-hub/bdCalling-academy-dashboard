@@ -1,27 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Table from "../../../component/UI/Table/Table";
-import { Link } from "react-router-dom";
+import CustomModal from "../../../component/UI/Modal/Modal";
+import AddDepartment from "./AddDepartment/AddDepartment";
+import style from "./department.module.css";
+import { PlusOutlined } from "@ant-design/icons";
+import { useGetallDepartmentsQuery } from "../../../redux/api/departmentApi";
+import dayjs from "dayjs";
 import { FiEdit } from "react-icons/fi";
-import { RxCross1 } from "react-icons/rx";
+import EditDepartMent from "./EditDepartment/EditDepartment";
 interface departmentData {
-  id: string;
-  img: string;
-  head: string;
-  department: string;
-  phone: string;
-  email: string;
-  startingDate: string;
-  totalStudents: string;
+  id: number;
+  department_name: string;
+  created_at: string;
+  updated_at: string;
 }
 export default function Department() {
-  const [departments, setdepartments] = useState<departmentData[] | []>([]);
-
-  useEffect(() => {
-    fetch("/departments.json")
-      .then((res) => res.json())
-      .then((data) => setdepartments(data));
-  }, []);
+  const [show, setshow] = useState(false);
+  const { data, isLoading }: any = useGetallDepartmentsQuery(undefined);
+  const [selectedData, setSelectedData] = useState<any>({});
   const tablethemes = {
     Table: {
       headerBg: "#2492EB",
@@ -30,92 +27,86 @@ export default function Department() {
   };
   const columns = [
     {
-      title: "Head of Department",
-      dataIndex: "head",
+      title: "Department Name",
+      dataIndex: "department_name",
+      key: "department_name",
     },
     {
-      title: "Department name",
-      dataIndex: "department",
-    },
-
-    {
-      title: "Phone",
-      dataIndex: "phone",
+      title: "Creation Date",
+      dataIndex: "created_at",
+      key: "created_at",
     },
     {
-      title: "Email",
-      dataIndex: "email",
-    },
-    {
-      title: "Starting date",
-      dataIndex: "startingDate",
-    },
-    {
-      title: "Total students",
-      dataIndex: "totalStudents",
+      title: "Updated Date",
+      dataIndex: "updated_at",
+      key: "updated_at",
     },
     {
       title: "Actions",
       render: function (data: any) {
         return (
           <div className="flex gap-x-2">
-            <Link to={`/admin/department/edit/${data.id}`}>
-              {" "}
+            <button>
               <FiEdit
                 className="cursor-pointer text-customPrimary"
-                onClick={() => console.log(data)}
+                onClick={() => {
+                  setSelectedData(data); // Set the selected data for editing
+                  setshow(true); // Open the modal
+                }}
               />
-            </Link>
-            <RxCross1
-              className="cursor-pointer "
-              onClick={() => console.log(data)}
-            />
+            </button>
           </div>
         );
       },
     },
   ];
-
-  const data = departments?.map((department) => {
-    return {
-      key: department.id,
-      id: department.id,
-      head: (
-        <div className="flex items-center gap-x-2">
-          <img
-            style={{
-              width: "30px",
-              height: "30px",
-              borderRadius: "50%",
-            }}
-            src={department.img}
-            alt=""
-          />
-          <p>{department.head}</p>
-        </div>
-      ),
-      department: department.department,
-      phone: department.phone,
-      email: department.email,
-      startingDate: department.startingDate,
-      totalStudents: department.totalStudents,
-    };
-  });
+  const departmentData =
+    data?.data.map((department: departmentData) => ({
+      id: department?.id,
+      department_name: department?.department_name,
+      created_at: dayjs(department?.created_at).format("YYYY-MM-DD HH:mm:ss"),
+      updated_at: dayjs(department?.updated_at).format("YYYY-MM-DD HH:mm:ss"),
+    })) || [];
   console.log(data);
   return (
     <div className="h-screen ">
-      <h1 className="text-[24px] font-[600] text-customHeader">
-        Department List
-      </h1>
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => {
+          setshow(false);
+          setSelectedData(null); // Reset the selected data when closing the modal
+        }}
+      >
+        {selectedData ? (
+          <EditDepartMent setshow={setshow} data={selectedData} />
+        ) : (
+          <AddDepartment setshow={setshow} />
+        )}
+      </CustomModal>
+      <div className="flex items-center justify-between">
+        <h1 className="text-[24px] font-[600] text-customHeader">
+          Department List
+        </h1>
+        <button
+          onClick={() => setshow(true)}
+          className={style.addDepartmentBtn}
+        >
+          <PlusOutlined className="me-2" /> Add Department
+        </button>
+      </div>
+
       <div className="">
         <Table
           theme={tablethemes}
           title={false}
-          loading={false}
+          loading={isLoading}
           columns={columns}
-          data={data}
-          page={5}
-          total={departments.length}
+          data={departmentData}
+          page={10}
+          total={data?.data?.length}
           needPagination={true}
         />
       </div>

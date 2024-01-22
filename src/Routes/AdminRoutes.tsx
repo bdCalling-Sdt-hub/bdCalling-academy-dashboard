@@ -1,22 +1,29 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Spin } from "antd";
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { getuser } from "../service/auth.service";
+import { getuserInfo } from "../service/auth.service";
 import { USER_ROLE } from "../constants/role";
 import { userKey } from "../constants/authKey";
+import { useAppSelector } from "../redux/hooks";
+import {
+  useCurrentToken,
+  useCurrentUser,
+} from "../redux/features/auth/authSlice";
 interface AdminRoutesProps {
   children?: ReactNode;
 }
 
 const AdminRoutes = ({ children }: AdminRoutesProps) => {
   const loading = false;
-  const user = getuser(userKey);
-  const location = useLocation();
+  const token: any = useAppSelector(useCurrentToken);
+  const user: any = useAppSelector(useCurrentUser);
   if (loading) {
     return <Spin />;
   }
-
-  if (user && user.role === USER_ROLE.ADMIN) {
+  console.log();
+  if (token && user && user.userType === USER_ROLE.ADMIN) {
     return children;
   }
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;

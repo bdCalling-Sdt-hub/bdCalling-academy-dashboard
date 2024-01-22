@@ -4,12 +4,16 @@ import { Col, Row } from "antd";
 import DashboardSurvery from "../../component/Survey/DashboardSurvey/DashboardSurvery";
 import StudentEnrollmentChart from "../../component/Chart/surveyChart";
 import Table from "../../component/UI/Table/Table";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import person from "../../assets/table/person.svg";
-import { FiEdit } from "react-icons/fi";
-import { RxCross1 } from "react-icons/rx";
+
+import { useGetallmentorsQuery } from "../../redux/api/mentorApi";
+import { useGetAllStudentQuery } from "../../redux/api/StudentApi";
+import { IMAGE_BASE_URL } from "../../utils/Common";
 
 export default function Dashboard() {
+  const { data: mentorData, isLoading: mentorLoading }: any =
+    useGetallmentorsQuery(undefined);
+  const { data: studentData, isLoading: studentLoading }: any =
+    useGetAllStudentQuery(undefined);
   const tablethemes = {
     Table: {
       lineHeight: 1,
@@ -17,203 +21,116 @@ export default function Dashboard() {
     },
   };
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-    },
-    {
-      title: "Department",
-      dataIndex: "department",
-    },
-
-    {
-      title: "Actions",
-      render: function (data: any) {
-        return (
-          <div className="flex gap-x-2">
-            <BsThreeDotsVertical
-              className="cursor-pointer"
-              onClick={() => console.log(data)}
-            />
-          </div>
-        );
-      },
-    },
-  ];
-  const data = [
-    {
-      key: "1",
-      name: (
-        <div className="flex items-center gap-x-2">
-          <img src={person} alt="" />
-          <p>John Brown</p>
-        </div>
-      ),
-      department: "ui ux designer",
-    },
-    {
-      key: "2",
-      name: (
-        <div className="flex items-center gap-x-2">
-          <img src={person} alt="" />
-          <p>John Brown</p>
-        </div>
-      ),
-      department: "ui ux designer",
-    },
-    {
-      key: "3",
-      name: (
-        <div className="flex items-center gap-x-2">
-          <img src={person} alt="" />
-          <p>John Brown</p>
-        </div>
-      ),
-      department: "ui ux designer",
-    },
-
-    {
-      key: "6",
-      name: (
-        <div className="flex items-center gap-x-2">
-          <img src={person} alt="" />
-          <p>John Brown</p>
-        </div>
-      ),
-      department: "ui ux designer",
-    },
-    {
-      key: "7",
-      name: (
-        <div className="flex items-center gap-x-2">
-          <img src={person} alt="" />
-          <p>John Brown</p>
-        </div>
-      ),
-      department: "ui ux designer",
-    },
-  ];
-  const columns2 = [
+  const mentorColumn = [
     {
       title: "#sl",
-      dataIndex: "img",
+      dataIndex: "index",
+    },
+    {
+      title: "Id",
+      dataIndex: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "fullName",
+    },
+    {
+      title: "Image",
+      dataIndex: "image",
+    },
+
+    {
+      title: "Designation",
+      dataIndex: "designation",
+    },
+
+    // {
+    //   title: "Actions",
+    //   render: function (data: any) {
+    //     return (
+    //       <div className="flex gap-x-2">
+    //         <BsThreeDotsVertical
+    //           className="cursor-pointer"
+    //           onClick={() => console.log(data)}
+    //         />
+    //       </div>
+    //     );
+    //   },
+    // },
+  ];
+  const studentColumn = [
+    {
+      title: "#sl",
+      dataIndex: "serial",
+    },
+    {
+      title: "Student Id",
+      dataIndex: "id",
+    },
+    {
+      title: "Student Image",
+      dataIndex: "image",
     },
     {
       title: "Student Name",
-      dataIndex: "studentName",
+      dataIndex: "fullName",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "mobileNumber",
     },
 
     {
-      title: "Phone",
-      dataIndex: "phone",
+      title: "Course name",
+      dataIndex: "category_name",
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: "Batch No",
+      dataIndex: "batchNo",
     },
     {
-      title: "Admission Date",
-      dataIndex: "admissionDate",
-    },
-    {
-      title: "Actions",
-      render: function (data: any) {
-        return (
-          <div className="flex gap-x-2">
-            <FiEdit
-              className="cursor-pointer text-customPrimary"
-              onClick={() => console.log(data)}
-            />
-            <RxCross1
-              className="cursor-pointer "
-              onClick={() => console.log(data)}
-            />
-          </div>
-        );
-      },
+      title: "Registration Date",
+      dataIndex: "registrationDate",
     },
   ];
-  const data2 = [
-    {
-      key: "1",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-    {
-      key: "2",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-    {
-      key: "3",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-    {
-      key: "4",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-    {
-      key: "5",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-    {
-      key: "6",
-      img: (
-        <>
-          <img src={person} alt="" />
-        </>
-      ),
-      studentName: "John Brown",
-      phone: "018888888",
-      address: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "12-08-2023",
-    },
-  ];
+  const mentors = mentorData?.data?.map((mentor: any, index: number) => {
+    return {
+      index: index + 1,
+      id: mentor?.id,
+      fullName: mentor?.fullName,
+      image:
+        (
+          <img className="w-[30px] h-[30px] rounded-full" src={mentor?.image} />
+        ) ?? "N/A",
+      email: mentor?.email ?? "N/A",
+      designation: mentor?.designation,
+    };
+  });
+
+  const students = studentData?.data?.data?.map((data: any, index: number) => {
+    return {
+      serial: index + 1,
+      id: data?.id,
+      image:
+        (
+          <img
+            className="w-[30px] h-[30px] rounded-full"
+            src={`${IMAGE_BASE_URL}/${data?.image}`}
+          />
+        ) || "N/A",
+      fullName: data?.fullName || "N/A",
+      category_name: data?.category?.category_name || "N/A",
+      batchNo: data?.batchNo || "N/A",
+      registrationDate: data?.registrationDate || "N/A",
+      approve: data?.approve,
+      email: data?.email,
+      mobileNumber: data?.mobileNumber,
+    };
+  });
 
   return (
     <div className="">
@@ -232,18 +149,22 @@ export default function Dashboard() {
             </div>
           </Col>
           <Col lg={10}>
-            <Table
-              style="bg-[white]"
-              theme={tablethemes}
-              title="Mentors List"
-              page={5}
-              seeAll="seeAll"
-              needPagination={false}
-              total={data.length}
-              columns={columns}
-              data={data}
-              loading={false}
-            />
+            {/* mentor table */}
+            <div>
+              <Table
+                style="bg-[white]"
+                theme={tablethemes}
+                title="Mentors List"
+                page={5}
+                seeAll="seeAll"
+                link="/SUPER_ADMIN/mentors"
+                needPagination={false}
+                total={mentors?.length}
+                columns={mentorColumn}
+                data={mentors}
+                loading={mentorLoading}
+              />
+            </div>
           </Col>
         </Row>
       </div>
@@ -254,11 +175,12 @@ export default function Dashboard() {
               style="bg-[white]"
               title="Student List"
               seeAll="seeAll"
-              loading={false}
-              data={data2}
-              columns={columns2}
+              link="/SUPER_ADMIN/students"
+              loading={studentLoading}
+              data={students}
+              columns={studentColumn}
               page={6}
-              total={data2.length}
+              total={students?.length}
             />
           </Col>
         </Row>
