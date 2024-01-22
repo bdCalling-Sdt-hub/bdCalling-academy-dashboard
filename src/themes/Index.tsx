@@ -15,6 +15,10 @@ export const sidebardThemes = {
       subMenuItemBg: "rgba(255, 255, 255, 0.02)",
       itemMarginInline: 0,
     },
+
+    Dropdown: {
+      controlItemBgHover: "rgb(255, 255, 255)",
+    },
   },
 };
 export const inputTheme = {

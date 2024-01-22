@@ -9,7 +9,7 @@ import CustomModal from "../../UI/Modal/Modal";
 import EditEvent from "../../../pages/Dashboard/Events/EditEvent/EditEvent";
 export default function EventCard(props: any) {
   const { img, date, time, location, title, id } = props.events;
-  const [show, setshow] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleDelete = (id: string) => {
     console.log(id);
   };
@@ -19,8 +19,8 @@ export default function EventCard(props: any) {
         showCancelButton={false}
         showOkButton={false}
         title={""}
-        isOpen={show}
-        closeModal={() => setshow(false)}
+        isOpen={open}
+        closeModal={() => setOpen(false)}
       >
         <EditEvent data={props.events} />
       </CustomModal>
@@ -57,7 +57,7 @@ export default function EventCard(props: any) {
             >
               Delete Events
             </button>
-            <button onClick={() => setshow(true)} className={style.editEvents}>
+            <button onClick={() => setOpen(true)} className={style.editEvents}>
               Edit Events
             </button>
           </div>

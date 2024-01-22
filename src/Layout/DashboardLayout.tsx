@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLocation } from "react-router-dom";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.svg";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { IoIosNotificationsOutline } from "react-icons/io";
-
 import {
   Layout,
   Menu,
@@ -16,17 +15,28 @@ import {
   Badge,
   ConfigProvider,
   Select,
+  Dropdown,
+  MenuProps,
 } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 import { sidebarItems } from "../constants/sidebarItems";
 
 import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
+interface Inotification {
+  id: string;
+  image: string;
+  name: string;
+  description: string;
+  time: string;
+  // Add other properties if they exist in your data
+}
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
@@ -34,11 +44,64 @@ const DashboardLayout = () => {
 
   const { userType: role }: any = useAppSelector(useCurrentUser);
   console.log("userType", role);
+  const [notifications, setnotifications] = useState<Inotification[]>([]);
+  useEffect(() => {
+    fetch("/notification.json")
+      .then((res) => res.json())
+      .then((data) => setnotifications(data));
+  }, []);
+
+  const selectedKey =
+    // @ts-ignore
+    sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
+    `/${role}/dashboard`;
+
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
-
     localStorage.setItem("lang", value);
   };
+
+  const notificationItems = notifications.slice(0, 3).map((notification) => {
+    return {
+      key: notification.id,
+      label: (
+        <div className="flex justify-between items-center p-2 bg-[#fff]  rounded-lg ">
+          <div className="flex gap-x-2">
+            <img
+              src={notification.image}
+              alt=""
+              style={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+            <div>
+              <p>{notification.name}</p>
+              <p className="text-[#4E4E4E]">{notification.description}</p>
+              <p className="text-[#4E4E4E]">{notification.time}</p>
+            </div>
+          </div>
+        </div>
+      ),
+    };
+  });
+  const items: MenuProps["items"] = [
+    ...notificationItems,
+    {
+      key: "button",
+      label: (
+        <button
+          onClick={() => navigate("/notification")}
+          className=" w-full mb-2 bg-customPrimary py-2 rounded-sm text-[#fff] font-semibold"
+        >
+          See All
+        </button>
+      ),
+    },
+  ];
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -124,7 +187,7 @@ const DashboardLayout = () => {
               }}
               selectedKeys={[pathname]}
               // defaultSelectedKeys={[sidebarItems[0].key]}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
               // @ts-ignore
               items={sidebarItems(role)}
               onClick={handleMenuSelect}
@@ -191,15 +254,15 @@ const DashboardLayout = () => {
                   onChange={handleSelectLanguage}
                 ></Select>
               </div>
-              <div>
-                <Link to="/notification " className="flex items-center">
-                  <Badge count={5} className="cursor-pointer">
-                    <IoIosNotificationsOutline
-                      style={{ width: "30px", height: "30px" }}
-                    />
-                  </Badge>
-                </Link>
-              </div>
+
+              <Dropdown menu={{ items }} arrow>
+                <Badge count={5} className="cursor-pointer">
+                  <IoIosNotificationsOutline
+                    style={{ width: "30px", height: "30px" }}
+                  />
+                </Badge>
+              </Dropdown>
+
               <div className="ms-[20px]">
                 <div className="flex items-center gap-x-4">
                   <img

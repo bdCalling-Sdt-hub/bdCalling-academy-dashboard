@@ -12,8 +12,6 @@ interface videoPlayerParams {
 export default function VideoPlayer({
   title,
   videoId,
-  autoplay = true,
-  loading,
   moduleId,
 }: videoPlayerParams) {
   return (

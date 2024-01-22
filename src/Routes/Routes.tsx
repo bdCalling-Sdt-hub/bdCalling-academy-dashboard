@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import SignIn from "../pages/Signin/Signin";
 import Email from "../pages/ForgetPassword/Email/Email";
-import Otp from "../pages/ForgetPassword/Otp/Otp";
+import Otp from "../pages/ForgetPassword/SigninOtp/SigninOtp";
 import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePassword";
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
