@@ -9,8 +9,10 @@ import style from "../Classes.module.css";
 
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { MdDelete } from "react-icons/md";
+import { useGetallCourseQuery } from "../../../../redux/api/courseApi";
 
 const AddClass = () => {
+  const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
   const [form] = useForm();
   const onFinish = async (values: any) => {
     try {
@@ -27,6 +29,12 @@ const AddClass = () => {
     console.log(form);
     form.resetFields();
   };
+  const courseFields = courseData?.data?.data.map((data: any) => {
+    return {
+      label: data?.courseName,
+      value: data?.id,
+    };
+  });
   return (
     <div className="h-screen">
       <h1 className="text-2xl font-bold mb-4 text-customHeader ">
@@ -52,11 +60,7 @@ const AddClass = () => {
                 >
                   <Select
                     style={{ width: "100%" }}
-                    options={[
-                      { label: "online", value: "online" },
-                      { label: "offline", value: "offline" },
-                      { label: "video", value: "video" },
-                    ]}
+                    options={courseFields}
                     placeholder="please select a course"
                   />
                 </Form.Item>

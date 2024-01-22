@@ -83,6 +83,14 @@ export default function Students() {
       title: "Student Name",
       dataIndex: "fullName",
     },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "mobileNumber",
+    },
 
     {
       title: "Course name",
@@ -165,6 +173,8 @@ export default function Students() {
       batchNo: data?.batchNo || "N/A",
       registrationDate: data?.registrationDate || "N/A",
       approve: data?.approve,
+      email: data?.email,
+      mobileNumber: data?.mobileNumber,
     };
   });
   const tablethemes = {
