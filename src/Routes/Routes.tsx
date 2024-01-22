@@ -46,7 +46,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Dashboardlayout></Dashboardlayout>,
+    element: (
+      <PrivateRoutes>
+        <Dashboardlayout></Dashboardlayout>
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "/SUPER_ADMIN/dashboard",

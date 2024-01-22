@@ -28,6 +28,7 @@ export default function Addcourse() {
   const [form] = Form.useForm();
   const [courseType, setCourseType] = useState("Offline");
   const [file, setFile] = useState<File | null>(null);
+
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const [addCourse, { isLoading }] = useAddCourseMutation();
@@ -36,11 +37,14 @@ export default function Addcourse() {
   };
   console.log(file, "file");
   const onFinish = async (values: any) => {
+    console.log(values);
     const finalData = {
       ...values,
       startDate: values.startDate.format("YYYY-MM-DD"),
       end_date: values.startDate.format("YYYY-MM-DD"),
+      publish: values?.publish === true ? "1" : "0",
     };
+
     console.log(finalData);
     if (!file) {
       message.error("please select a course thumbnail");
@@ -53,13 +57,17 @@ export default function Addcourse() {
     }
     for (const [key, value] of Object.entries(finalData)) {
       // @ts-ignore
+
       formData.append(key, value);
     }
     try {
       const res: any = await addCourse(formData).unwrap();
-      console.log(res);
-    } catch (err) {
-      console.log(err);
+      if (res.message) {
+        message.info(res?.message);
+        form.resetFields();
+      }
+    } catch (err: any) {
+      message.error(err.data.message);
     }
   };
 
@@ -356,8 +364,8 @@ export default function Addcourse() {
               <Col lg={8}>
                 <Form.Item
                   label="Select Mentors"
-                  key="mentorId"
-                  name="mentorId"
+                  key="mentorId[]"
+                  name="mentorId[]"
                   rules={[
                     { required: true, message: "Please input mentors  " },
                   ]}
@@ -403,8 +411,8 @@ export default function Addcourse() {
                   <Select
                     style={{ width: "100%" }}
                     options={[
-                      { value: true, label: "true" },
-                      { value: false, label: "false" },
+                      { label: "true", value: "1" },
+                      { label: "false", value: "0" },
                     ]}
                     placeholder="please select a category"
                   />
@@ -461,8 +469,8 @@ export default function Addcourse() {
 
               <Col lg={6}>
                 <Form.List
-                  name="careeropportunities"
-                  key="careeropportunities"
+                  name="careeropportunities[]"
+                  key="careeropportunities[]"
                   initialValue={[{ key: "0", value: "" }]}
                 >
                   {(fields, { add, remove }) => (
@@ -500,8 +508,8 @@ export default function Addcourse() {
               </Col>
               <Col lg={6}>
                 <Form.List
-                  name="carriculum"
-                  key="carriculum"
+                  name="carriculum[]"
+                  key="carriculum[]"
                   initialValue={[{ key: "0", value: "" }]}
                 >
                   {(fields, { add, remove }) => (
@@ -539,8 +547,8 @@ export default function Addcourse() {
               </Col>
               <Col lg={6}>
                 <Form.List
-                  name="job_position"
-                  key="job_position"
+                  name="job_position[]"
+                  key="job_position[]"
                   initialValue={[{ key: "0", value: "" }]}
                 >
                   {(fields, { add, remove }) => (
@@ -578,8 +586,8 @@ export default function Addcourse() {
               </Col>
               <Col lg={6}>
                 <Form.List
-                  name="software"
-                  key="software"
+                  name="software[]"
+                  key="software[]"
                   initialValue={[{ key: "0", value: "" }]}
                 >
                   {(fields, { add, remove }) => (

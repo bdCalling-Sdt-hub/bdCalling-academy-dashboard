@@ -44,6 +44,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
     email,
     designation,
     category,
+    expert,
   } = mentorData;
 
   useEffect(() => {
@@ -53,25 +54,34 @@ export default function EditMentor({ setshow, mentorData }: any) {
       userName,
       mobileNumber: mobileNumber,
       email,
+      expert,
       designation,
       category_id: category?.id,
     });
   }, []);
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
-    const formdData = new FormData();
+    const formData = new FormData();
+    const finalData = {
+      ...data,
+      careeropportunities: JSON.stringify(data.careeropportunities),
+      carriculum: JSON.stringify(data.carriculum),
+      job_position: JSON.stringify(data.job_position),
+      software: JSON.stringify(data.software),
+      mentorId: JSON.stringify(data.mentorId),
+    };
     if (imageFile) {
-      formdData.append("image", imageFile);
+      formData.append("image", imageFile);
     }
 
-    for (const [key, value] of Object.entries(data)) {
+    for (const [key, value] of Object.entries(finalData)) {
       console.log(key, value);
       // @ts-ignore
 
-      formdData.append(key, value);
+      formData.append(key, value);
     }
 
     try {
-      const res: any = await updateMentor({ id: id, body: formdData }).unwrap();
+      const res: any = await updateMentor({ id: id, body: formData }).unwrap();
       console.log("response", res);
       if (res?.message) {
         message.info(res?.message);

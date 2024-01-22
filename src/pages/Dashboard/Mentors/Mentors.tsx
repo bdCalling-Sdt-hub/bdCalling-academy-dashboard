@@ -2,7 +2,6 @@
 import { Col, Dropdown, MenuProps, Row, Space, message } from "antd";
 import { useState } from "react";
 import style from "./Mentors.module.css";
-
 import MentorsCard from "../../../component/cards/MentorsCard/MentorsCard";
 import {
   ArrowRightOutlined,
