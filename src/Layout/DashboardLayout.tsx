@@ -50,7 +50,7 @@ const DashboardLayout = () => {
       .then((res) => res.json())
       .then((data) => setnotifications(data));
   }, []);
-  const { role } = getuser(userKey);
+
   const selectedKey =
     // @ts-ignore
     sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
