@@ -10,13 +10,16 @@ import style from "../Classes.module.css";
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { MdDelete } from "react-icons/md";
 import { useGetallCourseQuery } from "../../../../redux/api/courseApi";
+import { useAddClassesMutation } from "../../../../redux/api/classApi";
 
 const AddClass = () => {
   const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
+  const [addClass, { isLoading: addClassLoading }] = useAddClassesMutation();
   const [form] = useForm();
-  const onFinish = async (values: any) => {
+  const onFinish = async (data: any) => {
     try {
-      console.log(values);
+      const res: any = await addClass(data);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
