@@ -1,33 +1,108 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Col, DatePicker, Form, Input, Row, SelectProps } from "antd";
+import {
+  Button,
+  Col,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Select,
+  SelectProps,
+  message,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadImage from "../../../../component/Form/UploadImage";
-import SelectField from "../../../../component/Form/SelectField";
-import { useParams } from "react-router-dom";
+
 import style from "../courses.module.css";
+import {
+  useGetallCategoriesQuery,
+  useGetsingleCategoryQuery,
+} from "../../../../redux/api/categoryapi";
+import { useGetallmentorsQuery } from "../../../../redux/api/mentorApi";
+import { selectedFiledTheme } from "../../../../themes/Index";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import { useUpdateCourseMutation } from "../../../../redux/api/courseApi";
+
+import { useParams } from "react-router-dom";
 export default function EditCourse() {
   const { id } = useParams();
-  const [courseType, setCourseType] = useState("Online");
-  const [file, setFile] = useState<File | null>(null);
-  const [selectedValue, setSelectedValue] = useState();
-  console.log(selectedValue);
+  console.log("id", id);
   const [form] = Form.useForm();
-  const onFinish = (values: any) => {
+  const [courseType, setCourseType] = useState("Offline");
+  const [file, setFile] = useState<File | null>(null);
+
+  const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
+  const { data: mentorData }: any = useGetallmentorsQuery(undefined);
+  const { data }: any = useGetsingleCategoryQuery(id);
+  console.log("ediatble data");
+  const [editCourse] = useUpdateCourseMutation();
+  const handleButtonClick = (type: string) => {
+    setCourseType(type);
+  };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      courseName: data?.courseName,
+      language: data?.language,
+      courseDetails: data?.courseDetails,
+      startDate: data?.startDate,
+      courseTimeLength: data?.courseTimeLength,
+      price: data?.price,
+      mentorId: data?.mentorId,
+      maxStudentLength: data?.maxStudentLength,
+      skillLevel: data?.skillLevel,
+      address: data?.address,
+      category_id: data?.category_id,
+      status: data?.status,
+      batch: data?.batch,
+      discount_price: data?.discount_price,
+      coupon_code: data?.coupon_code,
+      coupon_code_price: data?.coupon_code_price,
+      end_date: data?.end_date,
+      seat_left: data?.seat_left,
+      courseThumbnail: data?.courseThumbnail,
+      careeropportunities: data?.careeropportunities || [], // Check if it exists
+      carriculum: data?.carriculum || [], // Check if it exists
+      job_position: data?.job_position || [], // Check if it exists
+      software: data?.software || [], // Check if it exists
+    });
+  }, []);
+
+  console.log(file, "file");
+  const onFinish = async (values: any) => {
     const finalData = {
       ...values,
-      mentors: selectedValue,
-      startDate: values.startDate.format("DD-MM-YYYY"),
+      startDate: values.startDate.format("YYYY-MM-DD"),
+      end_date: values.startDate.format("YYYY-MM-DD"),
+      publish: values?.publish === true ? "1" : "0",
     };
+
     console.log(finalData);
+    if (!file) {
+      message.error("please select a course thumbnail");
+      return;
+    }
+
     const formData = new FormData();
     if (file) {
-      formData.append("file", file);
+      formData.append("courseThumbnail", file);
     }
-    formData.append("data", finalData);
-    console.log("Success:", values);
+    for (const [key, value] of Object.entries(finalData)) {
+      // @ts-ignore
+
+      formData.append(key, value);
+    }
+
+    try {
+      console.log("dsfsd");
+    } catch (err: any) {
+      message.error(err.data.message);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -37,78 +112,97 @@ export default function EditCourse() {
     console.log(form);
     form.resetFields();
   };
-  const options: SelectProps["options"] = [
-    {
-      value: "1",
-      label: "mentor id 1",
-    },
-    {
-      value: "2",
-      label: "mentor id 2",
-    },
-  ];
+
+  const options: SelectProps["options"] = categoryData?.data?.map(
+    (category: any) => {
+      return {
+        value: category?.id,
+        label: category?.category_name,
+      };
+    }
+  );
+  const mentorOptions: SelectProps["options"] = mentorData?.data?.map(
+    (mentor: any) => {
+      return {
+        value: mentor?.id,
+        label: mentor?.fullName,
+      };
+    }
+  );
+
   return (
-    <div>
+    <ConfigProvider theme={selectedFiledTheme}>
       <div className="">
-        <div className="flex justify-between items-center">
-          <h1 className="text-[24px]  text-#333 font-[600] mb-[30px] ">
+        <div className="flex justify-between items-cEnter mb-[30px]">
+          <h1 className="text-2xl  font-semibold  text-customHeader">
             Edit Course
           </h1>
+          <div className="flex gap-x-4">
+            <button
+              className={
+                courseType === "Offline" ? style.activeBtn : style.inActiveBtn
+              }
+              onClick={() => handleButtonClick("Offline")}
+            >
+              Offline
+            </button>
+            <button
+              className={
+                courseType === "Online" ? style.activeBtn : style.inActiveBtn
+              }
+              onClick={() => handleButtonClick("Online")}
+            >
+              Online
+            </button>
+            <button
+              className={
+                courseType === "Video" ? style.activeBtn : style.inActiveBtn
+              }
+              onClick={() => handleButtonClick("Video")}
+            >
+              Video
+            </button>
+          </div>
         </div>
-        <div
-          className={`${style.editCourseContainer} px-[30px] pt-[30px] mb-6`}
-        >
+        <div className={`${style.AddcourseContainer} px-[30px] pt-[30px] mb-6`}>
           <Form
             layout="vertical"
             form={form}
             name="add-course"
-            initialValues={{}}
+            initialValues={data}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Row gutter={16}>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
+                  label="Enter course name"
                   key="courseName"
                   name="courseName"
                   rules={[
                     { required: true, message: "Please input course name" },
                   ]}
                 >
-                  <Input placeholder="enter course name" className="py-2" />
+                  <Input placeholder="Enter course name" className="py-2" />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
+                  label="Enter langugage"
                   key="language"
                   name="language"
-                  rules={[{ required: true, message: "Please input language" }]}
+                  rules={[
+                    { required: true, message: "Please input course name" },
+                  ]}
                 >
                   <Input placeholder="language" className="py-2" />
                 </Form.Item>
               </Col>
-              <Col lg={24}>
+
+              <Col lg={8}>
                 <Form.Item
-                  key="courseDetails"
-                  name="courseDetails"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input course Details",
-                    },
-                  ]}
-                >
-                  <TextArea
-                    showCount
-                    maxLength={500}
-                    placeholder="course details"
-                    style={{ height: 150, resize: "none" }}
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
+                  label="Enter start date"
                   key="startDate"
                   name="startDate"
                   rules={[
@@ -121,10 +215,11 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
-                  key="duration"
-                  name="duration"
+                  label="Enter course time length"
+                  key="courseTimeLength"
+                  name="courseTimeLength"
                   rules={[
                     {
                       required: true,
@@ -135,8 +230,9 @@ export default function EditCourse() {
                   <Input placeholder="Course Time Length*" className="py-2" />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
+                  label="Enter course price"
                   key="price"
                   name="price"
                   rules={[
@@ -146,22 +242,14 @@ export default function EditCourse() {
                     },
                   ]}
                 >
-                  <Input placeholder="Course name*" className="py-2" />
+                  <Input type="number" placeholder="price*" className="py-2" />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
-                <Form.Item key="mentors" name="mentors" rules={[]}>
-                  <SelectField
-                    setSelectedValue={setSelectedValue}
-                    options={options}
-                    placeholder="select mentor"
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
-                  key="studentLength"
-                  name="studentLength"
+                  key="maxStudentLength"
+                  name="maxStudentLength"
+                  label="Enter max Student Length"
                   rules={[
                     {
                       required: true,
@@ -170,18 +258,236 @@ export default function EditCourse() {
                   ]}
                 >
                   <Input
+                    type="number"
                     placeholder="Maximum Students Length*"
                     className="py-2"
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
-                <Form.Item key="skillLevel" name="skillLevel" rules={[]}>
+
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter skill level"
+                  key="skillLevel"
+                  name="skillLevel"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter skill level",
+                    },
+                  ]}
+                >
                   <Input placeholder="skillLevel" className="py-2" />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter batch no"
+                  key="batch"
+                  name="batch"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter batch no",
+                    },
+                  ]}
+                >
+                  <Input type="number" placeholder="batch" className="py-2" />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter discount price"
+                  key="discount_price"
+                  name="discount_price"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter batch no",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="number"
+                    placeholder="discount_price"
+                    className="py-2"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter Coupon Code"
+                  key="coupon_code"
+                  name="coupon_code"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter  coupon code",
+                    },
+                  ]}
+                >
+                  <Input placeholder="coupon_code" className="py-2" />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter Coupon Code Price"
+                  key="coupon_code_price"
+                  name="coupon_code_price"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter coupon code price",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="number"
+                    placeholder="coupon_code_price"
+                    className="py-2"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Enter End Date"
+                  key="end_date"
+                  name="end_date"
+                  rules={[{ required: true, message: "Please input end_date" }]}
+                >
+                  <DatePicker
+                    style={{ width: "100%", padding: "8px" }}
+                    placeholder="end date"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Select Course Type"
+                  name="status"
+                  rules={[
+                    { required: true, message: "Please select course type" },
+                  ]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={[
+                      { label: "online", value: "online" },
+                      { label: "offline", value: "offline" },
+                      { label: "video", value: "video" },
+                    ]}
+                    placeholder="please select a status"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Select Category"
+                  name="category_id"
+                  rules={[
+                    { required: true, message: "Please select a category" },
+                  ]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={options}
+                    placeholder="please select a category"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Select Mentors"
+                  key="mentorId[]"
+                  name="mentorId[]"
+                  rules={[
+                    { required: true, message: "Please input mentors  " },
+                  ]}
+                >
+                  <Select
+                    mode="multiple"
+                    options={mentorOptions}
+                    placeholder="select mentor"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={12}>
+                <Form.Item
+                  label="Enter Seat Left"
+                  key="seat_left"
+                  name="seat_left"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter seat left",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="number"
+                    placeholder="seat left"
+                    className="py-2"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={12}>
+                <Form.Item
+                  label="Select Publish Status"
+                  key="publish"
+                  name="publish"
+                  rules={[
+                    {
+                      required: true,
+                      message: "please Enter Publish Status",
+                    },
+                  ]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={[
+                      { label: "true", value: "1" },
+                      { label: "false", value: "0" },
+                    ]}
+                    placeholder="please select a category"
+                  />
                 </Form.Item>
               </Col>
               <Col lg={24}>
                 <Form.Item
+                  label="course Thumbnail"
+                  key="courseThumbnail"
+                  name="courseThumbnail"
+                  // rules={[
+                  //   {
+                  //     required: true,
+                  //     message: "please select a courseThumbnail",
+                  //   },
+                  // ]}
+                >
+                  <UploadImage setFile={setFile} />
+                </Form.Item>
+              </Col>
+              <Col lg={24}>
+                <Form.Item
+                  label="Enter Course Details"
+                  key="courseDetails"
+                  name="courseDetails"
+                  rules={[
+                    { required: true, message: "Please input course name" },
+                  ]}
+                >
+                  <TextArea
+                    showCount
+                    maxLength={100}
+                    placeholder="course details"
+                    style={{ height: 200, resize: "none" }}
+                  />
+                </Form.Item>
+              </Col>
+
+              <Col lg={24}>
+                <Form.Item
+                  label="Enter Address"
                   key="address"
                   name="address"
                   rules={[{ required: true, message: "Please input address" }]}
@@ -194,41 +500,163 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              {courseType === "Video" ? (
-                <>
-                  <Col lg={12}>
-                    <Form.Item
-                      label="Course Time"
-                      key=""
-                      name="image"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input course Time",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="Video hours" className="py-2" />
-                    </Form.Item>
-                  </Col>
-                  <Col lg={12}>
-                    <Form.Item
-                      label="image"
-                      key="image"
-                      name="image"
-                      rules={[]}
-                    >
-                      <UploadImage setFile={setFile} />
-                    </Form.Item>
-                  </Col>
-                </>
-              ) : (
-                <Col lg={24}>
-                  <Form.Item label="upload" key="image" name="image" rules={[]}>
-                    <UploadImage setFile={setFile} />
-                  </Form.Item>
-                </Col>
-              )}
+
+              <Col lg={6}>
+                <Form.List
+                  name="careeropportunities[]"
+                  key="careeropportunities[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map((field, index) => (
+                        <Form.Item
+                          {...field}
+                          label="Enter Carrier Opportunity"
+                          rules={[
+                            {
+                              required: true,
+                              message: "please Enter Carrier Opportunity",
+                            },
+                          ]}
+                        >
+                          <div className="flex items-cEnter gap-x-2">
+                            <Input
+                              className="py-2"
+                              placeholder="Enter careeropportunities"
+                            />
+                            <button onClick={() => remove(index)}>
+                              <CloseOutlined />
+                            </button>
+                            {index === fields.length - 1 && (
+                              <button onClick={() => add()}>
+                                <PlusOutlined />
+                              </button>
+                            )}
+                          </div>
+                        </Form.Item>
+                      ))}
+                    </>
+                  )}
+                </Form.List>
+              </Col>
+              <Col lg={6}>
+                <Form.List
+                  name="carriculum[]"
+                  key="carriculum[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map((field, index) => (
+                        <Form.Item
+                          {...field}
+                          label="Enter carriculum"
+                          rules={[
+                            {
+                              required: true,
+                              message: "please Enter Curriculum",
+                            },
+                          ]}
+                        >
+                          <div className="flex items-center gap-x-2">
+                            <Input
+                              className="py-2"
+                              placeholder="Enter carriculum"
+                            />
+                            <button onClick={() => remove(index)}>
+                              <CloseOutlined />
+                            </button>
+                            {index === fields.length - 1 && (
+                              <button onClick={() => add()}>
+                                <PlusOutlined />
+                              </button>
+                            )}
+                          </div>
+                        </Form.Item>
+                      ))}
+                    </>
+                  )}
+                </Form.List>
+              </Col>
+              <Col lg={6}>
+                <Form.List
+                  name="job_position[]"
+                  key="job_position[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map((field, index) => (
+                        <Form.Item
+                          {...field}
+                          label="Enter Job Positions"
+                          rules={[
+                            {
+                              required: true,
+                              message: "please Enter Job Position",
+                            },
+                          ]}
+                        >
+                          <div className="flex items-cEnter gap-x-2">
+                            <Input
+                              className="py-2"
+                              placeholder="Enter job_position"
+                            />
+                            <button onClick={() => remove(index)}>
+                              <CloseOutlined />
+                            </button>
+                            {index === fields.length - 1 && (
+                              <button onClick={() => add()}>
+                                <PlusOutlined />
+                              </button>
+                            )}
+                          </div>
+                        </Form.Item>
+                      ))}
+                    </>
+                  )}
+                </Form.List>
+              </Col>
+              <Col lg={6}>
+                <Form.List
+                  name="software[]"
+                  key="software[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map((field, index) => (
+                        <Form.Item
+                          {...field}
+                          label="Enter Softwares"
+                          rules={[
+                            {
+                              required: true,
+                              message: "please Enter Softwares",
+                            },
+                          ]}
+                        >
+                          <div className="flex items-cEnter gap-x-2">
+                            <Input
+                              className="py-2"
+                              placeholder="Enter softwares"
+                            />
+                            <button onClick={() => remove(index)}>
+                              <CloseOutlined />
+                            </button>
+                            {index === fields.length - 1 && (
+                              <button onClick={() => add()}>
+                                <PlusOutlined />
+                              </button>
+                            )}
+                          </div>
+                        </Form.Item>
+                      ))}
+                    </>
+                  )}
+                </Form.List>
+              </Col>
             </Row>
             <div className="flex justify-between">
               <div>
@@ -266,6 +694,6 @@ export default function EditCourse() {
           </Form>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 }

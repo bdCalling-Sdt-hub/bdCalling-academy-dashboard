@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GoBook } from "react-icons/go";
 import { GoPeople } from "react-icons/go";
 import { CiClock2 } from "react-icons/ci";
-import { LuInfo } from "react-icons/lu";
+// import { LuInfo } from "react-icons/lu";
 import { IoNewspaperOutline } from "react-icons/io5";
 
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -12,21 +13,23 @@ import { PiVideoLight } from "react-icons/pi";
 
 import style from "./courseCard.module.css";
 import { useNavigate } from "react-router-dom";
+import { IMAGE_BASE_URL } from "../../../utils/Common";
 export default function CourseCard({ course, courseType }: any) {
-  console.log(courseType);
+  console.log("couirse", course);
   const navigate = useNavigate();
   const {
     id,
-    img,
-    title,
+    courseThumbnail,
+    courseName,
     price,
-    availableSeat,
+    seat_left,
     batch,
-    type,
-    daysLeft,
+    status,
     lesson,
     videoDuration,
+    end_date,
   } = course;
+  const image = `${IMAGE_BASE_URL}/${courseThumbnail}`;
 
   const handleDelete = (id: string) => {
     console.log(id);
@@ -35,7 +38,7 @@ export default function CourseCard({ course, courseType }: any) {
     <div className={style.card}>
       <div className="p-[20px]">
         <div>
-          <img src={img} alt="" className={style.img} />
+          <img src={image} alt="" className={style.img} />
         </div>
         <div>
           <div className="flex justify-between items-center text-[#5C5C5C]  my-[20px]">
@@ -43,7 +46,7 @@ export default function CourseCard({ course, courseType }: any) {
               <span className="text-customPrimary">
                 <GoBook />
               </span>
-              <p className="">{batch}</p>
+              <p className="">Batch {batch}</p>
             </div>
             <p
               className="bg-customPrimary px-4 text-white "
@@ -52,7 +55,7 @@ export default function CourseCard({ course, courseType }: any) {
                 borderRadius: "3px",
               }}
             >
-              {type}
+              {status}
             </p>
           </div>
 
@@ -62,13 +65,13 @@ export default function CourseCard({ course, courseType }: any) {
                 <span className="text-customPrimary">
                   <GoPeople />
                 </span>
-                <p className="">{availableSeat}</p>
+                <p className="">{seat_left}</p>
               </div>
               <div className="flex items-center gap-x-3">
                 <span className="text-customPrimary">
                   <CiClock2 />
                 </span>
-                <p>{daysLeft}</p>
+                <p>{end_date}</p>
               </div>
             </div>
           ) : (
@@ -91,58 +94,41 @@ export default function CourseCard({ course, courseType }: any) {
           )}
           <hr className="text-[#EBEBEB]  mt-[30px] mb-[20px]" />
           <h1 className="text-[18px] font-semibold text-customPrimary">
-            {title}
+            {courseName}
           </h1>
           <div>
-            <p className="text-[18px] font-semibold text-customPrimary mt-[40px] mb-[20px]">
+            <p className="text-[18px] font-semibold text-customPrimary mt-[20px] mb-[20px]">
               {price}
             </p>
-            {courseType === "Online" || courseType === "Video" ? (
-              <div className="flex justify-between">
-                <button
-                  onClick={() => handleDelete(id)}
-                  className={style.deleteCourse}
-                >
-                  Delete Course
-                </button>
-                <button
-                  className={style.EditCourse}
-                  onClick={() => navigate(`/courses/edit/${id}`)}
-                >
-                  Edit Course
-                </button>
-              </div>
-            ) : (
-              <div className="flex justify-between">
-                <button className={style.btnInfo}>
-                  <LuInfo
-                    style={{
-                      height: "24px",
-                      width: "24px",
-                    }}
-                  />
-                </button>
-                <button
-                  className={style.btnEdit}
-                  onClick={() => navigate(`/admin/courses/edit/${id}`)}
-                >
-                  <PiNotePencilDuotone
-                    style={{
-                      height: "24px",
-                      width: "24px",
-                    }}
-                  />
-                </button>
-                <button className={style.btnDelete}>
-                  <RiDeleteBin5Line
-                    style={{
-                      height: "24px",
-                      width: "24px",
-                    }}
-                  />
-                </button>
-              </div>
-            )}
+            <div className="flex justify-between">
+              {/* <button className={style.btnInfo}>
+                <LuInfo
+                  style={{
+                    height: "24px",
+                    width: "24px",
+                  }}
+                />
+              </button> */}
+              <button
+                className={style.btnEdit}
+                onClick={() => navigate(`/SUPER_ADMIN/courses/edit/${id}`)}
+              >
+                <PiNotePencilDuotone
+                  style={{
+                    height: "24px",
+                    width: "24px",
+                  }}
+                />
+              </button>
+              <button className={style.btnDelete}>
+                <RiDeleteBin5Line
+                  style={{
+                    height: "24px",
+                    width: "24px",
+                  }}
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>

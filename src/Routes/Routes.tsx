@@ -9,7 +9,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
 import Courses from "../pages/Dashboard/Courses/Courses";
 import Addcourse from "../pages/Dashboard/Courses/Addcourse/Addcourse";
-import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
+
 import Mentors from "../pages/Dashboard/Mentors/Mentors";
 import Department from "../pages/Dashboard/Department/Department";
 import EditDepartment from "../pages/Dashboard/Department/EditDepartment/EditDepartment";
@@ -34,6 +34,7 @@ import StudentRoutes from "./StudentRoutes";
 import MentorRoutes from "./MentorRoutes";
 import Category from "../pages/Dashboard/Category/Category";
 import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
+import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 
 export const router = createBrowserRouter([
   {

@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import StudentSurvey from "../../../component/Survey/StudentSurvey/StudentSurvey";
 import person from "../../../assets/table/person.svg";
+import style from "./student.module.css";
+
+import { AiOutlineClose } from "react-icons/ai";
+
+import { AiOutlineCheck } from "react-icons/ai";
 
 import {
   ArrowRightOutlined,
@@ -14,32 +20,114 @@ import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
 import { MenuProps, Space, message, Dropdown } from "antd";
+import {
+  useApproveStudentQuery,
+  useDisapproveStudentQuery,
+  useGetAllStudentQuery,
+} from "../../../redux/api/StudentApi";
+import { IMAGE_BASE_URL } from "../../../utils/Common";
+import { useState } from "react";
 
 export default function Students() {
+  const [approveId, setApproveId] = useState<null | number>(null);
+  const [disapproveId, setdisApproveId] = useState<null | number>(null);
+
+  const {
+    data: studentData,
+    isLoading,
+    refetch,
+  }: any = useGetAllStudentQuery(undefined);
+  const { data: approveStudentData }: any = useApproveStudentQuery(approveId, {
+    skip: !approveId,
+  });
+  const { data: disapproveStudentData }: any = useDisapproveStudentQuery(
+    disapproveId,
+    {
+      skip: !disapproveId,
+    }
+  );
+
+  if (approveStudentData) {
+    message.info(approveStudentData.message);
+  }
+  if (disapproveStudentData) {
+    message.info(disapproveStudentData.message);
+  }
   const handleDownload = () => {
     console.log("Downloading students...");
   };
+  const handleApprove = (id: number, value: string) => {
+    console.log(id, value);
+    if (id && value === "approve") {
+      setApproveId(id);
+      refetch();
+    } else if (id && value === "disapprove") {
+      setdisApproveId(id);
+    }
+  };
+  console.log(approveId);
   const columns = [
     {
       title: "#sl",
+      dataIndex: "serial",
+    },
+    {
+      title: "Student Id",
       dataIndex: "id",
     },
     {
+      title: "Student Image",
+      dataIndex: "image",
+    },
+    {
       title: "Student Name",
-      dataIndex: "studentName",
+      dataIndex: "fullName",
     },
 
     {
       title: "Course name",
-      dataIndex: "courseName",
+      dataIndex: "category_name",
     },
     {
       title: "Batch No",
       dataIndex: "batchNo",
     },
     {
-      title: "Date",
-      dataIndex: "admissionDate",
+      title: "Registration Date",
+      dataIndex: "registrationDate",
+    },
+    {
+      title: "Approve Status",
+      // dataIndex: "approve",
+      render: function (data: any) {
+        console.log("approved", data);
+        return (
+          <span className="flex gap-x-4 items-center">
+            {data?.approve === 1 ? (
+              <p className={`${style.approve}`}>Approved</p>
+            ) : (
+              <p
+                title="approve"
+                onClick={() => handleApprove(data?.id, "approve")}
+                className={`text-[#2492EB] cursor-pointer`}
+              >
+                <AiOutlineCheck />
+              </p>
+            )}
+            {data?.approve === 0 ? (
+              <p className={`${style.disapprove}`}>disApproved</p>
+            ) : (
+              <p
+                title="disapprove"
+                onClick={() => handleApprove(data?.id, "disapprove")}
+                className={`  cursor-pointer`}
+              >
+                <AiOutlineClose />
+              </p>
+            )}
+          </span>
+        );
+      },
     },
     {
       title: "Actions",
@@ -61,84 +149,31 @@ export default function Students() {
       },
     },
   ];
-  const data = [
-    {
-      key: "1",
-
-      studentName: (
-        <div className="flex gap-x-2 items-center">
-          <img src={person} alt="" />
-          <p>jhon doe</p>
-        </div>
-      ),
-      courseName: "ui ux designer",
-      batchNo: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "1October 30, 2023",
-    },
-    {
-      key: "2",
-
-      studentName: (
-        <div className="flex gap-x-2 items-center">
-          <img src={person} alt="" />
-          <p>jhon doe</p>
-        </div>
-      ),
-      courseName: "ui ux designer",
-      batchNo: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "1October 30, 2023",
-    },
-    {
-      key: "3",
-
-      studentName: (
-        <div className="flex gap-x-2 items-center">
-          <img src={person} alt="" />
-          <p>jhon doe</p>
-        </div>
-      ),
-      courseName: "ui ux designer",
-      batchNo: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "1October 30, 2023",
-    },
-    {
-      key: "4",
-
-      studentName: (
-        <div className="flex gap-x-2 items-center">
-          <img src={person} alt="" />
-          <p>jhon doe</p>
-        </div>
-      ),
-      courseName: "ui ux designer",
-      batchNo: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "1October 30, 2023",
-    },
-    {
-      key: "5",
-
-      studentName: (
-        <div className="flex gap-x-2 items-center">
-          <img src={person} alt="" />
-          <p>jhon doe</p>
-        </div>
-      ),
-      courseName: "ui ux designer",
-      batchNo: "dhaka,bangladesh",
-      department: "ui ux designer",
-      admissionDate: "1October 30, 2023",
-    },
-  ];
+  const data = studentData?.data?.data?.map((data: any, index: number) => {
+    return {
+      serial: index + 1,
+      id: data?.id,
+      image:
+        (
+          <img
+            className="w-[30px] h-[30px] rounded-full"
+            src={`${IMAGE_BASE_URL}/${data?.image}`}
+          />
+        ) || "N/A",
+      fullName: data?.fullName || "N/A",
+      category_name: data?.category?.category_name || "N/A",
+      batchNo: data?.batchNo || "N/A",
+      registrationDate: data?.registrationDate || "N/A",
+      approve: data?.approve,
+    };
+  });
   const tablethemes = {
     Table: {
       headerBg: "#2492EB",
       headerColor: "white",
     },
   };
+  console.log(data);
   const onClick: MenuProps["onClick"] = ({ key }) => {
     message.info(`Click on item ${key}`);
   };
@@ -203,13 +238,13 @@ export default function Students() {
       <div className="">
         <Table
           theme={tablethemes}
-          loading={false}
+          loading={isLoading}
           title={false}
           data={data}
           columns={columns}
           needPagination={true}
           page={5}
-          total={data.length}
+          total={data?.length}
         />
       </div>
     </div>

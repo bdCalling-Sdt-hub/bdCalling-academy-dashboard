@@ -15,7 +15,7 @@ import {
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadImage from "../../../../component/Form/UploadImage";
 
 import style from "../courses.module.css";
@@ -23,8 +23,11 @@ import { useGetallCategoriesQuery } from "../../../../redux/api/categoryapi";
 import { useGetallmentorsQuery } from "../../../../redux/api/mentorApi";
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { useAddCourseMutation } from "../../../../redux/api/courseApi";
-export default function Addcourse() {
+import {
+  useAddCourseMutation,
+  useUpdateCourseMutation,
+} from "../../../../redux/api/courseApi";
+export default function Addcourse({ type, editableData }: any) {
   const [form] = Form.useForm();
   const [courseType, setCourseType] = useState("Offline");
   const [file, setFile] = useState<File | null>(null);
@@ -32,12 +35,43 @@ export default function Addcourse() {
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const [addCourse, { isLoading }] = useAddCourseMutation();
+  const [editCourse] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
+
+  useEffect(() => {
+    if (type === "edit" && editableData) {
+      form.setFieldsValue({
+        courseName: editableData?.courseName,
+        language: editableData?.language,
+        courseDetails: editableData?.courseDetails,
+        startDate: editableData?.startDate,
+        courseTimeLength: editableData?.courseTimeLength,
+        price: editableData?.price,
+        mentorId: editableData?.mentorId,
+        maxStudentLength: editableData?.maxStudentLength,
+        skillLevel: editableData?.skillLevel,
+        address: editableData?.address,
+        category_id: editableData?.category_id,
+        status: editableData?.status,
+        batch: editableData?.batch,
+        discount_price: editableData?.discount_price,
+        coupon_code: editableData?.coupon_code,
+        coupon_code_price: editableData?.coupon_code_price,
+        end_date: editableData?.end_date,
+        seat_left: editableData?.seat_left,
+        courseThumbnail: editableData?.courseThumbnail,
+        careeropportunities: editableData?.careeropportunities || [], // Check if it exists
+        carriculum: editableData?.carriculum || [], // Check if it exists
+        job_position: editableData?.job_position || [], // Check if it exists
+        software: editableData?.software || [], // Check if it exists
+      });
+    }
+  }, [type, editableData, form]);
+
   console.log(file, "file");
   const onFinish = async (values: any) => {
-    console.log(values);
     const finalData = {
       ...values,
       startDate: values.startDate.format("YYYY-MM-DD"),
@@ -60,7 +94,12 @@ export default function Addcourse() {
 
       formData.append(key, value);
     }
+
     try {
+      if (type === "edit" && editableData) {
+        const res = await editCourse(formData).unwrap();
+        console.log(res);
+      }
       const res: any = await addCourse(formData).unwrap();
       if (res.message) {
         message.info(res?.message);
@@ -135,7 +174,7 @@ export default function Addcourse() {
             layout="vertical"
             form={form}
             name="add-course"
-            initialValues={{}}
+            initialValues={editableData ? editableData : {}}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
