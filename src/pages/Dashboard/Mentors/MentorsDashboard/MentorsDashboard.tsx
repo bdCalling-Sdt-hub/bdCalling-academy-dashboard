@@ -63,7 +63,7 @@ export default function MentorsDashboard() {
     {
       title: "Attendence",
       dataIndex: "attendence",
-      render: (data: any) => (
+      render: () => (
         <span className="flex gap-x-2">
           <p
             onClick={() => handleAttendence("id", "present")}

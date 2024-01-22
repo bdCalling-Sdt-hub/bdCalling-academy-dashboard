@@ -1,17 +1,14 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Col, Row, Form, Input, DatePicker } from "antd";
+import { Col, Row, Form, Input, DatePicker } from "antd";
 import style from "./Profile.module.css";
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
-
-import ChangePassword from "../../../component/ChangePassword/ChangePassword";
+import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import CustomUpload from "../../../component/UI/Upload/Upload";
-
 export default function Profile() {
-  // const { id } = useSearchParams();
   const img = "https://shorturl.at/qvEFR";
   let role = "student";
   const [loading, setLoading] = useState(false);
@@ -28,11 +25,20 @@ export default function Profile() {
     };
     console.log(finalData);
   };
+  console.log(action);
 
   const onFinishFailed = (data: any) => {
     console.log(data);
   };
+  const handleChagePassword = (value: any) => {
+    console.log(value);
+  };
 
+  const handleEditProfile = async () => {
+    console.log("called");
+    form.submit();
+    setAction("save");
+  };
   return (
     <div className=" h-screen ">
       <CustomModal
@@ -42,7 +48,7 @@ export default function Profile() {
         isOpen={show}
         closeModal={() => setshow(false)}
       >
-        <ChangePassword />
+        <ChangePassword btnText="SAVE" onSubmit={handleChagePassword} />
       </CustomModal>
       <div className="flex justify-end gap-x-[30px]">
         {role !== "admin" && (
@@ -50,17 +56,13 @@ export default function Profile() {
             CHANGE PASSWORD
           </button>
         )}
-        <button className={style.editBtn} onClick={() => setAction("edit")}>
-          EDIT
-        </button>
+        {(action === "save" || action === "") && (
+          <button className={style.editBtn} onClick={() => setAction("edit")}>
+            EDIT
+          </button>
+        )}
         {action === "edit" ? (
-          <button
-            onClick={() => {
-              form.submit();
-              setAction("save");
-            }}
-            className={style.saveBtn}
-          >
+          <button onClick={handleEditProfile} className={style.saveBtn}>
             SAVE
           </button>
         ) : null}
