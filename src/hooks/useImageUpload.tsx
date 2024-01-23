@@ -28,6 +28,7 @@ const useImageUpload = (initialImage = null) => {
     imageUrl,
     setFile,
     imageFile,
+    setImageUrl,
   };
 };
 

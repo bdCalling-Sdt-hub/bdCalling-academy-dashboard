@@ -34,7 +34,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
   const [updateMentor, { isLoading }] = useUpdateprofileMutation();
   const [form] = useForm();
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
-  const { imageUrl, setFile, imageFile } = useImageUpload();
+  const { imageUrl, setFile, imageFile, setImageUrl } = useImageUpload();
 
   const {
     id,
@@ -82,6 +82,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
         message.info(res?.message);
         form.resetFields();
         setshow(false);
+        setImageUrl(null);
       }
     } catch (error) {
       console.log(error);

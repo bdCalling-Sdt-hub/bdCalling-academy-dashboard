@@ -36,7 +36,7 @@ const authApi = baseApi.injectEndpoints({
         params: { _method: "PUT" },
         body: data.body,
       }),
-      providesTags: [tagTypes.user, tagTypes.mentor],
+      invalidatesTags: [tagTypes.user, tagTypes.mentor],
     }),
     deleteProfile: builder.mutation({
       query: (id: number) => ({

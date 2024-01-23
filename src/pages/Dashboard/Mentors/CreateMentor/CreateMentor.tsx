@@ -55,9 +55,9 @@ export default function CreateMentor({ setshow }: any) {
         form.resetFields();
         setshow(false);
       }
-    } catch (error) {
-      console.log(error);
-      errorResponse(error);
+    } catch (error: any) {
+      message.error(error?.data?.email[0]);
+      message.error(error?.data?.userName[0]);
     }
   };
   const onFinishFailed = (error: any) => {
