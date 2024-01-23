@@ -68,6 +68,9 @@ export default function Profile() {
     console.log(value);
   };
 
+  const handleCancel = () => {
+    setAction("");
+  };
   const handleEditProfile = async () => {
     form.submit();
     setAction("save");
@@ -99,9 +102,14 @@ export default function Profile() {
           </button>
         )}
         {action === "edit" ? (
-          <button onClick={handleEditProfile} className={style.saveBtn}>
-            SAVE
-          </button>
+          <div className="flex gap-x-4">
+            <button onClick={handleEditProfile} className={style.saveBtn}>
+              SAVE
+            </button>
+            <button onClick={handleCancel} className={style.editBtn}>
+              Cancel
+            </button>
+          </div>
         ) : null}
       </div>
       <div className="mt-6">
@@ -167,6 +175,7 @@ export default function Profile() {
               initialValues={profileData?.user}
               form={form}
               className="mt-4"
+              layout="vertical"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
@@ -175,6 +184,7 @@ export default function Profile() {
                   <Form.Item
                     name="fullName"
                     key="fullName"
+                    label="Your Name"
                     rules={[
                       {
                         required: true,
@@ -200,6 +210,7 @@ export default function Profile() {
                   <Form.Item
                     name="mobileNumber"
                     key="mobileNumber"
+                    label="Mobile Number"
                     rules={[
                       {
                         required: true,
@@ -231,6 +242,7 @@ export default function Profile() {
                   <Form.Item
                     name="email"
                     key="email"
+                    label="Email"
                     rules={[
                       {
                         required: true,
@@ -316,7 +328,12 @@ export default function Profile() {
                   </Form.Item>
                 </Col> */}
                 <Col lg={12} xl={12} className="mb-[15px]">
-                  <Form.Item rules={[]} name="bloodGroup" key="bloodGroup">
+                  <Form.Item
+                    rules={[]}
+                    name="bloodGroup"
+                    key="bloodGroup"
+                    label="Blood Group"
+                  >
                     <Input
                       size="large"
                       type="text"
@@ -330,6 +347,7 @@ export default function Profile() {
                   <Form.Item
                     name="address"
                     key="address"
+                    label="Address"
                     // rules={[
                     //   {
                     //     required: true,
