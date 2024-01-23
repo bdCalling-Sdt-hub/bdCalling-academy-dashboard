@@ -84,7 +84,11 @@ export default function Profile() {
         isOpen={show}
         closeModal={() => setshow(false)}
       >
-        <ChangePassword btnText="SAVE" onSubmit={handleChagePassword} />
+        <ChangePassword
+          btnText="SAVE"
+          onSubmit={handleChagePassword}
+          setshow={setshow}
+        />
       </CustomModal>
       <div className="flex justify-end gap-x-[30px]">
         {role !== "admin" && (
