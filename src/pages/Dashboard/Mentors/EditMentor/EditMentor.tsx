@@ -26,14 +26,15 @@ import { useForm } from "antd/es/form/Form";
 import errorResponse from "../../../../utils/errorResponse";
 import Loading from "../../../../component/UI/Loading/Loading";
 import { IMAGE_BASE_URL, imageUrl } from "../../../../utils/Common";
+import useImageUpload from "../../../../hooks/useImageUpload";
 
 export default function EditMentor({ setshow, mentorData }: any) {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+
   const [updateMentor, { isLoading }] = useUpdateprofileMutation();
   const [form] = useForm();
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
+  const { imageUrl, setFile, imageFile } = useImageUpload();
 
   const {
     id,
@@ -47,6 +48,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
     expert,
   } = mentorData;
 
+  console.log(imageUrl, "url");
   useEffect(() => {
     form.setFieldsValue({
       image, // Set imageUrl directly, assuming it's a URL
@@ -59,7 +61,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
       category_id: category?.id,
     });
   }, [form, mentorData]);
-  console.log(imageFile);
+
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
     const formData = new FormData();
     if (imageFile) {
@@ -128,8 +130,8 @@ export default function EditMentor({ setshow, mentorData }: any) {
                   className={`avatar-uploader`}
                   showUploadList={false}
                   setLoading={setLoading}
-                  setImageUrl={setImageUrl}
-                  setImageFile={setImageFile}
+                  setImageUrl={() => {}}
+                  setImageFile={setFile}
                 >
                   <div
                     className=" bg-customPrimary absolute"
@@ -153,7 +155,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
                   </div>
                 </CustomUpload>
                 <img
-                  src={`${IMAGE_BASE_URL}/${image}`}
+                  src={imageUrl || `${IMAGE_BASE_URL}/${image}`}
                   alt="avatar"
                   style={{
                     width: "140px",
