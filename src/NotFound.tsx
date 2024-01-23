@@ -1,7 +1,8 @@
+import notFoundImage from "./assets/not found/not found.jpg";
 const NotFound = () => {
   return (
-    <div>
-      <h1>this is Notfound Page</h1>
+    <div className="h-screen">
+      <img className="h-[100vh] mx-auto" src={notFoundImage} alt="" />
     </div>
   );
 };

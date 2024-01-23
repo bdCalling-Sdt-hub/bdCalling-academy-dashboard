@@ -22,14 +22,14 @@ import { selectedFiledTheme } from "../../../../themes/Index";
 import { useForm } from "antd/es/form/Form";
 import errorResponse from "../../../../utils/errorResponse";
 import Loading from "../../../../component/UI/Loading/Loading";
+import useImageUpload from "../../../../hooks/useImageUpload";
 
 export default function CreateMentor({ setshow }: any) {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const { setFile, imageUrl, imageFile } = useImageUpload();
   const [register, { isLoading }] = useRegisterMutation();
   const [form] = useForm();
-  console.log(imageFile);
+
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
     if (data?.password !== data?.password_confirmation) {
@@ -102,8 +102,8 @@ export default function CreateMentor({ setshow }: any) {
                   className={`avatar-uploader`}
                   showUploadList={false}
                   setLoading={setLoading}
-                  setImageUrl={setImageUrl}
-                  setImageFile={setImageFile}
+                  setImageUrl={() => {}}
+                  setImageFile={setFile}
                 >
                   <div
                     className=" bg-customPrimary absolute"

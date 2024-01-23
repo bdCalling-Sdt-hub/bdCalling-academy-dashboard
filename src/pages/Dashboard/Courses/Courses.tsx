@@ -9,14 +9,17 @@ import style from "./courses.module.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { useGetallCourseQuery } from "../../../redux/api/courseApi";
 export default function Courses() {
-  const [courseType, setCourseType] = useState("All");
+  const [courseType, setCourseType] = useState<string | null>(null);
 
-  const handleButtonClick = (type: string) => {
+  const handleFilterCourse = (type: string | null) => {
     setCourseType(type);
   };
-
-  const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
+  const queryParameters = courseType !== null ? { status: courseType } : {};
+  const { data: courseData, isLoading }: any =
+    useGetallCourseQuery(queryParameters);
   const courses = courseData?.data?.data;
+  console.log(courseData, "courseData");
+  console.log(courseType);
   return (
     <div className="">
       <div className="flex justify-between items-center mb-[30px]">
@@ -30,33 +33,33 @@ export default function Courses() {
       </div>
       <div className=" flex  gap-x-4">
         <button
-          className={courseType === "All" ? style.activeBtn : style.inActiveBtn}
-          onClick={() => handleButtonClick("All")}
+          className={courseType === null ? style.activeBtn : style.inActiveBtn}
+          onClick={() => handleFilterCourse(null)}
         >
           All Course
         </button>
         <button
           className={
-            courseType === "Offline" ? style.activeBtn : style.inActiveBtn
+            courseType === "offline" ? style.activeBtn : style.inActiveBtn
           }
-          onClick={() => handleButtonClick("Offline")}
+          onClick={() => handleFilterCourse("offline")}
         >
           Offline Course
         </button>
         <button
           className={
-            courseType === "Online" ? style.activeBtn : style.inActiveBtn
+            courseType === "online" ? style.activeBtn : style.inActiveBtn
           }
-          onClick={() => handleButtonClick("Online")}
+          onClick={() => handleFilterCourse("online")}
         >
           Online Course
         </button>
 
         <button
           className={
-            courseType === "Video" ? style.activeBtn : style.inActiveBtn
+            courseType === "video" ? style.activeBtn : style.inActiveBtn
           }
-          onClick={() => handleButtonClick("Video")}
+          onClick={() => handleFilterCourse("video")}
         >
           Video Course
         </button>

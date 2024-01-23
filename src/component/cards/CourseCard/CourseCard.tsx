@@ -15,7 +15,6 @@ import style from "./courseCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
 export default function CourseCard({ course, courseType }: any) {
-  console.log("couirse", course);
   const navigate = useNavigate();
   const {
     id,
@@ -59,39 +58,21 @@ export default function CourseCard({ course, courseType }: any) {
             </p>
           </div>
 
-          {courseType !== "Online" && courseType !== "Video" ? (
-            <div className="flex justify-between items-center text-[#5C5C5C]  ">
-              <div className="text-base flex items-center gap-x-3">
-                <span className="text-customPrimary">
-                  <GoPeople />
-                </span>
-                <p className="">{seat_left}</p>
-              </div>
-              <div className="flex items-center gap-x-3">
-                <span className="text-customPrimary">
-                  <CiClock2 />
-                </span>
-                <p>{end_date}</p>
-              </div>
+          <div className="flex justify-between items-center text-[#5C5C5C]  ">
+            <div className="text-base flex items-center gap-x-3">
+              <span className="text-customPrimary">
+                <GoPeople />
+              </span>
+              <p className="">{seat_left}</p>
             </div>
-          ) : (
-            <div className="flex items-center justify-between">
-              <div className="text-base flex items-center gap-x-3 text-[#5C5C5C]">
-                <span className="text-customPrimary">
-                  <IoNewspaperOutline />
-                </span>
-                <p className="">Lessons {lesson}</p>
-              </div>
-              {courseType === "Video" && (
-                <div className="text-base flex items-center gap-x-3 text-[#5C5C5C]">
-                  <span className="text-customPrimary">
-                    <PiVideoLight />
-                  </span>
-                  <p className="">Videos {videoDuration}</p>
-                </div>
-              )}
+            <div className="flex items-center gap-x-3">
+              <span className="text-customPrimary">
+                <CiClock2 />
+              </span>
+              <p>{end_date}</p>
             </div>
-          )}
+          </div>
+
           <hr className="text-[#EBEBEB]  mt-[30px] mb-[20px]" />
           <h1 className="text-[18px] font-semibold text-customPrimary">
             {courseName}

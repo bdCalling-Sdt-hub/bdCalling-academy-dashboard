@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { baseApi } from "./baseApi";
@@ -14,9 +15,10 @@ const CourseApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.course],
     }),
     getallCourse: builder.query({
-      query: () => ({
+      query: (params: any) => ({
         url: "/course",
         method: "GET",
+        params: params,
       }),
       providesTags: [tagTypes.course],
     }),
