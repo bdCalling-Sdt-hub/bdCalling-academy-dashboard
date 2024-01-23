@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { baseApi } from "./baseApi";
@@ -19,22 +20,23 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: userInfo,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.user, tagTypes.mentor],
     }),
     getmyprofile: builder.query({
       query: () => ({
         url: "/profile",
         method: "GET",
       }),
-      providesTags: [tagTypes.user],
+      providesTags: [tagTypes.user, tagTypes.mentor],
     }),
     updateprofile: builder.mutation({
       query: (data: any) => ({
         url: `/profile/edit/${data?.id}`,
-        method: "PUT",
+        method: "POST",
         params: { _method: "PUT" },
         body: data.body,
       }),
+      providesTags: [tagTypes.user, tagTypes.mentor],
     }),
     deleteProfile: builder.mutation({
       query: (id: number) => ({
@@ -42,6 +44,34 @@ const authApi = baseApi.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: [tagTypes.user, tagTypes.mentor],
+    }),
+    forgetPassword: builder.mutation({
+      query: (email: string) => ({
+        url: "/forget-pass",
+        method: "POST",
+        body: email,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (data: any) => ({
+        url: "/reset-pass",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updatePassword: builder.mutation({
+      query: (data: any) => ({
+        url: "/update-pass",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    verifyOtp: builder.mutation({
+      query: (params: any) => ({
+        url: "/otp-checker",
+        method: "POST",
+        parmas: params,
+      }),
     }),
   }),
 });
@@ -52,4 +82,7 @@ export const {
   useRegisterMutation,
   useUpdateprofileMutation,
   useDeleteProfileMutation,
+  useForgetPasswordMutation,
+  useVerifyOtpMutation,
+  useUpdatePasswordMutation,
 } = authApi;

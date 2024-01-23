@@ -63,12 +63,12 @@ export default function SignIn() {
         }
         dispatch(setUser({ token: result.access_token, user: newUser }));
         console.log(user);
-        navigate(`/${newUser.userType}/dashboard`);
+        navigate(`/`);
       }
       console.log(newUser);
     } catch (error: any) {
       console.log(error);
-      message.error(error?.data?.error);
+      message.error(error?.data?.message);
     }
   };
 

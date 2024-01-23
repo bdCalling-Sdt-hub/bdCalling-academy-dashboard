@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Col, Row, Form, Input, DatePicker } from "antd";
+import { Col, Row, Form, Input, DatePicker, Button, message } from "antd";
 import style from "./Profile.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import personImage from "../../../assets/students/student.svg";
 import { EditOutlined } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import CustomUpload from "../../../component/UI/Upload/Upload";
+import {
+  useGetmyprofileQuery,
+  useUpdateprofileMutation,
+} from "../../../redux/api/authApi";
+import { IMAGE_BASE_URL } from "../../../utils/Common";
 export default function Profile() {
   const img = "https://shorturl.at/qvEFR";
   let role = "student";
@@ -17,15 +24,44 @@ export default function Profile() {
   const [show, setshow] = useState(false);
   const [action, setAction] = useState("");
   const [form] = Form.useForm();
-  const onFinish = (data: any) => {
-    const finalData = {
-      ...data,
-      dateOfBirth: data.dateOfBirth.format("DD-MM-YYYY"),
-      registrationDate: data.registrationDate.format("DD-MM-YYYY"),
-    };
-    console.log(finalData);
+  const { data: profileData }: any = useGetmyprofileQuery(undefined);
+  const [updateProfile] = useUpdateprofileMutation();
+  useEffect(() => {
+    form.setFieldsValue({
+      image: profileData?.user?.image, // Set imageUrl directly, assuming it's a URL
+      fullName: profileData?.user?.fullName,
+      mobileNumber: profileData?.user?.mobileNumber,
+      bloodGroup: profileData?.user?.bloodGroup,
+      address: profileData?.user?.address,
+      email: profileData?.user?.email,
+    });
+  }, [profileData?.user, form]);
+  const onFinish = async (data: any) => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    for (const [key, value] of Object.entries(data)) {
+      console.log(key, value);
+      // @ts-ignore
+      formData.append(key, value);
+    }
+    try {
+      const res: any = await updateProfile({
+        id: profileData?.user?.id,
+        body: formData,
+      }).unwrap();
+      if (res) {
+        message.info(res?.message);
+        // form.resetFields();
+      }
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      message.error("something went wrong. please try again later");
+    }
   };
-  console.log(action);
 
   const onFinishFailed = (data: any) => {
     console.log(data);
@@ -35,10 +71,10 @@ export default function Profile() {
   };
 
   const handleEditProfile = async () => {
-    console.log("called");
     form.submit();
     setAction("save");
   };
+
   return (
     <div className=" h-screen ">
       <CustomModal
@@ -72,19 +108,22 @@ export default function Profile() {
           <div className={`${style.studentImageSection}  `}>
             <div className="relative">
               <div className="">
-                {img && (
-                  <img
-                    src={imageUrl ? imageUrl : img}
-                    alt="avatar"
-                    className="student-image"
-                    style={{
-                      width: "250px",
-                      height: "250px",
-                      borderRadius: "50%",
-                      objectFit: "cover", // Ensure the image covers the container
-                    }}
-                  />
-                )}
+                <img
+                  src={
+                    imageUrl ||
+                    (profileData?.user?.image &&
+                      `${IMAGE_BASE_URL}/${profileData.user.image}`) ||
+                    personImage
+                  }
+                  alt="avatar"
+                  className="student-image"
+                  style={{
+                    width: "250px",
+                    height: "250px",
+                    borderRadius: "50%",
+                    objectFit: "cover", // Ensure the image covers the container
+                  }}
+                />
               </div>
               <div className="absolute right-5 top-[225px]">
                 <CustomUpload
@@ -124,7 +163,7 @@ export default function Profile() {
           <div className={style.editStudentContainer}>
             <Form
               disabled={action !== "edit"}
-              initialValues={{}}
+              initialValues={profileData?.user}
               form={form}
               className="mt-4"
               onFinish={onFinish}
@@ -133,19 +172,24 @@ export default function Profile() {
               <Row gutter={16}>
                 <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
-                    name="name"
-                    key="name"
+                    name="fullName"
+                    key="fullName"
                     rules={[
                       {
                         required: true,
                         message: "Please input student name",
+                      },
+                      {
+                        min: 2,
+                        message: "Full name must be at least 2 characters",
                       },
                     ]}
                   >
                     <Input
                       size="large"
                       type="text"
-                      name="name"
+                      // name="fullName"
+
                       placeholder="name"
                       className={style.input}
                     />
@@ -153,24 +197,35 @@ export default function Profile() {
                 </Col>
                 <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
-                    name="phone"
-                    key="phone"
+                    name="mobileNumber"
+                    key="mobileNumber"
                     rules={[
                       {
                         required: true,
                         message: "Please input student mobile number",
+                      },
+                      {
+                        min: 11,
+                        message:
+                          "minimum number must be at least 11 characters",
+                      },
+                      {
+                        max: 11,
+                        message: "maximum mobile number is 11 digit",
                       },
                     ]}
                   >
                     <Input
                       size="large"
                       type="number"
-                      name="phone"
+                      // name="mobileNumber"
+                      // key="mobileNumber"
                       placeholder="mobile number"
                       className={style.input}
                     />
                   </Form.Item>
                 </Col>
+
                 <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="email"
@@ -191,7 +246,8 @@ export default function Profile() {
                     />
                   </Form.Item>
                 </Col>
-                <Col lg={12} xl={12} className="mb-[15px]">
+
+                {/* <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="batchNo"
                     key="batchNo"
@@ -209,8 +265,8 @@ export default function Profile() {
                       className={style.input}
                     />
                   </Form.Item>
-                </Col>
-                <Col lg={12} xl={12} className="mb-[15px]">
+                </Col> */}
+                {/* <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="registrationDate"
                     key="registrationDate"
@@ -222,8 +278,8 @@ export default function Profile() {
                       className={style.input}
                     />
                   </Form.Item>
-                </Col>
-                <Col lg={12} xl={12} className="mb-[15px]">
+                </Col> */}
+                {/* <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="dateOfBirth"
                     key="dateOfBirth"
@@ -240,8 +296,8 @@ export default function Profile() {
                       className={style.input}
                     />
                   </Form.Item>
-                </Col>
-                <Col lg={12} xl={12} className="mb-[15px]">
+                </Col> */}
+                {/* <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     rules={[
                       {
@@ -257,13 +313,13 @@ export default function Profile() {
                       className={style.input}
                     />
                   </Form.Item>
-                </Col>
+                </Col> */}
                 <Col lg={12} xl={12} className="mb-[15px]">
-                  <Form.Item rules={[]} name="blood" key="blood">
+                  <Form.Item rules={[]} name="bloodGroup" key="bloodGroup">
                     <Input
                       size="large"
                       type="text"
-                      name="blood"
+                      name="bloodGroup"
                       placeholder="blood group"
                       className={style.input}
                     />
@@ -273,12 +329,12 @@ export default function Profile() {
                   <Form.Item
                     name="address"
                     key="address"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input address",
-                      },
-                    ]}
+                    // rules={[
+                    //   {
+                    //     required: true,
+                    //     message: "Please input address",
+                    //   },
+                    // ]}
                   >
                     <Input
                       size="large"

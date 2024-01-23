@@ -33,7 +33,7 @@ export const sidebarItems = (role: string) => {
   ];
   const adminSidebarItems: MenuProps["items"] = [
     {
-      key: `/${role}/dashboard`,
+      key: `/`,
       label: "Dashboard",
       icon: <MdOutlineDashboard />,
     },

@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../pages/Signin/Signin";
 import Email from "../pages/ForgetPassword/Email/Email";
 import Otp from "../pages/ForgetPassword/SigninOtp/SigninOtp";
-import UpdatePassword from "../pages/ForgetPassword/updatePassword/UpdatePassword";
+
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Students from "../pages/Dashboard/Students/Students";
@@ -35,6 +35,7 @@ import MentorRoutes from "./MentorRoutes";
 import Category from "../pages/Dashboard/Category/Category";
 import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
+import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
 
 export const router = createBrowserRouter([
   // {
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/SUPER_ADMIN/dashboard",
+        path: "/",
         element: (
           <AdminRoutes>
             <Dashboard />
@@ -122,7 +123,7 @@ export const router = createBrowserRouter([
         path: "/SUPER_ADMIN/courses/edit/modulelist/:id",
         element: (
           <AdminRoutes>
-            <EditModuleList></EditModuleList>s
+            <EditModuleList></EditModuleList>
           </AdminRoutes>
         ),
       },
@@ -244,8 +245,8 @@ export const router = createBrowserRouter([
     element: <Otp></Otp>,
   },
   {
-    path: "/forgetpassword/update",
-    element: <UpdatePassword></UpdatePassword>,
+    path: "/verified/:id",
+    element: <ResetPassword></ResetPassword>,
   },
   {
     path: "*",

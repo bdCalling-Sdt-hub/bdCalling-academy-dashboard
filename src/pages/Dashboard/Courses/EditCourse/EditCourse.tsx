@@ -32,6 +32,7 @@ import {
 } from "../../../../redux/api/courseApi";
 
 import { useParams } from "react-router-dom";
+import dayjs from "dayjs";
 export default function EditCourse() {
   const { id } = useParams();
   console.log("id", id);
@@ -55,10 +56,10 @@ export default function EditCourse() {
       courseName: data?.data?.courseName,
       language: data?.data?.language,
       courseDetails: data?.data?.courseDetails,
-      // startDate: new Date(data?.data?.startDate),
+      startDate: dayjs(data?.data?.startDate),
       courseTimeLength: data?.data?.courseTimeLength,
       price: data?.data?.price,
-      mentorId: data?.data?.mentorId,
+      "mentorId[]": data?.data?.mentorId,
       maxStudentLength: data?.data?.maxStudentLength,
       skillLevel: data?.data?.skillLevel,
       address: data?.data?.address,
@@ -68,30 +69,25 @@ export default function EditCourse() {
       discount_price: data?.data?.discount_price,
       coupon_code: data?.data?.coupon_code,
       coupon_code_price: data?.data?.coupon_code_price,
-      // end_date: new Date(data?.data?.end_date),
+      end_date: dayjs(data?.data?.end_date),
       seat_left: data?.data?.seat_left,
       courseThumbnail: data?.data?.courseThumbnail,
-      careeropportunities: data?.data?.careeropportunities || [], // Check if it exists
-      carriculum: data?.data?.carriculum || [], // Check if it exists
-      job_position: data?.data?.job_position || [], // Check if it exists
-      software: data?.data?.software || [], // Check if it exists
+      "careeropportunities[]": data?.data?.careeropportunities || [], // Check if it exists
+      "carriculum[]": data?.data?.carriculum || [], // Check if it exists
+      "job_position[]": data?.data?.job_position || [], // Check if it exists
+      "software[]": data?.data?.software || [], // Check if it exists
     });
   }, [data, form]);
 
-  console.log(file, "file");
+  console.log(typeof new Date(data?.data?.startDate));
   const onFinish = async (values: any) => {
+    console.log(values);
     const finalData = {
       ...values,
       startDate: values.startDate.format("YYYY-MM-DD"),
       end_date: values.startDate.format("YYYY-MM-DD"),
       publish: values?.publish === true ? "1" : "0",
     };
-
-    console.log(finalData);
-    if (!file) {
-      message.error("please select a course thumbnail");
-      return;
-    }
 
     try {
       const formData = new FormData();
@@ -532,6 +528,9 @@ export default function EditCourse() {
                         >
                           <div className="flex items-cEnter gap-x-2">
                             <Input
+                              value={
+                                data?.data?.careeropportunities[field?.key]
+                              }
                               className="py-2"
                               placeholder="Enter careeropportunities"
                             />
@@ -551,11 +550,7 @@ export default function EditCourse() {
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List
-                  name="carriculum[]"
-                  key="carriculum[]"
-                  initialValue={[{ key: "0", value: "" }]}
-                >
+                <Form.List name="carriculum[]" key="carriculum[]">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
@@ -571,6 +566,7 @@ export default function EditCourse() {
                         >
                           <div className="flex items-center gap-x-2">
                             <Input
+                              value={data?.data?.carriculum[field?.key]}
                               className="py-2"
                               placeholder="Enter carriculum"
                             />
@@ -590,11 +586,7 @@ export default function EditCourse() {
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List
-                  name="job_position[]"
-                  key="job_position[]"
-                  initialValue={[{ key: "0", value: "" }]}
-                >
+                <Form.List name="job_position[]" key="job_position[]">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
@@ -610,6 +602,7 @@ export default function EditCourse() {
                         >
                           <div className="flex items-cEnter gap-x-2">
                             <Input
+                              value={data?.data?.job_position[field?.key]}
                               className="py-2"
                               placeholder="Enter job_position"
                             />
@@ -629,11 +622,7 @@ export default function EditCourse() {
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List
-                  name="software[]"
-                  key="software[]"
-                  initialValue={[{ key: "0", value: "" }]}
-                >
+                <Form.List name="software[]" key="software[]">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
@@ -649,6 +638,7 @@ export default function EditCourse() {
                         >
                           <div className="flex items-cEnter gap-x-2">
                             <Input
+                              value={data?.data?.software[field?.key]}
                               className="py-2"
                               placeholder="Enter softwares"
                             />

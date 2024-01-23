@@ -5,8 +5,8 @@ export const storeUserInfo = (key: string, value: any) => {
 export const storeToken = (key: string, value: any) => {
   localStorage.setItem(key, value);
 };
-export const getuserInfo = () => {
-  return localStorage.user ?? {};
+export const getuserInfo = (key: string) => {
+  return localStorage.getItem(key) ?? {};
 };
 export const getToken = () => {
   return localStorage.user ?? {};

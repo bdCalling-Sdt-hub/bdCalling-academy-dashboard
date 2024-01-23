@@ -6,15 +6,17 @@ import CustomModal from "../../../component/UI/Modal/Modal";
 import { useState } from "react";
 import ChangePassword from "../../../component/ChangePasswordForm/ChangePasswordForm";
 import OtpForm from "../../../component/OtpForm/OtpForm";
-import { getuser } from "../../../service/auth.service";
 
 import UpdatePasswordForm from "../../../component/UpdatePasswordForm/UpdatePasswordForm";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentUser } from "../../../redux/features/auth/authSlice";
 
 export default function Setting() {
   const [open, setOpen] = useState(false);
   const [openOtpModal, setOpenOtpModal] = useState(false);
   const [openUpdatePasswordModal, setOpenUpdatePasswordModal] = useState(false);
-  const { email } = getuser("user") || {};
+  const user: any = useAppSelector(useCurrentUser);
+  const { email }: any = useAppSelector(useCurrentUser);
   const onChange = (checked: boolean) => {
     console.log(`switch to ${checked}`);
   };
@@ -98,6 +100,12 @@ export default function Setting() {
           />
         </div>
       </CustomModal>
+      <div className="flex bg-[#fff] mb-[20px] justify-between p-4 rounded ">
+        <p className="text-[#333] text-lg">Profile</p>
+        <Link to={`/profile/${user?.id}`}>
+          <RightOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
+        </Link>
+      </div>
       <div className="flex bg-[#fff] justify-between p-4 rounded ">
         <p className="text-[#333] text-lg">Notification</p>
         <Switch defaultChecked onChange={onChange} />

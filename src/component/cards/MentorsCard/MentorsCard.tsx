@@ -37,7 +37,7 @@ export default function MentorsCard(props: any) {
         isOpen={show}
         closeModal={() => setshow(false)}
       >
-        <EditMentor setshow={setshow} mentorData={props.mentor} />
+        <EditMentor setshow={setshow} mentorData={props?.mentor} />
       </CustomModal>
       <Card
         hoverable
