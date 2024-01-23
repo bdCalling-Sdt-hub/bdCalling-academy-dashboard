@@ -24,6 +24,8 @@ import { sidebarItems } from "../constants/sidebarItems";
 
 import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useGetmyprofileQuery } from "../redux/api/authApi";
+import { IMAGE_BASE_URL } from "../utils/Common";
 
 interface Inotification {
   id: string;
@@ -36,6 +38,7 @@ interface Inotification {
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const { data: profileData }: any = useGetmyprofileQuery(undefined);
 
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
@@ -266,13 +269,15 @@ const DashboardLayout = () => {
               <div className="ms-[20px]">
                 <div className="flex items-center gap-x-4">
                   <img
-                    src="https://t.ly/18Nvk"
+                    src={`${IMAGE_BASE_URL}/${profileData?.user?.image}`}
                     className="w-[40px] h-[40px] object-cover rounded-full"
                     alt=""
                   />
 
                   <div className="my-[2px]">
-                    <h1 className="font-semibold">Mr. Admin John Doe</h1>
+                    <h1 className="font-semibold">
+                      {profileData?.user?.fullName}
+                    </h1>
                   </div>
                 </div>
               </div>

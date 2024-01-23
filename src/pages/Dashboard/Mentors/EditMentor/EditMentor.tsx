@@ -79,7 +79,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
       const res: any = await updateMentor({ id: id, body: formData }).unwrap();
       console.log("response", res);
       if (res?.message) {
-        message.info(res?.message);
+        message.success(res?.message);
         form.resetFields();
         setshow(false);
         setImageUrl(null);

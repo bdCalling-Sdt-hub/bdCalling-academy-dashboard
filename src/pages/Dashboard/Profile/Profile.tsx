@@ -15,12 +15,10 @@ import {
   useUpdateprofileMutation,
 } from "../../../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
+import useImageUpload from "../../../hooks/useImageUpload";
 export default function Profile() {
-  const img = "https://shorturl.at/qvEFR";
-  let role = "student";
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const { imageUrl, setFile, setImageUrl, imageFile } = useImageUpload();
   const [show, setshow] = useState(false);
   const [action, setAction] = useState("");
   const [form] = Form.useForm();
@@ -91,11 +89,10 @@ export default function Profile() {
         />
       </CustomModal>
       <div className="flex justify-end gap-x-[30px]">
-        {role !== "admin" && (
-          <button onClick={() => setshow(true)} className={style.saveBtn}>
-            CHANGE PASSWORD
-          </button>
-        )}
+        <button onClick={() => setshow(true)} className={style.saveBtn}>
+          CHANGE PASSWORD
+        </button>
+
         {(action === "save" || action === "") && (
           <button className={style.editBtn} onClick={() => setAction("edit")}>
             EDIT
@@ -137,7 +134,7 @@ export default function Profile() {
                   showUploadList={false}
                   setLoading={setLoading}
                   setImageUrl={setImageUrl}
-                  setImageFile={setImageFile}
+                  setImageFile={setFile}
                 >
                   <div
                     className=" bg-customPrimary"

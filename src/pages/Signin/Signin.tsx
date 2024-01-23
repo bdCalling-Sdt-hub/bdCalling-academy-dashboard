@@ -62,13 +62,12 @@ export default function SignIn() {
           newUser = { ...user.user, userType: "SUPER_ADMIN" };
         }
         dispatch(setUser({ token: result.access_token, user: newUser }));
-        console.log(user);
         navigate(`/`);
       }
       console.log(newUser);
     } catch (error: any) {
       console.log(error);
-      message.error(error?.data?.message);
+      message.error(error?.data?.error);
     }
   };
 
