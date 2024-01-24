@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 
 import studentsLogo from "../../../assets/students/student.svg";
 import { MdOutlineShowChart } from "react-icons/md";
-export default function StudentSurvey() {
+export default function StudentSurvey({ students }: any) {
   const percantage = 10;
   return (
     <Row gutter={16}>
@@ -27,7 +28,7 @@ export default function StudentSurvey() {
                   color: "#2492EB",
                 }}
               >
-                72k
+                {students?.length}
               </h1>
             </div>
           </div>
@@ -60,7 +61,7 @@ export default function StudentSurvey() {
                   color: "#2492EB",
                 }}
               >
-                20k
+                {students?.length}
               </h1>
             </div>
           </div>
@@ -93,7 +94,7 @@ export default function StudentSurvey() {
                   color: "#2492EB",
                 }}
               >
-                5k
+                0
               </h1>
             </div>
           </div>

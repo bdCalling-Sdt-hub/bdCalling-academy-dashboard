@@ -202,7 +202,7 @@ export default function Students() {
   ];
   return (
     <div className=" h-screen">
-      <StudentSurvey></StudentSurvey>
+      <StudentSurvey students={studentData?.data?.data}></StudentSurvey>
       <div className="mt-6">
         <div
           className="flex 

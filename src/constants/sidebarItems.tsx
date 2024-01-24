@@ -7,8 +7,11 @@ import { IoPersonCircleOutline, IoSettingsOutline } from "react-icons/io5";
 import { LuClipboardList, LuFolders } from "react-icons/lu";
 import { MdOutlineDashboard } from "react-icons/md";
 import { PiIdentificationCard } from "react-icons/pi";
-export const sidebarItems = (role: string) => {
+// import { useGetmyprofileQuery } from "../redux/api/authApi";
+export const SidebarItems = (role: string) => {
   console.log(role);
+  // const { data: userData } = useGetmyprofileQuery(undefined);
+  // console.log(userData);
   const defaultSidebarItems: MenuProps["items"] = [
     {
       key: `/${role}/class-schedule`,

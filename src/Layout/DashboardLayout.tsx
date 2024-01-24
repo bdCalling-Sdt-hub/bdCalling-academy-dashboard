@@ -20,12 +20,12 @@ import {
 } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
-import { sidebarItems } from "../constants/sidebarItems";
 
 import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetmyprofileQuery } from "../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../utils/Common";
+import { SidebarItems } from "../constants/sidebarItems";
 
 interface Inotification {
   id: string;
@@ -54,10 +54,10 @@ const DashboardLayout = () => {
       .then((data) => setnotifications(data));
   }, []);
 
-  const selectedKey =
-    // @ts-ignore
-    sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
-    `/${role}/dashboard`;
+  // const selectedKey =
+  //   // @ts-ignore
+  //   sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
+  //   `/${role}/dashboard`;
 
   const handleSelectLanguage = (value: any) => {
     setSelectedLanguage(value);
@@ -192,7 +192,7 @@ const DashboardLayout = () => {
               // defaultSelectedKeys={[sidebarItems[0].key]}
 
               // @ts-ignore
-              items={sidebarItems(role)}
+              items={SidebarItems(role)}
               onClick={handleMenuSelect}
             ></Menu>
           </div>

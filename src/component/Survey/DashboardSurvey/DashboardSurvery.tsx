@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 import studentsLogo from "../../../assets/dashboard-icon/student.svg";
 import videoLogo from "../../../assets/dashboard-icon/video.svg";
@@ -5,8 +6,15 @@ import teacherLogo from "../../../assets/dashboard-icon/teacher.svg";
 import cashLogo from "../../../assets/dashboard-icon/cash.svg";
 import { MdOutlineShowChart } from "react-icons/md";
 
+import useAllStudents from "../../../hooks/useAllStudents";
+import useAllMentors from "../../../hooks/useAllMentors";
+import useALLCourses from "../../../hooks/useAllCourses";
+
 export default function DashboardSurvery() {
   const percantage = 10;
+  const [studentsData] = useAllStudents();
+  const [mentorsData] = useAllMentors();
+  const [coursesData] = useALLCourses();
   return (
     <div>
       <Row gutter={16}>
@@ -31,7 +39,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  5000
+                  {studentsData?.data?.data?.length}
                 </h1>
               </div>
             </div>
@@ -64,7 +72,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  7
+                  {coursesData?.data?.data?.length}
                 </h1>
               </div>
             </div>
@@ -98,7 +106,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  50
+                  {mentorsData?.data?.length}
                 </h1>
               </div>
             </div>
@@ -106,9 +114,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="tracking-wide">
-                {percantage} Higher Then Last Month
-              </p>
+              <p className="tracking-wide">Higher Then Last Month</p>
             </div>
           </div>
         </Col>

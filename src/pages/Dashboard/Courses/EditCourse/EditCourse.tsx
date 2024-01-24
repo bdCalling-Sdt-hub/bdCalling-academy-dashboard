@@ -71,13 +71,13 @@ export default function EditCourse() {
       coupon_code_price: data?.data?.coupon_code_price,
       end_date: dayjs(data?.data?.end_date),
       seat_left: data?.data?.seat_left,
-      courseThumbnail: data?.data?.courseThumbnail,
+      courseThumbnail: file ? file : {},
       "careeropportunities[]": data?.data?.careeropportunities || [], // Check if it exists
       "carriculum[]": data?.data?.carriculum || [], // Check if it exists
       "job_position[]": data?.data?.job_position || [], // Check if it exists
       "software[]": data?.data?.software || [], // Check if it exists
     });
-  }, [data, form]);
+  }, [data, form, file]);
 
   console.log(typeof new Date(data?.data?.startDate));
   const onFinish = async (values: any) => {

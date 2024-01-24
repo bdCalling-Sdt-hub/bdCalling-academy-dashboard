@@ -41,22 +41,22 @@ export default function SignIn() {
   const form = location?.state?.from.pathname;
   const [signin] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
+
   const currentUser = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
-  const { data: user }: any = useGetmyprofileQuery({
-    skip: !currentUser,
-  });
+  const { data: user }: any = useGetmyprofileQuery({ skip: !token });
 
   const onSubmit = async (data: any) => {
     try {
       const result: any = await signin(data).unwrap();
-      if (result?.data) {
-        dispatch(setUser({ token: token }));
-        storeToken("token", result?.data?.access_Token);
+      if (result) {
+        console.log("hitted");
+        dispatch(setUser({ token: result.access_token }));
       }
       console.log(result);
       let newUser: any = {};
       if (user) {
+        console.log("hitted user");
         newUser = { ...user.user };
         if (user?.user?.userType === "SUPER ADMIN") {
           newUser = { ...user.user, userType: "SUPER_ADMIN" };
