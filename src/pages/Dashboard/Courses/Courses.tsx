@@ -21,7 +21,7 @@ export default function Courses() {
   console.log(courseData, "courseData");
   console.log(courseType);
   return (
-    <div className="">
+    <div className="h-screen">
       <div className="flex justify-between items-center mb-[30px]">
         <h1 className="text-2xl  font-semibold  text-customHeader">Courses</h1>
         <Link to="/SUPER_ADMIN/courses/add">

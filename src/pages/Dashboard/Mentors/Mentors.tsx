@@ -11,15 +11,13 @@ import {
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateMentor from "./CreateMentor/CreateMentor";
 import { useGetallmentorsQuery } from "../../../redux/api/mentorApi";
-import Loading from "../../../component/UI/Loading/Loading";
 
 export default function Mentors() {
   const [show, setshow] = useState(false);
   const handleShowModal = () => {
     setshow(true);
   };
-  const { data: mentorsData, isLoading }: any =
-    useGetallmentorsQuery(undefined);
+  const { data: mentorsData }: any = useGetallmentorsQuery(undefined);
 
   const onClick: MenuProps["onClick"] = ({ key }) => {
     message.info(`Click on item ${key}`);
@@ -37,9 +35,9 @@ export default function Mentors() {
       key: "1",
     },
   ];
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
   return (
     <div className="h-screen">
       <CustomModal

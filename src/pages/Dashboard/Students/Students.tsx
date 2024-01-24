@@ -27,11 +27,13 @@ import {
 } from "../../../redux/api/StudentApi";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
 import { useState } from "react";
+import CustomModal from "../../../component/UI/Modal/Modal";
+import CreateStudents from "./createStudent/CreateStudents";
 
 export default function Students() {
   const [approveId, setApproveId] = useState<null | number>(null);
   const [disapproveId, setdisApproveId] = useState<null | number>(null);
-
+  const [show, setshow] = useState(false);
   const {
     data: studentData,
     isLoading,
@@ -53,8 +55,8 @@ export default function Students() {
   if (disapproveStudentData) {
     message.info(disapproveStudentData.message);
   }
-  const handleDownload = () => {
-    console.log("Downloading students...");
+  const handleAddStudents = () => {
+    setshow(true);
   };
   const handleApprove = (id: number, value: string) => {
     console.log(id, value);
@@ -202,6 +204,15 @@ export default function Students() {
   ];
   return (
     <div className=" h-screen">
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <CreateStudents setshow={setshow} />
+      </CustomModal>
       <StudentSurvey students={studentData?.data?.data}></StudentSurvey>
       <div className="mt-6">
         <div
@@ -238,7 +249,7 @@ export default function Students() {
           </div>
           <button
             className="bg-customPrimary text-[#fff] p-[16px] rounded-lg text-[18px] font-[500]"
-            onClick={handleDownload}
+            onClick={handleAddStudents}
           >
             <PlusOutlined /> <span className="ms-2">Add Students</span>
           </button>
