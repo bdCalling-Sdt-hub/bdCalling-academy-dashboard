@@ -11,6 +11,7 @@ import {
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateMentor from "./CreateMentor/CreateMentor";
 import { useGetallmentorsQuery } from "../../../redux/api/mentorApi";
+import NoData from "../../../utils/NoData";
 
 export default function Mentors() {
   const [show, setshow] = useState(false);
@@ -75,13 +76,17 @@ export default function Mentors() {
       </div>
 
       <div className="mt-[30px]">
-        <Row gutter={16} align={"middle"}>
-          {mentorsData?.data?.map((mentor: any, index: number) => (
-            <Col key={index} lg={6} xl={6} style={{ marginBottom: "16px" }}>
-              <MentorsCard mentor={mentor}></MentorsCard>
-            </Col>
-          ))}
-        </Row>
+        {mentorsData ? (
+          <Row gutter={16} align={"middle"}>
+            {mentorsData?.data?.map((mentor: any, index: number) => (
+              <Col key={index} lg={6} xl={6} style={{ marginBottom: "16px" }}>
+                <MentorsCard mentor={mentor}></MentorsCard>
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <NoData />
+        )}
       </div>
     </div>
   );
