@@ -10,12 +10,13 @@ const According = ({
   moduleLenth,
 }: any) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log(moduleLenth, "module length");
+  console.log(index);
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
-  const shouldApplyBottomBorder = isOpen || index === moduleLenth - 1;
-
+  const shouldApplyBottomBorder = !isOpen && index === moduleLenth - 1;
+  console.log(shouldApplyBottomBorder);
   return (
     <div>
       <div

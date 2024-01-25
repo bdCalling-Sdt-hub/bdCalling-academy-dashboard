@@ -39,7 +39,7 @@ const ModuleList = ({
             title={module.module_title}
             moduleDuration={module.moduleDuration}
             index={moduleIndex}
-            moduleLenth={module?.data?.length}
+            moduleLenth={course?.data?.length}
           >
             {module?.module_class?.map((video: any, videoIndex: number) => (
               <Link

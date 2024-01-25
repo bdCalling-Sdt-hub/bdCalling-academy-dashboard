@@ -7,12 +7,17 @@ import style from "./studentCourseCard.module.css";
 import { Link } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
+import { useGetClassesbyCourseIdQuery } from "../../../redux/api/classApi";
 
 export default function StudentCoursesCard({ courses }: any) {
   const { id, courseThumbnail, courseName } = courses?.course || {};
+  console.log(courses);
+  console.log("coursEiD", id);
+  const { data: classes } = useGetClassesbyCourseIdQuery(id);
 
+  const lastClass = classes?.data[classes?.data?.length - 1];
   const courseImage = `${IMAGE_BASE_URL}/${courseThumbnail}`;
-  console.log(courseImage);
+
   const handleContinueCourse = () => {};
   return (
     <div>
@@ -32,7 +37,15 @@ export default function StudentCoursesCard({ courses }: any) {
         </h1>
 
         <div className="px-5 pb-[22px] pt-3">
-          <Link to={`/${courseName?.split(" ").join("-")}/${id}`}>
+          <Link
+            to={`/${courseName}/${id}/${lastClass?.id}/${
+              lastClass?.module_no
+            }/${lastClass?.module_class[
+              lastClass?.module_class?.length - 1
+            ]?.name
+              .split(" ")
+              .join("-")}`}
+          >
             <button
               onClick={handleContinueCourse}
               className={style.continueBtn}
