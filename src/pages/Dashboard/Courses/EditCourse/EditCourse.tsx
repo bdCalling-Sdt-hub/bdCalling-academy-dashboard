@@ -34,6 +34,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import moment from "moment";
+import { USER_ROLE } from "../../../../constants/role";
 export default function EditCourse() {
   const { id } = useParams();
   console.log("id", id);
@@ -105,8 +106,9 @@ export default function EditCourse() {
         body: formData,
       }).unwrap();
       if (res) {
+        message.info(res?.message);
         form.resetFields();
-        navigate("/course");
+        navigate(`${USER_ROLE.ADMIN}/course`);
       }
     } catch (err: any) {
       // message.error(err.data.message);

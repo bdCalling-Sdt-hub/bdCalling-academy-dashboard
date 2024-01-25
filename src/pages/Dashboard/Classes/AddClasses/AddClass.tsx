@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Col, ConfigProvider, Input, Row, Select } from "antd";
+import { Button, Col, ConfigProvider, Input, Row, Select, message } from "antd";
 
 import { Form } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -11,15 +11,22 @@ import { selectedFiledTheme } from "../../../../themes/Index";
 import { MdDelete } from "react-icons/md";
 import { useGetallCourseQuery } from "../../../../redux/api/courseApi";
 import { useAddClassesMutation } from "../../../../redux/api/classApi";
+import { useNavigate } from "react-router-dom";
+import { USER_ROLE } from "../../../../constants/role";
+import Loading from "../../../../component/UI/Loading/Loading";
 
 const AddClass = () => {
   const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
   const [addClass, { isLoading: addClassLoading }] = useAddClassesMutation();
+  const navigate = useNavigate();
   const [form] = useForm();
   const onFinish = async (data: any) => {
     try {
-      const res: any = await addClass(data);
-      console.log(res);
+      const res: any = await addClass(data).unwrap();
+      if (res) {
+        message.success(res.message);
+        navigate(`/${USER_ROLE.ADMIN}/courses`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -163,7 +170,7 @@ const AddClass = () => {
                     htmlType="submit"
                     className="bg-customPrimary"
                   >
-                    Submit
+                    {addClassLoading ? <Loading /> : "Submit"}
                   </Button>
                 </Form.Item>
               </div>
