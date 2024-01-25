@@ -29,6 +29,7 @@ const AddCategory = ({ setshow }: any) => {
         // @ts-ignore
         department_id: form.getFieldValue("department"),
       });
+      console.log(res);
       if (res.data) {
         message.info(res.data.message);
         setshow(false);

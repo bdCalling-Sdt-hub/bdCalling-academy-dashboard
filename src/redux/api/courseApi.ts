@@ -36,14 +36,14 @@ const CourseApi = baseApi.injectEndpoints({
         params: { _method: "PUT" },
         body: data?.body,
       }),
-      providesTags: [tagTypes.course],
+      invalidatesTags: [tagTypes.course],
     }),
     deleteCourse: builder.mutation({
       query: (id: number) => ({
         url: `/course/${id}`,
         method: "DELETE",
       }),
-      providesTags: [tagTypes.course],
+      invalidatesTags: [tagTypes.course],
     }),
   }),
 });

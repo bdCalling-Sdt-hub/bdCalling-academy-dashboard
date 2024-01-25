@@ -479,6 +479,7 @@ export default function Addcourse({ type, editableData }: any) {
                   name="courseDetails"
                   rules={[
                     { required: true, message: "Please input course name" },
+                    { min: 10, message: "Course Details " },
                   ]}
                 >
                   <TextArea

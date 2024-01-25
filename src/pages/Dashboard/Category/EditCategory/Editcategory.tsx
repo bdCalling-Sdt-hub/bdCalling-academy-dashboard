@@ -22,6 +22,7 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
         id,
         body: data,
       });
+      console.log(res);
       if (res.data) {
         message.info(res.data.message);
         setshow(false);

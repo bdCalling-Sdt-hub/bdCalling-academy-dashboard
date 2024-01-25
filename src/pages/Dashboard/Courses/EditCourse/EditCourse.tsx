@@ -31,8 +31,9 @@ import {
   useUpdateCourseMutation,
 } from "../../../../redux/api/courseApi";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import moment from "moment";
 export default function EditCourse() {
   const { id } = useParams();
   console.log("id", id);
@@ -50,42 +51,41 @@ export default function EditCourse() {
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    form.setFieldsValue({
-      courseName: data?.data?.courseName,
-      language: data?.data?.language,
-      courseDetails: data?.data?.courseDetails,
-      startDate: dayjs(data?.data?.startDate),
-      courseTimeLength: data?.data?.courseTimeLength,
-      price: data?.data?.price,
-      "mentorId[]": data?.data?.mentorId,
-      maxStudentLength: data?.data?.maxStudentLength,
-      skillLevel: data?.data?.skillLevel,
-      address: data?.data?.address,
-      category_id: data?.data?.category_id,
-      status: data?.data?.status,
-      batch: data?.data?.batch,
-      discount_price: data?.data?.discount_price,
-      coupon_code: data?.data?.coupon_code,
-      coupon_code_price: data?.data?.coupon_code_price,
-      end_date: dayjs(data?.data?.end_date),
-      seat_left: data?.data?.seat_left,
-      courseThumbnail: file ? file : {},
-      "careeropportunities[]": data?.data?.careeropportunities || [], // Check if it exists
-      "carriculum[]": data?.data?.carriculum || [], // Check if it exists
-      "job_position[]": data?.data?.job_position || [], // Check if it exists
-      "software[]": data?.data?.software || [], // Check if it exists
-    });
-  }, [data, form, file]);
-
-  console.log(typeof new Date(data?.data?.startDate));
+    if (data?.data) {
+      form.setFieldsValue({
+        courseName: data?.data?.courseName,
+        language: data?.data?.language,
+        courseDetails: data?.data?.courseDetails,
+        startDate: dayjs(data?.data?.startDate) || null,
+        courseTimeLength: data?.data?.courseTimeLength,
+        price: data?.data?.price,
+        "mentorId[]": data?.data?.mentorId,
+        maxStudentLength: data?.data?.maxStudentLength,
+        skillLevel: data?.data?.skillLevel,
+        address: data?.data?.address,
+        category_id: data?.data?.category_id,
+        status: data?.data?.status,
+        batch: data?.data?.batch,
+        discount_price: data?.data?.discount_price,
+        coupon_code: data?.data?.coupon_code,
+        coupon_code_price: data?.data?.coupon_code_price,
+        end_date: dayjs(data?.data?.end_date) || null,
+        seat_left: data?.data?.seat_left,
+        courseThumbnail: file ? file : {},
+        "careeropportunities[]": data?.data?.careeropportunities || [], // Check if it exists
+        "carriculum[]": data?.data?.carriculum || [], // Check if it exists
+        "job_position[]": data?.data?.job_position || [], // Check if it exists
+        "software[]": data?.data?.software || [], // Check if it exists
+      });
+    }
+  }, [data?.data, form, file]);
   const onFinish = async (values: any) => {
-    console.log(values);
+    console.log("values", values);
     const finalData = {
       ...values,
-      startDate: values.startDate.format("YYYY-MM-DD"),
-      end_date: values.startDate.format("YYYY-MM-DD"),
       publish: values?.publish === true ? "1" : "0",
     };
 
@@ -103,17 +103,17 @@ export default function EditCourse() {
       const res: any = await editCourse({
         id: data?.data?.id,
         body: formData,
-      });
-      console.log(res);
+      }).unwrap();
+      if (res) {
+        form.resetFields();
+        navigate("/course");
+      }
     } catch (err: any) {
       // message.error(err.data.message);
-      console.log(err);
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo: any) => {};
   const onReset = () => {
     console.log(form);
     form.resetFields();
@@ -175,7 +175,11 @@ export default function EditCourse() {
             layout="vertical"
             form={form}
             name="add-course"
-            initialValues={data?.data}
+            initialValues={{
+              ...data?.data,
+              startDate: dayjs(data?.data?.startDate),
+              end_date: dayjs(data?.data?.end_date),
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -216,8 +220,9 @@ export default function EditCourse() {
                   ]}
                 >
                   <DatePicker
+                    format="YYYY-MM-DD"
                     style={{ width: "100%", padding: "8px" }}
-                    placeholder="start date"
+                    placeholder="end date"
                   />
                 </Form.Item>
               </Col>
@@ -362,6 +367,7 @@ export default function EditCourse() {
                   rules={[{ required: true, message: "Please input end_date" }]}
                 >
                   <DatePicker
+                    format="YYYY-MM-DD"
                     style={{ width: "100%", padding: "8px" }}
                     placeholder="end date"
                   />

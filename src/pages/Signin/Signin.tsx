@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty */
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import axios from "axios";
 import singupImage from "../../assets/auth/isometric.svg";
 import logo from "../../assets/auth/Component 2.svg";
 import style from "./Signin.module.css";
@@ -40,31 +41,35 @@ export default function SignIn() {
   const location = useLocation();
   const form = location?.state?.from.pathname;
   const [signin] = useLoginMutation();
-  const token = useAppSelector(useCurrentToken);
 
-  const currentUser = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
-  const { data: user }: any = useGetmyprofileQuery({ skip: !token });
 
   const onSubmit = async (data: any) => {
     try {
       const result: any = await signin(data).unwrap();
       if (result) {
         console.log("hitted");
-        dispatch(setUser({ token: result.access_token }));
-      }
-      console.log(result);
-      let newUser: any = {};
-      if (user) {
-        console.log("hitted user");
-        newUser = { ...user.user };
-        if (user?.user?.userType === "SUPER ADMIN") {
-          newUser = { ...user.user, userType: "SUPER_ADMIN" };
+        const response = await axios.get(
+          "http://192.168.10.13:8000/api/profile/",
+          {
+            headers: {
+              Authorization: `Bearer ${result?.access_token}`,
+            },
+          }
+        );
+        let newUser = {};
+        if (response?.data?.user) {
+          newUser = { ...response?.data?.user };
+          if (response?.data?.user?.userType === "SUPER ADMIN") {
+            newUser = { ...response?.data?.user, userType: "SUPER_ADMIN" };
+          }
+          dispatch(setUser({ token: result.access_token, user: newUser }));
+          navigate(`/`);
         }
-        dispatch(setUser({ token: result.access_token, user: newUser }));
-        navigate(`/`);
       }
-      console.log(newUser);
+      // console.log(result);
+
+      // console.log(newUser);
     } catch (error: any) {
       console.log(error);
       message.error(error?.data?.error);
