@@ -18,7 +18,7 @@ export default function Courses() {
   const { data: courseData, isLoading }: any =
     useGetallCourseQuery(queryParameters);
   const courses = courseData?.data?.data;
-  console.log(courseData, "courseData");
+  console.log(courses, "courseData");
   console.log(courseType);
   return (
     <div className="h-screen">

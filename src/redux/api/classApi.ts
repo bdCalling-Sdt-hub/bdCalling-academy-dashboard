@@ -15,8 +15,8 @@ const classApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.class],
     }),
     getClassesbyCourseId: builder.query({
-      query: (data) => ({
-        url: `/class/${data.id}`,
+      query: (id: number) => ({
+        url: `/class/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.class, tagTypes.course],

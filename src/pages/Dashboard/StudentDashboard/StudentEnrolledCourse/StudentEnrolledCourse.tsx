@@ -6,6 +6,7 @@ import VideoPlayer from "../../../../component/UI/VideoPlayer/VideoPlayer";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import ModuleList from "../../../../component/Modulelist/ModuleList";
 import VideoNavigationButtons from "../../../../component/VideoNavigationButtons/VideoNavigationButtons";
+import { useGetClassesbyCourseIdQuery } from "../../../../redux/api/classApi";
 interface Video {
   id: string;
   video: string;
@@ -28,9 +29,12 @@ interface ICourse {
   modules: Module[];
 }
 export default function StudentEnrolledCourse() {
-  const { id } = useParams();
+  const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
+  console.log("courseid", courseTitle, videoTitle, moduleNo, classId);
   const navigate = useNavigate();
   const [course, setCourse] = useState<ICourse | null>(null);
+  const { data: classesData }: any = useGetClassesbyCourseIdQuery(Number(id));
+  console.log("classes", classesData);
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [videoInfo, setVideoInfo] = useState({
@@ -38,35 +42,46 @@ export default function StudentEnrolledCourse() {
     title: "",
     moduleId: 0,
   });
-  useEffect(() => {
-    fetch("/video.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const course = data.find(
-          (c: any) => c.id === "complete-html-course-01"
-        );
-        setCourse(course);
-      });
-  }, [id]);
-  useEffect(() => {
-    if (course?.modules && course.modules.length > 0) {
-      const selectedVideo =
-        course.modules[currentModuleIndex].videos[currentVideoIndex];
-      setVideoInfo({
-        videoId: selectedVideo.video,
-        title: selectedVideo.title,
-        moduleId: currentModuleIndex,
-      });
-      // setShowNextButton(
-      //   currentVideoIndex < course.modules[currentModuleIndex].videos.length - 1
-      // );
-      // setShowPrevButton(currentVideoIndex > 0);
-    }
-  }, [course, currentModuleIndex, currentVideoIndex, setVideoInfo]);
+  // useEffect(() => {
+  //   fetch("/video.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       const course = data.find(
+  //         (c: any) => c.id === "complete-html-course-01"
+  //       );
+  //       setCourse(course);
+  //     });
+  // }, [id]);
+  // useEffect(() => {
+  //   if (course?.modules && course.modules.length > 0) {
+  //     const selectedVideo =
+  //       course?.modules[currentModuleIndex]?.videos[currentVideoIndex];
+  //     setVideoInfo({
+  //       videoId: selectedVideo.video,
+  //       title: selectedVideo.title,
+  //       moduleId: currentModuleIndex,
+  //     });
+  //     // setShowNextButton(
+  //     //   currentVideoIndex < course.modules[currentModuleIndex].videos.length - 1
+  //     // );
+  //     // setShowPrevButton(currentVideoIndex > 0);
+  //   }
+  // }, [course, currentModuleIndex, currentVideoIndex, setVideoInfo]);
   const handleback = () => {
     navigate("/student/dashboard");
   };
+
+  const singleVideo = classesData?.data
+    ?.find((c: any) => c?.id == classId && c?.module_no == moduleNo)
+    ?.module_class?.find(
+      (video: any) => video?.name === videoTitle?.split("-").join(" ")
+    );
+  // const singleVideo = classesData?.data?.find((c: any) => {
+  //   c?.id == classId;
+  //   console.log("Fahim er matha", c?.id);
+  // });
+  console.log("singleVideo", singleVideo);
   return (
     <div className="h-screen">
       <div className="flex justify-around ">
@@ -84,9 +99,10 @@ export default function StudentEnrolledCourse() {
             <h1>Class Video</h1>
           </div>
           <VideoPlayer
-            title={videoInfo.title}
+            data={singleVideo}
+            title={videoTitle}
             videoId={videoInfo.videoId}
-            moduleId={videoInfo.moduleId}
+            moduleId={classId}
           />
           <VideoNavigationButtons
             course={course}
@@ -98,7 +114,10 @@ export default function StudentEnrolledCourse() {
         </div>
         <div className="w-4/5	ms-4 mt-16">
           <ModuleList
-            course={course}
+            courseTitle={courseTitle}
+            courseId={id}
+            classId={classId}
+            course={classesData}
             setCurrentModuleIndex={setCurrentModuleIndex}
             setCurrentVideoIndex={setCurrentVideoIndex}
           />

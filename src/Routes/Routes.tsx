@@ -212,6 +212,22 @@ export const router = createBrowserRouter([
           </StudentRoutes>
         ),
       },
+      {
+        path: "/:courseTitle/:id",
+        element: (
+          <StudentRoutes>
+            <StudentEnrolledCourse />
+          </StudentRoutes>
+        ),
+      },
+      {
+        path: "/:courseTitle/:id/:classId/:moduleNo/:videoTitle",
+        element: (
+          <StudentRoutes>
+            <StudentEnrolledCourse />
+          </StudentRoutes>
+        ),
+      },
       // =========================================mentor route part =================================================================
       {
         path: "/mentor/dashboard",

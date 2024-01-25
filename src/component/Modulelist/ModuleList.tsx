@@ -7,44 +7,20 @@ import { PiVideo } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import According from "../UI/According/According";
 
-interface IVideo {
-  id: string;
-  video: string;
-  title: string;
-  module?: string;
-}
-
-interface IModule {
-  moduleId: number;
-  moduleDuration: string;
-  moduleName: string;
-  videos: IVideo[];
-}
-interface ICourse {
-  id: string;
-  completation: number;
-  rating: number;
-  image: string;
-  title: string;
-  duration: string;
-  modules: IModule[];
-}
-
-interface IModulelistProps {
-  course: ICourse | null;
-  setCurrentModuleIndex: (value: number) => void;
-  setCurrentVideoIndex: (value: number) => void;
-}
 const ModuleList = ({
   course,
+  courseId,
+  courseTitle,
+  classId,
   setCurrentModuleIndex,
   setCurrentVideoIndex,
-}: IModulelistProps) => {
+}: any) => {
   const handleVideoClick = (moduleId: number, videoIndex: number) => {
     setCurrentModuleIndex(moduleId);
     setCurrentVideoIndex(videoIndex);
   };
-  console.log("courses here in module list", course);
+  let courseName;
+  console.log("courses here in module list", classId);
   return (
     <div className="h-screen">
       <Input
@@ -57,21 +33,19 @@ const ModuleList = ({
         }}
       />
       <div>
-        {course?.modules?.map((module, moduleIndex) => (
+        {course?.data?.map((module: any, moduleIndex: number) => (
           <According
-            key={module.moduleId}
-            title={module.moduleName}
+            key={moduleIndex}
+            title={module.module_title}
             moduleDuration={module.moduleDuration}
             index={moduleIndex}
-            moduleLenth={course.modules.length}
+            moduleLenth={module?.data?.length}
           >
-            {module.videos.map((video, videoIndex) => (
+            {module?.module_class?.map((video: any, videoIndex: number) => (
               <Link
-                to={`/student/dashboard/course/${
-                  course.id
-                }/${encodeURIComponent(module.moduleName)}/${encodeURIComponent(
-                  video.title
-                )}`}
+                to={`/${courseTitle}/${courseId}/${module?.id}/${
+                  module?.module_no
+                }/${video?.name?.split(" ").join("-")}`}
               >
                 <button
                   key={video.id}
@@ -82,7 +56,7 @@ const ModuleList = ({
                     <PiVideo />
                   </span>
                   <span>
-                    {video.id}. {video.title}
+                    {video.id}. {video.name}
                   </span>
                 </button>
               </Link>

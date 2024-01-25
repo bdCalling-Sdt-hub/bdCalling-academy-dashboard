@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+
 import StudentCoursesCard from "./StudentCoursesCard/StudentCoursesCard";
 import { Row } from "antd";
+import { useGetbuyingCourseQuery } from "../../redux/api/courseApi";
 
 export default function StudentCourses() {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    fetch("/video.json")
-      .then((res) => res.json())
-      .then((data) => setCourses(data));
-  }, []);
-  console.log(courses);
+  const { data: courseData }: any = useGetbuyingCourseQuery(undefined);
+  console.log(courseData);
+
   return (
     <div>
       <div className=" my-7">
         <Row>
-          {courses.map((course: any, index: number) => (
-            <StudentCoursesCard key={index} course={course} />
+          {courseData?.map((course: any, index: number) => (
+            <StudentCoursesCard key={index} courses={course} />
           ))}
         </Row>
       </div>

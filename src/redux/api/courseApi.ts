@@ -29,6 +29,13 @@ const CourseApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.course],
     }),
+    getbuyingCourse: builder.query({
+      query: () => ({
+        url: `/students/buy/courses`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.course],
+    }),
     updateCourse: builder.mutation({
       query: (data: any) => ({
         url: `/course/${data.id}`,
@@ -54,4 +61,5 @@ export const {
   useGetSingleCourseQuery,
   useUpdateCourseMutation,
   useDeleteCourseMutation,
+  useGetbuyingCourseQuery,
 } = CourseApi;
