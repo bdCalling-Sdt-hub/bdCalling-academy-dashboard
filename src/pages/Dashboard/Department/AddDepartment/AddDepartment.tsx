@@ -2,23 +2,26 @@
 
 import { Col, Form, Input, Row, message } from "antd";
 import { useAddDepartmentMutation } from "../../../../redux/api/departmentApi";
-import errorResponse from "../../../../utils/errorResponse";
+
 import { useForm } from "antd/es/form/Form";
+import Loading from "../../../../component/UI/Loading/Loading";
 
 const AddDepartment = ({ setshow }: any) => {
-  const [postDepartment] = useAddDepartmentMutation();
+  const [postDepartment, { isLoading }] = useAddDepartmentMutation();
   const [form] = useForm();
   const onFinish = async (data: any) => {
     console.log(data);
     try {
-      const res: any = await postDepartment(data);
-      if (res.data) {
-        message.info(res.data.message);
+      const res: any = await postDepartment(data).unwrap();
+      console.log(res);
+      if (res) {
+        message.info(res.message);
         setshow(false);
         form.resetFields();
       }
-    } catch (err) {
-      errorResponse(err);
+    } catch (err: any) {
+      console.log(err);
+      message.error(err?.data?.message);
     }
   };
   const onFinishFailed = (error: any) => {
@@ -61,7 +64,7 @@ const AddDepartment = ({ setshow }: any) => {
             className="bg-customPrimary text-[#fff] px-6 py-2 rounded"
             type="submit"
           >
-            CREATE
+            {isLoading ? <Loading /> : "CREATE"}
           </button>
         </div>
       </Form>

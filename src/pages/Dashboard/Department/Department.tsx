@@ -18,7 +18,7 @@ interface departmentData {
 export default function Department() {
   const [show, setshow] = useState(false);
   const { data, isLoading }: any = useGetallDepartmentsQuery(undefined);
-  const [selectedData, setSelectedData] = useState<any>({});
+  const [selectedData, setSelectedData] = useState<any>(null);
   const tablethemes = {
     Table: {
       headerBg: "#2492EB",

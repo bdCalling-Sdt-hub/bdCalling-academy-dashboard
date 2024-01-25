@@ -63,6 +63,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/SUPER_ADMIN/dashboard",
+        element: (
+          <AdminRoutes>
+            <Dashboard />
+          </AdminRoutes>
+        ),
+      },
+      {
         path: "/profile/:id",
         element: (
           <PrivateRoutes>

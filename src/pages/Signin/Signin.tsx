@@ -57,14 +57,14 @@ export default function SignIn() {
             },
           }
         );
-        let newUser = {};
+        let newUser: any = {};
         if (response?.data?.user) {
           newUser = { ...response?.data?.user };
           if (response?.data?.user?.userType === "SUPER ADMIN") {
             newUser = { ...response?.data?.user, userType: "SUPER_ADMIN" };
           }
           dispatch(setUser({ token: result.access_token, user: newUser }));
-          navigate(`/`);
+          navigate(`/${newUser?.userType}/dashboard`);
         }
       }
       // console.log(result);

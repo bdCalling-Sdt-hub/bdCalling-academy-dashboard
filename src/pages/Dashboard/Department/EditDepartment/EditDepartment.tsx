@@ -2,8 +2,6 @@
 
 import { Col, Form, Input, Row, message } from "antd";
 
-import errorResponse from "../../../../utils/errorResponse";
-
 import { useForm } from "antd/es/form/Form";
 import { useUpdateDepartmentMutation } from "../../../../redux/api/departmentApi";
 
@@ -21,13 +19,12 @@ const EditDepartMent = ({ setshow, data: formdata }: any) => {
       }).unwrap();
 
       if (res?.data) {
-        message.info(res.message);
+        message.success(res.message);
         setshow(false);
         form.resetFields();
       }
-    } catch (err) {
-      console.log(err);
-      errorResponse(err);
+    } catch (err: any) {
+      message.success(err?.data?.message);
     }
   };
   const onFinishFailed = (error: any) => {
