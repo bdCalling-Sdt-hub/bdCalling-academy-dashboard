@@ -7,15 +7,15 @@ import { tagTypes } from "../../types/tags";
 const studentApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({
     getAllStudent: builder.query({
-      query: (data: any) => ({
+      query: () => ({
         url: "/students/all",
         method: "GET",
       }),
       providesTags: [tagTypes.student, tagTypes.user],
     }),
     getSingleStudent: builder.query({
-      query: (data: any) => ({
-        url: `/admins/students/show/${data.id}`,
+      query: (id: number) => ({
+        url: `/students/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.student, tagTypes.user],

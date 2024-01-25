@@ -1,45 +1,66 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
-  Col,
   ConfigProvider,
   Input,
-  Row,
   message,
+  Row,
+  Col,
   Form,
   DatePicker,
 } from "antd";
-import CustomUpload from "../../../../component/UI/Upload/Upload";
+import React, { useEffect } from "react";
 import { selectedFiledTheme } from "../../../../themes/Index";
-import { useState } from "react";
+
 import useImageUpload from "../../../../hooks/useImageUpload";
-import { useRegisterMutation } from "../../../../redux/api/authApi";
 import { useForm } from "antd/es/form/Form";
 import { EditOutlined } from "@ant-design/icons";
-import personimage from "../../../../assets/table/person.svg";
+import CustomUpload from "../../../../component/UI/Upload/Upload";
 import Loading from "../../../../component/UI/Loading/Loading";
+import { useUpdateprofileMutation } from "../../../../redux/api/authApi";
+import { IMAGE_BASE_URL } from "../../../../utils/Common";
+import { useGetSingleStudentQuery } from "../../../../redux/api/StudentApi";
+import dayjs from "dayjs";
 
-export default function CreateStudents({ setshow }: any) {
-  const [loading, setLoading] = useState(false);
-
+const EditStudent = ({ setshow, id }: any) => {
   const { setFile, imageUrl, imageFile } = useImageUpload();
-  const [register, { isLoading }] = useRegisterMutation();
+  console.log(imageFile);
   const [form] = useForm();
-  const onFinish = async (data: { [key: string]: string | Blob | number }) => {
-    if (data?.password !== data?.password_confirmation) {
-      message.error("re entered password did not match");
-      return;
+  const [updateProfile, { isLoading }] = useUpdateprofileMutation();
+  const { data: studentData }: any = useGetSingleStudentQuery(id);
+  const {
+    image,
+    fullName,
+    userName,
+    mobileNumber,
+    email,
+    dob,
+    address,
+    bloodGroup,
+  } = studentData?.user || {};
+
+  useEffect(() => {
+    if (studentData?.user) {
+      form.setFieldsValue({
+        image, // Set imageUrl directly, assuming it's a URL
+        fullName,
+        userName,
+        mobileNumber,
+        email,
+        address,
+        bloodGroup,
+        dob: dayjs(dob),
+      });
     }
+  }, [form, studentData?.user]);
+  const onFinish = async (data: { [key: string]: string | Blob | number }) => {
+    console.log("student data", data);
     const formatedData: any = {
       ...data,
       // @ts-ignore
       dob: data?.dob?.format("YYYY-MM-DD"),
     };
-    formatedData.userType = "STUDENT";
-    formatedData.approve = 0;
     const formdData = new FormData();
-    console.log("data from ", data);
     if (imageFile) {
       formdData.append("image", imageFile);
     }
@@ -48,7 +69,10 @@ export default function CreateStudents({ setshow }: any) {
       formdData.append(key, value);
     }
     try {
-      const res: any = await register({ body: formdData }).unwrap();
+      const res: any = await updateProfile({
+        id: studentData?.user?.id,
+        body: formdData,
+      }).unwrap();
       console.log(res);
       if (res?.message) {
         message.success(res?.message);
@@ -56,12 +80,10 @@ export default function CreateStudents({ setshow }: any) {
         setshow(false);
       }
     } catch (error: any) {
+      console.log(error);
       message.error(error?.data?.email[0]);
       message.error(error?.data?.userName[0]);
     }
-  };
-  const onFinishFailed = (error: any) => {
-    console.log(error);
   };
   return (
     <div>
@@ -70,8 +92,7 @@ export default function CreateStudents({ setshow }: any) {
           <Form
             onFinish={onFinish}
             layout="vertical"
-            onFinishFailed={onFinishFailed}
-            initialValues={{}}
+            initialValues={{ ...studentData?.user, dob: dayjs(dob) }}
             form={form}
           >
             <Form.Item
@@ -94,7 +115,7 @@ export default function CreateStudents({ setshow }: any) {
                     name="avatar"
                     className={`avatar-uploader`}
                     showUploadList={false}
-                    setLoading={setLoading}
+                    setLoading={() => {}}
                     setImageUrl={() => {}}
                     setImageFile={setFile}
                   >
@@ -120,7 +141,7 @@ export default function CreateStudents({ setshow }: any) {
                     </div>
                   </CustomUpload>
                   <img
-                    src={imageUrl ? imageUrl : personimage}
+                    src={imageUrl || `${IMAGE_BASE_URL}/${image}`}
                     alt="avatar"
                     style={{
                       width: "140px",
@@ -205,52 +226,6 @@ export default function CreateStudents({ setshow }: any) {
                   <Input type="email" placeholder="email" className="py-2" />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="password"
-                  name="password"
-                  label="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input  password",
-                    },
-                    {
-                      min: 6,
-                      message: "password must be at least 6 characters",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    type="password"
-                    placeholder="password"
-                    className="py-2"
-                  />
-                </Form.Item>
-              </Col>
-              <Col lg={12}>
-                <Form.Item
-                  key="password_confirmation"
-                  name="password_confirmation"
-                  label="Confirm Password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please re enter password",
-                    },
-                    {
-                      min: 6,
-                      message: "password must be at least 6 characters",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    type="password"
-                    placeholder="password"
-                    className="py-2"
-                  />
-                </Form.Item>
-              </Col>
 
               <Col lg={12}>
                 <Form.Item
@@ -294,10 +269,10 @@ export default function CreateStudents({ setshow }: any) {
                   rules={[{ required: true, message: "Please Input Address" }]}
                 >
                   {/* <Select
-                    style={{ width: "100%" }}
-                    options={options}
-                    placeholder="please select a category"
-                  /> */}
+                style={{ width: "100%" }}
+                options={options}
+                placeholder="please select a category"
+              /> */}
                   <Input placeholder="address" className="py-2" />
                 </Form.Item>
               </Col>
@@ -315,4 +290,6 @@ export default function CreateStudents({ setshow }: any) {
       </ConfigProvider>
     </div>
   );
-}
+};
+
+export default EditStudent;

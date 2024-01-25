@@ -48,7 +48,6 @@ export default function EditMentor({ setshow, mentorData }: any) {
     expert,
   } = mentorData;
 
-  console.log(imageUrl, "url");
   useEffect(() => {
     form.setFieldsValue({
       image, // Set imageUrl directly, assuming it's a URL

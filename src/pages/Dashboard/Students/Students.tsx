@@ -29,11 +29,16 @@ import { IMAGE_BASE_URL } from "../../../utils/Common";
 import { useState } from "react";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateStudents from "./createStudent/CreateStudents";
+import EditStudent from "./EditStudent/EditStudent";
 
 export default function Students() {
   const [approveId, setApproveId] = useState<null | number>(null);
   const [disapproveId, setdisApproveId] = useState<null | number>(null);
   const [show, setshow] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [id, setStudentId] = useState<number | null>(null);
+
+  console.log(showEditModal, "dsfsdfsdf");
   const {
     data: studentData,
     isLoading,
@@ -67,7 +72,12 @@ export default function Students() {
       setdisApproveId(id);
     }
   };
-  console.log(approveId);
+  const handleEditModal = (data: any) => {
+    setShowEditModal(true);
+    setStudentId(data?.id);
+  };
+
+  console.log("student data", studentData);
   const columns = [
     {
       title: "#sl",
@@ -144,12 +154,11 @@ export default function Students() {
       render: function (data: any) {
         return (
           <div className="flex gap-x-2 ">
-            <Link to={`/profile/${data.key}`}>
-              <FiEdit
-                className="cursor-pointer text-customPrimary"
-                onClick={() => console.log(data)}
-              />
-            </Link>
+            <FiEdit
+              className="cursor-pointer text-customPrimary"
+              onClick={() => handleEditModal(data)}
+            />
+
             <RxCross1
               className="cursor-pointer "
               onClick={() => console.log(data)}
@@ -185,7 +194,7 @@ export default function Students() {
       headerColor: "white",
     },
   };
-  console.log(data);
+
   const onClick: MenuProps["onClick"] = ({ key }) => {
     message.info(`Click on item ${key}`);
   };
@@ -209,10 +218,24 @@ export default function Students() {
         showOkButton={false}
         title={""}
         isOpen={show}
-        closeModal={() => setshow(false)}
+        closeModal={() => {
+          setshow(false);
+        }}
       >
         <CreateStudents setshow={setshow} />
       </CustomModal>
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={showEditModal}
+        closeModal={() => {
+          setShowEditModal(false);
+        }}
+      >
+        <EditStudent setshow={setShowEditModal} id={id} />
+      </CustomModal>
+
       <StudentSurvey students={studentData?.data?.data}></StudentSurvey>
       <div className="mt-6">
         <div

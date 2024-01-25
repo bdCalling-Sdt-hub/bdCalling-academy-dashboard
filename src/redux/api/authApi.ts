@@ -12,7 +12,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
-      invalidatesTags: [tagTypes.user, tagTypes.mentor],
+      invalidatesTags: [tagTypes.user, tagTypes.mentor, tagTypes.student],
     }),
     login: builder.mutation({
       query: (userInfo: any) => ({
