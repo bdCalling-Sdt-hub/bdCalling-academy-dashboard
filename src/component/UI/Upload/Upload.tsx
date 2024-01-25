@@ -14,6 +14,7 @@ interface UploadPropss {
   className?: string;
   showUploadList?: boolean;
   action?: string;
+  listType?: any;
   setLoading: (action: boolean) => void;
   setImageUrl: (imageUrl: string) => void;
   setImageFile: (file: any) => void;
@@ -27,6 +28,7 @@ export default function CustomUpload({
   setLoading,
   setImageUrl,
   setImageFile,
+  listType,
   children,
   action = "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
 }: UploadPropss) {
@@ -66,6 +68,7 @@ export default function CustomUpload({
 
   return (
     <Upload
+      listType={listType}
       maxCount={1}
       multiple={false}
       name={name}

@@ -38,7 +38,7 @@ export default function StudentCoursesCard({ courses }: any) {
 
         <div className="px-5 pb-[22px] pt-3">
           <Link
-            to={`/${courseName}/${id}/${lastClass?.id}/${
+            to={`/${courseName?.split(" ")?.join("-")}/${id}/${lastClass?.id}/${
               lastClass?.module_no
             }/${lastClass?.module_class[
               lastClass?.module_class?.length - 1

@@ -705,3 +705,69 @@ export default function EditCourse() {
     </ConfigProvider>
   );
 }
+
+//  <Col lg={8}>
+//                 <Form.Item
+//                   key="courseThumbnail"
+//                   name="courseThumbnail"
+//                   rules={[
+//                     {
+//                       required: true,
+//                       message: (
+//                         <p className="flex justify-center ">
+//                           Please input mentor image{" "}
+//                         </p>
+//                       ),
+//                     },
+//                   ]}
+//                 >
+//                   <div className="flex justify-center  py-6">
+//                     <div className="relative w-[400px]">
+//                       <CustomUpload
+//                         name="avatar"
+//                         // listType="picture-card"
+//                         className={`avatar-uploader`}
+//                         showUploadList={false}
+//                         setLoading={() => {}}
+//                         setImageUrl={() => {}}
+//                         setImageFile={setFile}
+//                       >
+//                         <div
+//                           className=" bg-customPrimary absolute"
+//                           style={{
+//                             width: "30px",
+//                             color: "white",
+//                             height: "30px",
+//                             textAlign: "center",
+//                             borderRadius: "50%",
+//                             top: "95%",
+//                             left: "98%",
+//                             transform: "translate(-50%, -50%)",
+//                           }}
+//                         >
+//                           <span
+//                             className="font-bold text-lg cursor-pointer"
+//                             style={{}}
+//                           >
+//                             <EditOutlined />
+//                           </span>
+//                         </div>
+//                         <img
+//                           className=""
+//                           src={
+//                             imageUrl ||
+//                             `${IMAGE_BASE_URL}/${data?.data?.courseThumbnail}`
+//                           }
+//                           alt="avatar"
+//                           style={{
+//                             // width: "140px",
+//                             // height: "140px",
+//                             top: "40%",
+//                             objectFit: "cover",
+//                           }}
+//                         />
+//                       </CustomUpload>
+//                     </div>
+//                   </div>
+//                 </Form.Item>
+//               </Col>

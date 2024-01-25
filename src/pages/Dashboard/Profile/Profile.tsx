@@ -188,11 +188,37 @@ export default function Profile() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input student name",
+                        message: "Please input your full name",
                       },
                       {
                         min: 2,
                         message: "Full name must be at least 2 characters",
+                      },
+                    ]}
+                  >
+                    <Input
+                      size="large"
+                      type="text"
+                      // name="fullName"
+
+                      placeholder="name"
+                      className={style.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col lg={12} xl={12} className="mb-[15px]">
+                  <Form.Item
+                    name="userName"
+                    key="userName"
+                    label="Your userName"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your user name",
+                      },
+                      {
+                        min: 4,
+                        message: "userName must be at least 2 characters",
                       },
                     ]}
                   >
@@ -214,7 +240,7 @@ export default function Profile() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input student mobile number",
+                        message: "Please input your mobile number",
                       },
                       {
                         min: 11,
@@ -246,7 +272,7 @@ export default function Profile() {
                     rules={[
                       {
                         required: true,
-                        message: "Please input student email",
+                        message: "Please input your email",
                       },
                     ]}
                   >
@@ -343,7 +369,7 @@ export default function Profile() {
                     />
                   </Form.Item>
                 </Col>
-                <Col lg={24} xl={24} className="mb-[15px]">
+                <Col lg={24} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="address"
                     key="address"
