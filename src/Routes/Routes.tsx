@@ -37,6 +37,7 @@ import Category from "../pages/Dashboard/Category/Category";
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
 import Classes from "../pages/Dashboard/Classes/Classes";
+import EditClasses from "../pages/Dashboard/Classes/EditClasses/EditClasses";
 
 export const router = createBrowserRouter([
   // {
@@ -125,6 +126,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <Classes></Classes>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/editclasses/:courseId/:module_no",
+        element: (
+          <AdminRoutes>
+            <EditClasses></EditClasses>
           </AdminRoutes>
         ),
       },

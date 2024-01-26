@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DownOutlined, EditOutlined, RightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const According = ({
+  id,
+  module_no,
   title,
   editable = false,
   index,
@@ -40,9 +43,11 @@ const According = ({
             {moduleDuration}
           </button>
           {editable && (
-            <button className="border px-4 py-2 bg-customPrimary text-[#fff] font-bold">
-              <EditOutlined />
-            </button>
+            <Link to={`/editclasses/${id}/${module_no}`}>
+              <button className="border px-4 py-2 bg-customPrimary text-[#fff] font-bold">
+                <EditOutlined />
+              </button>
+            </Link>
           )}
         </div>
       </div>

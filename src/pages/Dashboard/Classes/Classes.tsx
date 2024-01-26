@@ -18,6 +18,8 @@ const Classes = () => {
         <div>
           {course?.data?.map((module: any, moduleIndex: number) => (
             <According
+              id={id}
+              module_no={module?.module_no}
               key={moduleIndex}
               editable={true}
               title={module.module_title}

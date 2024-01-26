@@ -21,6 +21,15 @@ const classApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.class, tagTypes.course],
     }),
+    updateClassesById: builder.mutation({
+      query: (data: any) => ({
+        url: `/class/${data?.id}`,
+        method: "POST",
+        params: { _method: "PUT" },
+        body: data?.body,
+      }),
+      invalidatesTags: [tagTypes.class, tagTypes.course],
+    }),
   }),
 });
 
