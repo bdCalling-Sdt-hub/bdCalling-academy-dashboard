@@ -25,7 +25,7 @@ import {
 } from "../../../../redux/api/categoryapi";
 import { useGetallmentorsQuery } from "../../../../redux/api/mentorApi";
 import { selectedFiledTheme } from "../../../../themes/Index";
-import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import { CloseOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   useGetSingleCourseQuery,
   useUpdateCourseMutation,
@@ -35,19 +35,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import moment from "moment";
 import { USER_ROLE } from "../../../../constants/role";
+import { IMAGE_BASE_URL } from "../../../../utils/Common";
+import CustomUpload from "../../../../component/UI/Upload/Upload";
+import useImageUpload from "../../../../hooks/useImageUpload";
 export default function EditCourse() {
   const { id } = useParams();
-  console.log("id", id);
+
   const [form] = Form.useForm();
   const [courseType, setCourseType] = useState("Offline");
-  const [file, setFile] = useState<File | null>(null);
 
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
-  const { data: categorySingleData }: any = useGetsingleCategoryQuery(id);
+  const { setFile, imageUrl, imageFile } = useImageUpload();
   const { data }: any = useGetSingleCourseQuery(id);
-  console.log("course data", data);
-  console.log("ediatble data");
+
   const [editCourse] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
     setCourseType(type);
@@ -60,7 +61,7 @@ export default function EditCourse() {
         courseName: data?.data?.courseName,
         language: data?.data?.language,
         courseDetails: data?.data?.courseDetails,
-        startDate: dayjs(data?.data?.startDate) || null,
+        startDate: dayjs(data?.data?.startDate),
         courseTimeLength: data?.data?.courseTimeLength,
         price: data?.data?.price,
         "mentorId[]": data?.data?.mentorId,
@@ -73,27 +74,31 @@ export default function EditCourse() {
         discount_price: data?.data?.discount_price,
         coupon_code: data?.data?.coupon_code,
         coupon_code_price: data?.data?.coupon_code_price,
-        end_date: dayjs(data?.data?.end_date) || null,
+        end_date: dayjs(data?.data?.end_date),
         seat_left: data?.data?.seat_left,
-        courseThumbnail: file ? file : {},
+        courseThumbnail: data?.data?.courseThumbnail,
         "careeropportunities[]": data?.data?.careeropportunities || [], // Check if it exists
         "carriculum[]": data?.data?.carriculum || [], // Check if it exists
         "job_position[]": data?.data?.job_position || [], // Check if it exists
         "software[]": data?.data?.software || [], // Check if it exists
       });
     }
-  }, [data?.data, form, file]);
+  }, [data?.data, form, imageFile]);
   const onFinish = async (values: any) => {
-    console.log("values", values);
     const finalData = {
       ...values,
       publish: values?.publish === true ? "1" : "0",
+      startDate: values?.startDate.format("YYYY-MM-DD"),
+      end_date: values?.end_date.format("YYYY-MM-DD"),
     };
 
+    if (!imageFile) {
+      delete finalData?.courseThumbnail;
+    }
     try {
       const formData = new FormData();
-      if (file) {
-        formData.append("courseThumbnail", file);
+      if (imageFile) {
+        formData.append("courseThumbnail", imageFile);
       }
       for (const [key, value] of Object.entries(finalData)) {
         // @ts-ignore
@@ -108,7 +113,7 @@ export default function EditCourse() {
       if (res) {
         message.info(res?.message);
         form.resetFields();
-        navigate(`${USER_ROLE.ADMIN}/course`);
+        navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
     } catch (err: any) {
       // message.error(err.data.message);
@@ -187,6 +192,72 @@ export default function EditCourse() {
             autoComplete="off"
           >
             <Row gutter={16}>
+              <Col lg={24}>
+                <Form.Item
+                  key="courseThumbnail"
+                  name="courseThumbnail"
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <p className="flex justify-center ">
+                          Please input mentor image{" "}
+                        </p>
+                      ),
+                    },
+                  ]}
+                >
+                  <div className="flex justify-center  py-6">
+                    <div className="relative w-[400px]">
+                      <CustomUpload
+                        name="avatar"
+                        // listType="picture-card"
+                        className={`avatar-uploader`}
+                        showUploadList={false}
+                        setLoading={() => {}}
+                        setImageUrl={() => {}}
+                        setImageFile={setFile}
+                      >
+                        <div
+                          className=" bg-customPrimary absolute"
+                          style={{
+                            width: "30px",
+                            color: "white",
+                            height: "30px",
+                            textAlign: "center",
+                            borderRadius: "50%",
+                            top: "95%",
+                            left: "98%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        >
+                          <span
+                            className="font-bold text-lg cursor-pointer"
+                            style={{}}
+                          >
+                            <EditOutlined />
+                          </span>
+                        </div>
+                      </CustomUpload>
+                      <img
+                        className=""
+                        src={
+                          imageUrl ||
+                          ` ${IMAGE_BASE_URL}/${data?.data?.courseThumbnail}`
+                        }
+                        alt="avatar"
+                        style={{
+                          // width: "140px",
+                          // height: "140px",
+                          top: "40%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Form.Item>
+              </Col>
+
               <Col lg={8}>
                 <Form.Item
                   label="Enter course name"
@@ -466,21 +537,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={24}>
-                <Form.Item
-                  label="course Thumbnail"
-                  key="courseThumbnail"
-                  name="courseThumbnail"
-                  // rules={[
-                  //   {
-                  //     required: true,
-                  //     message: "please select a courseThumbnail",
-                  //   },
-                  // ]}
-                >
-                  <UploadImage setFile={setFile} />
-                </Form.Item>
-              </Col>
+
               <Col lg={24}>
                 <Form.Item
                   label="Enter Course Details"
@@ -524,142 +581,176 @@ export default function EditCourse() {
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
-                        <Form.Item
-                          {...field}
-                          label="Enter Carrier Opportunity"
-                          rules={[
-                            {
-                              required: true,
-                              message: "please Enter Carrier Opportunity",
-                            },
-                          ]}
-                        >
-                          <div className="flex items-cEnter gap-x-2">
-                            <Input
-                              value={
-                                data?.data?.careeropportunities[field?.key]
-                              }
-                              className="py-2"
-                              placeholder="Enter careeropportunities"
-                            />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
-                            {index === fields.length - 1 && (
-                              <button onClick={() => add()}>
-                                <PlusOutlined />
+                        <Row key={field.key} gutter={16} align="middle">
+                          <Col lg={20}>
+                            <Form.Item
+                              {...field}
+                              // name={[field.name, "careeropportunities[]"]}
+                              label="Enter Carrier Opportunity"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "please Enter Carrier Opportunity",
+                                },
+                              ]}
+                            >
+                              <Input
+                                className="py-2"
+                                placeholder="Enter careeropportunities"
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={2}>
+                            <div className="flex gap-x-2">
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
                               </button>
-                            )}
-                          </div>
-                        </Form.Item>
+                              {index === fields.length - 1 && (
+                                <button onClick={() => add()}>
+                                  <PlusOutlined />
+                                </button>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
                       ))}
                     </>
                   )}
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List name="carriculum[]" key="carriculum[]">
+                <Form.List
+                  name="carriculum[]"
+                  key="carriculum[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
-                        <Form.Item
-                          {...field}
-                          label="Enter carriculum"
-                          rules={[
-                            {
-                              required: true,
-                              message: "please Enter Curriculum",
-                            },
-                          ]}
-                        >
-                          <div className="flex items-center gap-x-2">
-                            <Input
-                              value={data?.data?.carriculum[field?.key]}
-                              className="py-2"
-                              placeholder="Enter carriculum"
-                            />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
-                            {index === fields.length - 1 && (
-                              <button onClick={() => add()}>
-                                <PlusOutlined />
+                        <Row key={field.key} gutter={16} align="middle">
+                          <Col lg={20}>
+                            <Form.Item
+                              {...field}
+                              // name={[field.name, "careeropportunities[]"]}
+                              label="Enter carriculum"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "please Enter curriculum",
+                                },
+                              ]}
+                            >
+                              <Input
+                                className="py-2"
+                                placeholder="Enter curriculum"
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={2}>
+                            <div className="flex gap-x-2">
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
                               </button>
-                            )}
-                          </div>
-                        </Form.Item>
+                              {index === fields.length - 1 && (
+                                <button onClick={() => add()}>
+                                  <PlusOutlined />
+                                </button>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
                       ))}
                     </>
                   )}
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List name="job_position[]" key="job_position[]">
+                <Form.List
+                  name="job_position[]"
+                  key="job_position[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
-                        <Form.Item
-                          {...field}
-                          label="Enter Job Positions"
-                          rules={[
-                            {
-                              required: true,
-                              message: "please Enter Job Position",
-                            },
-                          ]}
-                        >
-                          <div className="flex items-cEnter gap-x-2">
-                            <Input
-                              value={data?.data?.job_position[field?.key]}
-                              className="py-2"
-                              placeholder="Enter job_position"
-                            />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
-                            {index === fields.length - 1 && (
-                              <button onClick={() => add()}>
-                                <PlusOutlined />
+                        <Row key={field.key} gutter={16} align="middle">
+                          <Col lg={20}>
+                            <Form.Item
+                              {...field}
+                              // name={[field.name, "careeropportunities[]"]}
+                              label="Enter job positions"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "please Enter job positions",
+                                },
+                              ]}
+                            >
+                              <Input
+                                className="py-2"
+                                placeholder="Enter job positions"
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={2}>
+                            <div className="flex gap-x-2">
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
                               </button>
-                            )}
-                          </div>
-                        </Form.Item>
+                              {index === fields.length - 1 && (
+                                <button onClick={() => add()}>
+                                  <PlusOutlined />
+                                </button>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
                       ))}
                     </>
                   )}
                 </Form.List>
               </Col>
               <Col lg={6}>
-                <Form.List name="software[]" key="software[]">
+                <Form.List
+                  name="software[]"
+                  key="software[]"
+                  initialValue={[{ key: "0", value: "" }]}
+                >
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map((field, index) => (
-                        <Form.Item
-                          {...field}
-                          label="Enter Softwares"
-                          rules={[
-                            {
-                              required: true,
-                              message: "please Enter Softwares",
-                            },
-                          ]}
-                        >
-                          <div className="flex items-cEnter gap-x-2">
-                            <Input
-                              value={data?.data?.software[field?.key]}
-                              className="py-2"
-                              placeholder="Enter softwares"
-                            />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
-                            {index === fields.length - 1 && (
-                              <button onClick={() => add()}>
-                                <PlusOutlined />
+                        <Row key={field.key} gutter={16} align="middle">
+                          <Col lg={20}>
+                            <Form.Item
+                              {...field}
+                              // name={[field.name, "careeropportunities[]"]}
+                              label="Enter Softwares"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "please Enter software",
+                                },
+                              ]}
+                            >
+                              <Input
+                                className="py-2"
+                                placeholder="Enter software"
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={2}>
+                            <div className="flex gap-x-2">
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
                               </button>
-                            )}
-                          </div>
-                        </Form.Item>
+                              {index === fields.length - 1 && (
+                                <button onClick={() => add()}>
+                                  <PlusOutlined />
+                                </button>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
                       ))}
                     </>
                   )}
@@ -705,69 +796,3 @@ export default function EditCourse() {
     </ConfigProvider>
   );
 }
-
-//  <Col lg={8}>
-//                 <Form.Item
-//                   key="courseThumbnail"
-//                   name="courseThumbnail"
-//                   rules={[
-//                     {
-//                       required: true,
-//                       message: (
-//                         <p className="flex justify-center ">
-//                           Please input mentor image{" "}
-//                         </p>
-//                       ),
-//                     },
-//                   ]}
-//                 >
-//                   <div className="flex justify-center  py-6">
-//                     <div className="relative w-[400px]">
-//                       <CustomUpload
-//                         name="avatar"
-//                         // listType="picture-card"
-//                         className={`avatar-uploader`}
-//                         showUploadList={false}
-//                         setLoading={() => {}}
-//                         setImageUrl={() => {}}
-//                         setImageFile={setFile}
-//                       >
-//                         <div
-//                           className=" bg-customPrimary absolute"
-//                           style={{
-//                             width: "30px",
-//                             color: "white",
-//                             height: "30px",
-//                             textAlign: "center",
-//                             borderRadius: "50%",
-//                             top: "95%",
-//                             left: "98%",
-//                             transform: "translate(-50%, -50%)",
-//                           }}
-//                         >
-//                           <span
-//                             className="font-bold text-lg cursor-pointer"
-//                             style={{}}
-//                           >
-//                             <EditOutlined />
-//                           </span>
-//                         </div>
-//                         <img
-//                           className=""
-//                           src={
-//                             imageUrl ||
-//                             `${IMAGE_BASE_URL}/${data?.data?.courseThumbnail}`
-//                           }
-//                           alt="avatar"
-//                           style={{
-//                             // width: "140px",
-//                             // height: "140px",
-//                             top: "40%",
-//                             objectFit: "cover",
-//                           }}
-//                         />
-//                       </CustomUpload>
-//                     </div>
-//                   </div>
-//                 </Form.Item>
-//               </Col>

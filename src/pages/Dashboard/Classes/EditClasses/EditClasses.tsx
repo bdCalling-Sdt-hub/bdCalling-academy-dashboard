@@ -53,7 +53,6 @@ const EditClasses = () => {
     form.resetFields();
   };
 
-  console.log(typeof module?.module_class[0]?.video);
   useEffect(() => {
     form.setFieldsValue({
       courseName: classData?.data[0]?.course?.courseName,
