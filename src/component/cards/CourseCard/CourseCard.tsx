@@ -12,8 +12,9 @@ import { PiNotePencilDuotone } from "react-icons/pi";
 import { PiVideoLight } from "react-icons/pi";
 
 import style from "./courseCard.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
+import { LuInfo } from "react-icons/lu";
 export default function CourseCard({ course, courseType }: any) {
   const navigate = useNavigate();
   const {
@@ -81,35 +82,37 @@ export default function CourseCard({ course, courseType }: any) {
             <p className="text-[18px] font-semibold text-customPrimary mt-[20px] mb-[20px]">
               {price}
             </p>
-            <div className="flex justify-between">
-              {/* <button className={style.btnInfo}>
-                <LuInfo
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                  }}
-                />
-              </button> */}
-              <button
-                className={style.btnEdit}
-                onClick={() => navigate(`/SUPER_ADMIN/courses/edit/${id}`)}
-              >
-                <PiNotePencilDuotone
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                  }}
-                />
-              </button>
-              <button className={style.btnDelete}>
-                <RiDeleteBin5Line
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                  }}
-                />
-              </button>
-            </div>
+            <Link to={`/classes/${id}`}>
+              <div className="flex justify-between">
+                <button className={style.btnInfo}>
+                  <LuInfo
+                    style={{
+                      height: "24px",
+                      width: "24px",
+                    }}
+                  />
+                </button>
+                <button
+                  className={style.btnEdit}
+                  onClick={() => navigate(`/SUPER_ADMIN/courses/edit/${id}`)}
+                >
+                  <PiNotePencilDuotone
+                    style={{
+                      height: "24px",
+                      width: "24px",
+                    }}
+                  />
+                </button>
+                <button className={style.btnDelete}>
+                  <RiDeleteBin5Line
+                    style={{
+                      height: "24px",
+                      width: "24px",
+                    }}
+                  />
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

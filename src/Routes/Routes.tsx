@@ -33,9 +33,10 @@ import PrivateRoutes from "./PrivateRoutes";
 import StudentRoutes from "./StudentRoutes";
 import MentorRoutes from "./MentorRoutes";
 import Category from "../pages/Dashboard/Category/Category";
-import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
+
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
+import Classes from "../pages/Dashboard/Classes/Classes";
 
 export const router = createBrowserRouter([
   // {
@@ -120,10 +121,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/SUPER_ADMIN/class",
+        path: "/classes/:id",
         element: (
           <AdminRoutes>
-            <AddClass></AddClass>
+            <Classes></Classes>
           </AdminRoutes>
         ),
       },

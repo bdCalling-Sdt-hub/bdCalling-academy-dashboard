@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DownOutlined, RightOutlined } from "@ant-design/icons";
+import { DownOutlined, EditOutlined, RightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
 const According = ({
   title,
+  editable = false,
   index,
   children,
   moduleDuration,
+
   moduleLenth,
 }: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,18 +27,23 @@ const According = ({
         }`}
       >
         <div
-          className="flex justify-between items-center cursor-pointer"
+          className=" cursor-pointer flex justify-between"
           onClick={toggleAccordion}
         >
-          <button className="text-lg  text-customHeader ">
-            {isOpen ? <DownOutlined /> : <RightOutlined />}
-            <span className="ms-2">
+          <button className="text-lg flex items-center  text-customHeader ">
+            <div>{isOpen ? <DownOutlined /> : <RightOutlined />}</div>
+            <div className="ms-2">
               {index}. {title}
-            </span>
+            </div>
           </button>
           <button className="text-lg  text-customHeader ">
             {moduleDuration}
           </button>
+          {editable && (
+            <button className="border px-4 py-2 bg-customPrimary text-[#fff] font-bold">
+              <EditOutlined />
+            </button>
+          )}
         </div>
       </div>
       {isOpen && <div className={`p-4`}>{children}</div>}
