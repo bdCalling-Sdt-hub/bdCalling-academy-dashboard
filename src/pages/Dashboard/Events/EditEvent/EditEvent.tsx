@@ -1,38 +1,72 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Col, DatePicker, Form, Input, Row, TimePicker } from "antd";
+import { Col, DatePicker, Form, Input, Row, TimePicker, message } from "antd";
 
 import { MdMyLocation } from "react-icons/md";
 
 import style from "../Events.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
+import Loading from "../../../../component/UI/Loading/Loading";
+import useImageUpload from "../../../../hooks/useImageUpload";
+import { useUpdateEventsMutation } from "../../../../redux/api/eventApi";
+import { IMAGE_BASE_URL } from "../../../../utils/Common";
+import dayjs from "dayjs";
 export default function EditEvent(props: any) {
-  const { img, date, time, location, title } = props.data;
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const { image, starttime, endtime, courseName, officeLocation, date, id } =
+    props.event;
+  const setshow = props?.setshow;
+  const { imageUrl, setFile, imageFile, setImageUrl } = useImageUpload();
+  const [updateEvent, { isLoading }] = useUpdateEventsMutation();
   const [form] = Form.useForm();
 
   console.log(props);
-  const onFinish = (data: any) => {
-    const finalData = {
+  const onFinish = async (data: any) => {
+    const formatedData = {
       ...data,
-      date: data.date.format("DD.MM.YYYY"),
-      time: data.time.format("HH:mm:ss"),
+      starttime: data.starttime.format("HH:mm"),
+      endtime: data.endtime.format("HH:mm"),
+      date: data.date.format("YYYY-MM-DD"),
     };
-    console.log(finalData);
+
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
     }
-    formData.append("data", finalData);
+    for (const [key, value] of Object.entries(formatedData)) {
+      // @ts-ignore
+      formData.append(key, value);
+    }
+    try {
+      const res: any = await updateEvent({ id: id, body: formData }).unwrap();
+      if (res) {
+        message.success(res?.message);
+        form.resetFields();
+        setImageUrl(null);
+        setshow(false);
+      }
+    } catch (err) {
+      console.log(err);
+      message.error(
+        "something went wrong please check date and time correctly."
+      );
+    }
   };
   const onFinishFailed = (error: any) => {
     console.log(error);
   };
 
+  useEffect(() => {
+    form.setFieldsValue({
+      date: dayjs(date),
+      starttime: dayjs(starttime, "HH:mm"),
+      endtime: dayjs(endtime, "HH:mm"),
+      courseName,
+      officeLocation,
+    });
+  }, [form, props.event]);
   const onReset = () => {
     form.resetFields();
     setImageUrl("");
@@ -40,17 +74,40 @@ export default function EditEvent(props: any) {
 
   return (
     <div>
-      <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Form.Item>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+        initialValues={{
+          ...props.event,
+          date: dayjs(date),
+          starttime: dayjs(starttime, "HH:mm"),
+          endtime: dayjs(endtime, "HH:mm"),
+        }}
+      >
+        <Form.Item
+          name="image"
+          rules={[
+            {
+              required: true,
+              message: (
+                <p className="flex items-center justify-center mt-2">
+                  Please select an image
+                </p>
+              ),
+            },
+          ]}
+        >
           <div className="flex justify-center items-center ">
             <div className="relative">
               <CustomUpload
                 name="avatar"
                 className={`avatar-uploader`}
                 showUploadList={false}
-                setLoading={setLoading}
-                setImageUrl={setImageUrl}
-                setImageFile={setImageFile}
+                setLoading={() => {}}
+                setImageUrl={() => {}}
+                setImageFile={setFile}
               >
                 <div
                   className=" bg-customPrimary absolute"
@@ -72,7 +129,7 @@ export default function EditEvent(props: any) {
               </CustomUpload>
               <img
                 className="w-[274px] h-[146px] rounded"
-                src={imageUrl ? imageUrl : img}
+                src={imageUrl || `${IMAGE_BASE_URL}/${image}`}
                 alt=""
               />
             </div>
@@ -82,10 +139,11 @@ export default function EditEvent(props: any) {
           <Col lg={24}>
             <Form.Item className="text-center"></Form.Item>
           </Col>
-          <Col lg={12}>
+          <Col lg={24}>
             <Form.Item
               key="date"
               name="date"
+              label=" Enter Date"
               rules={[
                 {
                   required: true,
@@ -101,38 +159,43 @@ export default function EditEvent(props: any) {
           </Col>
           <Col lg={12}>
             <Form.Item
-              key="time"
-              name="time"
+              key="starttime"
+              name="starttime"
+              label="Start time"
               rules={[
                 {
                   required: true,
-                  message: "Please input time",
+                  message: "Please input start time",
                 },
               ]}
             >
-              <TimePicker style={{ width: "100%", padding: "8px" }} />
+              <TimePicker
+                format={"HH:mm"}
+                style={{ width: "100%", padding: "8px" }}
+              />
             </Form.Item>
           </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
-              key="location"
-              name="location"
+              key="endtime"
+              name="endtime"
+              label="End Time"
               rules={[
                 {
                   required: true,
-                  message: "please input location",
+                  message: "Please input end time",
                 },
               ]}
             >
-              <Input
-                placeholder="location"
-                className="py-2"
-                suffix={<MdMyLocation style={{ color: "gray" }} />}
+              <TimePicker
+                format={"HH:mm"}
+                style={{ width: "100%", padding: "8px" }}
               />
             </Form.Item>
           </Col>
           <Col lg={24}>
             <Form.Item
+              label="Course Name"
               key="courseName"
               name="courseName"
               rules={[
@@ -145,13 +208,25 @@ export default function EditEvent(props: any) {
               <Input placeholder="courseName" className="py-2" />
             </Form.Item>
           </Col>
+          <Col lg={24}>
+            <Form.Item
+              label="Office Location"
+              key="officeLocation"
+              name="officeLocation"
+              rules={[
+                {
+                  required: true,
+                  message: "please input officeLocation",
+                },
+              ]}
+            >
+              <Input placeholder="officeLocation" className="py-2" />
+            </Form.Item>
+          </Col>
         </Row>
         <div className={style.buttonContainer}>
           <button type="submit" className={style.eventSaveCardBtn}>
-            SAVE
-          </button>
-          <button onClick={onReset} className={style.eventcancelCardBtn}>
-            CANCEL
+            {isLoading ? <Loading /> : "EDIT"}
           </button>
         </div>
       </Form>

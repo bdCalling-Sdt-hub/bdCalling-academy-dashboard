@@ -46,7 +46,7 @@ const DashboardLayout = () => {
   const [selectedLanguage, setSelectedLanguage] = useState();
 
   const { userType: role }: any = useAppSelector(useCurrentUser);
-  console.log("userType", role);
+
   const [notifications, setnotifications] = useState<Inotification[]>([]);
   useEffect(() => {
     fetch("/notification.json")

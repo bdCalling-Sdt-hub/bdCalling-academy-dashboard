@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Col, DatePicker, Form, Input, Row, TimePicker } from "antd";
+import { Col, DatePicker, Form, Input, Row, TimePicker, message } from "antd";
 
 import { MdMyLocation } from "react-icons/md";
 
@@ -10,25 +11,46 @@ import style from "../Events.module.css";
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
+import useImageUpload from "../../../../hooks/useImageUpload";
+import { IMAGE_BASE_URL } from "../../../../utils/Common";
+import { useAddEventMutation } from "../../../../redux/api/eventApi";
+import Loading from "../../../../component/UI/Loading/Loading";
 export default function AddEvents({ setshow }: any) {
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const { imageUrl, setFile, imageFile, setImageUrl } = useImageUpload();
+  const [postEvent, { isLoading }] = useAddEventMutation();
   const [form] = Form.useForm();
 
-  const onFinish = (data: any) => {
-    const finalData = {
+  const onFinish = async (data: any) => {
+    const formatedData = {
       ...data,
-      date: data.date.format("DD.MM.YYYY"),
-      time: data.time.format("HH:mm:ss"),
+      starttime: data.starttime.format("HH:mm"),
+      endtime: data.endtime.format("HH:mm"),
+      date: data.date.format("YYYY-MM-DD"),
+      // time: data.time.format("HH:mm:ss"),
     };
-    console.log(finalData);
+
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
     }
-    formData.append("data", finalData);
-    setshow(false);
+    for (const [key, value] of Object.entries(formatedData)) {
+      // @ts-ignore
+      formData.append(key, value);
+    }
+    try {
+      const res: any = await postEvent(formData).unwrap();
+      if (res) {
+        message.success(res?.message);
+        form.resetFields();
+        setImageUrl(null);
+        setshow(false);
+      }
+    } catch (err) {
+      console.log(err);
+      message.error(
+        "something went wrong please check date and time correctly."
+      );
+    }
   };
   const onFinishFailed = (error: any) => {
     console.log(error);
@@ -36,17 +58,34 @@ export default function AddEvents({ setshow }: any) {
 
   return (
     <div>
-      <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Form.Item>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+      >
+        <Form.Item
+          name="image"
+          rules={[
+            {
+              required: true,
+              message: (
+                <p className="flex items-center justify-center mt-2">
+                  Please select an image
+                </p>
+              ),
+            },
+          ]}
+        >
           <div className="flex justify-center items-center ">
             <div className="relative">
               <CustomUpload
                 name="avatar"
                 className={`avatar-uploader`}
                 showUploadList={false}
-                setLoading={setLoading}
+                setLoading={() => {}}
                 setImageUrl={() => {}}
-                setImageFile={() => {}}
+                setImageFile={setFile}
               >
                 <div
                   className=" bg-customPrimary absolute"
@@ -68,7 +107,7 @@ export default function AddEvents({ setshow }: any) {
               </CustomUpload>
               <img
                 className="w-[274px] h-[146px] rounded"
-                src={imageUrl}
+                src={imageUrl!}
                 alt=""
               />
             </div>
@@ -78,10 +117,11 @@ export default function AddEvents({ setshow }: any) {
           <Col lg={24}>
             <Form.Item className="text-center"></Form.Item>
           </Col>
-          <Col lg={12}>
+          <Col lg={24}>
             <Form.Item
               key="date"
               name="date"
+              label=" Enter Date"
               rules={[
                 {
                   required: true,
@@ -97,38 +137,43 @@ export default function AddEvents({ setshow }: any) {
           </Col>
           <Col lg={12}>
             <Form.Item
-              key="time"
-              name="time"
+              key="starttime"
+              name="starttime"
+              label="Start time"
               rules={[
                 {
                   required: true,
-                  message: "Please input time",
+                  message: "Please input start time",
                 },
               ]}
             >
-              <TimePicker style={{ width: "100%", padding: "8px" }} />
+              <TimePicker
+                format={"HH:mm"}
+                style={{ width: "100%", padding: "8px" }}
+              />
             </Form.Item>
           </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
-              key="location"
-              name="location"
+              key="endtime"
+              name="endtime"
+              label="End Time"
               rules={[
                 {
                   required: true,
-                  message: "please input location",
+                  message: "Please input end time",
                 },
               ]}
             >
-              <Input
-                placeholder="location"
-                className="py-2"
-                suffix={<MdMyLocation style={{ color: "gray" }} />}
+              <TimePicker
+                format={"HH:mm"}
+                style={{ width: "100%", padding: "8px" }}
               />
             </Form.Item>
           </Col>
           <Col lg={24}>
             <Form.Item
+              label="Course Name"
               key="courseName"
               name="courseName"
               rules={[
@@ -141,10 +186,25 @@ export default function AddEvents({ setshow }: any) {
               <Input placeholder="courseName" className="py-2" />
             </Form.Item>
           </Col>
+          <Col lg={24}>
+            <Form.Item
+              label="Office Location"
+              key="officeLocation"
+              name="officeLocation"
+              rules={[
+                {
+                  required: true,
+                  message: "please input officeLocation",
+                },
+              ]}
+            >
+              <Input placeholder="officeLocation" className="py-2" />
+            </Form.Item>
+          </Col>
         </Row>
         <div className={style.buttonContainer}>
           <button type="submit" className={style.eventSaveCardBtn}>
-            CREATE
+            {isLoading ? <Loading /> : "CREATE"}
           </button>
         </div>
       </Form>

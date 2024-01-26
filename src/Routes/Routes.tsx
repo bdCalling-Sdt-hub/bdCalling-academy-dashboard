@@ -35,10 +35,11 @@ import MentorRoutes from "./MentorRoutes";
 import Category from "../pages/Dashboard/Category/Category";
 
 import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
-import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
+
 import Classes from "../pages/Dashboard/Classes/Classes";
 import EditClasses from "../pages/Dashboard/Classes/EditClasses/EditClasses";
 import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
+import VerifyEmail from "../pages/ForgetPassword/verifyEmail/VerifyEmail";
 
 export const router = createBrowserRouter([
   // {
@@ -297,8 +298,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/verified/:id",
-    element: <ResetPassword></ResetPassword>,
+    element: <VerifyEmail></VerifyEmail>,
   },
+  // {
+  //   path: "/verified/:id",
+  //   element: <ResetPassword></ResetPassword>,
+  // },
   {
     path: "*",
     element: <NotFound />,

@@ -7,11 +7,24 @@ import style from "./eventsCard.module.css";
 
 import CustomModal from "../../UI/Modal/Modal";
 import EditEvent from "../../../pages/Dashboard/Events/EditEvent/EditEvent";
+import { imageUrl } from "../../../utils/Common";
+import { useDeleteEventMutation } from "../../../redux/api/eventApi";
+import { message } from "antd";
 export default function EventCard(props: any) {
-  const { img, date, time, location, title, id } = props.events;
-  const [open, setOpen] = useState(false);
-  const handleDelete = (id: string) => {
-    console.log(id);
+  const { image, date, starttime, officeLocation, courseName, id } =
+    props.events;
+  const [deleteEvents] = useDeleteEventMutation();
+
+  const [show, setshow] = useState(false);
+  const handleDelete = async (id: string) => {
+    try {
+      const res: any = await deleteEvents(id).unwrap();
+      if (res) {
+        message.success(res?.message);
+      }
+    } catch (err: any) {
+      message.error(err.data.message);
+    }
   };
   return (
     <div>
@@ -19,15 +32,15 @@ export default function EventCard(props: any) {
         showCancelButton={false}
         showOkButton={false}
         title={""}
-        isOpen={open}
-        closeModal={() => setOpen(false)}
+        isOpen={show}
+        closeModal={() => setshow(false)}
       >
-        <EditEvent data={props.events} />
+        <EditEvent event={props.events} setshow={setshow} />
       </CustomModal>
       <div className={style.eventCard}>
         <div className="p-[20px]">
           <div className={style.img}>
-            <img className="rounded-[10px]" src={img} alt="" />
+            <img className="rounded-[10px]" src={imageUrl(image)} alt="" />
           </div>
           <div className="flex justify-between my-[30px]">
             <div className="flex items-center gap-x-2 text-customPrimary">
@@ -40,16 +53,16 @@ export default function EventCard(props: any) {
               <span>
                 <IoMdTime />
               </span>
-              <p>{time}</p>
+              <p>{starttime}</p>
             </div>
             <div className="flex items-center gap-x-2 text-customPrimary">
               <span>
                 <MdMyLocation />
               </span>
-              <p>{location}</p>
+              <p>{officeLocation}</p>
             </div>
           </div>
-          <h1 className="text-[18px] font-medium ">{title}</h1>
+          <h1 className="text-[18px] font-medium ">{courseName}</h1>
           <div className="card-footer flex justify-between mt-[30px]">
             <button
               onClick={() => handleDelete(id)}
@@ -57,7 +70,7 @@ export default function EventCard(props: any) {
             >
               Delete Events
             </button>
-            <button onClick={() => setOpen(true)} className={style.editEvents}>
+            <button onClick={() => setshow(true)} className={style.editEvents}>
               Edit Events
             </button>
           </div>

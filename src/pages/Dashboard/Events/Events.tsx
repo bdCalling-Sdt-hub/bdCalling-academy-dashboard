@@ -10,16 +10,14 @@ import { PlusOutlined } from "@ant-design/icons";
 import style from "./Events.module.css";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import AddEvents from "./AddEvents/AddEvents";
+import { useGetAllEventsQuery } from "../../../redux/api/eventApi";
+import NotFound from "../../../NotFound";
+import NoData from "../../../utils/NoData";
 export default function Events() {
-  const [events, setevents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [show, setshow] = useState(false);
-  useEffect(() => {
-    fetch("/eventsData.json")
-      .then((res) => res.json())
-      .then((data) => setevents(data));
-  }, []);
-  console.log(events);
+  const { data: events }: any = useGetAllEventsQuery(undefined);
+  console.log("events", events);
   return (
     <div className="h-screen">
       <CustomModal
@@ -39,23 +37,27 @@ export default function Events() {
         </button>
       </div>
       <div>
-        <Row gutter={12}>
-          {events?.map((e, index) => (
-            <Col key={index} style={{ marginBottom: "12px" }} lg={8}>
-              <EventCard key={index} events={e} />
-            </Col>
-          ))}
-        </Row>
+        {events?.data?.length > 0 ? (
+          <Row gutter={12}>
+            {events?.data?.map((e: any, index: number) => (
+              <Col key={index} style={{ marginBottom: "12px" }} lg={8}>
+                <EventCard key={index} events={e} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <NoData />
+        )}
       </div>
-      <div className="text-end mt-4">
+      {/* <div className="text-end mt-4">
         <CustomPaginations
           pageSize={5}
-          total={events.length}
+          total={events?.length}
           defaultPageSize={1}
           size="large"
           onChange={(page: any) => setCurrentPage(page)}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

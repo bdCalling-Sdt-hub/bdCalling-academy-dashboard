@@ -72,7 +72,7 @@ export default function SignIn() {
       // console.log(newUser);
     } catch (error: any) {
       console.log(error);
-      message.error(error?.data?.error);
+      message.error(error?.data?.error || error?.data?.message);
     }
   };
 
@@ -147,7 +147,7 @@ export default function SignIn() {
                         Password
                       </label>
                       <Form.Item name="password">
-                        <Input
+                        <Input.Password
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
