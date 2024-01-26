@@ -7,7 +7,7 @@ import { useGetbuyingCourseQuery } from "../../../redux/api/courseApi";
 export default function StudentDashboardSurvey() {
   const { data: studentEnrolledCourses }: any =
     useGetbuyingCourseQuery(undefined);
-  const amount = studentEnrolledCourses.reduce((acc: any, item: any) => {
+  const amount = studentEnrolledCourses?.reduce((acc: any, item: any) => {
     return (acc = acc + Number(item?.amount));
   }, 0);
   console.log(amount);

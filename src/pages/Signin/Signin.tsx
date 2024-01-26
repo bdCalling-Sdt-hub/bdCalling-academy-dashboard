@@ -50,7 +50,7 @@ export default function SignIn() {
       if (result) {
         console.log("hitted");
         const response = await axios.get(
-          "http://192.168.10.13:8000/api/profile/",
+          `${import.meta.env.VITE_BASE_API}/profile/`,
           {
             headers: {
               Authorization: `Bearer ${result?.access_token}`,

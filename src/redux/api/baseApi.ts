@@ -7,8 +7,7 @@ import { tagTypesList } from "../../types/tags";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://192.168.10.13:8000/api",
-
+    baseUrl: import.meta.env.VITE_BASE_API,
     // credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as any).auth.token;
