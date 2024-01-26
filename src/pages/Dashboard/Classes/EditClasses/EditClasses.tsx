@@ -34,6 +34,7 @@ const EditClasses = () => {
   const navigate = useNavigate();
   const [form] = useForm();
   const onFinish = async (data: any) => {
+    console.log(data);
     try {
       const res: any = "";
       if (res) {
