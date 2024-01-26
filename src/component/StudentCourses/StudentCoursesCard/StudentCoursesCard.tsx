@@ -15,7 +15,7 @@ export default function StudentCoursesCard({ courses }: any) {
   console.log("coursEiD", id);
   const { data: classes } = useGetClassesbyCourseIdQuery(id);
 
-  const lastClass = classes?.data[classes?.data?.length - 1];
+  const firstClass = classes?.data[0];
   const courseImage = `${IMAGE_BASE_URL}/${courseThumbnail}`;
 
   const handleContinueCourse = () => {};
@@ -38,11 +38,9 @@ export default function StudentCoursesCard({ courses }: any) {
 
         <div className="px-5 pb-[22px] pt-3">
           <Link
-            to={`/${courseName?.split(" ")?.join("-")}/${id}/${lastClass?.id}/${
-              lastClass?.module_no
-            }/${lastClass?.module_class[
-              lastClass?.module_class?.length - 1
-            ]?.name
+            to={`/${courseName?.split(" ")?.join("-")}/${id}/${
+              firstClass?.id
+            }/${firstClass?.module_no}/${firstClass?.module_class[0]?.name
               .split(" ")
               .join("-")}`}
           >

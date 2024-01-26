@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 
 import videoicon from "../../../assets/studentDashboard/video.png";
 import cashIcon from "../../../assets/studentDashboard/cash.png";
+import { useGetbuyingCourseQuery } from "../../../redux/api/courseApi";
 export default function StudentDashboardSurvey() {
-  const fakeData = {
-    amount: "15000",
-    duration: "6 months",
-    totalCourse: "05",
-    courseCompleted: "05",
-  };
+  const { data: studentEnrolledCourses }: any =
+    useGetbuyingCourseQuery(undefined);
+  const amount = studentEnrolledCourses.reduce((acc: any, item: any) => {
+    return (acc = acc + Number(item?.amount));
+  }, 0);
+  console.log(amount);
 
   return (
     <div>
@@ -27,7 +29,7 @@ export default function StudentDashboardSurvey() {
             <div className="text-center">
               <h1 className="text-xl font-semibold">Total Course</h1>
               <h1 className="text-4xl font-semibold text-[#2492EB] mt-1">
-                {fakeData.totalCourse}
+                {studentEnrolledCourses?.length}
               </h1>
             </div>
           </div>
@@ -47,7 +49,7 @@ export default function StudentDashboardSurvey() {
               <h1 className="text-xl font-semibold">Complete Course</h1>
               <h1 className="text-4xl font-semibold text-[#2492EB] mt-1">
                 {" "}
-                {fakeData.courseCompleted}
+                {0}
               </h1>
             </div>
           </div>
@@ -66,7 +68,7 @@ export default function StudentDashboardSurvey() {
             <div className="text-center">
               <h1 className="text-xl font-semibold">Courses Duration</h1>
               <h1 className="text-4xl font-semibold text-[#2492EB] mt-1">
-                {fakeData.duration}
+                {0}
               </h1>
             </div>
           </div>
@@ -85,7 +87,7 @@ export default function StudentDashboardSurvey() {
             <div className="text-center">
               <h1 className="text-xl font-semibold">Pay Total Amount</h1>
               <h1 className="text-4xl font-semibold text-[#2492EB] mt-1">
-                BDT {fakeData.amount}
+                BDT {amount}
               </h1>
             </div>
           </div>
