@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
 import { LuInfo } from "react-icons/lu";
 import { useGetClassesbyCourseIdQuery } from "../../../redux/api/classApi";
+import { USER_ROLE } from "../../../constants/role";
 export default function CourseCard({ course }: any) {
   const navigate = useNavigate();
   const {
@@ -87,9 +88,9 @@ export default function CourseCard({ course }: any) {
 
             <div className="flex justify-between">
               <Link
-                to={`/${courseName.split(" ").join("-")}/${id}/${
-                  classesData?.data[0]?.id
-                }/${
+                to={`/${USER_ROLE.ADMIN}/${courseName
+                  .split(" ")
+                  .join("-")}/${id}/${classesData?.data[0]?.id}/${
                   classesData?.data[0]?.module_no
                 }/${classesData?.data[0]?.module_class[0]?.name
                   .split(" ")

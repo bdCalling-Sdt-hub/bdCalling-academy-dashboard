@@ -9,6 +9,7 @@ import { Col, Row } from "antd";
 import { useGetSingleCourseQuery } from "../../../redux/api/courseApi";
 import { imageUrl } from "../../../utils/Common";
 import VideoPlayer from "../../../component/UI/VideoPlayer/VideoPlayer";
+import { USER_ROLE } from "../../../constants/role";
 
 const Classes = () => {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
@@ -52,9 +53,11 @@ const Classes = () => {
               >
                 {module?.module_class?.map((video: any) => (
                   <Link
-                    to={`/${courseTitle}/${id}/${module?.id}/${
-                      module?.module_no
-                    }/${video?.name?.split(" ").join("-")}`}
+                    to={`/${USER_ROLE.ADMIN}/${courseTitle}/${id}/${
+                      module?.id
+                    }/${module?.module_no}/${video?.name
+                      ?.split(" ")
+                      .join("-")}`}
                   >
                     <button
                       key={video.id}

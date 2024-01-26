@@ -139,7 +139,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/:courseTitle/:id/:classId/:moduleNo/:videoTitle",
+        path: "/SUPER_ADMIN/:courseTitle/:id/:classId/:moduleNo/:videoTitle",
         element: (
           <AdminRoutes>
             <Classes></Classes>
