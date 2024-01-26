@@ -61,12 +61,12 @@ export default function Setting() {
           style={{ fontSize: "18px", cursor: "pointer" }}
         />
       </div> */}
-      <div className="flex bg-[#fff] justify-between p-4 rounded ">
+      {/* <div className="flex bg-[#fff] justify-between p-4 rounded ">
         <p className="text-[#333] text-lg">Login Activity</p>
         <Link to={"/setting/login-activity"}>
           <RightOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

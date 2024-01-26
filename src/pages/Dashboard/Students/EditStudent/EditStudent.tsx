@@ -52,7 +52,7 @@ const EditStudent = ({ setshow, id }: any) => {
         dob: dayjs(dob),
       });
     }
-  }, [form, studentData?.user]);
+  }, [form, studentData]);
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
     console.log("student data", data);
     const formatedData: any = {
@@ -241,7 +241,7 @@ const EditStudent = ({ setshow, id }: any) => {
                 >
                   <DatePicker
                     style={{ width: "100%", padding: "8px" }}
-                    placeholder="start date"
+                    placeholder="date of birth"
                   />
                 </Form.Item>
               </Col>

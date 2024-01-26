@@ -135,7 +135,7 @@ export default function Students() {
               </p>
             )}
             {data?.approve === 0 ? (
-              <p className={`${style.disapprove}`}>disApproved</p>
+              <p className={`${style.disapprove}`}>Pending</p>
             ) : (
               <p
                 title="disapprove"

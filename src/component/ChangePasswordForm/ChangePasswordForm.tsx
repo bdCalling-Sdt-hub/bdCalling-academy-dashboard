@@ -22,7 +22,7 @@ interface IChangePassword {
   setshow: (value: boolean) => void;
 }
 export default function ChangePassword({
-  onSubmit,
+  // onSubmit,
   btnText,
 
   setshow,

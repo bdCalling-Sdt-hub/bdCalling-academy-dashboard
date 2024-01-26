@@ -50,7 +50,7 @@ const Classes = () => {
                 index={moduleIndex}
                 moduleLenth={classes?.data?.length}
               >
-                {module?.module_class?.map((video: any, videoIndex: number) => (
+                {module?.module_class?.map((video: any) => (
                   <Link
                     to={`/${courseTitle}/${id}/${module?.id}/${
                       module?.module_no

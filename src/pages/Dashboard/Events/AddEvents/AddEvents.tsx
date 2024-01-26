@@ -45,8 +45,8 @@ export default function AddEvents({ setshow }: any) {
                 className={`avatar-uploader`}
                 showUploadList={false}
                 setLoading={setLoading}
-                setImageUrl={setImageUrl}
-                setImageFile={setImageFile}
+                setImageUrl={() => {}}
+                setImageFile={() => {}}
               >
                 <div
                   className=" bg-customPrimary absolute"

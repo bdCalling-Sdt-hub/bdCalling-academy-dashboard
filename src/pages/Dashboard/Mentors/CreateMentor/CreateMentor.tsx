@@ -25,8 +25,7 @@ import Loading from "../../../../component/UI/Loading/Loading";
 import useImageUpload from "../../../../hooks/useImageUpload";
 
 export default function CreateMentor({ setshow }: any) {
-  const [loading, setLoading] = useState(false);
-  const { setFile, imageUrl, imageFile } = useImageUpload();
+  const { setFile, imageUrl, imageFile, setImageUrl } = useImageUpload();
   const [register, { isLoading }] = useRegisterMutation();
   const [form] = useForm();
 
@@ -54,6 +53,7 @@ export default function CreateMentor({ setshow }: any) {
         message.info(res?.message);
         form.resetFields();
         setshow(false);
+        setImageUrl(null);
       }
     } catch (error: any) {
       message.error(error?.data?.email[0]);
@@ -101,7 +101,7 @@ export default function CreateMentor({ setshow }: any) {
                   name="avatar"
                   className={`avatar-uploader`}
                   showUploadList={false}
-                  setLoading={setLoading}
+                  setLoading={() => {}}
                   setImageUrl={() => {}}
                   setImageFile={setFile}
                 >

@@ -11,7 +11,7 @@ const studentApi = baseApi.injectEndpoints({
         url: "/students/all",
         method: "GET",
       }),
-      providesTags: [tagTypes.student, tagTypes.user],
+      providesTags: [tagTypes.user, tagTypes.student],
     }),
     getSingleStudent: builder.query({
       query: (id: number) => ({

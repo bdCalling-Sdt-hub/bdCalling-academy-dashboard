@@ -21,9 +21,7 @@ import personimage from "../../../../assets/table/person.svg";
 import Loading from "../../../../component/UI/Loading/Loading";
 
 export default function CreateStudents({ setshow }: any) {
-  const [loading, setLoading] = useState(false);
-
-  const { setFile, imageUrl, imageFile } = useImageUpload();
+  const { setFile, imageUrl, imageFile, setImageUrl } = useImageUpload();
   const [register, { isLoading }] = useRegisterMutation();
   const [form] = useForm();
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
@@ -53,6 +51,7 @@ export default function CreateStudents({ setshow }: any) {
       if (res?.message) {
         message.success(res?.message);
         form.resetFields();
+        setImageUrl(null);
         setshow(false);
       }
     } catch (error: any) {
@@ -94,7 +93,7 @@ export default function CreateStudents({ setshow }: any) {
                     name="avatar"
                     className={`avatar-uploader`}
                     showUploadList={false}
-                    setLoading={setLoading}
+                    setLoading={() => {}}
                     setImageUrl={() => {}}
                     setImageFile={setFile}
                   >

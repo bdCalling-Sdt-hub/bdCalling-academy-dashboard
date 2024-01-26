@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Spin } from "antd";
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
@@ -7,7 +8,7 @@ import { userKey } from "../constants/authKey";
 
 const MentorRoutes = ({ children: Children }: { children: ReactNode }) => {
   const loading = false;
-  const user = getuserInfo(userKey);
+  const user: any = getuserInfo(userKey);
   const location = useLocation();
   if (loading) {
     return <Spin />;

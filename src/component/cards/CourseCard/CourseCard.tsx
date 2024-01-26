@@ -16,7 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
 import { LuInfo } from "react-icons/lu";
 import { useGetClassesbyCourseIdQuery } from "../../../redux/api/classApi";
-export default function CourseCard({ course, courseType }: any) {
+export default function CourseCard({ course }: any) {
   const navigate = useNavigate();
   const {
     id,

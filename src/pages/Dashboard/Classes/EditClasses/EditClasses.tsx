@@ -112,7 +112,7 @@ const EditClasses = () => {
                 >
                   {(fields, { add, remove }) => (
                     <>
-                      {fields.map((field, index) => (
+                      {fields.map((field) => (
                         <Row key={field.key} gutter={16}>
                           <Col lg={12}>
                             <Form.Item

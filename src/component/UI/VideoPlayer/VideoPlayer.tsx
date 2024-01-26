@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-export default function VideoPlayer({ title, link, moduleId, data }: any) {
+export default function VideoPlayer({ title, moduleId, data }: any) {
   console.log("videoplayer", data);
   return (
     <div>
