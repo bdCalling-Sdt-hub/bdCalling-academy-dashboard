@@ -165,6 +165,10 @@ export default function CreateMentor({ setshow }: any) {
                     required: true,
                     message: "Please input your full  name",
                   },
+                  {
+                    min: 4,
+                    message: "user name must be at least 4 characters",
+                  },
                 ]}
               >
                 <Input placeholder="user  name" className="py-2" />
@@ -179,6 +183,14 @@ export default function CreateMentor({ setshow }: any) {
                   {
                     required: true,
                     message: "Please input phone  number",
+                  },
+                  {
+                    min: 11,
+                    message: "mobile number must be at least 11 character",
+                  },
+                  {
+                    max: 11,
+                    message: "mobile number must be at least 11 character",
                   },
                 ]}
               >
@@ -214,6 +226,10 @@ export default function CreateMentor({ setshow }: any) {
                     required: true,
                     message: "Please input  password",
                   },
+                  {
+                    min: 6,
+                    message: "password must be at least 6 characters",
+                  },
                 ]}
               >
                 <Input.Password
@@ -232,6 +248,10 @@ export default function CreateMentor({ setshow }: any) {
                   {
                     required: true,
                     message: "Please re enter password",
+                  },
+                  {
+                    min: 6,
+                    message: "password must be at least 6 characters",
                   },
                 ]}
               >

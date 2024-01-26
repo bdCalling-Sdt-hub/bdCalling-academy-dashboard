@@ -14,9 +14,11 @@ export default function Courses() {
   const handleFilterCourse = (type: string | null) => {
     setCourseType(type);
   };
-  const queryParameters = courseType !== null ? { status: courseType } : {};
-  const { data: courseData, isLoading }: any =
-    useGetallCourseQuery(queryParameters);
+  const query: Record<string, any> = {};
+  if (courseType) {
+    query["status"] = courseType;
+  }
+  const { data: courseData, isLoading }: any = useGetallCourseQuery(query);
   const courses = courseData?.data?.data;
   console.log(courses, "courseData");
   console.log(courseType);

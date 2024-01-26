@@ -56,7 +56,6 @@ export default function Profile() {
       }
       console.log(res);
     } catch (err) {
-      console.log(err);
       message.error("something went wrong. please try again later");
     }
   };

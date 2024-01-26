@@ -193,6 +193,10 @@ export default function EditMentor({ setshow, mentorData }: any) {
                     required: true,
                     message: "Please input your full  name",
                   },
+                  {
+                    min: 4,
+                    message: "user name must be at least 4 characters",
+                  },
                 ]}
               >
                 <Input placeholder="user  name" className="py-2" />
@@ -207,6 +211,14 @@ export default function EditMentor({ setshow, mentorData }: any) {
                   {
                     required: true,
                     message: "Please input phone  number",
+                  },
+                  {
+                    min: 11,
+                    message: "phone number must be at least 11 character",
+                  },
+                  {
+                    max: 11,
+                    message: "phone number must be at least 11 character",
                   },
                 ]}
               >
