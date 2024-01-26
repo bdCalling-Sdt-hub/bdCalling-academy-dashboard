@@ -10,6 +10,7 @@ import EditEvent from "../../../pages/Dashboard/Events/EditEvent/EditEvent";
 import { imageUrl } from "../../../utils/Common";
 import { useDeleteEventMutation } from "../../../redux/api/eventApi";
 import { message } from "antd";
+import dayjs from "dayjs";
 export default function EventCard(props: any) {
   const { image, date, starttime, officeLocation, courseName, id } =
     props.events;
@@ -53,7 +54,7 @@ export default function EventCard(props: any) {
               <span>
                 <IoMdTime />
               </span>
-              <p>{starttime}</p>
+              <p>{dayjs(starttime, "HH:mm").format("h:mm a")}</p>
             </div>
             <div className="flex items-center gap-x-2 text-customPrimary">
               <span>

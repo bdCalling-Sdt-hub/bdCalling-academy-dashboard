@@ -170,7 +170,8 @@ export default function EditEvent(props: any) {
               ]}
             >
               <TimePicker
-                format={"HH:mm"}
+                format="h:mm a"
+                use12Hours
                 style={{ width: "100%", padding: "8px" }}
               />
             </Form.Item>
@@ -188,7 +189,8 @@ export default function EditEvent(props: any) {
               ]}
             >
               <TimePicker
-                format={"HH:mm"}
+                format="h:mm a"
+                use12Hours
                 style={{ width: "100%", padding: "8px" }}
               />
             </Form.Item>
