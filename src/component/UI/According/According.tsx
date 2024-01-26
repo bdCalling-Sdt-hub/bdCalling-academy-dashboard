@@ -20,7 +20,7 @@ const According = ({
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
-  const shouldApplyBottomBorder = !isOpen && index === moduleLenth - 1;
+  const shouldApplyBottomBorder = isOpen || index === moduleLenth - 1;
   console.log(shouldApplyBottomBorder);
   return (
     <div>

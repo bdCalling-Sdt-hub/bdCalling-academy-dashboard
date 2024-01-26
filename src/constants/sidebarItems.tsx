@@ -57,8 +57,8 @@ export const SidebarItems = (role: string) => {
           label: "All Courses",
         },
         {
-          key: `/${role}/class/`,
-          label: "Classes",
+          key: `/${role}/classes/add`,
+          label: "Add Class",
         },
       ],
     },

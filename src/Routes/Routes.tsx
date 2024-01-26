@@ -38,6 +38,7 @@ import EditCourse from "../pages/Dashboard/Courses/EditCourse/EditCourse";
 import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
 import Classes from "../pages/Dashboard/Classes/Classes";
 import EditClasses from "../pages/Dashboard/Classes/EditClasses/EditClasses";
+import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 
 export const router = createBrowserRouter([
   // {
@@ -122,7 +123,23 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/SUPER_ADMIN/classes/add",
+        element: (
+          <AdminRoutes>
+            <AddClass></AddClass>
+          </AdminRoutes>
+        ),
+      },
+      {
         path: "/classes/:id",
+        element: (
+          <AdminRoutes>
+            <Classes></Classes>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/:courseTitle/:id/:classId/:moduleNo/:videoTitle",
         element: (
           <AdminRoutes>
             <Classes></Classes>
