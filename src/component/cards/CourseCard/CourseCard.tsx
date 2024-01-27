@@ -17,6 +17,9 @@ import { IMAGE_BASE_URL } from "../../../utils/Common";
 import { LuInfo } from "react-icons/lu";
 import { useGetClassesbyCourseIdQuery } from "../../../redux/api/classApi";
 import { USER_ROLE } from "../../../constants/role";
+import { useDeleteCourseMutation } from "../../../redux/api/courseApi";
+import { message } from "antd";
+import PopConfirm from "../../UI/popConfirm/PopConfirm";
 export default function CourseCard({ course }: any) {
   const navigate = useNavigate();
   const {
@@ -32,9 +35,16 @@ export default function CourseCard({ course }: any) {
   } = course;
   const image = `${IMAGE_BASE_URL}/${courseThumbnail}`;
   const { data: classesData } = useGetClassesbyCourseIdQuery(id);
-
-  const handleDelete = (id: string) => {
-    console.log(id);
+  const [deleteCourse] = useDeleteCourseMutation();
+  const handleDelete = async () => {
+    try {
+      const res: any = await deleteCourse(id).unwrap();
+      if (res) {
+        message.success(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className={style.card}>
@@ -116,14 +126,20 @@ export default function CourseCard({ course }: any) {
                   }}
                 />
               </button>
-              <button className={style.btnDelete}>
-                <RiDeleteBin5Line
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                  }}
-                />
-              </button>
+              <PopConfirm
+                title="Are You Sure?"
+                description="this action cannot be undone!"
+                onConfirm={handleDelete}
+              >
+                <button className={style.btnDelete}>
+                  <RiDeleteBin5Line
+                    style={{
+                      height: "24px",
+                      width: "24px",
+                    }}
+                  />
+                </button>
+              </PopConfirm>
             </div>
           </div>
         </div>
