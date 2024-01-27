@@ -14,31 +14,41 @@ const classScheduleApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.classSchedule],
     }),
-    getallClassSchedule: builder.query({
-      query: () => ({
+    getallClassSchedule: builder.mutation({
+      query: (data: any) => ({
         url: `/schedules/all/admin`,
-        method: "GET",
+        method: "POST",
+        body: data,
       }),
-      providesTags: [tagTypes.classSchedule],
+      invalidatesTags: [tagTypes.classSchedule],
     }),
-    showclassScheduleForMentors: builder.query({
+    showclassScheduleForMentor: builder.mutation({
+      query: (data: any) => ({
+        url: `/schedules/all/admin`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.classSchedule],
+    }),
+    showclassScheduleForStudents: builder.mutation({
       query: () => ({
         url: `/schedules/mentor`,
         method: "GET",
       }),
-      providesTags: [tagTypes.classSchedule],
+      invalidatesTags: [tagTypes.classSchedule],
     }),
-    showclassScheduleForStudents: builder.query({
-      query: () => ({
-        url: `schedules/fetch/student`,
-        method: "GET",
+    showClassScheduleForStudents: builder.mutation({
+      query: (data: any) => ({
+        url: `/schedules/fetch/student`,
+        method: "POST",
+        body: data,
       }),
-      providesTags: [tagTypes.classSchedule],
+      invalidatesTags: [tagTypes.classSchedule],
     }),
     deleteClassScheduleById: builder.mutation({
       query: (id: number) => ({
         url: `/schedules/${id}`,
-        method: "DELTE",
+        method: "DELETE",
       }),
       invalidatesTags: [tagTypes.classSchedule],
     }),
@@ -47,8 +57,8 @@ const classScheduleApi = baseApi.injectEndpoints({
 
 export const {
   useAddClassScheduleMutation,
-  useGetallClassScheduleQuery,
-  useShowclassScheduleForMentorsQuery,
-  useShowclassScheduleForStudentsQuery,
+  useGetallClassScheduleMutation,
+  useShowclassScheduleForMentorMutation,
+  useShowClassScheduleForStudentsMutation,
   useDeleteClassScheduleByIdMutation,
 } = classScheduleApi;
