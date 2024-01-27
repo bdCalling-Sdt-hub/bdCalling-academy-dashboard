@@ -3,8 +3,11 @@ import { useState } from "react";
 import { Calendar, CalendarProps } from "antd";
 import { Dayjs } from "dayjs";
 import dayjs from "dayjs";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
+import CustomModal from "../../../component/UI/Modal/Modal";
+import AddClassSchedule from "./AddClass-Schedule/AddClassSchedule";
 export default function ClassSchedule() {
+  const [show, setshow] = useState(false);
   const [value, setValue] = useState(() => dayjs());
   const handleNextMonth = () => setValue(value.add(1, "month"));
   const handlePrevMonth = () => setValue(value.add(-1, "month"));
@@ -15,8 +18,29 @@ export default function ClassSchedule() {
   const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>["mode"]) => {
     console.log(value.format("YYYY.MM.DD"), mode);
   };
+
+  const handleAddSchedule = () => {
+    setshow((prev) => !prev);
+  };
   return (
     <div className="h-screen">
+      <CustomModal
+        showCancelButton={false}
+        showOkButton={false}
+        title={""}
+        isOpen={show}
+        closeModal={() => setshow(false)}
+      >
+        <AddClassSchedule setshow={setshow} />
+      </CustomModal>
+      <div className="flex justify-end mb-6">
+        <button
+          className="bg-customPrimary text-[#fff] p-[16px]  rounded-lg text-[18px] font-[500]"
+          onClick={handleAddSchedule}
+        >
+          <PlusOutlined /> <span className="ms-2">Add Schedule</span>
+        </button>
+      </div>
       <Calendar
         headerRender={() => (
           <div className="">
