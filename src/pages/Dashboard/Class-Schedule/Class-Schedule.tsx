@@ -215,7 +215,7 @@ export default function ClassSchedule() {
                   <DatePicker
                     picker="month"
                     style={{ width: "100%", padding: "8px" }}
-                    placeholder="start date"
+                    placeholder="select year and month"
                   />
                 </Form.Item>
               </Col>
