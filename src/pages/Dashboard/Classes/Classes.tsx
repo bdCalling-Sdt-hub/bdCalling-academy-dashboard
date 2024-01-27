@@ -15,12 +15,13 @@ const Classes = () => {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
   const { data: classes } = useGetClassesbyCourseIdQuery(Number(id));
   const { data: courseData }: any = useGetSingleCourseQuery(Number(id));
-
+  console.log("classes", classes);
   const singleVideo = classes?.data
     ?.find((c: any) => c?.id == classId && c?.module_no == moduleNo)
     ?.module_class?.find(
       (video: any) => video?.name === videoTitle?.split("-").join(" ")
     );
+
   return (
     <div className="h-screen">
       <div className="">
@@ -43,7 +44,7 @@ const Classes = () => {
             {classes?.data?.map((module: any, moduleIndex: number) => (
               <According
                 id={id}
-                module_no={module?.module_no}
+                classId={module?.id}
                 key={moduleIndex}
                 editable={true}
                 title={module.module_title}

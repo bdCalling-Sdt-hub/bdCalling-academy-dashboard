@@ -21,6 +21,13 @@ const classApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.class, tagTypes.course],
     }),
+    getAllClassModulesbyClassId: builder.query({
+      query: (id: number) => ({
+        url: `/class-single/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.class, tagTypes.course],
+    }),
     updateClassesById: builder.mutation({
       query: (data: any) => ({
         url: `/class/${data?.id}`,
@@ -33,4 +40,9 @@ const classApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddClassesMutation, useGetClassesbyCourseIdQuery } = classApi;
+export const {
+  useAddClassesMutation,
+  useGetClassesbyCourseIdQuery,
+  useGetAllClassModulesbyClassIdQuery,
+  useUpdateClassesByIdMutation,
+} = classApi;

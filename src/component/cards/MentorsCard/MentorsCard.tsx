@@ -29,7 +29,7 @@ export default function MentorsCard(props: any) {
   };
 
   return (
-    <div className="h-screen">
+    <div>
       <CustomModal
         showCancelButton={false}
         showOkButton={false}

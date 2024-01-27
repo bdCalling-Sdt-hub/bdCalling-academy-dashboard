@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const According = ({
   id,
-  module_no,
+  classId,
   title,
   editable = false,
   index,
@@ -43,7 +43,7 @@ const According = ({
             {moduleDuration}
           </button>
           {editable && (
-            <Link to={`/editclasses/${id}/${module_no}`}>
+            <Link to={`/editclasses/${id}/${classId}`}>
               <button className="border px-4 py-2 bg-customPrimary text-[#fff] font-bold">
                 <EditOutlined />
               </button>

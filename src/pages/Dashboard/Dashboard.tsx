@@ -7,7 +7,7 @@ import Table from "../../component/UI/Table/Table";
 
 import { useGetallmentorsQuery } from "../../redux/api/mentorApi";
 import { useGetAllStudentQuery } from "../../redux/api/StudentApi";
-import { IMAGE_BASE_URL } from "../../utils/Common";
+import { IMAGE_BASE_URL, imageUrl } from "../../utils/Common";
 
 export default function Dashboard() {
   const { data: mentorData, isLoading: mentorLoading }: any =
@@ -104,14 +104,17 @@ export default function Dashboard() {
       fullName: mentor?.fullName,
       image:
         (
-          <img className="w-[30px] h-[30px] rounded-full" src={mentor?.image} />
+          <img
+            className="w-[30px] h-[30px] rounded-full"
+            src={imageUrl(mentor?.image)}
+          />
         ) ?? "N/A",
       email: mentor?.email ?? "N/A",
       designation: mentor?.designation,
     };
   });
 
-  const students = studentData?.data?.data?.map((data: any, index: number) => {
+  const students = studentData?.data?.map((data: any, index: number) => {
     return {
       serial: index + 1,
       id: data?.id,
@@ -131,6 +134,7 @@ export default function Dashboard() {
       mobileNumber: data?.mobileNumber,
     };
   });
+  console.log("students", studentData?.data?.data);
 
   return (
     <div className="">

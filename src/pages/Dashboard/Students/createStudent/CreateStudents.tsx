@@ -35,7 +35,7 @@ export default function CreateStudents({ setshow }: any) {
       dob: data?.dob?.format("YYYY-MM-DD"),
     };
     formatedData.userType = "STUDENT";
-    formatedData.approve = 0;
+    formatedData.approve = 1;
     const formdData = new FormData();
     console.log("data from ", data);
     if (imageFile) {
@@ -55,8 +55,8 @@ export default function CreateStudents({ setshow }: any) {
         setshow(false);
       }
     } catch (error: any) {
-      message.error(error?.data?.email[0]);
       message.error(error?.data?.userName[0]);
+      message.error(error?.data?.email[0]);
     }
   };
   const onFinishFailed = (error: any) => {

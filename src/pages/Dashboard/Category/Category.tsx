@@ -61,7 +61,7 @@ const Category = () => {
       department: category?.department?.department_name,
     };
   });
-  console.log(categoryData);
+
   return (
     <div>
       <div className="h-screen ">

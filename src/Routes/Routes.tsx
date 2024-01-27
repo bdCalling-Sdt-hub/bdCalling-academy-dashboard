@@ -148,7 +148,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/editclasses/:courseId/:module_no",
+        path: "/editclasses/:courseId/:classId",
         element: (
           <AdminRoutes>
             <EditClasses></EditClasses>

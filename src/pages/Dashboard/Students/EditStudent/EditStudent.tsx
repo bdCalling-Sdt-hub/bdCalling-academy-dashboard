@@ -73,14 +73,13 @@ const EditStudent = ({ setshow, id }: any) => {
         id: studentData?.user?.id,
         body: formdData,
       }).unwrap();
-      console.log(res);
+
       if (res?.message) {
         message.success(res?.message);
         form.resetFields();
         setshow(false);
       }
     } catch (error: any) {
-      console.log(error);
       message.error(error?.data?.email[0]);
       message.error(error?.data?.userName[0]);
     }
@@ -103,7 +102,7 @@ const EditStudent = ({ setshow, id }: any) => {
                   required: true,
                   message: (
                     <p className="flex justify-center ">
-                      Please select an image{" "}
+                      Please input mentor image{" "}
                     </p>
                   ),
                 },

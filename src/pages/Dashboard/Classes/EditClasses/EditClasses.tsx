@@ -12,10 +12,11 @@ import {
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useGetallCourseQuery } from "../../../../redux/api/courseApi";
 import {
   useAddClassesMutation,
+  useGetAllClassModulesbyClassIdQuery,
   useGetClassesbyCourseIdQuery,
+  useUpdateClassesByIdMutation,
 } from "../../../../redux/api/classApi";
 import { USER_ROLE } from "../../../../constants/role";
 import { MdDelete } from "react-icons/md";
@@ -24,19 +25,33 @@ import { useForm } from "antd/es/form/Form";
 
 import style from "../Classes.module.css";
 import { useEffect } from "react";
+import { useGetsingleCategoryQuery } from "../../../../redux/api/categoryapi";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const EditClasses = () => {
-  const { courseId, module_no } = useParams();
-
+  const { courseId, classId } = useParams();
+  //  const [editClass,{isLoading}] =  useupdatec
   const { data: classData } = useGetClassesbyCourseIdQuery(Number(courseId));
-  const module = classData?.data?.find((c: any) => c.module_no == module_no);
-  console.log(module);
+
+  const { data: modules } = useGetAllClassModulesbyClassIdQuery(
+    Number(classId)
+  );
+  const [updateClass, { isLoading }] = useUpdateClassesByIdMutation();
+  const module = modules?.data;
+
   const navigate = useNavigate();
   const [form] = useForm();
   const onFinish = async (data: any) => {
-    console.log(data);
+    const formatedData = {
+      ...data,
+      course_id: courseId,
+      module_no: module?.module_no,
+    };
+    console.log(formatedData);
     try {
-      const res: any = "";
+      const res: any = await updateClass({
+        id: classId,
+        body: formatedData,
+      }).unwrap();
       if (res) {
         message.success(res.message);
         navigate(`/${USER_ROLE.ADMIN}/courses`);
@@ -186,8 +201,7 @@ const EditClasses = () => {
                     htmlType="submit"
                     className="bg-customPrimary"
                   >
-                    {/* {addClassLoading ? <Loading /> : "Submit"} */}
-                    Submit
+                    {isLoading ? <Loading /> : "Submit"}
                   </Button>
                 </Form.Item>
               </div>

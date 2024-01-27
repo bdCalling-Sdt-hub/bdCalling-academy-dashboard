@@ -77,7 +77,6 @@ export default function Students() {
     setStudentId(data?.id);
   };
 
-  console.log("student data", studentData);
   const columns = [
     {
       title: "#sl",
@@ -168,7 +167,7 @@ export default function Students() {
       },
     },
   ];
-  const data = studentData?.data?.data?.map((data: any, index: number) => {
+  const data = studentData?.data?.map((data: any, index: number) => {
     return {
       serial: index + 1,
       id: data?.id,
@@ -188,6 +187,7 @@ export default function Students() {
       mobileNumber: data?.mobileNumber,
     };
   });
+  console.log(studentData);
   const tablethemes = {
     Table: {
       headerBg: "#2492EB",
@@ -236,7 +236,7 @@ export default function Students() {
         <EditStudent setshow={setShowEditModal} id={id} />
       </CustomModal>
 
-      <StudentSurvey students={studentData?.data?.data}></StudentSurvey>
+      <StudentSurvey students={studentData?.data}></StudentSurvey>
       <div className="mt-6">
         <div
           className="flex 

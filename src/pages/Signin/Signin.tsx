@@ -48,7 +48,6 @@ export default function SignIn() {
     try {
       const result: any = await signin(data).unwrap();
       if (result) {
-        console.log("hitted");
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_API}/profile/`,
           {
@@ -71,7 +70,6 @@ export default function SignIn() {
 
       // console.log(newUser);
     } catch (error: any) {
-      console.log(error);
       message.error(error?.data?.error || error?.data?.message);
     }
   };

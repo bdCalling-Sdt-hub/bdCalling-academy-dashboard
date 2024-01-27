@@ -39,7 +39,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  {studentsData?.data?.data?.length}
+                  {studentsData?.data?.length}
                 </h1>
               </div>
             </div>

@@ -19,7 +19,7 @@ export default function Mentors() {
     setshow(true);
   };
   const { data: mentorsData }: any = useGetallmentorsQuery(undefined);
-
+  console.log(mentorsData);
   const onClick: MenuProps["onClick"] = ({ key }) => {
     message.info(`Click on item ${key}`);
   };
@@ -77,9 +77,9 @@ export default function Mentors() {
 
       <div className="mt-[30px]">
         {mentorsData ? (
-          <Row gutter={16} align={"middle"}>
+          <Row gutter={[8, 16]} align={"middle"} style={{}}>
             {mentorsData?.data?.map((mentor: any, index: number) => (
-              <Col key={index} lg={6} xl={6} style={{ marginBottom: "16px" }}>
+              <Col key={index} lg={6} xl={6}>
                 <MentorsCard mentor={mentor}></MentorsCard>
               </Col>
             ))}

@@ -9,9 +9,6 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { PiIdentificationCard } from "react-icons/pi";
 // import { useGetmyprofileQuery } from "../redux/api/authApi";
 export const SidebarItems = (role: string) => {
-  console.log(role);
-  // const { data: userData } = useGetmyprofileQuery(undefined);
-  // console.log(userData);
   const defaultSidebarItems: MenuProps["items"] = [
     {
       key: `/${role}/class-schedule`,

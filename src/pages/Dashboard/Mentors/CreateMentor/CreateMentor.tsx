@@ -50,14 +50,16 @@ export default function CreateMentor({ setshow }: any) {
       const res: any = await register({ body: formdData }).unwrap();
       console.log(res);
       if (res?.message) {
+        console.log(res);
         message.info(res?.message);
         form.resetFields();
         setshow(false);
         setImageUrl(null);
       }
     } catch (error: any) {
-      message.error(error?.data?.email[0]);
-      message.error(error?.data?.userName[0]);
+      console.log(error);
+      // message.error(error?.data?.email[0]);
+      // message.error(error?.data?.userName[0]);
     }
   };
   const onFinishFailed = (error: any) => {
