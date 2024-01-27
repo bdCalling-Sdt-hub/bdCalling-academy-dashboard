@@ -235,19 +235,19 @@ const DashboardLayout = () => {
                   },
                 }}
               >
-                <Input
+                {/* <Input
                   allowClear={true}
                   prefix={<SearchOutlined className="text-[#A7A7A7] " />}
                   placeholder="search here"
                   className="h-[50px] w-[461px] border-0"
-                />
+                /> */}
               </ConfigProvider>
             </div>
 
             <div
               style={{ display: "flex", alignItems: "center", lineHeight: 0 }}
             >
-              <div className="" style={{ marginRight: "20px" }}>
+              {/* <div className="" style={{ marginRight: "20px" }}>
                 <Select
                   options={options}
                   defaultValue={options[0]}
@@ -256,15 +256,15 @@ const DashboardLayout = () => {
                   placeholder="dsfsdafd"
                   onChange={handleSelectLanguage}
                 ></Select>
-              </div>
+              </div> */}
 
-              <Dropdown menu={{ items }} arrow>
+              {/* <Dropdown menu={{ items }} arrow>
                 <Badge count={5} className="cursor-pointer">
                   <IoIosNotificationsOutline
                     style={{ width: "30px", height: "30px" }}
                   />
                 </Badge>
-              </Dropdown>
+              </Dropdown> */}
 
               <div className="ms-[20px]">
                 <div className="flex items-center gap-x-4">

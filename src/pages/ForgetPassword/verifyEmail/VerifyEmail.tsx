@@ -11,7 +11,7 @@ const VerifyEmail = () => {
   const email = getuserInfo("email");
   const navigate = useNavigate();
   const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const verify = async () => {
     try {
       const res: any = await verifyOtp({
@@ -22,8 +22,8 @@ const VerifyEmail = () => {
         message.success(res.message);
         navigate("/resetpassword");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      setErrorMessage(err?.data?.error);
     }
   };
   useEffect(() => {
@@ -40,6 +40,7 @@ const VerifyEmail = () => {
           Your OTP is currently being verified. Please wait for the process to
           complete.
         </h1>
+        <p className="text-red-500 mt-4"> {errorMessage}</p>
       </div>
     </div>
   );
