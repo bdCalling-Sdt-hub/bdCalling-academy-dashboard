@@ -11,7 +11,6 @@ import useAllMentors from "../../../hooks/useAllMentors";
 import useALLCourses from "../../../hooks/useAllCourses";
 
 export default function DashboardSurvery() {
-  const percantage = 10;
   const [studentsData] = useAllStudents();
   const [mentorsData] = useAllMentors();
   const [coursesData] = useALLCourses();
@@ -139,7 +138,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  BDT 5000,40
+                  BDT 0
                 </h1>
               </div>
             </div>
@@ -147,9 +146,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="tracking-wide">
-                {percantage} Higher Then Last Month
-              </p>
+              <p className="tracking-wide">Higher Then Last Month</p>
             </div>
           </div>
         </Col>

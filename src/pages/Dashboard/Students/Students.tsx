@@ -30,6 +30,7 @@ import { useState } from "react";
 import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateStudents from "./createStudent/CreateStudents";
 import EditStudent from "./EditStudent/EditStudent";
+import PopConfirm from "../../../component/UI/popConfirm/PopConfirm";
 
 export default function Students() {
   const [approveId, setApproveId] = useState<null | number>(null);
@@ -38,7 +39,6 @@ export default function Students() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [id, setStudentId] = useState<number | null>(null);
 
-  console.log(showEditModal, "dsfsdfsdf");
   const {
     data: studentData,
     isLoading,
@@ -127,24 +127,27 @@ export default function Students() {
             {data?.approve === 1 ? (
               <p className={`${style.approve}`}>Approved</p>
             ) : (
-              <p
-                title="approve"
-                onClick={() => handleApprove(data?.id, "approve")}
-                className={`text-[#2492EB] cursor-pointer`}
-              >
-                <AiOutlineCheck />
-              </p>
+              <PopConfirm onConfirm={() => handleApprove(data?.id, "approve")}>
+                <p
+                  title="approve"
+                  // onClick={() => handleApprove(data?.id, "approve")}
+                  className={`text-[#2492EB] cursor-pointer`}
+                >
+                  <AiOutlineCheck />
+                </p>
+              </PopConfirm>
             )}
             {data?.approve === 0 ? (
               <p className={`${style.disapprove}`}>Pending</p>
             ) : (
-              <p
-                title="disapprove"
-                onClick={() => handleApprove(data?.id, "disapprove")}
-                className={`  cursor-pointer`}
+              <PopConfirm
+                title="Are You Sure?"
+                onConfirm={() => handleApprove(data?.id, "disapprove")}
               >
-                <AiOutlineClose />
-              </p>
+                <p title="disapprove" className={`  cursor-pointer`}>
+                  <AiOutlineClose />
+                </p>
+              </PopConfirm>
             )}
           </span>
         );

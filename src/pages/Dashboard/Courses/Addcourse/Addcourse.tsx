@@ -142,7 +142,7 @@ export default function Addcourse({ type, editableData }: any) {
           <h1 className="text-2xl  font-semibold  text-customHeader">
             Add Course
           </h1>
-          <div className="flex gap-x-4">
+          {/* <div className="flex gap-x-4">
             <button
               className={
                 courseType === "Offline" ? style.activeBtn : style.inActiveBtn
@@ -167,7 +167,7 @@ export default function Addcourse({ type, editableData }: any) {
             >
               Video
             </button>
-          </div>
+          </div> */}
         </div>
         <div className={`${style.AddcourseContainer} px-[30px] pt-[30px] mb-6`}>
           <Form
@@ -194,7 +194,7 @@ export default function Addcourse({ type, editableData }: any) {
               </Col>
               <Col lg={8}>
                 <Form.Item
-                  label="Enter langugage"
+                  label="Enter Language"
                   key="language"
                   name="language"
                   rules={[

@@ -19,16 +19,13 @@ export default function Email() {
   const onSubmit = async (data: any) => {
     try {
       const res: any = await sendEmail(data).unwrap();
-      console.log(res);
+
       if (res.message) {
         message.info(res.message);
         storeUserInfo("email", data.email);
         // navigate("/verified/otp");
       }
-
-      console.log(data);
     } catch (error: any) {
-      console.log(error);
       message.error(error?.data?.error);
     }
   };

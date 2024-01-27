@@ -20,34 +20,23 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
 
-import {
-  useGetmyprofileQuery,
-  useLoginMutation,
-} from "../../redux/api/authApi";
+import { useLoginMutation } from "../../redux/api/authApi";
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  setUser,
-  useCurrentToken,
-  useCurrentUser,
-} from "../../redux/features/auth/authSlice";
-import { storeToken } from "../../service/auth.service";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/features/auth/authSlice";
 import { useState } from "react";
-
-// Assume your dummy data looks like this
+import Loading from "../../component/UI/Loading/Loading";
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const form = location?.state?.from.pathname;
   const [signin] = useLoginMutation();
-
   const dispatch = useAppDispatch();
-
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (data: any) => {
     try {
       const result: any = await signin(data).unwrap();
       if (result) {
+        setLoading(true);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_API}/profile/`,
           {
@@ -63,6 +52,7 @@ export default function SignIn() {
             newUser = { ...response?.data?.user, userType: "SUPER_ADMIN" };
           }
           dispatch(setUser({ token: result.access_token, user: newUser }));
+          setLoading(false);
           navigate(`/${newUser?.userType}/dashboard`);
         }
       }
@@ -187,7 +177,7 @@ export default function SignIn() {
                           background: "#2492EB",
                         }}
                       >
-                        Sign In
+                        {loading ? <Loading /> : " Sign In"}
                       </Button>
                     </Form.Item>
                   </Form>

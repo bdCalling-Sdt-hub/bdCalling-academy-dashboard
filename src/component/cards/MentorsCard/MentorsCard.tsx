@@ -8,6 +8,7 @@ const dummyImage =
 import EditMentor from "../../../pages/Dashboard/Mentors/EditMentor/EditMentor";
 import { useDeleteProfileMutation } from "../../../redux/api/authApi";
 import { imageUrl } from "../../../utils/Common";
+import PopConfirm from "../../UI/popConfirm/PopConfirm";
 
 export default function MentorsCard(props: any) {
   const { category, designation, image, fullName, id } = props.mentor;
@@ -73,12 +74,13 @@ export default function MentorsCard(props: any) {
           <button className={style.mentorsCardEditBtn} onClick={handleModal}>
             EDIT
           </button>
-          <button
-            onClick={handleDeleteMentor}
-            className={style.mentorDeleteBtn}
+          <PopConfirm
+            title="Are You Sure?"
+            description="This Action Cannot Be Undone!"
+            onConfirm={handleDeleteMentor}
           >
-            DELETE
-          </button>
+            <button className={style.mentorDeleteBtn}>DELETE</button>
+          </PopConfirm>
         </div>
       </Card>
     </div>
