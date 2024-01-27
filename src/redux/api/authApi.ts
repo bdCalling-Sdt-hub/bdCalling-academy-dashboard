@@ -67,10 +67,10 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
     verifyOtp: builder.mutation({
-      query: (params: any) => ({
-        url: "/otp-checker",
+      query: (data: any) => ({
+        url: "/verified-checker",
         method: "POST",
-        parmas: params,
+        body: data,
       }),
     }),
   }),
@@ -83,6 +83,7 @@ export const {
   useUpdateprofileMutation,
   useDeleteProfileMutation,
   useForgetPasswordMutation,
+  useResetPasswordMutation,
   useVerifyOtpMutation,
   useUpdatePasswordMutation,
 } = authApi;

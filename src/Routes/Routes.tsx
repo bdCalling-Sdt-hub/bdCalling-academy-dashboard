@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import SignIn from "../pages/Signin/Signin";
 import Email from "../pages/ForgetPassword/Email/Email";
-import Otp from "../pages/ForgetPassword/SigninOtp/SigninOtp";
+// import Otp from "../pages/ForgetPassword/SigninOtp/SigninOtp";
 
 import Dashboardlayout from "../Layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -40,6 +40,7 @@ import Classes from "../pages/Dashboard/Classes/Classes";
 import EditClasses from "../pages/Dashboard/Classes/EditClasses/EditClasses";
 import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 import VerifyEmail from "../pages/ForgetPassword/verifyEmail/VerifyEmail";
+import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
 
 export const router = createBrowserRouter([
   // {
@@ -292,18 +293,18 @@ export const router = createBrowserRouter([
     path: "/forgetpassword/email",
     element: <Email></Email>,
   },
-  {
-    path: "/forgetpassword/otp",
-    element: <Otp></Otp>,
-  },
+  // {
+  //   path: "/forgetpassword/:otp",
+  //   element: <Otp></Otp>,
+  // },
   {
     path: "/verified/:id",
     element: <VerifyEmail></VerifyEmail>,
   },
-  // {
-  //   path: "/verified/:id",
-  //   element: <ResetPassword></ResetPassword>,
-  // },
+  {
+    path: "/resetpassword",
+    element: <ResetPassword></ResetPassword>,
+  },
   {
     path: "*",
     element: <NotFound />,

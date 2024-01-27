@@ -55,9 +55,11 @@ export default function Students() {
   );
 
   if (approveStudentData) {
+    window.location.reload();
     message.info(approveStudentData.message);
   }
   if (disapproveStudentData) {
+    window.location.reload();
     message.info(disapproveStudentData.message);
   }
   const handleAddStudents = () => {

@@ -11,10 +11,11 @@ import { inputTheme } from "../../../themes/Index";
 import { useForgetPasswordMutation } from "../../../redux/api/authApi";
 
 import { storeUserInfo } from "../../../service/auth.service";
+import Loading from "../../../component/UI/Loading/Loading";
 
 export default function Email() {
   const navigate = useNavigate();
-  const [sendEmail] = useForgetPasswordMutation();
+  const [sendEmail, { isLoading }] = useForgetPasswordMutation();
   const onSubmit = async (data: any) => {
     try {
       const res: any = await sendEmail(data).unwrap();
@@ -22,7 +23,7 @@ export default function Email() {
       if (res.message) {
         message.info(res.message);
         storeUserInfo("email", data.email);
-        navigate("/forgetpassword/otp");
+        // navigate("/verified/otp");
       }
 
       console.log(data);
@@ -116,7 +117,7 @@ export default function Email() {
                           background: "#2492EB",
                         }}
                       >
-                        SEND OTP
+                        {isLoading ? <Loading /> : "SEND OTP"}
                       </Button>
                     </Form.Item>
                   </Form>

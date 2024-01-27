@@ -43,11 +43,15 @@ const UpdatePasswordForm = ({
               required: true,
               message: "Please input your Password!",
             },
+            {
+              min: 6,
+              message: "password must be at least 6 characters",
+            },
           ]}
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            name="newPassword"
+            name="password"
             type="password"
             placeholder="Password"
             className={style.input}
@@ -62,17 +66,21 @@ const UpdatePasswordForm = ({
           Confirm Password
         </label>
         <Form.Item
-          key="confirmPassword"
-          name="confirmPassword"
+          key="password_confirmation"
+          name="password_confirmation"
           rules={[
             {
               required: true,
               message: "Please input your Password!",
             },
+            {
+              min: 6,
+              message: "password must be at least 6 characters",
+            },
           ]}
         >
           <Input.Password
-            name="confirmPassword"
+            name="password_confirmation"
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"

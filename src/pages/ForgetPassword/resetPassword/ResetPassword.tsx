@@ -5,24 +5,39 @@
 import updatePasswordImage from "../../../assets/forget-password/updatepassword.svg";
 import logo from "../../../assets/logo.svg";
 
-import { Col, ConfigProvider, Row } from "antd";
+import { Col, ConfigProvider, Row, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { inputTheme } from "../../../themes/Index";
 import ChangePasswordForm from "../../../component/UpdatePasswordForm/UpdatePasswordForm";
 import { getuserInfo } from "../../../service/auth.service";
-import { useVerifyOtpMutation } from "../../../redux/api/authApi";
+import {
+  useResetPasswordMutation,
+  useVerifyOtpMutation,
+} from "../../../redux/api/authApi";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const { otp } = useParams();
   const email = getuserInfo("email");
-  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
-
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const onSubmit = async (data: any) => {
+    if (data.password !== data.password_confirmation) {
+      message.error("password and confirm password does not match");
+      return;
+    }
     try {
-      console.log("something", data);
-    } catch (error) {}
+      const formatedData = {
+        ...data,
+        email: email,
+      };
+      const res: any = await resetPassword(formatedData).unwrap();
+      if (res) {
+        message.success(res.message);
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
