@@ -5,13 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getuserInfo } from "../../../service/auth.service";
 import { useVerifyOtpMutation } from "../../../redux/api/authApi";
 import { Spin, message } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 
 const VerifyEmail = () => {
   const { id } = useParams();
   const email = getuserInfo("email");
   const navigate = useNavigate();
   const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const verify = async () => {
     try {
       const res: any = await verifyOtp({
@@ -34,13 +35,27 @@ const VerifyEmail = () => {
     <div className="h-screen flex items-center justify-center">
       <div className="flex flex-col items-center">
         <p className="mb-4">
-          <Spin size="large"></Spin>
+          {errorMessage ? (
+            <CloseOutlined
+              style={{
+                color: "red",
+                fontSize: "40px",
+              }}
+            />
+          ) : (
+            <Spin size="large"></Spin>
+          )}
         </p>
-        <h1 className="text-2xl font-bold text-customPrimary">
-          Your OTP is currently being verified. Please wait for the process to
-          complete.
-        </h1>
-        <p className="text-red-500 mt-4"> {errorMessage}</p>
+        {errorMessage ? (
+          <h1 className="text-2xl text-[#ff0000] font-bold">
+            {errorMessage}! Please Try Again
+          </h1>
+        ) : (
+          <h1 className="text-2xl font-bold text-customPrimary">
+            Your OTP is currently being verified. Please wait for the process to
+            complete.
+          </h1>
+        )}
       </div>
     </div>
   );
