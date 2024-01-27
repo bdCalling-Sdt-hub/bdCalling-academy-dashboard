@@ -16,7 +16,7 @@ const CourseApi = baseApi.injectEndpoints({
     }),
     getallCourse: builder.query({
       query: (params: any) => ({
-        url: "/course",
+        url: "/course/superadmin/all",
         method: "GET",
         params: params,
       }),

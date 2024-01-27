@@ -27,18 +27,19 @@ import {
   useAddCourseMutation,
   useUpdateCourseMutation,
 } from "../../../../redux/api/courseApi";
+import { useNavigate } from "react-router-dom";
 export default function Addcourse({ type, editableData }: any) {
   const [form] = Form.useForm();
-  const [courseType, setCourseType] = useState("Offline");
+  // const [courseType, setCourseType] = useState("Offline");
   const [file, setFile] = useState<File | null>(null);
-
+  const navigate = useNavigate();
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const [addCourse, { isLoading }] = useAddCourseMutation();
   const [editCourse] = useUpdateCourseMutation();
-  const handleButtonClick = (type: string) => {
-    setCourseType(type);
-  };
+  // const handleButtonClick = (type: string) => {
+  //   setCourseType(type);
+  // };
 
   useEffect(() => {
     if (type === "edit" && editableData) {
@@ -79,7 +80,6 @@ export default function Addcourse({ type, editableData }: any) {
       publish: values?.publish === true ? "1" : "0",
     };
 
-    console.log(finalData);
     if (!file) {
       message.error("please select a course thumbnail");
       return;
@@ -104,6 +104,7 @@ export default function Addcourse({ type, editableData }: any) {
       if (res.message) {
         message.info(res?.message);
         form.resetFields();
+        navigate("/SUPER_ADMIN/courses");
       }
     } catch (err: any) {
       message.error(err.data.message);

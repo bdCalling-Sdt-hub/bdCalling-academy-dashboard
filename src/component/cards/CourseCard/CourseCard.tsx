@@ -27,8 +27,7 @@ export default function CourseCard({ course }: any) {
     seat_left,
     batch,
     status,
-    lesson,
-    videoDuration,
+
     end_date,
   } = course;
   const image = `${IMAGE_BASE_URL}/${courseThumbnail}`;

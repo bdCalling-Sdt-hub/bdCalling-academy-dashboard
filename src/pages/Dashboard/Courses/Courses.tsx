@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import style from "./courses.module.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { useGetallCourseQuery } from "../../../redux/api/courseApi";
+import NoData from "../../../utils/NoData";
 export default function Courses() {
   const [courseType, setCourseType] = useState<string | null>(null);
 
@@ -18,10 +19,12 @@ export default function Courses() {
   if (courseType) {
     query["status"] = courseType;
   }
-  const { data: courseData, isLoading }: any = useGetallCourseQuery(query);
-  const courses = courseData?.data?.data;
-  console.log(courses, "courseData");
-  console.log(courseType);
+  const {
+    data: courseData,
+    isLoading,
+    error,
+  }: any = useGetallCourseQuery(query);
+
   return (
     <div className="h-screen">
       <div className="flex justify-between items-center mb-[30px]">
@@ -68,13 +71,20 @@ export default function Courses() {
       </div>
 
       <div className="mt-6">
-        <Row gutter={16}>
-          {courses?.map((course: any, index: number) => (
-            <Col key={index} lg={6} style={{ marginBottom: "16px" }}>
-              <CourseCard course={course} courseType={courseType}></CourseCard>
-            </Col>
-          ))}
-        </Row>
+        {error?.status === 404 ? (
+          <NoData />
+        ) : (
+          <Row gutter={16}>
+            {courseData?.data?.data?.map((course: any, index: number) => (
+              <Col key={index} lg={6} style={{ marginBottom: "16px" }}>
+                <CourseCard
+                  course={course}
+                  courseType={courseType}
+                ></CourseCard>
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );

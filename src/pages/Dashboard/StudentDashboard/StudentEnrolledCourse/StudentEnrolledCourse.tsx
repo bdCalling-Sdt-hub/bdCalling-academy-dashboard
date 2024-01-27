@@ -30,11 +30,11 @@ interface ICourse {
 }
 export default function StudentEnrolledCourse() {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
-  console.log("courseid", courseTitle, videoTitle, moduleNo, classId);
+
   const navigate = useNavigate();
   const [course, setCourse] = useState<ICourse | null>(null);
   const { data: classesData }: any = useGetClassesbyCourseIdQuery(Number(id));
-  console.log("classes", classesData);
+
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [videoInfo, setVideoInfo] = useState({
@@ -81,7 +81,7 @@ export default function StudentEnrolledCourse() {
   //   c?.id == classId;
   //   console.log("Fahim er matha", c?.id);
   // });
-  console.log("singleVideo", singleVideo);
+
   return (
     <div className="h-screen">
       <div className="flex justify-around ">
@@ -104,13 +104,13 @@ export default function StudentEnrolledCourse() {
             videoId={videoInfo.videoId}
             moduleId={classId}
           />
-          <VideoNavigationButtons
+          {/* <VideoNavigationButtons
             course={course}
             currentModuleIndex={currentModuleIndex}
             currentVideoIndex={currentVideoIndex}
             setCurrentModuleIndex={setCurrentModuleIndex}
             setCurrentVideoIndex={setCurrentVideoIndex}
-          />
+          /> */}
         </div>
         <div className="w-4/5	ms-4 mt-16">
           <ModuleList

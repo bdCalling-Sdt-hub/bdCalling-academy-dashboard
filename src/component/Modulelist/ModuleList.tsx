@@ -4,7 +4,7 @@ import { Input } from "antd";
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { PiVideo } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import According from "../UI/According/According";
 
 const ModuleList = ({
@@ -19,11 +19,10 @@ const ModuleList = ({
     setCurrentModuleIndex(moduleId);
     setCurrentVideoIndex(videoIndex);
   };
-  let courseName;
-  console.log("courses here in module list", classId);
+
   return (
     <div className="h-screen">
-      <Input
+      {/* <Input
         className="py-[16px] border border-[#D3D3D3] mb-[20px] "
         prefix={<CiSearch />}
         placeholder="Search"
@@ -31,7 +30,7 @@ const ModuleList = ({
         style={{
           boxShadow: " 0px 0px 20px 0px rgba(0, 0, 0, 0.08)",
         }}
-      />
+      /> */}
       <div>
         {course?.data?.map((module: any, moduleIndex: number) => (
           <According
@@ -42,7 +41,7 @@ const ModuleList = ({
             moduleLenth={course?.data?.length}
           >
             {module?.module_class?.map((video: any, videoIndex: number) => (
-              <Link
+              <NavLink
                 to={`/${courseTitle}/${courseId}/${module?.id}/${
                   module?.module_no
                 }/${video?.name?.split(" ").join("-")}`}
@@ -56,10 +55,10 @@ const ModuleList = ({
                     <PiVideo />
                   </span>
                   <span>
-                    {video.id}. {video.name}
+                    {videoIndex + 1}. {video.name}
                   </span>
                 </button>
-              </Link>
+              </NavLink>
             ))}
           </According>
         ))}
