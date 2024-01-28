@@ -40,7 +40,7 @@ export default function CreateStudents({ setshow }: any) {
   });
 
   const handleCourseChange = (key: string | number | null) => {
-    console.log("key", id);
+    console.log("key", key);
   };
 
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {

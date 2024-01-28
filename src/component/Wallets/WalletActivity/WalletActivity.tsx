@@ -24,7 +24,7 @@ export default function WalletActivity() {
 
   const formatedData = data
     ?.filter((filterableData: any) => filterableData?.status === "Processing")
-    ?.map((wallet: any, index: number) => {
+    ?.map((wallet: any) => {
       return {
         id: wallet?.id,
         studentName: wallet?.student?.userName,
