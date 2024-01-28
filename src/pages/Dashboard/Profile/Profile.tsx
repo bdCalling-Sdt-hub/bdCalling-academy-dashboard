@@ -16,6 +16,9 @@ import {
 } from "../../../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../../../utils/Common";
 import useImageUpload from "../../../hooks/useImageUpload";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentUser } from "../../../redux/features/auth/authSlice";
+import Loading from "../../../component/UI/Loading/Loading";
 export default function Profile() {
   const [loading, setLoading] = useState(false);
   const { imageUrl, setFile, setImageUrl, imageFile } = useImageUpload();
@@ -23,7 +26,8 @@ export default function Profile() {
   const [action, setAction] = useState("");
   const [form] = Form.useForm();
   const { data: profileData }: any = useGetmyprofileQuery(undefined);
-  const [updateProfile] = useUpdateprofileMutation();
+  const [updateProfile, { isLoading }] = useUpdateprofileMutation();
+  const { userType: role }: any = useAppSelector(useCurrentUser);
   useEffect(() => {
     form.setFieldsValue({
       image: profileData?.user?.image, // Set imageUrl directly, assuming it's a URL
@@ -35,13 +39,13 @@ export default function Profile() {
     });
   }, [profileData?.user, form]);
   const onFinish = async (data: any) => {
+    console.log(data);
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
     }
 
     for (const [key, value] of Object.entries(data)) {
-      console.log(key, value);
       // @ts-ignore
       formData.append(key, value);
     }
@@ -51,10 +55,10 @@ export default function Profile() {
         body: formData,
       }).unwrap();
       if (res) {
-        message.info(res?.message);
+        message.success(res?.message);
+        setAction("save");
         // form.resetFields();
       }
-      console.log(res);
     } catch (err) {
       message.error("something went wrong. please try again later");
     }
@@ -72,7 +76,6 @@ export default function Profile() {
   };
   const handleEditProfile = async () => {
     form.submit();
-    setAction("save");
   };
 
   return (
@@ -103,7 +106,7 @@ export default function Profile() {
         {action === "edit" ? (
           <div className="flex gap-x-4">
             <button onClick={handleEditProfile} className={style.saveBtn}>
-              SAVE
+              {isLoading ? <Loading /> : "SAVE"}
             </button>
             <button onClick={handleCancel} className={style.editBtn}>
               Cancel
@@ -368,27 +371,8 @@ export default function Profile() {
                     />
                   </Form.Item>
                 </Col>
-                <Col lg={24} xl={12} className="mb-[15px]">
-                  <Form.Item
-                    name="designation"
-                    key="designation"
-                    label="Designation"
-                    // rules={[
-                    //   {
-                    //     required: true,
-                    //     message: "Please input address",
-                    //   },
-                    // ]}
-                  >
-                    <Input
-                      size="large"
-                      type="text"
-                      placeholder="designation"
-                      className={style.input}
-                    />
-                  </Form.Item>
-                </Col>
-                <Col lg={24} xl={24} className="mb-[15px]">
+
+                <Col lg={12} xl={12} className="mb-[15px]">
                   <Form.Item
                     name="address"
                     key="address"
@@ -408,6 +392,28 @@ export default function Profile() {
                     />
                   </Form.Item>
                 </Col>
+                {role === "SUPER_ADMIN" && (
+                  <Col lg={24} xl={24} className="mb-[15px]">
+                    <Form.Item
+                      name="designation"
+                      key="designation"
+                      label="Designation"
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: "Please input address",
+                      //   },
+                      // ]}
+                    >
+                      <Input
+                        size="large"
+                        type="text"
+                        placeholder="designation"
+                        className={style.input}
+                      />
+                    </Form.Item>
+                  </Col>
+                )}
               </Row>
             </Form>
           </div>
