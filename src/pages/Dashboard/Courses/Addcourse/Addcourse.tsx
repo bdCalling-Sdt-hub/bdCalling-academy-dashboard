@@ -71,7 +71,6 @@ export default function Addcourse({ type, editableData }: any) {
     }
   }, [type, editableData, form]);
 
-  console.log(file, "file");
   const onFinish = async (values: any) => {
     const finalData = {
       ...values,

@@ -5,6 +5,10 @@ import studentsLogo from "../../../assets/students/student.svg";
 import { MdOutlineShowChart } from "react-icons/md";
 export default function StudentSurvey({ students }: any) {
   const percantage = 10;
+  const findPendingStudents = students?.filter(
+    (student: any) => student?.approve == 0
+  );
+
   return (
     <Row gutter={16}>
       <Col sm={24} lg={6} xl={6}>
@@ -28,7 +32,7 @@ export default function StudentSurvey({ students }: any) {
                   color: "#2492EB",
                 }}
               >
-                {students?.length}
+                {students?.length || 0}
               </h1>
             </div>
           </div>
@@ -61,7 +65,7 @@ export default function StudentSurvey({ students }: any) {
                   color: "#2492EB",
                 }}
               >
-                {students?.length}
+                {students?.length || 0}
               </h1>
             </div>
           </div>
@@ -94,7 +98,7 @@ export default function StudentSurvey({ students }: any) {
                   color: "#2492EB",
                 }}
               >
-                0
+                {findPendingStudents?.length || 0}
               </h1>
             </div>
           </div>

@@ -134,7 +134,6 @@ export default function Dashboard() {
       mobileNumber: data?.mobileNumber,
     };
   });
-  console.log("students", studentData?.data?.data);
 
   return (
     <div className="">

@@ -40,7 +40,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  {studentsData?.data?.length}
+                  {studentsData?.data?.length || 0}
                 </h1>
               </div>
             </div>
@@ -73,7 +73,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  {coursesData?.data?.data?.length}
+                  {coursesData?.data?.data?.length || 0}
                 </h1>
               </div>
             </div>

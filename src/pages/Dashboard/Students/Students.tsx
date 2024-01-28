@@ -136,7 +136,6 @@ export default function Students() {
       title: "Approve Status",
       // dataIndex: "approve",
       render: function (data: any) {
-        console.log("approved", data);
         return (
           <span className="flex gap-x-4 items-center">
             {data?.approve === 1 ? (

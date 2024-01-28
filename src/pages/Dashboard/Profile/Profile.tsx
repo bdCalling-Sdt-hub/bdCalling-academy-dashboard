@@ -35,6 +35,7 @@ export default function Profile() {
       mobileNumber: profileData?.user?.mobileNumber,
       bloodGroup: profileData?.user?.bloodGroup,
       address: profileData?.user?.address,
+      userName: profileData?.user?.userName,
       email: profileData?.user?.email,
       designation: profileData?.user?.designation,
     });
