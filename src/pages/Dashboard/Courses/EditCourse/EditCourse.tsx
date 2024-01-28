@@ -112,7 +112,7 @@ export default function EditCourse() {
         body: formData,
       }).unwrap();
       if (res) {
-        message.info(res?.message);
+        message.success(res?.message);
         form.resetFields();
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
@@ -449,7 +449,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Course Type"
                   name="status"
@@ -468,7 +468,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Category"
                   name="category_id"
@@ -483,7 +483,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Mentors"
                   key="mentorId[]"
@@ -518,7 +518,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              {/* <Col lg={12}>
                 <Form.Item
                   label="Select Publish Status"
                   key="publish"
@@ -539,7 +539,7 @@ export default function EditCourse() {
                     placeholder="please select a category"
                   />
                 </Form.Item>
-              </Col>
+              </Col> */}
 
               <Col lg={24}>
                 <Form.Item

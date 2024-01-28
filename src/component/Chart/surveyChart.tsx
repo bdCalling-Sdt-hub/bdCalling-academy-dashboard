@@ -65,9 +65,9 @@ const StudentEnrollmentChart = () => {
                 borderRadius: "50%",
               }}
             ></p>
-            <p>new students</p>
+            <p>Students Overview</p>
           </div>
-          <div className="flex items-center gap-x-2">
+          {/* <div className="flex items-center gap-x-2">
             <p
               style={{
                 width: "12px",
@@ -77,7 +77,7 @@ const StudentEnrollmentChart = () => {
               }}
             ></p>
             <p>Old students</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <div>

@@ -77,7 +77,7 @@ export default function Addcourse({ type, editableData }: any) {
       ...values,
       startDate: values.startDate.format("YYYY-MM-DD"),
       end_date: values.startDate.format("YYYY-MM-DD"),
-      publish: values?.publish === true ? "1" : "0",
+      publish: 0,
     };
 
     if (!file) {
@@ -102,7 +102,7 @@ export default function Addcourse({ type, editableData }: any) {
       }
       const res: any = await addCourse(formData).unwrap();
       if (res) {
-        message.info(res?.message);
+        message.success(res?.message);
         form.resetFields();
         navigate("/SUPER_ADMIN/courses");
       }
@@ -371,7 +371,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Course Type"
                   name="status"
@@ -390,7 +390,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Category"
                   name="category_id"
@@ -405,7 +405,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={8}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Mentors"
                   key="mentorId[]"
@@ -440,7 +440,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              {/* <Col lg={12}>
                 <Form.Item
                   label="Select Publish Status"
                   key="publish"
@@ -461,7 +461,7 @@ export default function Addcourse({ type, editableData }: any) {
                     placeholder="please select a category"
                   />
                 </Form.Item>
-              </Col>
+              </Col> */}
               <Col lg={24}>
                 <Form.Item
                   label="course Thumbnail"
