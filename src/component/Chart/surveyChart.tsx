@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   LineChart,
   Line,
@@ -6,40 +7,43 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { useGetstudentsoverviewChartQuery } from "../../redux/api/StudentApi";
 
 const StudentEnrollmentChart = () => {
-  const data = [
-    {
-      month: "January",
-      oldStudents: 100,
-      newStudents: 50,
-    },
-    {
-      month: "February",
-      oldStudents: 120,
-      newStudents: 80,
-    },
-    {
-      month: "March",
-      oldStudents: 150,
-      newStudents: 100,
-    },
-    {
-      month: "April",
-      oldStudents: 180,
-      newStudents: 120,
-    },
-    {
-      month: "May",
-      oldStudents: 200,
-      newStudents: 150,
-    },
-    {
-      month: "June",
-      oldStudents: 220,
-      newStudents: 180,
-    },
-  ];
+  const { data }: any = useGetstudentsoverviewChartQuery(undefined);
+
+  // const data = [
+  //   {
+  //     month: "January",
+  //     oldStudents: 100,
+  //     newStudents: 50,
+  //   },
+  //   {
+  //     month: "February",
+  //     oldStudents: 120,
+  //     newStudents: 80,
+  //   },
+  //   {
+  //     month: "March",
+  //     oldStudents: 150,
+  //     newStudents: 100,
+  //   },
+  //   {
+  //     month: "April",
+  //     oldStudents: 180,
+  //     newStudents: 120,
+  //   },
+  //   {
+  //     month: "May",
+  //     oldStudents: 200,
+  //     newStudents: 150,
+  //   },
+  //   {
+  //     month: "June",
+  //     oldStudents: 220,
+  //     newStudents: 180,
+  //   },
+  // ];
 
   return (
     <div
@@ -79,8 +83,8 @@ const StudentEnrollmentChart = () => {
       <div>
         <LineChart
           width={865}
-          height={300}
-          data={data}
+          height={280}
+          data={data?.new}
           margin={{
             top: 5,
             right: 30,
@@ -95,16 +99,16 @@ const StudentEnrollmentChart = () => {
 
           <Line
             type="monotone"
-            dataKey="newStudents"
+            dataKey="student"
             stroke="#2492EB"
             strokeWidth={3}
           />
-          <Line
+          {/* <Line
             type="monotone"
-            dataKey="oldStudents"
+            dataKey="student"
             stroke="#2BA24C"
             strokeWidth={3}
-          />
+          /> */}
         </LineChart>
       </div>
     </div>

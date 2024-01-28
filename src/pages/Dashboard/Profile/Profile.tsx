@@ -370,6 +370,26 @@ export default function Profile() {
                 </Col>
                 <Col lg={24} xl={12} className="mb-[15px]">
                   <Form.Item
+                    name="designation"
+                    key="designation"
+                    label="Designation"
+                    // rules={[
+                    //   {
+                    //     required: true,
+                    //     message: "Please input address",
+                    //   },
+                    // ]}
+                  >
+                    <Input
+                      size="large"
+                      type="text"
+                      placeholder="designation"
+                      className={style.input}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col lg={24} xl={24} className="mb-[15px]">
+                  <Form.Item
                     name="address"
                     key="address"
                     label="Address"

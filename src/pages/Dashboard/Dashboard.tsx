@@ -86,7 +86,7 @@ export default function Dashboard() {
 
     {
       title: "Course name",
-      dataIndex: "category_name",
+      dataIndex: "courseName",
     },
     {
       title: "Batch No",
@@ -126,8 +126,8 @@ export default function Dashboard() {
           />
         ) || "N/A",
       fullName: data?.fullName || "N/A",
-      category_name: data?.category?.category_name || "N/A",
-      batchNo: data?.batchNo || "N/A",
+      courseName: data?.course?.courseName || "N/A",
+      batchNo: data?.course?.batch || "N/A",
       registrationDate: data?.registrationDate || "N/A",
       approve: data?.approve,
       email: data?.email,
@@ -154,9 +154,9 @@ export default function Dashboard() {
           </Col>
           <Col lg={10}>
             {/* mentor table */}
-            <div>
+            <div className="">
               <Table
-                style="bg-[white]"
+                style="bg-[white] "
                 theme={tablethemes}
                 title="Mentors List"
                 page={5}

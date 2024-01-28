@@ -54,6 +54,8 @@ export default function Students() {
     }
   );
 
+  console.log("student data", studentData);
+
   if (approveStudentData) {
     window.location.reload();
     message.info(approveStudentData.message);
@@ -107,7 +109,7 @@ export default function Students() {
 
     {
       title: "Course name",
-      dataIndex: "category_name",
+      dataIndex: "courseName",
     },
     {
       title: "Batch No",
@@ -184,8 +186,8 @@ export default function Students() {
           />
         ) || "N/A",
       fullName: data?.fullName || "N/A",
-      category_name: data?.category?.category_name || "N/A",
-      batchNo: data?.batchNo || "N/A",
+      courseName: data?.course?.courseName || "N/A",
+      batchNo: data?.course?.batch || "N/A",
       registrationDate: data?.registrationDate || "N/A",
       approve: data?.approve,
       email: data?.email,
@@ -250,7 +252,7 @@ export default function Students() {
         >
           <div className="flex gap-x-4 items-center">
             <h1 className="text-[24px] font-[600]">Student List</h1>
-            <Dropdown
+            {/* <Dropdown
               menu={{ items, onClick }}
               placement="bottomLeft"
               arrow={{ pointAtCenter: true }}
@@ -273,7 +275,7 @@ export default function Students() {
                   <DownOutlined />
                 </Space>
               </a>
-            </Dropdown>
+            </Dropdown> */}
           </div>
           <button
             className="bg-customPrimary text-[#fff] p-[16px] rounded-lg text-[18px] font-[500]"

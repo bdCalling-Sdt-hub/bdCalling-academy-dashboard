@@ -48,7 +48,7 @@ export default function EditCourse() {
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const { setFile, imageUrl, imageFile } = useImageUpload();
   const { data }: any = useGetSingleCourseQuery(id);
-
+  console.log("coursedataaa", data);
   const [editCourse] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
     setCourseType(type);

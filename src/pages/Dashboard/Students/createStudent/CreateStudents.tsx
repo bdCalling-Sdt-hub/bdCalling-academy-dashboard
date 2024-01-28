@@ -9,6 +9,8 @@ import {
   message,
   Form,
   DatePicker,
+  SelectProps,
+  Select,
 } from "antd";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 import { selectedFiledTheme } from "../../../../themes/Index";
@@ -19,25 +21,44 @@ import { useForm } from "antd/es/form/Form";
 import { EditOutlined } from "@ant-design/icons";
 import personimage from "../../../../assets/table/person.svg";
 import Loading from "../../../../component/UI/Loading/Loading";
+import { useGetallCourseQuery } from "../../../../redux/api/courseApi";
+import dayjs from "dayjs";
 
 export default function CreateStudents({ setshow }: any) {
   const { setFile, imageUrl, imageFile, setImageUrl } = useImageUpload();
   const [register, { isLoading }] = useRegisterMutation();
+  const [id, setcourseId] = useState<string | number | null>(null);
+  const { data: courses }: any = useGetallCourseQuery(undefined);
+  const courseData = courses?.data?.data;
+
   const [form] = useForm();
+  const options: SelectProps["options"] = courseData?.map((course: any) => {
+    return {
+      label: course?.courseName,
+      value: course?.id,
+    };
+  });
+
+  const handleCourseChange = (key: string | number | null) => {
+    console.log("key", id);
+  };
+
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
     if (data?.password !== data?.password_confirmation) {
       message.error("re entered password did not match");
       return;
     }
+
     const formatedData: any = {
       ...data,
       // @ts-ignore
       dob: data?.dob?.format("YYYY-MM-DD"),
+      registrationDate: dayjs(new Date()).format("YYYY-MM-DD"),
     };
     formatedData.userType = "STUDENT";
     formatedData.approve = 1;
     const formdData = new FormData();
-    console.log("data from ", data);
+    console.log("data from ", formatedData);
     if (imageFile) {
       formdData.append("image", imageFile);
     }
@@ -55,7 +76,9 @@ export default function CreateStudents({ setshow }: any) {
         setshow(false);
       }
     } catch (error: any) {
+      console.log(error?.data);
       message.error(error?.data?.userName[0]);
+
       message.error(error?.data?.email[0]);
     }
   };
@@ -284,6 +307,20 @@ export default function CreateStudents({ setshow }: any) {
                   }
                 >
                   <Input placeholder="dob" className="py-2" />
+                </Form.Item>
+              </Col>
+              <Col lg={24}>
+                <Form.Item
+                  label="Select Course"
+                  name="course_id"
+                  rules={[{ required: true, message: "Please Input Address" }]}
+                >
+                  <Select
+                    onChange={handleCourseChange}
+                    style={{ width: "100%" }}
+                    options={options}
+                    placeholder="please select course"
+                  />
                 </Form.Item>
               </Col>
               <Col lg={24}>

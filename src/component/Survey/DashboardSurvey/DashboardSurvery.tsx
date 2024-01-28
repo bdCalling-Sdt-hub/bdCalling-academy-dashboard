@@ -16,7 +16,7 @@ export default function DashboardSurvery() {
   const [coursesData] = useALLCourses();
   return (
     <div>
-      <Row gutter={16}>
+      <Row gutter={[16, 16]}>
         <Col sm={24} lg={6} xl={6}>
           <div
             className="p-4 rounded-lg"

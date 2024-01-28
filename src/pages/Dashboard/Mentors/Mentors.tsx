@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Dropdown, MenuProps, Row, Space, message } from "antd";
 import { useState } from "react";
 import style from "./Mentors.module.css";
 import MentorsCard from "../../../component/cards/MentorsCard/MentorsCard";
 import {
-  ArrowRightOutlined,
-  DownOutlined,
+  // ArrowRightOutlined,
+  // DownOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import CustomModal from "../../../component/UI/Modal/Modal";
@@ -20,22 +21,22 @@ export default function Mentors() {
   };
   const { data: mentorsData }: any = useGetallmentorsQuery(undefined);
   console.log(mentorsData);
-  const onClick: MenuProps["onClick"] = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
-  const items: MenuProps["items"] = [
-    {
-      label: (
-        <div className="flex items-center gap-x-10">
-          <p>Certified UI/UX Designer Course</p>
-          <span>
-            <ArrowRightOutlined />
-          </span>
-        </div>
-      ),
-      key: "1",
-    },
-  ];
+  // const onClick: MenuProps["onClick"] = ({ key }) => {
+  //   message.info(`Click on item ${key}`);
+  // };
+  // const items: MenuProps["items"] = [
+  //   {
+  //     label: (
+  //       <div className="flex items-center gap-x-10">
+  //         <p>Certified UI/UX Designer Course</p>
+  //         <span>
+  //           <ArrowRightOutlined />
+  //         </span>
+  //       </div>
+  //     ),
+  //     key: "1",
+  //   },
+  // ];
   // if (isLoading) {
   //   return <Loading />;
   // }
@@ -55,7 +56,7 @@ export default function Mentors() {
           <h1 className="text-2xl  font-semibold text-customHeader ">
             Mentor List
           </h1>
-          <div>
+          {/* <div>
             <Dropdown
               menu={{ items, onClick }}
               placement="bottomLeft"
@@ -68,7 +69,7 @@ export default function Mentors() {
                 </Space>
               </a>
             </Dropdown>
-          </div>
+          </div> */}
         </div>
         <button onClick={handleShowModal} className={style.addMentorsBtn}>
           <PlusOutlined className="me-2" /> Add Mentor
@@ -76,7 +77,7 @@ export default function Mentors() {
       </div>
 
       <div className="mt-[30px]">
-        {mentorsData ? (
+        {mentorsData?.data?.length > 0 ? (
           <Row gutter={[8, 16]} align={"middle"} style={{}}>
             {mentorsData?.data?.map((mentor: any, index: number) => (
               <Col key={index} lg={6} xl={6}>

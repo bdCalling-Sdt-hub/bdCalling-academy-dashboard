@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { inputTheme } from "../../../themes/Index";
 import ChangePasswordForm from "../../../component/UpdatePasswordForm/UpdatePasswordForm";
-import { getuserInfo } from "../../../service/auth.service";
+import { getuserInfo, removeFromStroage } from "../../../service/auth.service";
 import {
   useResetPasswordMutation,
   useVerifyOtpMutation,
@@ -33,10 +33,14 @@ export default function ResetPassword() {
       const res: any = await resetPassword(formatedData).unwrap();
       if (res) {
         message.success(res.message);
+        removeFromStroage("email");
         navigate("/signin");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      message.error(
+        error?.data?.error ||
+          "something went wrong. please try again with valid credintial."
+      );
     }
   };
 

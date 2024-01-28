@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import style from "./walletactivity.module.css";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
@@ -5,47 +7,65 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import ActivityCard from "./ActivityCard";
+import { useGetAllWalletActivityDataQuery } from "../../../redux/api/walletApi";
+import NoData from "../../../utils/NoData";
 export default function WalletActivity() {
   const [isVisible, setIsvisilbe] = useState(false);
-  const [data, setdata] = useState([]);
+
   const [startDate, setStartDate] = useState<dayjs.Dayjs | null>(null);
   const [endDate, setEndDate] = useState<dayjs.Dayjs | null>(null);
   console.log(startDate, endDate);
   //   const onChange: DatePickerProps["onChange"] = (date, dateString) => {};
-  useEffect(() => {
-    fetch("/studentWallet.json")
-      .then((res) => res.json())
-      .then((data) => setdata(data));
-  }, []);
+
   const handleFiltering = () => {
     setIsvisilbe(false);
   };
+  const { data } = useGetAllWalletActivityDataQuery(undefined);
 
+  const formatedData = data
+    ?.filter((filterableData: any) => filterableData?.status === "Processing")
+    ?.map((wallet: any, index: number) => {
+      return {
+        id: wallet?.id,
+        studentName: wallet?.student?.userName,
+        getway: wallet?.gateway_name,
+        amount: wallet?.amount,
+        date: wallet?.created_at,
+        transaction_id: wallet?.transaction_id,
+      };
+    });
+  console.log(formatedData);
   return (
     <div
-      className="p-6 rounded-lg relative"
+      className="p-6 rounded-lg relative "
       style={{
         backgroundColor: "#FFFFFF",
         boxShadow: "#000000",
       }}
     >
-      <div className="flex justify-between">
-        <h1 className="text-[22px] font-semibold">Overview Balance</h1>
+      <div className="flex justify-between     ">
+        <h1 className="text-[22px] font-semibold ">Overview Balance</h1>
 
-        <button
+        {/* <button
           className={style.dateRange}
           onClick={() => setIsvisilbe(!isVisible)}
         >
           Date Range <DownOutlined />
-        </button>
+        </button> */}
       </div>
-      <div>
-        {data?.map((wallet, index) => (
-          <ActivityCard key={index} wallet={wallet} />
-        ))}
+      <div className=" overflow-y-auto h-[450px]  max-h-[450px]">
+        {formatedData?.data?.length > 0 ? (
+          formatedData?.map((wallet: any, index: number) => (
+            <ActivityCard key={index} wallet={wallet} />
+          ))
+        ) : (
+          <div className="mt-20">
+            <NoData />
+          </div>
+        )}
       </div>
 
-      {isVisible && (
+      {/* {isVisible && (
         <div className="flex justify-between items-center  shadow-md  bg-[#ffffff]  rounded   p-2 gap-x-14 parent  absolute z-50   bottom-4">
           <div className="relative " onClick={(e) => e.stopPropagation()}>
             <div className={`${style.date} `}>
@@ -78,7 +98,7 @@ export default function WalletActivity() {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

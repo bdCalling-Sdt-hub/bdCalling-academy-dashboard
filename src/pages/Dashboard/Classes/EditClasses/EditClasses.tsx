@@ -65,7 +65,6 @@ const EditClasses = () => {
     console.log("Failed:", errorInfo);
   };
   const onReset = () => {
-    console.log(form);
     form.resetFields();
   };
 

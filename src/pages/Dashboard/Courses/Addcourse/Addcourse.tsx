@@ -101,13 +101,17 @@ export default function Addcourse({ type, editableData }: any) {
         console.log(res);
       }
       const res: any = await addCourse(formData).unwrap();
-      if (res.message) {
+      if (res) {
         message.info(res?.message);
         form.resetFields();
         navigate("/SUPER_ADMIN/courses");
       }
     } catch (err: any) {
-      message.error(err.data.message);
+      message.error(
+        err.data.message ||
+          err?.data?.error ||
+          "something went wrong. please provide valid information"
+      );
     }
   };
 

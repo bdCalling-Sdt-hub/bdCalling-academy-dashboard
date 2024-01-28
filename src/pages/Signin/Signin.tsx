@@ -17,7 +17,7 @@ import {
   ConfigProvider,
   message,
 } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { inputTheme } from "../../themes/Index";
 
 import { useLoginMutation } from "../../redux/api/authApi";
@@ -60,7 +60,11 @@ export default function SignIn() {
 
       // console.log(newUser);
     } catch (error: any) {
-      message.error(error?.data?.error || error?.data?.message);
+      message.error(
+        error?.data?.error ||
+          error?.data?.message ||
+          "something went wrong. please try again"
+      );
     }
   };
 

@@ -24,6 +24,7 @@ const AddClass = () => {
     try {
       const res: any = await addClass(data).unwrap();
       if (res) {
+        console.log(res);
         message.success(res.message);
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
@@ -36,7 +37,6 @@ const AddClass = () => {
     console.log("Failed:", errorInfo);
   };
   const onReset = () => {
-    console.log(form);
     form.resetFields();
   };
   const courseFields = courseData?.data?.data.map((data: any) => {

@@ -20,6 +20,13 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.student, tagTypes.user],
     }),
+    getstudentsoverviewChart: builder.query({
+      query: () => ({
+        url: `/students/chart/data`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.student, tagTypes.user],
+    }),
     approveStudent: builder.query({
       query: (id: any) => ({
         url: `/account/approve/${id}`,
@@ -42,4 +49,5 @@ export const {
   useGetSingleStudentQuery,
   useApproveStudentQuery,
   useDisapproveStudentQuery,
+  useGetstudentsoverviewChartQuery,
 } = studentApi;

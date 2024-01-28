@@ -1,11 +1,13 @@
-import { ArrowUpOutlined, DollarOutlined } from "@ant-design/icons";
+import { DollarOutlined } from "@ant-design/icons";
 import { FaChartLine } from "react-icons/fa6";
 import { TbChartInfographic } from "react-icons/tb";
 import { TbChartHistogram } from "react-icons/tb";
 
 import { Col, Row } from "antd";
+import { useGetAllWalletIncomeInformationQuery } from "../../../redux/api/walletApi";
 
 export default function WalletSurvey() {
+  const { data } = useGetAllWalletIncomeInformationQuery(undefined);
   return (
     <div>
       <Row gutter={16}>
@@ -32,7 +34,7 @@ export default function WalletSurvey() {
               <div className="my-2 flex justify-between ">
                 <h1 className="text-[36px] font-semibold">
                   <span className="text-customPrimary me-2">BDT</span>
-                  120.12k
+                  {data?.today_income}
                 </h1>
                 <div className="">
                   <div className=" relative bottom-3">
@@ -50,10 +52,10 @@ export default function WalletSurvey() {
                       />
                     </svg>
                   </div>
-                  <div className="text-customPrimary flex gap-x-2">
+                  {/* <div className="text-customPrimary flex gap-x-2">
                     <p className="text-customPrimary">+10%</p>
                     <ArrowUpOutlined />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -82,7 +84,7 @@ export default function WalletSurvey() {
               <div className="my-2 flex justify-between ">
                 <h1 className="text-[36px] font-semibold">
                   <span className="text-customPrimary me-2">BDT</span>
-                  120.12k
+                  {data?.this_month_income}
                 </h1>
                 <div className="">
                   <div className=" relative bottom-3">
@@ -100,10 +102,10 @@ export default function WalletSurvey() {
                       />
                     </svg>
                   </div>
-                  <div className="text-[#2BA24C] flex gap-x-2">
+                  {/* <div className="text-[#2BA24C] flex gap-x-2">
                     <p className="text-[#2BA24C]">+10%</p>
                     <ArrowUpOutlined />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -126,13 +128,13 @@ export default function WalletSurvey() {
                   <div className="w-[30px] h-[30px]  bg-[#D7263D] flex  justify-center  items-center rounded">
                     <TbChartInfographic style={{ color: "white" }} />
                   </div>
-                  <p className="text-[#858585]">Total 1 Day Income</p>
+                  <p className="text-[#858585]">Total 6 Months Income</p>
                 </div>
               </div>
               <div className="my-2 flex justify-between ">
                 <h1 className="text-[36px] font-semibold">
                   <span className="text-customPrimary me-2">BDT</span>
-                  120.12k
+                  {data?.six_month_income}
                 </h1>
                 <div className="">
                   <div className=" relative bottom-3">
@@ -150,10 +152,10 @@ export default function WalletSurvey() {
                       />
                     </svg>
                   </div>
-                  <div className="text-[#D7263D] flex gap-x-2">
+                  {/* <div className="text-[#D7263D] flex gap-x-2">
                     <p>+10%</p>
                     <ArrowUpOutlined />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -182,7 +184,7 @@ export default function WalletSurvey() {
               <div className="my-2 flex justify-between ">
                 <h1 className="text-[36px] font-semibold">
                   <span className="text-customPrimary me-2">BDT</span>
-                  120.12k
+                  {data?.running_year_income}
                 </h1>
                 <div className="">
                   <div className=" relative bottom-3">
@@ -200,16 +202,17 @@ export default function WalletSurvey() {
                       />
                     </svg>
                   </div>
-                  <div className="text-[#FFC60B] flex gap-x-2">
+                  {/* <div className="text-[#FFC60B] flex gap-x-2">
                     <p>+10%</p>
                     <ArrowUpOutlined />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         </Col>
-        <Col sm={24} lg={6} xl={6} className="mb-4">
+
+        {/* <Col sm={24} lg={6} xl={6} className="mb-4">
           <div
             className="p-4 rounded-lg h-[172px]  my-auto"
             style={{
@@ -408,7 +411,7 @@ export default function WalletSurvey() {
               </div>
             </div>
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );

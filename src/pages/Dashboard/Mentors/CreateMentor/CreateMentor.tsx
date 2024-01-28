@@ -58,8 +58,8 @@ export default function CreateMentor({ setshow }: any) {
       }
     } catch (error: any) {
       console.log(error);
-      // message.error(error?.data?.email[0]);
-      // message.error(error?.data?.userName[0]);
+      message.error(error?.data?.userName[0]);
+      message.error(error?.data?.email[0]);
     }
   };
   const onFinishFailed = (error: any) => {

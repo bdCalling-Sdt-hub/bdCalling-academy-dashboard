@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Col, DatePicker, Form, Input, Row, TimePicker, message } from "antd";
+import {
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Select,
+  TimePicker,
+  message,
+} from "antd";
 
 import { MdMyLocation } from "react-icons/md";
 
@@ -14,6 +23,7 @@ import useImageUpload from "../../../../hooks/useImageUpload";
 import { useUpdateEventsMutation } from "../../../../redux/api/eventApi";
 import { IMAGE_BASE_URL } from "../../../../utils/Common";
 import dayjs from "dayjs";
+import TextArea from "antd/es/input/TextArea";
 export default function EditEvent(props: any) {
   const { image, starttime, endtime, courseName, officeLocation, date, id } =
     props.event;
@@ -30,7 +40,7 @@ export default function EditEvent(props: any) {
       endtime: data.endtime.format("HH:mm"),
       date: data.date.format("YYYY-MM-DD"),
     };
-
+    console.log(formatedData);
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
@@ -197,6 +207,28 @@ export default function EditEvent(props: any) {
           </Col>
           <Col lg={24}>
             <Form.Item
+              label="status"
+              key="status"
+              name="status"
+              rules={[
+                {
+                  required: true,
+                  message: "please input staus",
+                },
+              ]}
+            >
+              <Select
+                placeholder="select status"
+                options={[
+                  { value: "OFFLINE", label: "OFFLINE" },
+                  { value: "ONLINE", label: "ONLINE" },
+                ]}
+                style={{ width: "100%", height: "42px" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col lg={24}>
+            <Form.Item
               label="Course Name"
               key="courseName"
               name="courseName"
@@ -223,6 +255,21 @@ export default function EditEvent(props: any) {
               ]}
             >
               <Input placeholder="officeLocation" className="py-2" />
+            </Form.Item>
+          </Col>
+          <Col lg={24}>
+            <Form.Item
+              label="Description"
+              key="description"
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: "please input description",
+                },
+              ]}
+            >
+              <TextArea placeholder="Description" className="py-2" />
             </Form.Item>
           </Col>
         </Row>

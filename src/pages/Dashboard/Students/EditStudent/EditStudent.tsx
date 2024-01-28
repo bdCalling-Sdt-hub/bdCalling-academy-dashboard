@@ -8,6 +8,8 @@ import {
   Col,
   Form,
   DatePicker,
+  Select,
+  SelectProps,
 } from "antd";
 import React, { useEffect } from "react";
 import { selectedFiledTheme } from "../../../../themes/Index";
@@ -21,6 +23,10 @@ import { useUpdateprofileMutation } from "../../../../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../../../../utils/Common";
 import { useGetSingleStudentQuery } from "../../../../redux/api/StudentApi";
 import dayjs from "dayjs";
+import {
+  useGetSingleCourseQuery,
+  useGetallCourseQuery,
+} from "../../../../redux/api/courseApi";
 
 const EditStudent = ({ setshow, id }: any) => {
   const { setFile, imageUrl, imageFile } = useImageUpload();
@@ -28,6 +34,8 @@ const EditStudent = ({ setshow, id }: any) => {
   const [form] = useForm();
   const [updateProfile, { isLoading }] = useUpdateprofileMutation();
   const { data: studentData }: any = useGetSingleStudentQuery(id);
+  const { data: courses }: any = useGetallCourseQuery(undefined);
+  const courseData = courses?.data?.data;
   const {
     image,
     fullName,
@@ -37,8 +45,11 @@ const EditStudent = ({ setshow, id }: any) => {
     dob,
     address,
     bloodGroup,
+    course_id,
   } = studentData?.user || {};
+  const { data }: any = useGetSingleCourseQuery(course_id);
 
+  console.log(data);
   useEffect(() => {
     if (studentData?.user) {
       form.setFieldsValue({
@@ -49,12 +60,26 @@ const EditStudent = ({ setshow, id }: any) => {
         email,
         address,
         bloodGroup,
+        course_id: data?.data?.id,
         dob: dayjs(dob),
       });
     }
-  }, [form, studentData]);
+  }, [
+    form,
+    address,
+    image,
+    fullName,
+    mobileNumber,
+    bloodGroup,
+    data?.data,
+    dob,
+    email,
+    studentData?.user,
+    userName,
+  ]);
+
   const onFinish = async (data: { [key: string]: string | Blob | number }) => {
-    console.log("student data", data);
+    console.log("coursedata", data);
     const formatedData: any = {
       ...data,
       // @ts-ignore
@@ -80,10 +105,17 @@ const EditStudent = ({ setshow, id }: any) => {
         setshow(false);
       }
     } catch (error: any) {
+      console.log(error);
       message.error(error?.data?.email[0]);
       message.error(error?.data?.userName[0]);
     }
   };
+  const options: SelectProps["options"] = courseData?.map((course: any) => {
+    return {
+      value: course?.id,
+      label: course?.courseName,
+    };
+  });
   return (
     <div>
       <ConfigProvider theme={selectedFiledTheme}>
@@ -263,6 +295,20 @@ const EditStudent = ({ setshow, id }: any) => {
               </Col>
               <Col lg={24}>
                 <Form.Item
+                  label="Select Course"
+                  name="course_id"
+                  key="course_id"
+                  rules={[{ required: true, message: "Please Input Address" }]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={options}
+                    placeholder="please select course"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={24}>
+                <Form.Item
                   label="Address"
                   name="address"
                   rules={[{ required: true, message: "Please Input Address" }]}
@@ -281,7 +327,7 @@ const EditStudent = ({ setshow, id }: any) => {
                 type="submit"
                 className="bg-customPrimary text-[#fff] px-10 py-2 rounded block mx-auto"
               >
-                {isLoading ? <Loading /> : "CREATE"}
+                {isLoading ? <Loading /> : "EDIT"}
               </button>
             </div>
           </Form>
