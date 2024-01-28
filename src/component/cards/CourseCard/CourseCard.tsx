@@ -40,7 +40,7 @@ export default function CourseCard({ course }: any) {
     try {
       const res: any = await deleteCourse(id).unwrap();
       if (res) {
-        message.success(res.message);
+        message.success(res.message || "Course deleted successfully");
       }
     } catch (err) {
       console.log(err);

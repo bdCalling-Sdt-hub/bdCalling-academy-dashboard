@@ -38,6 +38,7 @@ import { USER_ROLE } from "../../../../constants/role";
 import { IMAGE_BASE_URL } from "../../../../utils/Common";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 import useImageUpload from "../../../../hooks/useImageUpload";
+import Loading from "../../../../component/UI/Loading/Loading";
 export default function EditCourse() {
   const { id } = useParams();
 
@@ -48,8 +49,8 @@ export default function EditCourse() {
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const { setFile, imageUrl, imageFile } = useImageUpload();
   const { data }: any = useGetSingleCourseQuery(id);
-  console.log("coursedataaa", data);
-  const [editCourse] = useUpdateCourseMutation();
+
+  const [editCourse, { isLoading }] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
@@ -116,7 +117,9 @@ export default function EditCourse() {
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
     } catch (err: any) {
-      // message.error(err.data.message);
+      message.error(
+        err.data.message || err?.data?.error || "something went wrong"
+      );
     }
   };
 
@@ -769,7 +772,7 @@ export default function EditCourse() {
                     htmlType="submit"
                     className="bg-customPrimary"
                   >
-                    Submit
+                    {isLoading ? <Loading /> : "Submit"}
                   </Button>
                 </Form.Item>
               </div>

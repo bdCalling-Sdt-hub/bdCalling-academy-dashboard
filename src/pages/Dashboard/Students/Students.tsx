@@ -31,6 +31,7 @@ import CustomModal from "../../../component/UI/Modal/Modal";
 import CreateStudents from "./createStudent/CreateStudents";
 import EditStudent from "./EditStudent/EditStudent";
 import PopConfirm from "../../../component/UI/popConfirm/PopConfirm";
+import { useDeleteProfileMutation } from "../../../redux/api/authApi";
 
 export default function Students() {
   const [approveId, setApproveId] = useState<null | number>(null);
@@ -38,7 +39,7 @@ export default function Students() {
   const [show, setshow] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [id, setStudentId] = useState<number | null>(null);
-
+  const [deleteProfile] = useDeleteProfileMutation();
   const {
     data: studentData,
     isLoading,
@@ -53,8 +54,6 @@ export default function Students() {
       skip: !disapproveId,
     }
   );
-
-  console.log("student data", studentData);
 
   if (approveStudentData) {
     window.location.reload();
@@ -79,6 +78,20 @@ export default function Students() {
   const handleEditModal = (data: any) => {
     setShowEditModal(true);
     setStudentId(data?.id);
+  };
+  const handleDeleteProfile = async (id: number) => {
+    try {
+      const res: any = await deleteProfile(id).unwrap();
+      if (res) {
+        message.success(res.message);
+      }
+    } catch (error: any) {
+      message?.error(
+        error?.data?.message ||
+          error?.data?.error ||
+          "something went wrong. please try again!"
+      );
+    }
   };
 
   const columns = [
@@ -165,10 +178,13 @@ export default function Students() {
               onClick={() => handleEditModal(data)}
             />
 
-            <RxCross1
-              className="cursor-pointer "
-              onClick={() => console.log(data)}
-            />
+            <PopConfirm
+              title="Are You Sure?"
+              description="this action cannot be undone!"
+              onConfirm={() => handleDeleteProfile(data?.id)}
+            >
+              <RxCross1 className="cursor-pointer " />
+            </PopConfirm>
           </div>
         );
       },
@@ -202,22 +218,22 @@ export default function Students() {
     },
   };
 
-  const onClick: MenuProps["onClick"] = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
-  const items: MenuProps["items"] = [
-    {
-      label: (
-        <div className="flex items-center gap-x-10">
-          <p>Certified UI/UX Designer Course</p>
-          <span>
-            <ArrowRightOutlined />
-          </span>
-        </div>
-      ),
-      key: "1",
-    },
-  ];
+  // const onClick: MenuProps["onClick"] = ({ key }) => {
+  //   message.info(`Click on item ${key}`);
+  // };
+  // const items: MenuProps["items"] = [
+  //   {
+  //     label: (
+  //       <div className="flex items-center gap-x-10">
+  //         <p>Certified UI/UX Designer Course</p>
+  //         <span>
+  //           <ArrowRightOutlined />
+  //         </span>
+  //       </div>
+  //     ),
+  //     key: "1",
+  //   },
+  // ];
   return (
     <div className=" h-screen">
       <CustomModal
