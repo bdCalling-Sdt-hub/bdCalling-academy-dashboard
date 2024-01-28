@@ -51,7 +51,7 @@ export default function ClassSchedule() {
   const [getallschedulebyMentor] = useShowclassScheduleForMentorMutation();
   const [getallSchedulesForStudents] =
     useShowClassScheduleForStudentsMutation();
-  const batchOptions = Array.from({ length: 1000 }, (_, index) => ({
+  const batchOptions = Array.from({ length: 100 }, (_, index) => ({
     label: index + 1,
     value: index + 1,
   }));
