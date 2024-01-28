@@ -36,6 +36,7 @@ export default function Profile() {
       bloodGroup: profileData?.user?.bloodGroup,
       address: profileData?.user?.address,
       email: profileData?.user?.email,
+      designation: profileData?.user?.designation,
     });
   }, [profileData?.user, form]);
   const onFinish = async (data: any) => {
@@ -355,43 +356,47 @@ export default function Profile() {
                     />
                   </Form.Item>
                 </Col> */}
-                <Col lg={12} xl={12} className="mb-[15px]">
-                  <Form.Item
-                    rules={[]}
-                    name="bloodGroup"
-                    key="bloodGroup"
-                    label="Blood Group"
-                  >
-                    <Input
-                      size="large"
-                      type="text"
+                {role === "STUDENT" && (
+                  <Col lg={12} xl={12} className="mb-[15px]">
+                    <Form.Item
+                      rules={[]}
                       name="bloodGroup"
-                      placeholder="blood group"
-                      className={style.input}
-                    />
-                  </Form.Item>
-                </Col>
+                      key="bloodGroup"
+                      label="Blood Group"
+                    >
+                      <Input
+                        size="large"
+                        type="text"
+                        name="bloodGroup"
+                        placeholder="blood group"
+                        className={style.input}
+                      />
+                    </Form.Item>
+                  </Col>
+                )}
 
-                <Col lg={12} xl={12} className="mb-[15px]">
-                  <Form.Item
-                    name="address"
-                    key="address"
-                    label="Address"
-                    // rules={[
-                    //   {
-                    //     required: true,
-                    //     message: "Please input address",
-                    //   },
-                    // ]}
-                  >
-                    <Input
-                      size="large"
-                      type="text"
-                      placeholder="address"
-                      className={style.input}
-                    />
-                  </Form.Item>
-                </Col>
+                {role === "STUDENT" && (
+                  <Col lg={12} xl={12} className="mb-[15px]">
+                    <Form.Item
+                      name="address"
+                      key="address"
+                      label="Address"
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: "Please input address",
+                      //   },
+                      // ]}
+                    >
+                      <Input
+                        size="large"
+                        type="text"
+                        placeholder="address"
+                        className={style.input}
+                      />
+                    </Form.Item>
+                  </Col>
+                )}
                 {role === "SUPER_ADMIN" && (
                   <Col lg={24} xl={24} className="mb-[15px]">
                     <Form.Item
