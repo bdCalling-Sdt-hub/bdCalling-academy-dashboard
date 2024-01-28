@@ -99,9 +99,10 @@ const EditStudent = ({ setshow, id }: any) => {
         body: formdData,
       }).unwrap();
 
-      if (res?.message) {
+      if (res) {
         message.success(res?.message);
         form.resetFields();
+        // window.location.reload();
         setshow(false);
       }
     } catch (error: any) {
