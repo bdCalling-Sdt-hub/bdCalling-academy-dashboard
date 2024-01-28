@@ -9,11 +9,13 @@ import { MdOutlineShowChart } from "react-icons/md";
 import useAllStudents from "../../../hooks/useAllStudents";
 import useAllMentors from "../../../hooks/useAllMentors";
 import useALLCourses from "../../../hooks/useAllCourses";
+import { useWallet } from "../../../hooks/useWallet";
 
 export default function DashboardSurvery() {
   const [studentsData] = useAllStudents();
   const [mentorsData] = useAllMentors();
   const [coursesData] = useALLCourses();
+  const [incomeData] = useWallet();
   return (
     <div>
       <Row gutter={[16, 16]}>
@@ -46,7 +48,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="">Higher Then Last Month</p>
+              <p className="">Students Overview</p>
             </div>
           </div>
         </Col>
@@ -79,7 +81,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="tracking-wide">Higher Then Last Month</p>
+              <p className="tracking-wide">Courses Overview</p>
             </div>
           </div>
         </Col>
@@ -95,7 +97,7 @@ export default function DashboardSurvery() {
             <div className="flex justify-between">
               <img src={teacherLogo} alt="" />
               <div>
-                <p className="font-semibold text-end">Total Teachers</p>
+                <p className="font-semibold text-end">Total Mentors</p>
                 <h1
                   style={{
                     fontFamily: "Poppins",
@@ -113,7 +115,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="tracking-wide">Higher Then Last Month</p>
+              <p className="tracking-wide">Mentors Overview</p>
             </div>
           </div>
         </Col>
@@ -138,7 +140,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  BDT 0
+                  BDT {incomeData?.total_income}
                 </h1>
               </div>
             </div>
@@ -146,7 +148,7 @@ export default function DashboardSurvery() {
               <span className="text-customPrimary ">
                 <MdOutlineShowChart />
               </span>
-              <p className="tracking-wide">Higher Then Last Month</p>
+              <p className="tracking-wide">Income Overview</p>
             </div>
           </div>
         </Col>
