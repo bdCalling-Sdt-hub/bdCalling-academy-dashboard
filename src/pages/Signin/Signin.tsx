@@ -46,6 +46,7 @@ export default function SignIn() {
           }
         );
         let newUser: any = {};
+        console.log(response?.data?.user);
         if (response?.data?.user) {
           newUser = { ...response?.data?.user };
           if (response?.data?.user?.userType === "SUPER ADMIN") {

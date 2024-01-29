@@ -73,6 +73,7 @@ export default function ClassSchedule() {
         }
       } else if (role === "MENTOR") {
         res = await getallschedulebyMentor(formatedData).unwrap();
+        console.log(res, "classscheduleresponse");
         if (res) {
           setScheduleData(res?.data);
         }

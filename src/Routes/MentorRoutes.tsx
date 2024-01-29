@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Spin } from "antd";
+
 import { ReactNode } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { getuserInfo } from "../service/auth.service";
+import { Navigate } from "react-router-dom";
+
 import { USER_ROLE } from "../constants/role";
-import { userKey } from "../constants/authKey";
+import { useAppSelector } from "../redux/hooks";
+import {
+  useCurrentToken,
+  useCurrentUser,
+} from "../redux/features/auth/authSlice";
 
 const MentorRoutes = ({ children: Children }: { children: ReactNode }) => {
-  const loading = false;
-  const user: any = getuserInfo(userKey);
-  const location = useLocation();
-  if (loading) {
-    return <Spin />;
-  }
+  const token: any = useAppSelector(useCurrentToken);
+  const user: any = useAppSelector(useCurrentUser);
 
-  if (user && user.role === USER_ROLE.MENTOR) {
+  if (token && user && user.userType === USER_ROLE.MENTOR) {
     return Children;
   }
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;

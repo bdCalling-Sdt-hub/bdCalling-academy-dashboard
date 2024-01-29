@@ -104,7 +104,7 @@ export const SidebarItems = (role: string) => {
       icon: <IoPersonCircleOutline />,
     },
 
-    ...defaultSidebarItems,
+    ...defaultSidebarItems.slice(1),
   ];
   const studentSidebarItmes: MenuProps["items"] = [
     {

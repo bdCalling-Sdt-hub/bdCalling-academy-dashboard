@@ -259,7 +259,7 @@ export const router = createBrowserRouter([
       },
       // =========================================mentor route part =================================================================
       {
-        path: "/mentor/dashboard",
+        path: "/MENTOR/dashboard",
         element: (
           <MentorRoutes>
             <MentorsDashboard />

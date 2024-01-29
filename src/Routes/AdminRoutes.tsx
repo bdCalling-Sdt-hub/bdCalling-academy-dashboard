@@ -16,13 +16,9 @@ interface AdminRoutesProps {
 }
 
 const AdminRoutes = ({ children }: AdminRoutesProps) => {
-  const loading = false;
   const token: any = useAppSelector(useCurrentToken);
   const user: any = useAppSelector(useCurrentUser);
-  if (loading) {
-    return <Spin />;
-  }
-  console.log();
+
   if (token && user && user.userType === USER_ROLE.ADMIN) {
     return children;
   }

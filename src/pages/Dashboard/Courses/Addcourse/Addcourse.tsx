@@ -505,9 +505,11 @@ export default function Addcourse({ type, editableData }: any) {
                               className="py-2"
                               placeholder="Enter careeropportunities"
                             />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
+                            {index !== 0 && (
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
+                              </button>
+                            )}
                             {index === fields.length - 1 && (
                               <button onClick={() => add()}>
                                 <PlusOutlined />
@@ -544,9 +546,11 @@ export default function Addcourse({ type, editableData }: any) {
                               className="py-2"
                               placeholder="Enter carriculum"
                             />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
+                            {index !== 0 && (
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
+                              </button>
+                            )}
                             {index === fields.length - 1 && (
                               <button onClick={() => add()}>
                                 <PlusOutlined />
@@ -583,9 +587,11 @@ export default function Addcourse({ type, editableData }: any) {
                               className="py-2"
                               placeholder="Enter job_position"
                             />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
+                            {index !== 0 && (
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
+                              </button>
+                            )}
                             {index === fields.length - 1 && (
                               <button onClick={() => add()}>
                                 <PlusOutlined />
@@ -622,9 +628,11 @@ export default function Addcourse({ type, editableData }: any) {
                               className="py-2"
                               placeholder="Enter softwares"
                             />
-                            <button onClick={() => remove(index)}>
-                              <CloseOutlined />
-                            </button>
+                            {index !== 0 && (
+                              <button onClick={() => remove(index)}>
+                                <CloseOutlined />
+                              </button>
+                            )}
                             {index === fields.length - 1 && (
                               <button onClick={() => add()}>
                                 <PlusOutlined />

@@ -24,19 +24,19 @@ const classScheduleApi = baseApi.injectEndpoints({
     }),
     showclassScheduleForMentor: builder.mutation({
       query: (data: any) => ({
-        url: `/schedules/all/admin`,
+        url: `/schedules/mentor`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: [tagTypes.classSchedule],
     }),
-    showclassScheduleForStudents: builder.mutation({
-      query: () => ({
-        url: `/schedules/mentor`,
-        method: "GET",
-      }),
-      invalidatesTags: [tagTypes.classSchedule],
-    }),
+    // showclassScheduleForStudents: builder.mutation({
+    //   query: () => ({
+    //     url: `/schedules/mentor`,
+    //     method: "GET",
+    //   }),
+    //   invalidatesTags: [tagTypes.classSchedule],
+    // }),
     showClassScheduleForStudents: builder.mutation({
       query: (data: any) => ({
         url: `/schedules/fetch/student`,

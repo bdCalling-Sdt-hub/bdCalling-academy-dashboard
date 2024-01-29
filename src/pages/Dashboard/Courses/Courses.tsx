@@ -71,7 +71,7 @@ export default function Courses() {
       </div>
 
       <div className="mt-6">
-        {error?.status === 404 ? (
+        {error ? (
           <NoData />
         ) : (
           <Row gutter={16}>
