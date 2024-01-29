@@ -155,7 +155,8 @@ export default function Dashboard() {
             {/* mentor table */}
             <div>
               <Table
-                style="bg-[white] "
+                style="bg-[white]"
+                tableStyles={{ minHeight: "20px" }}
                 theme={tablethemes}
                 title="Mentors List"
                 page={5}

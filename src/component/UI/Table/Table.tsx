@@ -16,6 +16,7 @@ export default function Table({
   theme,
   style,
   link,
+  tableStyles,
 }: any) {
   const navigate = useNavigate();
   const handleSeeAll = () => {
@@ -48,6 +49,7 @@ export default function Table({
       </div>
       <ConfigProvider theme={combinedTheme}>
         <AntTable
+          style={tableStyles}
           loading={loading}
           columns={columns}
           dataSource={data}

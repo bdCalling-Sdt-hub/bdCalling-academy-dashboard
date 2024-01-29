@@ -22,6 +22,7 @@ import { RxCross1 } from "react-icons/rx";
 import Table from "../../../component/UI/Table/Table";
 import dayjs from "dayjs";
 import PopConfirm from "../../../component/UI/popConfirm/PopConfirm";
+import { USER_ROLE } from "../../../constants/role";
 export default function ClassSchedule() {
   const { data: courseData }: any = useGetbuyingCourseQuery(undefined);
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
@@ -186,14 +187,16 @@ export default function ClassSchedule() {
       </CustomModal>
 
       <div>
-        <div className="flex justify-end mb-6">
-          <button
-            className="bg-customPrimary text-[#fff] p-[16px]  rounded-lg text-[18px] font-[500]"
-            onClick={handleAddSchedule}
-          >
-            <PlusOutlined /> <span className="ms-2">Add Schedule</span>
-          </button>
-        </div>
+        {role === USER_ROLE.ADMIN && (
+          <div className="flex justify-end mb-6">
+            <button
+              className="bg-customPrimary text-[#fff] p-[16px]  rounded-lg text-[18px] font-[500]"
+              onClick={handleAddSchedule}
+            >
+              <PlusOutlined /> <span className="ms-2">Add Schedule</span>
+            </button>
+          </div>
+        )}
         <div>
           <Form
             // form={form}

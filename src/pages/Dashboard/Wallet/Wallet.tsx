@@ -8,10 +8,10 @@ export default function Wallet() {
     <div className="h-screen ">
       <WalletSurvey />
       <Row gutter={16}>
-        <Col lg={14}>
+        <Col lg={12}>
           <WalletChart />
         </Col>
-        <Col lg={10}>
+        <Col lg={12}>
           <WalletActivity />
         </Col>
       </Row>

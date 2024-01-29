@@ -20,7 +20,7 @@ export default function WalletActivity() {
   const handleFiltering = () => {
     setIsvisilbe(false);
   };
-  const { data } = useGetAllWalletActivityDataQuery(undefined);
+  const { data, isLoading } = useGetAllWalletActivityDataQuery(undefined);
 
   const formatedData = data
     ?.filter((filterableData: any) => filterableData?.status === "Processing")
@@ -34,7 +34,7 @@ export default function WalletActivity() {
         transaction_id: wallet?.transaction_id,
       };
     });
-  console.log(formatedData);
+
   return (
     <div
       className="p-6 rounded-lg relative "
@@ -53,18 +53,19 @@ export default function WalletActivity() {
           Date Range <DownOutlined />
         </button> */}
       </div>
-      <div className=" overflow-y-auto h-[450px]  max-h-[450px]">
-        {formatedData?.data?.length > 0 ? (
-          formatedData?.map((wallet: any, index: number) => (
+      {/* {formatedData?.length > 0 ? (
+        <div className="overflow-y-auto h-[450px]  max-h-[450px]">
+          {formatedData?.map((wallet: any, index: number) => (
             <ActivityCard key={index} wallet={wallet} />
-          ))
-        ) : (
-          <div className="mt-20">
-            <NoData />
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-20">
+          <NoData />
+        </div>
+      )} */}
 
+      <ActivityCard wallet={formatedData} loading={isLoading} />
       {/* {isVisible && (
         <div className="flex justify-between items-center  shadow-md  bg-[#ffffff]  rounded   p-2 gap-x-14 parent  absolute z-50   bottom-4">
           <div className="relative " onClick={(e) => e.stopPropagation()}>

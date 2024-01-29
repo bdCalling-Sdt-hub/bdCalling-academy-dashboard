@@ -67,8 +67,8 @@ export default function WalletChart() {
 
       <div>
         <AreaChart
-          width={890}
-          height={387}
+          width={750}
+          height={362}
           data={data}
           margin={{
             top: 10,
