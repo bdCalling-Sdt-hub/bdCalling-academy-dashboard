@@ -28,8 +28,10 @@ const AddClass = () => {
         message.success(res.message);
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      message.error(
+        err?.data?.message || err?.data?.error || "something went wrong"
+      );
     }
   };
 
@@ -96,7 +98,7 @@ const AddClass = () => {
                 >
                   {(fields, { add, remove }) => (
                     <>
-                      {fields.map((field) => (
+                      {fields.map((field, index) => (
                         <Row key={field.key} gutter={16}>
                           <Col lg={12}>
                             <Form.Item
@@ -133,14 +135,16 @@ const AddClass = () => {
                                   placeholder="Enter video link"
                                   className="py-2"
                                 />
-                                <span
-                                  onClick={() => remove(field.name)}
-                                  className="cursor-pointer rounded border border-[red] px-4 py-2 border-red-500"
-                                >
-                                  <MdDelete
-                                    style={{ color: "red", fontSize: "18px" }}
-                                  />
-                                </span>
+                                {index !== 0 && (
+                                  <span
+                                    onClick={() => remove(field.name)}
+                                    className="cursor-pointer rounded border border-[red] px-4 py-2 border-red-500"
+                                  >
+                                    <MdDelete
+                                      style={{ color: "red", fontSize: "18px" }}
+                                    />
+                                  </span>
+                                )}
                               </div>
                             </Form.Item>
                           </Col>

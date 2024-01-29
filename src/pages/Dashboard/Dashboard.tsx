@@ -153,7 +153,7 @@ export default function Dashboard() {
           </Col>
           <Col lg={10}>
             {/* mentor table */}
-            <div className="">
+            <div>
               <Table
                 style="bg-[white] "
                 theme={tablethemes}

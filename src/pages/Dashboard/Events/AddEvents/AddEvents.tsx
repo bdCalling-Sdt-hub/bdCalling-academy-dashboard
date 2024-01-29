@@ -4,6 +4,7 @@ import React from "react";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  Button,
   Col,
   DatePicker,
   Form,
@@ -23,6 +24,7 @@ import { IMAGE_BASE_URL } from "../../../../utils/Common";
 import { useAddEventMutation } from "../../../../redux/api/eventApi";
 import Loading from "../../../../component/UI/Loading/Loading";
 import TextArea from "antd/es/input/TextArea";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 export default function AddEvents({ setshow }: any) {
   const { imageUrl, setFile, imageFile, setImageUrl } = useImageUpload();
   const [postEvent, { isLoading }] = useAddEventMutation();

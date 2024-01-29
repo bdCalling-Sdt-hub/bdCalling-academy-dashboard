@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Col, Row } from "antd";
+import { Col, Row, TimePicker } from "antd";
 
 import { useEffect, useState } from "react";
 import EventCard from "../../../component/cards/EventsCard/EventCard";
@@ -48,6 +48,7 @@ export default function Events() {
           <NoData />
         )}
       </div>
+
       {/* <div className="text-end mt-4">
         <CustomPaginations
           pageSize={5}

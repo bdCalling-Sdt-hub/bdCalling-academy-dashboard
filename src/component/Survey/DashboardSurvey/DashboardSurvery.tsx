@@ -18,8 +18,8 @@ export default function DashboardSurvery() {
   const [incomeData] = useWallet();
   return (
     <div>
-      <Row gutter={[16, 16]}>
-        <Col sm={24} lg={6} xl={6}>
+      <Row gutter={16}>
+        <Col lg={6}>
           <div
             className="p-4 rounded-lg"
             style={{
@@ -52,7 +52,7 @@ export default function DashboardSurvery() {
             </div>
           </div>
         </Col>
-        <Col sm={24} lg={6} xl={6}>
+        <Col lg={6}>
           <div
             className="p-4 rounded-lg"
             style={{
@@ -85,19 +85,18 @@ export default function DashboardSurvery() {
             </div>
           </div>
         </Col>
-        <Col sm={24} lg={6} xl={6}>
+        <Col lg={6}>
           <div
-            className="p-4 rounded-lg text-end "
+            className="p-4 rounded-lg"
             style={{
               backgroundColor: "#FFFFFF",
               boxShadow: "#000000",
-              width: "372px",
             }}
           >
             <div className="flex justify-between">
               <img src={teacherLogo} alt="" />
-              <div>
-                <p className="font-semibold text-end">Total Mentors</p>
+              <div className="text-end">
+                <p className="font-semibold">Total Mentors</p>
                 <h1
                   style={{
                     fontFamily: "Poppins",
@@ -107,7 +106,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  {mentorsData?.data?.length}
+                  {mentorsData?.data?.length || 0}
                 </h1>
               </div>
             </div>
@@ -119,7 +118,8 @@ export default function DashboardSurvery() {
             </div>
           </div>
         </Col>
-        <Col sm={24} lg={6} xl={6}>
+
+        <Col lg={6}>
           <div
             className="p-4 rounded-lg"
             style={{
