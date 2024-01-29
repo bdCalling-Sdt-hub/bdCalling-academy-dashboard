@@ -37,22 +37,21 @@ export default function WalletActivity() {
 
   return (
     <div
-      className="p-6 rounded-lg relative "
+      className="p-6 rounded-lg  "
       style={{
         backgroundColor: "#FFFFFF",
         boxShadow: "#000000",
       }}
     >
-      <div className="flex justify-between     ">
+      <div className="flex justify-between mb-4">
         <h1 className="text-[22px] font-semibold ">Overview Balance</h1>
-
-        {/* <button
+      </div>
+      {/* <button
           className={style.dateRange}
           onClick={() => setIsvisilbe(!isVisible)}
         >
           Date Range <DownOutlined />
         </button> */}
-      </div>
       {/* {formatedData?.length > 0 ? (
         <div className="overflow-y-auto h-[450px]  max-h-[450px]">
           {formatedData?.map((wallet: any, index: number) => (

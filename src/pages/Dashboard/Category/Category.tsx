@@ -93,10 +93,9 @@ const Category = () => {
           </button>
         </div>
 
-        <div className="">
+        <div className="mt-8">
           <Table
             theme={tablethemes}
-            title={false}
             loading={isLoading}
             columns={columns}
             data={categoryData}

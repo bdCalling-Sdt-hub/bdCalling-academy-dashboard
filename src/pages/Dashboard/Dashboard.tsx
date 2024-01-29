@@ -8,12 +8,14 @@ import Table from "../../component/UI/Table/Table";
 import { useGetallmentorsQuery } from "../../redux/api/mentorApi";
 import { useGetAllStudentQuery } from "../../redux/api/StudentApi";
 import { IMAGE_BASE_URL, imageUrl } from "../../utils/Common";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const { data: mentorData, isLoading: mentorLoading }: any =
     useGetallmentorsQuery(undefined);
   const { data: studentData, isLoading: studentLoading }: any =
     useGetAllStudentQuery(undefined);
+  const navigate = useNavigate();
   const tablethemes = {
     Table: {
       lineHeight: 1,
@@ -154,14 +156,20 @@ export default function Dashboard() {
           <Col lg={10}>
             {/* mentor table */}
             <div>
+              <div
+                className={`flex justify-between  items-center py-4 rounded   px-4  bg-[#fff]`}
+              >
+                <h1 className="text-lg font-semibold   ">Mentor List</h1>
+                <button
+                  onClick={() => navigate("/SUPER_ADMIN/students")}
+                  className="text-lg text-customPrimary  font-semibold cursor-pointer "
+                >
+                  See All
+                </button>
+              </div>
               <Table
-                style="bg-[white]"
-                tableStyles={{ minHeight: "20px" }}
                 theme={tablethemes}
-                title="Mentors List"
                 page={5}
-                seeAll="seeAll"
-                link="/SUPER_ADMIN/mentors"
                 needPagination={false}
                 total={mentors?.length}
                 columns={mentorColumn}
@@ -175,11 +183,18 @@ export default function Dashboard() {
       <div className="mt-6">
         <Row>
           <Col lg={24}>
+            <div
+              className={`flex justify-between  items-center py-4 rounded   px-4  bg-[#fff]`}
+            >
+              <h1 className="text-lg font-semibold   ">Student List</h1>
+              <button
+                onClick={() => navigate("/SUPER_ADMIN/mentors")}
+                className="text-lg text-customPrimary  font-semibold cursor-pointer "
+              >
+                See All
+              </button>
+            </div>
             <Table
-              style="bg-[white]"
-              title="Student List"
-              seeAll="seeAll"
-              link="/SUPER_ADMIN/students"
               loading={studentLoading}
               data={students}
               columns={studentColumn}

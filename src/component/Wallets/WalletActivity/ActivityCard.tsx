@@ -91,11 +91,8 @@ export default function ActivityCard({ wallet, loading }: any) {
     // </Row>
     <div>
       <Table
-        tableStyles={{ minHeight: "390px" }}
-        style="bg-[white] "
+        style={{ minHeight: "410px", maxHeight: "410px" }}
         theme={tablethemes}
-        page={6}
-        link="/SUPER_ADMIN/mentors"
         needPagination={true}
         total={data?.length}
         columns={column}

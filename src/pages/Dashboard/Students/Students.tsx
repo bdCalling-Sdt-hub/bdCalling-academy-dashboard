@@ -301,11 +301,10 @@ export default function Students() {
         </div>
         <div></div>
       </div>
-      <div className="">
+      <div className="mt-8">
         <Table
           theme={tablethemes}
           loading={isLoading}
-          title={false}
           data={data}
           columns={columns}
           needPagination={true}
