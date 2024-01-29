@@ -10,6 +10,7 @@ import { useGetSingleCourseQuery } from "../../../redux/api/courseApi";
 import { imageUrl } from "../../../utils/Common";
 import VideoPlayer from "../../../component/UI/VideoPlayer/VideoPlayer";
 import { USER_ROLE } from "../../../constants/role";
+import NoData from "../../../utils/NoData";
 
 const Classes = () => {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
@@ -31,52 +32,56 @@ const Classes = () => {
             {courseData?.data?.courseName}
           </span>
         </h1>
-        <div className="flex justify-between gap-x-4">
-          <div className="">
-            <VideoPlayer
-              data={singleVideo}
-              title={videoTitle}
-              videoId={""}
-              moduleId={classId}
-            />
-          </div>
-          <div className="w-full">
-            {classes?.data?.map((module: any, moduleIndex: number) => (
-              <According
-                id={id}
-                classId={module?.id}
-                key={moduleIndex}
-                editable={true}
-                title={module.module_title}
-                moduleDuration={module.moduleDuration}
-                index={moduleIndex}
-                moduleLenth={classes?.data?.length}
-              >
-                {module?.module_class?.map((video: any) => (
-                  <Link
-                    to={`/${USER_ROLE.ADMIN}/${courseTitle}/${id}/${
-                      module?.id
-                    }/${module?.module_no}/${video?.name
-                      ?.split(" ")
-                      .join("-")}`}
-                  >
-                    <button
-                      key={video.id}
-                      className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
+        {classes?.data?.length > 0 ? (
+          <div className="flex justify-between gap-x-4">
+            <div className="">
+              <VideoPlayer
+                data={singleVideo}
+                title={videoTitle}
+                videoId={""}
+                moduleId={classId}
+              />
+            </div>
+            <div className="w-full">
+              {classes?.data?.map((module: any, moduleIndex: number) => (
+                <According
+                  id={id}
+                  classId={module?.id}
+                  key={moduleIndex}
+                  editable={true}
+                  title={module.module_title}
+                  moduleDuration={module.moduleDuration}
+                  index={moduleIndex}
+                  moduleLenth={classes?.data?.length}
+                >
+                  {module?.module_class?.map((video: any) => (
+                    <Link
+                      to={`/${USER_ROLE.ADMIN}/${courseTitle}/${id}/${
+                        module?.id
+                      }/${module?.module_no}/${video?.name
+                        ?.split(" ")
+                        .join("-")}`}
                     >
-                      <span>
-                        <PiVideo style={{ color: "#2492EB" }} />
-                      </span>
-                      <span className="text-customPrimary">
-                        {video.id}. {video.name}
-                      </span>
-                    </button>
-                  </Link>
-                ))}
-              </According>
-            ))}
+                      <button
+                        key={video.id}
+                        className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
+                      >
+                        <span>
+                          <PiVideo style={{ color: "#2492EB" }} />
+                        </span>
+                        <span className="text-customPrimary">
+                          {video.id}. {video.name}
+                        </span>
+                      </button>
+                    </Link>
+                  ))}
+                </According>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <NoData />
+        )}
       </div>
     </div>
   );

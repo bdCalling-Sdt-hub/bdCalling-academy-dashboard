@@ -14,10 +14,9 @@ import { useGetAllEventsQuery } from "../../../redux/api/eventApi";
 import NotFound from "../../../NotFound";
 import NoData from "../../../utils/NoData";
 export default function Events() {
-  const [currentPage, setCurrentPage] = useState(1);
   const [show, setshow] = useState(false);
   const { data: events }: any = useGetAllEventsQuery(undefined);
-  console.log("events", events);
+
   return (
     <div className="h-screen">
       <CustomModal

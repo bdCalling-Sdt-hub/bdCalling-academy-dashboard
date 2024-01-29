@@ -76,10 +76,18 @@ export default function CreateStudents({ setshow }: any) {
         setshow(false);
       }
     } catch (error: any) {
-      console.log(error?.data);
-      message.error(error?.data?.userName[0]);
-
-      message.error(error?.data?.email[0]);
+      if (error?.data?.userName) {
+        message.error(error.data.userName[0]);
+      } else if (error?.data?.email) {
+        console.log("error");
+        message.error(error.data.email[0]);
+      } else if (error?.data?.error) {
+        message.error(error.data.error);
+      } else if (error?.data?.message) {
+        message.error(error.data.message);
+      } else {
+        message.error("Something Went Wrong");
+      }
     }
   };
   const onFinishFailed = (error: any) => {

@@ -47,6 +47,7 @@ const EditStudent = ({ setshow, id }: any) => {
     bloodGroup,
     course_id,
   } = studentData?.user || {};
+  console.log("dob", dob);
   const { data }: any = useGetSingleCourseQuery(course_id);
 
   console.log(data);
@@ -61,7 +62,7 @@ const EditStudent = ({ setshow, id }: any) => {
         address,
         bloodGroup,
         course_id: data?.data?.id,
-        dob: dayjs(dob),
+        dob: dob ? dayjs(dob) : "",
       });
     }
   }, [
@@ -106,9 +107,18 @@ const EditStudent = ({ setshow, id }: any) => {
         setshow(false);
       }
     } catch (error: any) {
-      console.log(error);
-      message.error(error?.data?.email[0]);
-      message.error(error?.data?.userName[0]);
+      if (error?.data?.userName) {
+        message.error(error.data.userName[0]);
+      } else if (error?.data?.email) {
+        console.log("error");
+        message.error(error.data.email[0]);
+      } else if (error?.data?.error) {
+        message.error(error.data.error);
+      } else if (error?.data?.message) {
+        message.error(error.data.message);
+      } else {
+        message.error("Something Went Wrong");
+      }
     }
   };
   const options: SelectProps["options"] = courseData?.map((course: any) => {
@@ -135,7 +145,7 @@ const EditStudent = ({ setshow, id }: any) => {
                   required: true,
                   message: (
                     <p className="flex justify-center ">
-                      Please input mentor image{" "}
+                      Please Select An Image
                     </p>
                   ),
                 },
@@ -291,7 +301,7 @@ const EditStudent = ({ setshow, id }: any) => {
                     ]
                   }
                 >
-                  <Input placeholder="dob" className="py-2" />
+                  <Input placeholder="blood group" className="py-2" />
                 </Form.Item>
               </Col>
               <Col lg={24}>

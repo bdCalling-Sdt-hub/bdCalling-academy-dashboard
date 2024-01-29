@@ -11,6 +11,7 @@ import { imageUrl } from "../../../utils/Common";
 import { useDeleteEventMutation } from "../../../redux/api/eventApi";
 import { message } from "antd";
 import dayjs from "dayjs";
+import PopConfirm from "../../UI/popConfirm/PopConfirm";
 export default function EventCard(props: any) {
   const { image, date, starttime, officeLocation, courseName, id } =
     props.events;
@@ -65,12 +66,13 @@ export default function EventCard(props: any) {
           </div>
           <h1 className="text-[18px] font-medium ">{courseName}</h1>
           <div className="card-footer flex justify-between mt-[30px]">
-            <button
-              onClick={() => handleDelete(id)}
-              className={style.deleteEvents}
+            <PopConfirm
+              onConfirm={() => handleDelete(id)}
+              title="Are You Sure?"
+              description="this action cannot be undone!"
             >
-              Delete Events
-            </button>
+              <button className={style.deleteEvents}>Delete Events</button>
+            </PopConfirm>
             <button onClick={() => setshow(true)} className={style.editEvents}>
               Edit Events
             </button>

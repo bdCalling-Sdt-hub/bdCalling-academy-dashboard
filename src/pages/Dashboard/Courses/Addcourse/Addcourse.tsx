@@ -28,6 +28,7 @@ import {
   useUpdateCourseMutation,
 } from "../../../../redux/api/courseApi";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../../component/UI/Loading/Loading";
 export default function Addcourse({ type, editableData }: any) {
   const [form] = Form.useForm();
   // const [courseType, setCourseType] = useState("Offline");
@@ -40,36 +41,6 @@ export default function Addcourse({ type, editableData }: any) {
   // const handleButtonClick = (type: string) => {
   //   setCourseType(type);
   // };
-
-  useEffect(() => {
-    if (type === "edit" && editableData) {
-      form.setFieldsValue({
-        courseName: editableData?.courseName,
-        language: editableData?.language,
-        courseDetails: editableData?.courseDetails,
-        startDate: editableData?.startDate,
-        courseTimeLength: editableData?.courseTimeLength,
-        price: editableData?.price,
-        mentorId: editableData?.mentorId,
-        maxStudentLength: editableData?.maxStudentLength,
-        skillLevel: editableData?.skillLevel,
-        address: editableData?.address,
-        category_id: editableData?.category_id,
-        status: editableData?.status,
-        batch: editableData?.batch,
-        discount_price: editableData?.discount_price,
-        coupon_code: editableData?.coupon_code,
-        coupon_code_price: editableData?.coupon_code_price,
-        end_date: editableData?.end_date,
-        seat_left: editableData?.seat_left,
-        courseThumbnail: editableData?.courseThumbnail,
-        careeropportunities: editableData?.careeropportunities || [], // Check if it exists
-        carriculum: editableData?.carriculum || [], // Check if it exists
-        job_position: editableData?.job_position || [], // Check if it exists
-        software: editableData?.software || [], // Check if it exists
-      });
-    }
-  }, [type, editableData, form]);
 
   const onFinish = async (values: any) => {
     const finalData = {
@@ -118,7 +89,6 @@ export default function Addcourse({ type, editableData }: any) {
     console.log("Failed:", errorInfo);
   };
   const onReset = () => {
-    console.log(form);
     form.resetFields();
   };
 
@@ -680,7 +650,7 @@ export default function Addcourse({ type, editableData }: any) {
                     htmlType="submit"
                     className="bg-customPrimary"
                   >
-                    Submit
+                    {isLoading ? <Loading /> : "Submit"}
                   </Button>
                 </Form.Item>
               </div>

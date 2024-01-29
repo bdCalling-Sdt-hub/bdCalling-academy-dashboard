@@ -14,10 +14,8 @@ import {
   message,
 } from "antd";
 
-import { MdMyLocation } from "react-icons/md";
-
 import style from "../Events.module.css";
-import { useState } from "react";
+
 import { EditOutlined } from "@ant-design/icons";
 import CustomUpload from "../../../../component/UI/Upload/Upload";
 import useImageUpload from "../../../../hooks/useImageUpload";
@@ -125,10 +123,7 @@ export default function AddEvents({ setshow }: any) {
           </div>
         </Form.Item>
         <Row gutter={16} justify={"center"} align={"middle"}>
-          <Col lg={24}>
-            <Form.Item className="text-center"></Form.Item>
-          </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
               key="date"
               name="date"
@@ -184,7 +179,7 @@ export default function AddEvents({ setshow }: any) {
               />
             </Form.Item>
           </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
               label="status"
               key="status"
@@ -206,7 +201,7 @@ export default function AddEvents({ setshow }: any) {
               />
             </Form.Item>
           </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
               label="Course Name"
               key="courseName"
@@ -221,7 +216,7 @@ export default function AddEvents({ setshow }: any) {
               <Input placeholder="courseName" className="py-2" />
             </Form.Item>
           </Col>
-          <Col lg={24}>
+          <Col lg={12}>
             <Form.Item
               label="Office Location"
               key="officeLocation"

@@ -4,7 +4,6 @@ import { Col, Row } from "antd";
 import studentsLogo from "../../../assets/students/student.svg";
 import { MdOutlineShowChart } from "react-icons/md";
 export default function StudentSurvey({ students }: any) {
-  const percantage = 10;
   const findPendingStudents = students?.filter(
     (student: any) => student?.approve == 0
   );
@@ -40,7 +39,7 @@ export default function StudentSurvey({ students }: any) {
             <span className="text-customPrimary ">
               <MdOutlineShowChart />
             </span>
-            <p className="">{percantage} Higher Then Last Month</p>
+            <p className="">Students Overview</p>
           </div>
         </div>
       </Col>
@@ -73,7 +72,7 @@ export default function StudentSurvey({ students }: any) {
             <span className="text-customPrimary ">
               <MdOutlineShowChart />
             </span>
-            <p className="tracking-wide">{percantage} Higher Then Last Month</p>
+            <p className="tracking-wide">Students Overview</p>
           </div>
         </div>
       </Col>
@@ -106,7 +105,7 @@ export default function StudentSurvey({ students }: any) {
             <span className="text-customPrimary ">
               <MdOutlineShowChart />
             </span>
-            <p className="tracking-wide">{percantage} Higher Then Last Month</p>
+            <p className="tracking-wide">Students Overview</p>
           </div>
         </div>
       </Col>
