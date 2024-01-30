@@ -126,7 +126,6 @@ export default function EditCourse() {
 
   const onFinishFailed = () => {};
   const onReset = () => {
-
     form.resetFields();
   };
 
@@ -150,7 +149,7 @@ export default function EditCourse() {
   return (
     <ConfigProvider theme={selectedFiledTheme}>
       <div className="">
-        <div className="flex justify-between items-cEnter mb-[30px]">
+        {/* <div className="flex justify-between items-cEnter mb-[30px]">
           <h1 className="text-2xl  font-semibold  text-customHeader">
             Edit Course
           </h1>
@@ -180,7 +179,7 @@ export default function EditCourse() {
               Video
             </button>
           </div>
-        </div>
+        </div> */}
         <div className={`${style.AddcourseContainer} px-[30px] pt-[30px] mb-6`}>
           <Form
             layout="vertical"
