@@ -571,7 +571,7 @@ export default function EditCourse() {
                 >
                   <TextArea
                     showCount
-                    maxLength={100}
+                    maxLength={5000}
                     placeholder="course details"
                     style={{ height: 200, resize: "none" }}
                   />
@@ -587,7 +587,7 @@ export default function EditCourse() {
                 >
                   <TextArea
                     showCount
-                    maxLength={50}
+                    maxLength={200}
                     placeholder="address"
                     style={{ height: 100, resize: "none" }}
                   />

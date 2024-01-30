@@ -61,7 +61,6 @@ export default function CreateMentor({ setshow }: any) {
       if (error?.data?.userName) {
         message.error(error.data.userName[0]);
       } else if (error?.data?.email) {
-
         message.error(error.data.email[0]);
       } else if (error?.data?.error) {
         message.error(error.data.error);

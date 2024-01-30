@@ -49,7 +49,7 @@ export default function Addcourse({ type, editableData }: any) {
       end_date: values.startDate.format("YYYY-MM-DD"),
       publish: 0,
     };
-  
+
     if (!file) {
       message.error("please select a course thumbnail");
       return;
@@ -477,7 +477,7 @@ export default function Addcourse({ type, editableData }: any) {
                 >
                   <TextArea
                     showCount
-                    maxLength={100}
+                    maxLength={5000}
                     placeholder="course details"
                     style={{ height: 200, resize: "none" }}
                   />
@@ -493,7 +493,7 @@ export default function Addcourse({ type, editableData }: any) {
                 >
                   <TextArea
                     showCount
-                    maxLength={50}
+                    maxLength={200}
                     placeholder="address"
                     style={{ height: 100, resize: "none" }}
                   />
