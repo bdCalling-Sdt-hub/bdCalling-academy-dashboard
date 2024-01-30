@@ -36,11 +36,9 @@ const Classes = () => {
         {classes?.data?.length > 0 ? (
           <div className="flex justify-between gap-x-4">
             {courseData?.data?.status !== "video" ? (
-              <img
-                src={imageUrl(courseData?.data?.courseThumbnail)}
-                alt=""
-                className="max-w-[600px] "
-              />
+              <div>
+                <img src={imageUrl(courseData?.data?.courseThumbnail)} alt="" />
+              </div>
             ) : (
               <div className="">
                 <VideoPlayer
