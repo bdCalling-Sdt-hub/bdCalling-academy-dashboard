@@ -281,6 +281,7 @@ export default function Profile() {
                     ]}
                   >
                     <Input
+                      disabled={true}
                       size="large"
                       type="text"
                       name="email"
