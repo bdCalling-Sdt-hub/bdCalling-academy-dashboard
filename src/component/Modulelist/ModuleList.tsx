@@ -40,29 +40,26 @@ const ModuleList = ({
             index={moduleIndex}
             moduleLenth={course?.data?.length}
           >
-            {status === "video" &&
-              module?.module_class?.map((video: any, videoIndex: number) => (
-                <NavLink
-                  to={`/${courseTitle}/${courseId}/${module?.id}/${
-                    module?.module_no
-                  }/${video?.name?.split(" ").join("-")}`}
+            {module?.module_class?.map((video: any, videoIndex: number) => (
+              <NavLink
+                to={`/${courseTitle}/${courseId}/${module?.id}/${
+                  module?.module_no
+                }/${video?.name?.split(" ").join("-")}`}
+              >
+                <button
+                  key={video.id}
+                  className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
+                  onClick={() => handleVideoClick(module.moduleId, videoIndex)}
                 >
-                  <button
-                    key={video.id}
-                    className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
-                    onClick={() =>
-                      handleVideoClick(module.moduleId, videoIndex)
-                    }
-                  >
-                    <span>
-                      <PiVideo />
-                    </span>
-                    <span>
-                      {videoIndex + 1}. {video.name}
-                    </span>
-                  </button>
-                </NavLink>
-              ))}
+                  {/* <span>
+                    <PiVideo />
+                  </span> */}
+                  <span>
+                    {videoIndex + 1}. {video.name}
+                  </span>
+                </button>
+              </NavLink>
+            ))}
           </According>
         ))}
       </div>
