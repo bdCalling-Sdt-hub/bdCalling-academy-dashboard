@@ -148,16 +148,15 @@ const AddClass = () => {
                                   placeholder="Enter video link"
                                   className="py-2"
                                 />
-                                {index !== 0 && (
-                                  <span
-                                    onClick={() => remove(field.name)}
-                                    className="cursor-pointer rounded border border-[red] px-4 py-2 border-red-500"
-                                  >
-                                    <MdDelete
-                                      style={{ color: "red", fontSize: "18px" }}
-                                    />
-                                  </span>
-                                )}
+
+                                <span
+                                  onClick={() => remove(field.name)}
+                                  className="cursor-pointer rounded border border-[red] px-4 py-2 border-red-500"
+                                >
+                                  <MdDelete
+                                    style={{ color: "red", fontSize: "18px" }}
+                                  />
+                                </span>
                               </div>
                             </Form.Item>
                           </Col>

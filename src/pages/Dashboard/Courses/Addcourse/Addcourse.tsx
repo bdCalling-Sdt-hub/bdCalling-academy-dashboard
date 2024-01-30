@@ -49,7 +49,7 @@ export default function Addcourse({ type, editableData }: any) {
       end_date: values.startDate.format("YYYY-MM-DD"),
       publish: 0,
     };
-
+    console.log(values);
     if (!file) {
       message.error("please select a course thumbnail");
       return;
@@ -340,7 +340,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
                   label="Select Course Type"
                   name="status"
@@ -359,7 +359,7 @@ export default function Addcourse({ type, editableData }: any) {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
                   label="Select Category"
                   name="category_id"
@@ -371,6 +371,25 @@ export default function Addcourse({ type, editableData }: any) {
                     style={{ width: "100%" }}
                     options={options}
                     placeholder="please select a category"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Select Popularity"
+                  name="popular"
+                  key="popular"
+                  rules={[
+                    { required: true, message: "Please select Popularity" },
+                  ]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={[
+                      { label: "true", value: 1 },
+                      { label: "false", value: 0 },
+                    ]}
+                    placeholder="please select Popularity"
                   />
                 </Form.Item>
               </Col>

@@ -11,6 +11,7 @@ import { useGetSingleCourseQuery } from "../../../redux/api/courseApi";
 import VideoPlayer from "../../../component/UI/VideoPlayer/VideoPlayer";
 import { USER_ROLE } from "../../../constants/role";
 import NoData from "../../../utils/NoData";
+import { imageUrl } from "../../../utils/Common";
 
 const Classes = () => {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
@@ -34,14 +35,22 @@ const Classes = () => {
         </h1>
         {classes?.data?.length > 0 ? (
           <div className="flex justify-between gap-x-4">
-            <div className="">
-              <VideoPlayer
-                data={singleVideo}
-                title={videoTitle}
-                videoId={""}
-                moduleId={classId}
+            {courseData?.data?.status !== "video" ? (
+              <img
+                src={imageUrl(courseData?.data?.courseThumbnail)}
+                alt=""
+                className="max-w-[600px] "
               />
-            </div>
+            ) : (
+              <div className="">
+                <VideoPlayer
+                  data={singleVideo}
+                  title={videoTitle}
+                  videoId={""}
+                  moduleId={classId}
+                />
+              </div>
+            )}
             <div className="w-full">
               {classes?.data?.map((module: any, moduleIndex: number) => (
                 <According

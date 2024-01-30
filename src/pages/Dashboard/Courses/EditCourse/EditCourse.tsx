@@ -60,6 +60,7 @@ export default function EditCourse() {
     if (data?.data) {
       form.setFieldsValue({
         courseName: data?.data?.courseName,
+        popular: data?.data?.popular,
         language: data?.data?.language,
         courseDetails: data?.data?.courseDetails,
         startDate: dayjs(data?.data?.startDate),
@@ -449,7 +450,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
                   label="Select Course Type"
                   name="status"
@@ -468,7 +469,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={8}>
                 <Form.Item
                   label="Select Category"
                   name="category_id"
@@ -480,6 +481,25 @@ export default function EditCourse() {
                     style={{ width: "100%" }}
                     options={options}
                     placeholder="please select a category"
+                  />
+                </Form.Item>
+              </Col>
+              <Col lg={8}>
+                <Form.Item
+                  label="Select Popularity"
+                  name="popular"
+                  key="popular"
+                  rules={[
+                    { required: true, message: "Please select Popularity" },
+                  ]}
+                >
+                  <Select
+                    style={{ width: "100%" }}
+                    options={[
+                      { label: "true", value: 1 },
+                      { label: "false", value: 0 },
+                    ]}
+                    placeholder="please select Popularity"
                   />
                 </Form.Item>
               </Col>
