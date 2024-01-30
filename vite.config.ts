@@ -7,6 +7,6 @@ export default defineConfig({
 
   server: {
     host: "app.bdcallingacademy.com",
-    // port: 3001,
+    port: 3001,
   },
 });
