@@ -20,7 +20,7 @@ const Category = () => {
   };
   const columns = [
     {
-      title: "Serial No",
+      title: "#Sl",
       dataIndex: "id",
       key: "id",
     },

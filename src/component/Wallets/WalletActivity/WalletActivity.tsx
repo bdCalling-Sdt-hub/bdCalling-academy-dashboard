@@ -44,7 +44,7 @@ export default function WalletActivity() {
       }}
     >
       <div className="flex justify-between mb-4">
-        <h1 className="text-[22px] font-semibold ">Overview Balance</h1>
+        <h1 className="text-[22px] font-semibold ">Wallet Activity</h1>
       </div>
       {/* <button
           className={style.dateRange}

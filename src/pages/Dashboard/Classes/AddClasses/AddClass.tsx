@@ -50,7 +50,7 @@ const AddClass = () => {
   return (
     <div className="h-screen">
       <h1 className="text-2xl font-bold mb-4 text-customHeader ">
-        ADD CLASSES
+        Add Classes
       </h1>
       <div className={`${style.AddClassContainer} px-[30px] pt-[30px] mb-6`}>
         <ConfigProvider theme={selectedFiledTheme}>

@@ -71,12 +71,16 @@ export default function ClassSchedule() {
         res = await getAllClassSchedule(formatedData).unwrap();
         if (res) {
           setScheduleData(res?.data);
+        } else {
+          message.error("No Data Found");
         }
       } else if (role === "MENTOR") {
         res = await getallschedulebyMentor(formatedData).unwrap();
         console.log(res, "classscheduleresponse");
         if (res) {
           setScheduleData(res?.data);
+        } else {
+          message.error("No Data Found");
         }
       }
       if (role === "STUDENT") {
@@ -84,10 +88,12 @@ export default function ClassSchedule() {
 
         if (res) {
           setScheduleData(res);
+        } else {
+          message.error("No Data Found");
         }
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      message.error(err?.data?.message || err?.data?.error || "No Data Found");
     }
   };
   const handleAddSchedule = () => {
@@ -274,7 +280,7 @@ export default function ClassSchedule() {
                   rules={[
                     {
                       required: true,
-                      message: "please input courseName",
+                      message: "please select courseName",
                     },
                   ]}
                 >

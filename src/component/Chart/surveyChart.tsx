@@ -54,7 +54,7 @@ const StudentEnrollmentChart = () => {
       }}
     >
       <div className="flex justify-between mb-16">
-        <h1 className="font-semibold text-lg">student survery</h1>
+        <h1 className="font-semibold text-lg">Student Survey</h1>
         <div className="flex gap-x-4">
           <div className="flex items-center gap-x-2">
             <p

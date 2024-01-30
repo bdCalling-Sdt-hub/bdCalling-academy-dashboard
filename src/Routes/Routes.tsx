@@ -41,6 +41,7 @@ import EditClasses from "../pages/Dashboard/Classes/EditClasses/EditClasses";
 import AddClass from "../pages/Dashboard/Classes/AddClasses/AddClass";
 import VerifyEmail from "../pages/ForgetPassword/verifyEmail/VerifyEmail";
 import ResetPassword from "../pages/ForgetPassword/resetPassword/ResetPassword";
+import SignUpVerification from "../component/Verify/SignupVerification";
 
 export const router = createBrowserRouter([
   // {
@@ -300,6 +301,10 @@ export const router = createBrowserRouter([
   {
     path: "/verified/:id",
     element: <VerifyEmail></VerifyEmail>,
+  },
+  {
+    path: "/dashboard/verify-email/:token",
+    element: <SignUpVerification></SignUpVerification>,
   },
   {
     path: "/resetpassword",

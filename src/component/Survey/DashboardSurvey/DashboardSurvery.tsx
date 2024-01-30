@@ -140,7 +140,7 @@ export default function DashboardSurvery() {
                     color: "#2492EB",
                   }}
                 >
-                  BDT {incomeData?.total_income}
+                  BDT {incomeData?.total_income ?? 0}
                 </h1>
               </div>
             </div>
