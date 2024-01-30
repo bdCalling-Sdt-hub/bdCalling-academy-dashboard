@@ -66,6 +66,7 @@ export default function SignIn() {
           error?.data?.message ||
           "something went wrong. please try again"
       );
+      setLoading(false);
     }
   };
 
