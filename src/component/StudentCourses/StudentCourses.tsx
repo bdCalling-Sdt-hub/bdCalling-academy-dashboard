@@ -7,7 +7,6 @@ import NoEnrollMent from "./NoEnrollment/Noenrollment";
 
 export default function StudentCourses() {
   const { data: courseData }: any = useGetbuyingCourseQuery(undefined);
-  console.log(courseData);
 
   return (
     <div>

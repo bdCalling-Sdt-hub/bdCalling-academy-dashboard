@@ -11,7 +11,7 @@ const ModuleList = ({
   course,
   courseId,
   courseTitle,
-
+  status,
   setCurrentModuleIndex,
   setCurrentVideoIndex,
 }: any) => {
@@ -40,26 +40,29 @@ const ModuleList = ({
             index={moduleIndex}
             moduleLenth={course?.data?.length}
           >
-            {module?.module_class?.map((video: any, videoIndex: number) => (
-              <NavLink
-                to={`/${courseTitle}/${courseId}/${module?.id}/${
-                  module?.module_no
-                }/${video?.name?.split(" ").join("-")}`}
-              >
-                <button
-                  key={video.id}
-                  className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
-                  onClick={() => handleVideoClick(module.moduleId, videoIndex)}
+            {status === "video" &&
+              module?.module_class?.map((video: any, videoIndex: number) => (
+                <NavLink
+                  to={`/${courseTitle}/${courseId}/${module?.id}/${
+                    module?.module_no
+                  }/${video?.name?.split(" ").join("-")}`}
                 >
-                  <span>
-                    <PiVideo />
-                  </span>
-                  <span>
-                    {videoIndex + 1}. {video.name}
-                  </span>
-                </button>
-              </NavLink>
-            ))}
+                  <button
+                    key={video.id}
+                    className={`flex items-center py-1 gap-x-2 text-lg text-[#333333] cursor-pointer hover:text-customPrimary`}
+                    onClick={() =>
+                      handleVideoClick(module.moduleId, videoIndex)
+                    }
+                  >
+                    <span>
+                      <PiVideo />
+                    </span>
+                    <span>
+                      {videoIndex + 1}. {video.name}
+                    </span>
+                  </button>
+                </NavLink>
+              ))}
           </According>
         ))}
       </div>

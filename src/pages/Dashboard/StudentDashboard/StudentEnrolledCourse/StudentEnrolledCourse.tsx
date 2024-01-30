@@ -7,6 +7,8 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import ModuleList from "../../../../component/Modulelist/ModuleList";
 import VideoNavigationButtons from "../../../../component/VideoNavigationButtons/VideoNavigationButtons";
 import { useGetClassesbyCourseIdQuery } from "../../../../redux/api/classApi";
+import { useGetSingleCourseQuery } from "../../../../redux/api/courseApi";
+import { imageUrl } from "../../../../utils/Common";
 interface Video {
   id: string;
   video: string;
@@ -32,7 +34,6 @@ export default function StudentEnrolledCourse() {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
 
   const navigate = useNavigate();
-  const [course, setCourse] = useState<ICourse | null>(null);
   const { data: classesData }: any = useGetClassesbyCourseIdQuery(Number(id));
 
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
@@ -81,7 +82,8 @@ export default function StudentEnrolledCourse() {
   //   c?.id == classId;
   //   console.log("Fahim er matha", c?.id);
   // });
-
+  const status = classesData?.data[0]?.course?.status;
+  console.log(classesData?.data[0]?.course);
   return (
     <div className="h-screen">
       <div className="flex justify-around ">
@@ -96,14 +98,23 @@ export default function StudentEnrolledCourse() {
               />
               <button>BACK</button>
             </div>
-            <h1>Class Video</h1>
+            <h1>Modules</h1>
           </div>
-          <VideoPlayer
-            data={singleVideo}
-            title={videoTitle}
-            videoId={videoInfo.videoId}
-            moduleId={classId}
-          />
+          {status !== "video" ? (
+            <div>
+              <img
+                src={imageUrl(classesData?.data[0]?.course?.courseThumbnail)}
+                alt=""
+              />
+            </div>
+          ) : (
+            <VideoPlayer
+              data={singleVideo}
+              title={videoTitle}
+              videoId={videoInfo.videoId}
+              moduleId={classId}
+            />
+          )}
           {/* <VideoNavigationButtons
             course={course}
             currentModuleIndex={currentModuleIndex}
@@ -114,6 +125,7 @@ export default function StudentEnrolledCourse() {
         </div>
         <div className="w-4/5	ms-4 mt-16">
           <ModuleList
+            status={status}
             courseTitle={courseTitle}
             courseId={id}
             classId={classId}

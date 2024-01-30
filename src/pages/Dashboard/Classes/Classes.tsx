@@ -7,7 +7,7 @@ import According from "../../../component/UI/According/According";
 import { PiVideo } from "react-icons/pi";
 import { Col, Row } from "antd";
 import { useGetSingleCourseQuery } from "../../../redux/api/courseApi";
-import { imageUrl } from "../../../utils/Common";
+
 import VideoPlayer from "../../../component/UI/VideoPlayer/VideoPlayer";
 import { USER_ROLE } from "../../../constants/role";
 import NoData from "../../../utils/NoData";

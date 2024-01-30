@@ -14,11 +14,14 @@ import { useAddClassesMutation } from "../../../../redux/api/classApi";
 import { useNavigate } from "react-router-dom";
 import { USER_ROLE } from "../../../../constants/role";
 import Loading from "../../../../component/UI/Loading/Loading";
+import { useState } from "react";
 
 const AddClass = () => {
   const { data: courseData, isLoading }: any = useGetallCourseQuery(undefined);
   const [addClass, { isLoading: addClassLoading }] = useAddClassesMutation();
   const navigate = useNavigate();
+  const [status, setstatus] = useState<string | null>(null);
+
   const [form] = useForm();
   const onFinish = async (data: any) => {
     try {
@@ -36,7 +39,7 @@ const AddClass = () => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log(errorInfo);
   };
   const onReset = () => {
     form.resetFields();
@@ -47,6 +50,15 @@ const AddClass = () => {
       value: data?.id,
     };
   });
+
+  const handleCourseIdChange = (key: number) => {
+    console.log(key);
+    const getcourseStatus = courseData?.data?.data?.find(
+      (course: any) => course?.id === key
+    );
+    setstatus(getcourseStatus?.status);
+  };
+
   return (
     <div className="h-screen">
       <h1 className="text-2xl font-bold mb-4 text-customHeader ">
@@ -71,6 +83,7 @@ const AddClass = () => {
                   rules={[{ required: true, message: "Please select course " }]}
                 >
                   <Select
+                    onChange={handleCourseIdChange}
                     style={{ width: "100%" }}
                     options={courseFields}
                     placeholder="please select a course"
