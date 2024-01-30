@@ -38,7 +38,7 @@ export default function SignIn() {
       if (result) {
         setLoading(true);
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_API}/profile/`,
+          `${import.meta.env.VITE_BASE_API}/profile`,
           {
             headers: {
               Authorization: `Bearer ${result?.access_token}`,
