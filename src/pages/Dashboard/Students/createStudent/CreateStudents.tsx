@@ -57,8 +57,8 @@ export default function CreateStudents({ setshow }: any) {
     };
     formatedData.userType = "STUDENT";
     formatedData.approve = 1;
+    formatedData.signAs = "dashboard";
     const formdData = new FormData();
-    console.log("data from ", formatedData);
     if (imageFile) {
       formdData.append("image", imageFile);
     }

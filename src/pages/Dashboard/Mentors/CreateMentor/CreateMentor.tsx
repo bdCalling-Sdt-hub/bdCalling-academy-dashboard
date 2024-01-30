@@ -37,8 +37,9 @@ export default function CreateMentor({ setshow }: any) {
     }
     data.userType = "MENTOR";
     data.approve = 1;
+    data.signAs = "dashboard";
     const formdData = new FormData();
-    console.log("data from ", data);
+
     if (imageFile) {
       formdData.append("image", imageFile);
     }
