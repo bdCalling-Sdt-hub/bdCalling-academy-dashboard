@@ -27,7 +27,6 @@ export default function ClassSchedule() {
   const { data: courseData }: any = useGetbuyingCourseQuery(undefined);
   const { data: categoryData }: any = useGetallCategoriesQuery(undefined);
   const { userType: role }: any = useAppSelector(useCurrentUser);
-  console.log(role);
   const [show, setshow] = useState(false);
   const [scheduleData, setScheduleData] = useState([]);
 
@@ -69,18 +68,21 @@ export default function ClassSchedule() {
 
       if (role === "SUPER_ADMIN") {
         res = await getAllClassSchedule(formatedData).unwrap();
+
         if (res) {
           setScheduleData(res?.data);
-        } else {
-          message.error("No Data Found");
+        }
+        if (!res?.data?.length) {
+          message.error("Class Schedule Not Found");
         }
       } else if (role === "MENTOR") {
         res = await getallschedulebyMentor(formatedData).unwrap();
-        console.log(res, "classscheduleresponse");
+
         if (res) {
           setScheduleData(res?.data);
-        } else {
-          message.error("No Data Found");
+        }
+        if (!res?.data?.length) {
+          message.error("Class Schedule Not Found");
         }
       }
       if (role === "STUDENT") {
@@ -88,8 +90,9 @@ export default function ClassSchedule() {
 
         if (res) {
           setScheduleData(res);
-        } else {
-          message.error("No Data Found");
+        }
+        if (!res?.length) {
+          message.error("Class Schedule Not Found");
         }
       }
     } catch (err: any) {
@@ -324,7 +327,7 @@ export default function ClassSchedule() {
         </div>
       </div>
       {scheduleData?.length > 0 ? (
-        <div className="">
+        <div className="mt-4">
           <Table
             theme={tablethemes}
             columns={columns}

@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
 
   server: {
-    host: "app.bdcallingacademy.com",
+    host: "192.168.10.3",
     port: 3001,
   },
 });
