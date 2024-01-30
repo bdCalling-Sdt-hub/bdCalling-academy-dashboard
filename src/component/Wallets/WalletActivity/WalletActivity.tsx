@@ -14,7 +14,7 @@ export default function WalletActivity() {
 
   const [startDate, setStartDate] = useState<dayjs.Dayjs | null>(null);
   const [endDate, setEndDate] = useState<dayjs.Dayjs | null>(null);
-  console.log(startDate, endDate);
+
   //   const onChange: DatePickerProps["onChange"] = (date, dateString) => {};
 
   const handleFiltering = () => {

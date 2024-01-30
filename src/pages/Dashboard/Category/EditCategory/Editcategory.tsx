@@ -13,7 +13,7 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
   const { id }: any = categeoryData;
   const [updateCategory] = useUpdateCategoryMutation();
   //   const { data: departmentData }: any = useGetallDepartmentsQuery(undefined);
-  console.log(categeoryData);
+
   const [form] = useForm();
   const onFinish = async (data: any) => {
     // console.log(form.getFieldValue("department"));
@@ -22,14 +22,13 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
         id,
         body: data,
       });
-      console.log(res);
+
       if (res.data) {
         message.info(res.data.message);
         setshow(false);
         form.resetFields();
       }
     } catch (err) {
-      console.log(err);
       errorResponse(err);
     }
   };

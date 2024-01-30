@@ -17,7 +17,7 @@ const Classes = () => {
   const { courseTitle, videoTitle, moduleNo, classId, id } = useParams();
   const { data: classes } = useGetClassesbyCourseIdQuery(Number(id));
   const { data: courseData }: any = useGetSingleCourseQuery(Number(id));
-  console.log("classes", classes);
+
   const singleVideo = classes?.data
     ?.find((c: any) => c?.id == classId && c?.module_no == moduleNo)
     ?.module_class?.find(

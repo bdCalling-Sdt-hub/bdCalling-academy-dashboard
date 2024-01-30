@@ -68,7 +68,7 @@ export default function CreateStudents({ setshow }: any) {
     }
     try {
       const res: any = await register({ body: formdData }).unwrap();
-      console.log(res);
+
       if (res?.message) {
         message.success(res?.message);
         form.resetFields();

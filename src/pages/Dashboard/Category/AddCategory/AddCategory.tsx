@@ -22,27 +22,23 @@ const AddCategory = ({ setshow }: any) => {
 
   const [form] = useForm();
   const onFinish = async (data: any) => {
-    console.log(data);
     try {
       const res: any = await postCategory({
         ...data,
         // @ts-ignore
         department_id: form.getFieldValue("department"),
       });
-      console.log(res);
+
       if (res.data) {
         message.info(res.data.message);
         setshow(false);
         form.resetFields();
       }
     } catch (err) {
-      console.log(err);
       errorResponse(err);
     }
   };
-  const onFinishFailed = (error: any) => {
-    console.log(error);
-  };
+
   const options: SelectProps["options"] = departmentData?.data?.map(
     (department: any) => {
       return {
@@ -59,7 +55,6 @@ const AddCategory = ({ setshow }: any) => {
           form={form}
           layout="vertical"
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           initialValues={{}}
         >
           <Form.Item>

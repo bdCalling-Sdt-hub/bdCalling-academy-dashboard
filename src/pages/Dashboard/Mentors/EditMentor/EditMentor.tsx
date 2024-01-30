@@ -68,7 +68,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
     }
 
     for (const [key, value] of Object.entries(data)) {
-      console.log(key, value);
+
       // @ts-ignore
 
       formData.append(key, value);
@@ -76,7 +76,7 @@ export default function EditMentor({ setshow, mentorData }: any) {
 
     try {
       const res: any = await updateMentor({ id: id, body: formData }).unwrap();
-      console.log("response", res);
+
       if (res?.message) {
         message.success(res?.message);
         form.resetFields();

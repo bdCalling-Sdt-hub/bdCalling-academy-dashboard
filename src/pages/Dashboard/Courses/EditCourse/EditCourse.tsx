@@ -126,7 +126,7 @@ export default function EditCourse() {
 
   const onFinishFailed = () => {};
   const onReset = () => {
-    console.log(form);
+
     form.resetFields();
   };
 

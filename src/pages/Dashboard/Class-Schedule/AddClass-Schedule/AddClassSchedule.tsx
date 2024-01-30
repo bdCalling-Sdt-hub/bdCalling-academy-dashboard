@@ -34,7 +34,7 @@ const AddClassSchedule = ({ setshow }: any) => {
   );
   const courseOptions: SelectProps["options"] = courseData?.data?.data?.map(
     (course: any) => {
-      console.log("cpoiruse", course);
+
       return {
         label: course?.courseName,
         value: course?.id,

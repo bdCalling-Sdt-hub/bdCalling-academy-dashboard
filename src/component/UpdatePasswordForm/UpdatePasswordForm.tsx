@@ -22,7 +22,6 @@ const UpdatePasswordForm = ({
   btnStyle,
 }: IUpdatepasswordForm) => {
   const onFinish = (value: IpasswordObject) => {
-    console.log(value);
     onSubmit(value);
   };
   return (

@@ -55,7 +55,6 @@ export default function ChangePassword({
   };
   message;
   const onFinishFailed = (error: any) => {
-    console.log(error);
     message.error(error.message);
   };
 

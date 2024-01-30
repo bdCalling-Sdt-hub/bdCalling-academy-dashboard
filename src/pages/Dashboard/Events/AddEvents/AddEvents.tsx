@@ -38,7 +38,7 @@ export default function AddEvents({ setshow }: any) {
       date: data.date.format("YYYY-MM-DD"),
       // time: data.time.format("HH:mm:ss"),
     };
-    console.log("data", data);
+
 
     const formData = new FormData();
     if (imageFile) {

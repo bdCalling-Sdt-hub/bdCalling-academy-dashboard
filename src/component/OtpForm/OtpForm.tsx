@@ -47,7 +47,7 @@ const OtpForm = ({
   const handleSubmit = () => {
     handleOtpSubmit(otp.join(""), otpError);
   };
-  console.log(btnStyle);
+
   const resendOtp = () => {};
   return (
     <div

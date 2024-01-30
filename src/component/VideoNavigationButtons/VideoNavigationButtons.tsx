@@ -18,13 +18,13 @@ const VideoNavigationButtons = ({
 }: IVideoNavigationButtonProps) => {
   const navigate = useNavigate();
   const handleNext = () => {
-    console.log("cliced");
+
     if (
       currentVideoIndex <
       course?.modules[currentModuleIndex]?.videos.length - 1
     ) {
       setCurrentVideoIndex(currentVideoIndex + 1);
-      console.log(currentModuleIndex, currentVideoIndex);
+  
       navigate(
         `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex].moduleName
@@ -60,7 +60,7 @@ const VideoNavigationButtons = ({
       setCurrentVideoIndex(
         course.modules[currentModuleIndex - 1].videos.length - 1
       );
-      console.log(currentModuleIndex, currentVideoIndex);
+
       navigate(
         `/student/dashboard/course/${course.id}/${encodeURIComponent(
           course.modules[currentModuleIndex - 1].moduleName
@@ -72,7 +72,7 @@ const VideoNavigationButtons = ({
       );
     }
   };
-  console.log("course", course, currentModuleIndex);
+
   return (
     <div className="flex justify-between">
       <button onClick={handlePrev} className={`${style.prevBtn}`}>

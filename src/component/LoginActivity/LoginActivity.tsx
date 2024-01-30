@@ -8,7 +8,7 @@ export default function LoginActivity() {
       .then((res) => res.json())
       .then((data) => setdata(data));
   }, []);
-  console.log(data);
+
   const columns = [
     {
       title: "BROWSER",

@@ -12,9 +12,9 @@ import {
 const StudentRoutes = ({ children }: { children: ReactNode }) => {
   const token = useAppSelector(useCurrentToken);
   const user: any = useAppSelector(useCurrentUser);
-  console.log(token, user);
+
   if (token && user && user.userType === USER_ROLE.STUDENT) {
-    console.log("true");
+
     return children;
   }
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;

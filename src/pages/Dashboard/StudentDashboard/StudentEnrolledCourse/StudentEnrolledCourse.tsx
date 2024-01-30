@@ -83,7 +83,7 @@ export default function StudentEnrolledCourse() {
   //   console.log("Fahim er matha", c?.id);
   // });
   const status = classesData?.data[0]?.course?.status;
-  console.log(classesData?.data[0]?.course);
+
   return (
     <div className="h-screen">
       <div className="flex justify-around ">

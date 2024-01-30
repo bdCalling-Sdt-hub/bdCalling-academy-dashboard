@@ -10,8 +10,8 @@ const EditDepartMent = ({ setshow, data: formdata }: any) => {
   const [form] = useForm();
   const { id } = formdata;
   const onFinish = async (data: any) => {
-    console.log("data from here", data);
-    console.log({ data: data });
+
+
     try {
       const res: any = await updateDepartment({
         id,

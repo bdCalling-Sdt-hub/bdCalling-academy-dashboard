@@ -49,7 +49,7 @@ export default function Addcourse({ type, editableData }: any) {
       end_date: values.startDate.format("YYYY-MM-DD"),
       publish: 0,
     };
-    console.log(values);
+  
     if (!file) {
       message.error("please select a course thumbnail");
       return;

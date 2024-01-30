@@ -27,7 +27,7 @@ const AddClass = () => {
     try {
       const res: any = await addClass(data).unwrap();
       if (res) {
-        console.log(res);
+     
         message.success(res.message);
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
@@ -52,7 +52,7 @@ const AddClass = () => {
   });
 
   const handleCourseIdChange = (key: number) => {
-    console.log(key);
+
     const getcourseStatus = courseData?.data?.data?.find(
       (course: any) => course?.id === key
     );

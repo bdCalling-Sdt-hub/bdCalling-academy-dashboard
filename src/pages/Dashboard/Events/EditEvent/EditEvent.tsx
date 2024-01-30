@@ -30,7 +30,7 @@ export default function EditEvent(props: any) {
   const [updateEvent, { isLoading }] = useUpdateEventsMutation();
   const [form] = Form.useForm();
 
-  console.log(props);
+
   const onFinish = async (data: any) => {
     const formatedData = {
       ...data,
@@ -38,7 +38,7 @@ export default function EditEvent(props: any) {
       endtime: data.endtime.format("HH:mm"),
       date: data.date.format("YYYY-MM-DD"),
     };
-    console.log(formatedData);
+
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
@@ -56,7 +56,7 @@ export default function EditEvent(props: any) {
         setshow(false);
       }
     } catch (err) {
-      console.log(err);
+
       message.error(
         "something went wrong please check date and time correctly."
       );

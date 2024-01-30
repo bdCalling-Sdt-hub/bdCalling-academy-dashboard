@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import Table from "../../UI/Table/Table";
 
 export default function ActivityCard({ wallet, loading }: any) {
-  console.log("wallet", wallet);
   // const handleDownl  oad = (id: string) => {
   //   console.log(id);
   // };

@@ -11,8 +11,7 @@ import { useGetClassesbyCourseIdQuery } from "../../../redux/api/classApi";
 
 export default function StudentCoursesCard({ courses }: any) {
   const { id, courseThumbnail, courseName } = courses?.course || {};
-  console.log(courses);
-  console.log("coursEiD", id);
+
   const { data: classes } = useGetClassesbyCourseIdQuery(id);
 
   const firstClass = classes?.data[0];

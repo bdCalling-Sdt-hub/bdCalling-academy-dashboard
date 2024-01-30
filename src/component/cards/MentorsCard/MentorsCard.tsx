@@ -12,7 +12,7 @@ import PopConfirm from "../../UI/popConfirm/PopConfirm";
 
 export default function MentorsCard(props: any) {
   const { category, designation, image, fullName, id } = props.mentor;
-  console.log(image);
+
   const [show, setshow] = useState(false);
   const [deleteMentor] = useDeleteProfileMutation();
   const handleModal = () => {
@@ -24,8 +24,10 @@ export default function MentorsCard(props: any) {
       if (res.message) {
         message.info(res.message);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      message.error(
+        err?.data?.message || err?.data?.error || "something went wrong"
+      );
     }
   };
 

@@ -49,9 +49,9 @@ export default function CreateMentor({ setshow }: any) {
     }
     try {
       const res: any = await register({ body: formdData }).unwrap();
-      console.log(res);
+
       if (res?.message) {
-        console.log(res);
+    
         message.info(res?.message);
         form.resetFields();
         setshow(false);
@@ -61,7 +61,7 @@ export default function CreateMentor({ setshow }: any) {
       if (error?.data?.userName) {
         message.error(error.data.userName[0]);
       } else if (error?.data?.email) {
-        console.log("error");
+
         message.error(error.data.email[0]);
       } else if (error?.data?.error) {
         message.error(error.data.error);

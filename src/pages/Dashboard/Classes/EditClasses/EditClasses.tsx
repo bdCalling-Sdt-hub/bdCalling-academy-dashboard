@@ -46,7 +46,7 @@ const EditClasses = () => {
       course_id: courseId,
       module_no: module?.module_no,
     };
-    console.log(formatedData);
+
     try {
       const res: any = await updateClass({
         id: classId,

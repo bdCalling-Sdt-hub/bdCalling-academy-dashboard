@@ -67,7 +67,7 @@ export default function Department() {
       created_at: dayjs(department?.created_at).format("YYYY-MM-DD HH:mm:ss"),
       updated_at: dayjs(department?.updated_at).format("YYYY-MM-DD HH:mm:ss"),
     })) || [];
-  console.log(data);
+
   return (
     <div className="h-screen ">
       <CustomModal

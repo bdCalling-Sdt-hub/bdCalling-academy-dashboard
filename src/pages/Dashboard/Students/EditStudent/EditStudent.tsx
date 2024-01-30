@@ -47,10 +47,9 @@ const EditStudent = ({ setshow, id }: any) => {
     bloodGroup,
     course_id,
   } = studentData?.user || {};
-  console.log("dob", dob);
+
   const { data }: any = useGetSingleCourseQuery(course_id);
 
-  console.log(data);
   useEffect(() => {
     if (studentData?.user) {
       form.setFieldsValue({

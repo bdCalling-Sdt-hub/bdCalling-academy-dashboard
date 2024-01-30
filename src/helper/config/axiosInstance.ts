@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       // @ts-ignore
       message: err.response?.data?.error || err.message,
     };
-    console.log(errorResponse);
+
     return Promise.reject(errorResponse);
   }
 );

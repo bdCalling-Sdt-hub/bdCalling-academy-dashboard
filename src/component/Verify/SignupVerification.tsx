@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const SignUpVerification = () => {
   const navigate = useNavigate();
   const { token } = useParams();
-  console.log(token);
+
   const [verifyEmailByToken, { isLoading }] = useVerifyEmailMutation();
   const verifyEmail = async () => {
     try {

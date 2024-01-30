@@ -42,8 +42,10 @@ export default function CourseCard({ course }: any) {
       if (res) {
         message.success(res.message || "Course deleted successfully");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      message.error(
+        err.data?.message || err?.data?.error || "Course deleted successfully"
+      );
     }
   };
   return (

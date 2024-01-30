@@ -10,17 +10,17 @@ const AddDepartment = ({ setshow }: any) => {
   const [postDepartment, { isLoading }] = useAddDepartmentMutation();
   const [form] = useForm();
   const onFinish = async (data: any) => {
-    console.log(data);
+
     try {
       const res: any = await postDepartment(data).unwrap();
-      console.log(res);
+
       if (res) {
         message.info(res.message);
         setshow(false);
         form.resetFields();
       }
     } catch (err: any) {
-      console.log(err);
+
       message.error(err?.data?.message);
     }
   };

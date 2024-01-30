@@ -37,7 +37,7 @@ export default function WalletChart() {
   const income = data?.reduce((acc: any, item: any) => {
     return (acc = Number(acc) + Number(item?.income));
   }, 0);
-  console.log(income);
+
   return (
     <div
       className="p-6 rounded-lg"

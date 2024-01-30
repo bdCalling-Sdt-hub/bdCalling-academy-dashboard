@@ -8,7 +8,7 @@ export default function SelectField({
   maxCount = 1,
 }: any) {
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    .log(`selected ${value}`);
     setSelectedValue(value);
   };
   return (
