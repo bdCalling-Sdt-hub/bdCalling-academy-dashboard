@@ -5,8 +5,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
 
-  // server: {
-  //   host: "app.bdcallingacademy.com",
-  //   port: 3001,
-  // },
+  server: {
+    host: "app.bdcallingacademy.com",
+    port: 3001,
+  },
 });
