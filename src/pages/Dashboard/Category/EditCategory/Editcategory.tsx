@@ -5,7 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import { useUpdateCategoryMutation } from "../../../../redux/api/categoryapi";
 // import { useGetallDepartmentsQuery } from "../../../../redux/api/departmentApi";
 import { ConfigProvider, Input, Select, SelectProps, message } from "antd";
-import errorResponse from "../../../../utils/errorResponse";
+
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { Form, Row, Col } from "antd";
 import { useGetallDepartmentsQuery } from "../../../../redux/api/departmentApi";
