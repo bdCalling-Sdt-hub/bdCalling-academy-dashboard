@@ -4,14 +4,13 @@ import { Col, Form, Input, Row, message } from "antd";
 
 import { useForm } from "antd/es/form/Form";
 import { useUpdateDepartmentMutation } from "../../../../redux/api/departmentApi";
+import { useEffect } from "react";
 
 const EditDepartMent = ({ setshow, data: formdata }: any) => {
   const [updateDepartment] = useUpdateDepartmentMutation();
   const [form] = useForm();
   const { id } = formdata;
   const onFinish = async (data: any) => {
-
-
     try {
       const res: any = await updateDepartment({
         id,
@@ -30,9 +29,11 @@ const EditDepartMent = ({ setshow, data: formdata }: any) => {
   const onFinishFailed = (error: any) => {
     console.log(error);
   };
-  form.setFieldsValue({
-    department_name: formdata.department_name,
-  });
+  useEffect(() => {
+    form.setFieldsValue({
+      department_name: formdata.department_name,
+    });
+  }, [form, formdata]);
   return (
     <div>
       {" "}
@@ -58,6 +59,10 @@ const EditDepartMent = ({ setshow, data: formdata }: any) => {
                 {
                   required: true,
                   message: "Please input department Name",
+                },
+                {
+                  min: 2,
+                  message: "Department Name must be at least 2 characters",
                 },
               ]}
             >

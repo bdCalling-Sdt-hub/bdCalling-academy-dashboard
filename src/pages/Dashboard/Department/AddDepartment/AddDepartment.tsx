@@ -10,7 +10,6 @@ const AddDepartment = ({ setshow }: any) => {
   const [postDepartment, { isLoading }] = useAddDepartmentMutation();
   const [form] = useForm();
   const onFinish = async (data: any) => {
-
     try {
       const res: any = await postDepartment(data).unwrap();
 
@@ -20,7 +19,6 @@ const AddDepartment = ({ setshow }: any) => {
         form.resetFields();
       }
     } catch (err: any) {
-
       message.error(err?.data?.message);
     }
   };
@@ -52,6 +50,10 @@ const AddDepartment = ({ setshow }: any) => {
                 {
                   required: true,
                   message: "Please input department Name",
+                },
+                {
+                  min: 2,
+                  message: "Department Name must be at least 2 characters",
                 },
               ]}
             >

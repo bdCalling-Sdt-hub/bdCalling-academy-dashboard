@@ -103,9 +103,14 @@ export default function EditCourse() {
         formData.append("courseThumbnail", imageFile);
       }
       for (const [key, value] of Object.entries(finalData)) {
-        // @ts-ignore
-
-        formData.append(key, value);
+        if (Array.isArray(value)) {
+          for (const item of value) {
+            formData.append(key, item);
+          }
+        } else {
+          // @ts-ignore
+          formData.append(key, value);
+        }
       }
 
       const res: any = await editCourse({

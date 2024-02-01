@@ -4,17 +4,36 @@
 import { useForm } from "antd/es/form/Form";
 import { useUpdateCategoryMutation } from "../../../../redux/api/categoryapi";
 // import { useGetallDepartmentsQuery } from "../../../../redux/api/departmentApi";
-import { ConfigProvider, Input, message } from "antd";
+import { ConfigProvider, Input, Select, SelectProps, message } from "antd";
 import errorResponse from "../../../../utils/errorResponse";
 import { selectedFiledTheme } from "../../../../themes/Index";
 import { Form, Row, Col } from "antd";
+import { useGetallDepartmentsQuery } from "../../../../redux/api/departmentApi";
+import { useEffect } from "react";
 
 const EditCategory = ({ setshow, data: categeoryData }: any) => {
   const { id }: any = categeoryData;
+  console.log("categorydata", categeoryData);
   const [updateCategory] = useUpdateCategoryMutation();
   //   const { data: departmentData }: any = useGetallDepartmentsQuery(undefined);
 
   const [form] = useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      category_name: categeoryData?.category_name,
+      department_id: categeoryData?.department,
+    });
+  }, [form, categeoryData]);
+  const { data: departmentData }: any = useGetallDepartmentsQuery(undefined);
+  const options: SelectProps["options"] = departmentData?.data?.map(
+    (department: any) => {
+      return {
+        value: department?.id,
+        label: department?.department_name,
+      };
+    }
+  );
   const onFinish = async (data: any) => {
     // console.log(form.getFieldValue("department"));
     try {
@@ -28,8 +47,8 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
         setshow(false);
         form.resetFields();
       }
-    } catch (err) {
-      errorResponse(err);
+    } catch (err: any) {
+      message.error(err?.data?.error || "something went wrong.");
     }
   };
   const onFinishFailed = (error: any) => {
@@ -75,10 +94,10 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
                 <Input placeholder="category Name" className="py-2" />
               </Form.Item>
             </Col>
-            {/* <Col lg={24}>
+            <Col lg={24}>
               <Form.Item
                 label="Please select department"
-                name="department"
+                name="department_id"
                 rules={[
                   { required: true, message: "Please select a department" },
                 ]}
@@ -89,7 +108,7 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
                   placeholder="please select a department"
                 />
               </Form.Item>
-            </Col> */}
+            </Col>
           </Row>
           <div className="flex justify-center">
             <button

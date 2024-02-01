@@ -43,12 +43,14 @@ export default function Addcourse({ type, editableData }: any) {
   // };
 
   const onFinish = async (values: any) => {
+    console.log(values);
     const finalData = {
       ...values,
       startDate: values.startDate.format("YYYY-MM-DD"),
       end_date: values.startDate.format("YYYY-MM-DD"),
       publish: 0,
     };
+    console.log(finalData);
 
     if (!file) {
       message.error("please select a course thumbnail");
@@ -60,9 +62,14 @@ export default function Addcourse({ type, editableData }: any) {
       formData.append("courseThumbnail", file);
     }
     for (const [key, value] of Object.entries(finalData)) {
-      // @ts-ignore
-
-      formData.append(key, value);
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          formData.append(key, item);
+        }
+      } else {
+        // @ts-ignore
+        formData.append(key, value);
+      }
     }
 
     try {
@@ -73,8 +80,9 @@ export default function Addcourse({ type, editableData }: any) {
       const res: any = await addCourse(formData).unwrap();
       if (res) {
         message.success(res?.message);
-        form.resetFields();
-        navigate("/SUPER_ADMIN/courses");
+        console.log(JSON.parse(res?.data?.job_position));
+        // form.resetFields();
+        // navigate("/SUPER_ADMIN/courses");
       }
     } catch (err: any) {
       message.error(
@@ -593,6 +601,7 @@ export default function Addcourse({ type, editableData }: any) {
                       {fields.map((field, index) => (
                         <Form.Item
                           {...field}
+                          name={[field.name]}
                           label="Enter Job Positions"
                           rules={[
                             {
