@@ -43,12 +43,12 @@ export default function CustomUpload({
     if (!isJpgOrPng) {
       message.error("You can only upload JPG/PNG file!");
     }
-    const isLt2M = file.size / 1024 / 1024 < 100;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
+    const isL100mb = file.size / 1024 / 1024 < 100;
+    if (!isL100mb) {
+      message.error("Image must smaller than 100mb!");
     }
     setImageFile(file);
-    return isJpgOrPng && isLt2M;
+    return isJpgOrPng && isL100mb;
   };
   const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
