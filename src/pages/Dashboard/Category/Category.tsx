@@ -59,6 +59,7 @@ const Category = () => {
       id: category?.id,
       category_name: category?.category_name,
       department: category?.department?.department_name,
+      department_id: category?.department?.id,
     };
   });
 

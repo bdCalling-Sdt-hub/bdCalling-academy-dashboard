@@ -22,7 +22,7 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
   useEffect(() => {
     form.setFieldsValue({
       category_name: categeoryData?.category_name,
-      department_id: categeoryData?.department,
+      department_id: categeoryData?.department_id,
     });
   }, [form, categeoryData]);
   const { data: departmentData }: any = useGetallDepartmentsQuery(undefined);
@@ -36,6 +36,7 @@ const EditCategory = ({ setshow, data: categeoryData }: any) => {
   );
   const onFinish = async (data: any) => {
     // console.log(form.getFieldValue("department"));
+    console.log(data);
     try {
       const res: any = await updateCategory({
         id,
