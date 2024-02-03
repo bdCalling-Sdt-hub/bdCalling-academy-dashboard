@@ -161,7 +161,7 @@ export default function Dashboard() {
               >
                 <h1 className="text-lg font-semibold   ">Mentor List</h1>
                 <button
-                  onClick={() => navigate("/SUPER_ADMIN/students")}
+                  onClick={() => navigate("/SUPER_ADMIN/mentors")}
                   className="text-lg text-customPrimary  font-semibold cursor-pointer "
                 >
                   See All
@@ -188,7 +188,7 @@ export default function Dashboard() {
             >
               <h1 className="text-lg font-semibold   ">Student List</h1>
               <button
-                onClick={() => navigate("/SUPER_ADMIN/mentors")}
+                onClick={() => navigate("/SUPER_ADMIN/students")}
                 className="text-lg text-customPrimary  font-semibold cursor-pointer "
               >
                 See All
