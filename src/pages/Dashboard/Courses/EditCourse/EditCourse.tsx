@@ -61,6 +61,7 @@ export default function EditCourse() {
       form.setFieldsValue({
         courseName: data?.data?.courseName,
         popular: data?.data?.popular,
+        publish: data?.data?.publish,
         language: data?.data?.language,
         courseDetails: data?.data?.courseDetails,
         startDate: dayjs(data?.data?.startDate),
@@ -89,11 +90,10 @@ export default function EditCourse() {
   const onFinish = async (values: any) => {
     const finalData = {
       ...values,
-      publish: values?.publish === true ? "1" : "0",
       startDate: values?.startDate.format("YYYY-MM-DD"),
       end_date: values?.end_date.format("YYYY-MM-DD"),
     };
-
+    console.log("finalData", finalData);
     if (!imageFile) {
       delete finalData?.courseThumbnail;
     }
@@ -508,7 +508,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              <Col lg={24}>
                 <Form.Item
                   label="Select Mentors"
                   key="mentorId[]"
@@ -543,7 +543,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              {/* <Col lg={12}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Publish Status"
                   key="publish"
@@ -558,13 +558,13 @@ export default function EditCourse() {
                   <Select
                     style={{ width: "100%" }}
                     options={[
-                      { label: "true", value: "1" },
-                      { label: "false", value: "0" },
+                      { label: "true", value: 1 },
+                      { label: "false", value: 0 },
                     ]}
                     placeholder="please select a category"
                   />
                 </Form.Item>
-              </Col> */}
+              </Col>
 
               <Col lg={24}>
                 <Form.Item

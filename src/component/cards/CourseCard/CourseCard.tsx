@@ -100,7 +100,7 @@ export default function CourseCard({ course }: any) {
             <div className="flex justify-between">
               <Link
                 to={`/${USER_ROLE.ADMIN}/${courseName
-                  .split(" ")
+                  .split(/[/\s]+/)
                   .join("-")}/${id}/${classesData?.data[0]?.id}/${
                   classesData?.data[0]?.module_no
                 }/${classesData?.data[0]?.module_class[0]?.name
