@@ -61,7 +61,7 @@ export default function EditCourse() {
       form.setFieldsValue({
         courseName: data?.data?.courseName,
         popular: data?.data?.popular,
-        publish: data?.data?.publish,
+        // publish: data?.data?.publish,
         language: data?.data?.language,
         courseDetails: data?.data?.courseDetails,
         startDate: dayjs(data?.data?.startDate),
@@ -508,7 +508,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={24}>
+              <Col lg={12}>
                 <Form.Item
                   label="Select Mentors"
                   key="mentorId[]"
@@ -543,7 +543,7 @@ export default function EditCourse() {
                   />
                 </Form.Item>
               </Col>
-              <Col lg={12}>
+              {/* <Col lg={12}>
                 <Form.Item
                   label="Select Publish Status"
                   key="publish"
@@ -564,7 +564,7 @@ export default function EditCourse() {
                     placeholder="please select a category"
                   />
                 </Form.Item>
-              </Col>
+              </Col> */}
 
               <Col lg={24}>
                 <Form.Item

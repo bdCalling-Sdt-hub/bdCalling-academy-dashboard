@@ -40,7 +40,7 @@ export default function StudentCoursesCard({ courses }: any) {
             to={`/${courseName?.split(/[/\s]+/)?.join("-")}/${id}/${
               firstClass?.id
             }/${firstClass?.module_no}/${firstClass?.module_class[0]?.name
-              .split(" ")
+              .split(/[/\s]+/)
               .join("-")}`}
           >
             <button

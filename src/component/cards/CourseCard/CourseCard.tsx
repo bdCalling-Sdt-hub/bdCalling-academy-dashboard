@@ -104,7 +104,7 @@ export default function CourseCard({ course }: any) {
                   .join("-")}/${id}/${classesData?.data[0]?.id}/${
                   classesData?.data[0]?.module_no
                 }/${classesData?.data[0]?.module_class[0]?.name
-                  .split(" ")
+                  .split(/[/\s]+/)
                   .join("-")}`}
               >
                 <button className={style.btnInfo}>
