@@ -80,9 +80,8 @@ export default function Addcourse({ type, editableData }: any) {
       const res: any = await addCourse(formData).unwrap();
       if (res) {
         message.success(res?.message);
-        console.log(JSON.parse(res?.data?.job_position));
-        // form.resetFields();
-        // navigate("/SUPER_ADMIN/courses");
+        form.resetFields();
+        navigate("/SUPER_ADMIN/courses");
       }
     } catch (err: any) {
       message.error(

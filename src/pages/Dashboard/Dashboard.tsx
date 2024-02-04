@@ -173,7 +173,7 @@ export default function Dashboard() {
                 needPagination={false}
                 total={mentors?.length}
                 columns={mentorColumn}
-                data={mentors}
+                data={mentors?.slice(0, 5)}
                 loading={mentorLoading}
               />
             </div>

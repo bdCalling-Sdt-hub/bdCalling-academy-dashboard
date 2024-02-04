@@ -49,13 +49,13 @@ export default function EditCourse() {
   const { data: mentorData }: any = useGetallmentorsQuery(undefined);
   const { setFile, imageUrl, imageFile } = useImageUpload();
   const { data }: any = useGetSingleCourseQuery(id);
-
+  console.log(data, "data");
   const [editCourse, { isLoading }] = useUpdateCourseMutation();
   const handleButtonClick = (type: string) => {
     setCourseType(type);
   };
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (data?.data) {
       form.setFieldsValue({
@@ -150,6 +150,7 @@ export default function EditCourse() {
       };
     }
   );
+  console.log("dsfsdfdsf", mentorOptions);
 
   return (
     <ConfigProvider theme={selectedFiledTheme}>
