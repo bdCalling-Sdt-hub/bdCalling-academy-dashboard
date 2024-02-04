@@ -27,7 +27,6 @@ const AddClass = () => {
     try {
       const res: any = await addClass(data).unwrap();
       if (res) {
-     
         message.success(res.message);
         navigate(`/${USER_ROLE.ADMIN}/courses`);
       }
@@ -44,15 +43,22 @@ const AddClass = () => {
   const onReset = () => {
     form.resetFields();
   };
+
   const courseFields = courseData?.data?.data.map((data: any) => {
+    const statusColor =
+      data?.status === "offline" ? "bg-[#ADD8E6]" : "bg-[#90EE90]";
     return {
-      label: data?.courseName,
+      label: (
+        <div className="flex justify-between px-4">
+          <p>{data?.courseName}</p>
+          <p className={` rounded ${statusColor}`}>{data?.status}</p>
+        </div>
+      ),
       value: data?.id,
     };
   });
 
   const handleCourseIdChange = (key: number) => {
-
     const getcourseStatus = courseData?.data?.data?.find(
       (course: any) => course?.id === key
     );
