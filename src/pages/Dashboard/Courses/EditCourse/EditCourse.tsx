@@ -90,6 +90,7 @@ export default function EditCourse() {
   const onFinish = async (values: any) => {
     const finalData = {
       ...values,
+      publish: 1,
       startDate: values?.startDate.format("YYYY-MM-DD"),
       end_date: values?.end_date.format("YYYY-MM-DD"),
     };
