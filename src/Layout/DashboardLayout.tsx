@@ -25,7 +25,7 @@ import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetmyprofileQuery } from "../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../utils/Common";
-import { SidebarItems } from "../constants/SidebarItems";
+import { SidebarItems } from "../constants/sidebarItems";
 
 interface Inotification {
   id: string;

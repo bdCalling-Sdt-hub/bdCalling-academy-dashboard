@@ -11,7 +11,6 @@ const ModuleList = ({
   course,
   courseId,
   courseTitle,
-  status,
   setCurrentModuleIndex,
   setCurrentVideoIndex,
 }: any) => {
