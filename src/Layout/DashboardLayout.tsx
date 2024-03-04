@@ -74,8 +74,9 @@ const DashboardLayout = () => {
             >
               <img
                 style={{
-                  height: "40px",
-                  width: "180px",
+                  // height: "80px",
+                  padding: "10px",
+                  // width: "220px",
                 }}
                 src={logo}
                 alt=""
