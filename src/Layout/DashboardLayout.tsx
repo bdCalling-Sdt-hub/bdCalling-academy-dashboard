@@ -3,21 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo.png";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import {
-  Layout,
-  Menu,
-  Button,
-  theme,
-  Input,
-  Badge,
-  ConfigProvider,
-  Select,
-  Dropdown,
-  MenuProps,
-} from "antd";
+import { Layout, Menu, Button, theme, ConfigProvider } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { sidebardThemes } from "../themes/Index";
 
@@ -27,83 +16,14 @@ import { useGetmyprofileQuery } from "../redux/api/authApi";
 import { IMAGE_BASE_URL } from "../utils/Common";
 import { SidebarItems } from "../constants/sidebarItems";
 
-interface Inotification {
-  id: string;
-  image: string;
-  name: string;
-  description: string;
-  time: string;
-  // Add other properties if they exist in your data
-}
 const { Header, Sider, Content } = Layout;
 const DashboardLayout = () => {
   const navigate = useNavigate();
   const { data: profileData }: any = useGetmyprofileQuery(undefined);
-
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState();
-
   const { userType: role }: any = useAppSelector(useCurrentUser);
-
-  const [notifications, setnotifications] = useState<Inotification[]>([]);
-  useEffect(() => {
-    fetch("/notification.json")
-      .then((res) => res.json())
-      .then((data) => setnotifications(data));
-  }, []);
-
-  // const selectedKey =
-  //   // @ts-ignore
-  //   sidebarItems(role)?.find((item) => pathname.startsWith(item.key))?.key ||
-  //   `/${role}/dashboard`;
-
-  const handleSelectLanguage = (value: any) => {
-    setSelectedLanguage(value);
-    localStorage.setItem("lang", value);
-  };
-
-  const notificationItems = notifications.slice(0, 3).map((notification) => {
-    return {
-      key: notification.id,
-      label: (
-        <div className="flex justify-between items-center p-2 bg-[#fff]  rounded-lg ">
-          <div className="flex gap-x-2">
-            <img
-              src={notification.image}
-              alt=""
-              style={{
-                width: "60px",
-                height: "60px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-            />
-            <div>
-              <p>{notification.name}</p>
-              <p className="text-[#4E4E4E]">{notification.description}</p>
-              <p className="text-[#4E4E4E]">{notification.time}</p>
-            </div>
-          </div>
-        </div>
-      ),
-    };
-  });
-  const items: MenuProps["items"] = [
-    ...notificationItems,
-    {
-      key: "button",
-      label: (
-        <button
-          onClick={() => navigate("/notification")}
-          className=" w-full mb-2 bg-customPrimary py-2 rounded-sm text-[#fff] font-semibold"
-        >
-          See All
-        </button>
-      ),
-    },
-  ];
 
   const {
     token: { colorBgContainer },
@@ -118,21 +38,6 @@ const DashboardLayout = () => {
     }
   };
 
-  const options = [
-    {
-      value: "english",
-      label: (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img
-            src="https://cdn.britannica.com/29/22529-004-ED1907BE/Union-Flag-Cross-St-Andrew-of-George.jpg"
-            alt="English"
-            style={{ marginRight: 8, width: 16, height: 16 }}
-          />
-          English
-        </div>
-      ),
-    },
-  ];
   return (
     <ConfigProvider theme={sidebardThemes}>
       <Layout>

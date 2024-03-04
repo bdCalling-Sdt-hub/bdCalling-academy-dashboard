@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table as AntTable, ConfigProvider } from "antd";
 import { paginationThemes2 } from "../../../themes/Index";
+
+const showTotal = (total: number, range: any) => (
+  <div className="text-start">
+    <span>
+      Showing {range[0]}-{range[1]} of {total} Records.
+    </span>
+  </div>
+);
 export default function Table({
   page,
   total,
@@ -30,6 +38,7 @@ export default function Table({
           needPagination && {
             pageSize: page,
             total: total,
+            showTotal: showTotal,
           }
         }
         onChange={onTableChange}

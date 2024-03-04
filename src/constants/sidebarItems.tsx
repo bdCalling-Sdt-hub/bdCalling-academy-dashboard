@@ -92,7 +92,7 @@ export const SidebarItems = (role: string) => {
     },
     {
       key: "/setting",
-      label: "setting",
+      label: "Setting",
       icon: <IoSettingsOutline />,
     },
     ...defaultSidebarItems.slice(2),

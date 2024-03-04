@@ -197,8 +197,9 @@ export default function Dashboard() {
             <Table
               loading={studentLoading}
               data={students}
+              needPagination={true}
               columns={studentColumn}
-              page={6}
+              page={5}
               total={students?.length}
             />
           </Col>

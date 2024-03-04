@@ -308,7 +308,7 @@ export default function Students() {
           data={data}
           columns={columns}
           needPagination={true}
-          page={5}
+          page={10}
           total={data?.length}
         />
       </div>
