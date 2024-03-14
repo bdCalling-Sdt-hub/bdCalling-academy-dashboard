@@ -115,6 +115,7 @@ export default function Dashboard() {
       designation: mentor?.designation,
     };
   });
+  console.log(mentors);
 
   const students = studentData?.data?.map((data: any, index: number) => {
     return {

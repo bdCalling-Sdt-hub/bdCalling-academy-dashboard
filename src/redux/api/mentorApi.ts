@@ -8,7 +8,7 @@ const mentorsApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({
     getallmentors: builder.query({
       query: () => ({
-        url: "/mentors/all/",
+        url: "/mentors/all",
         method: "GET",
       }),
       providesTags: [tagTypes.mentor, tagTypes.user],
